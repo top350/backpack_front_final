@@ -1,33 +1,26 @@
 import 'package:flutter/material.dart';
-import 'home.dart';
-import 'signup.dart';
+import  'category.dart';
+
 
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      //  title:'Home page',
-      //  home: Home(),
-      home: new LoginPage(),
-      theme: new ThemeData(primarySwatch: Colors.pink),
-      routes: <String,WidgetBuilder>{ 
-        "/Home" : (BuildContext context)=>new Home(),
-        "/signup":(BuildContext context)=>new SignupPage(),
-        
-      }
-      
-    );
+    return new MaterialApp(  
+        home: new SignupPage(),
+         routes: <String,WidgetBuilder>{ 
+          "/Category": (BuildContext context)=> new Category()
+          });
   }
 }
-class LoginPage extends StatefulWidget {
+
+class SignupPage extends StatefulWidget {
   @override
-  State createState() => new LoginPageState();
+  State createState() => new SignupPageState();
 }
 
-class LoginPageState extends State<LoginPage>
+class SignupPageState extends State<SignupPage>
     with SingleTickerProviderStateMixin {
   AnimationController _iconAnimationController;
   Animation<double> _iconAnimation;
@@ -45,33 +38,30 @@ class LoginPageState extends State<LoginPage>
 
   @override
   Widget build(BuildContext context) {
+    
     return new Scaffold(
-     backgroundColor: Colors.pinkAccent,
+      backgroundColor: Colors.blueAccent,
       body: new Stack(
         fit: StackFit.expand,
         children: <Widget>[
           new Image(
             image: new AssetImage("assets/pinkbg.jpg"),
             fit: BoxFit.cover,
-            color: Colors.white24,
-            colorBlendMode: BlendMode.lighten,
+            color: Colors.black26,
+            colorBlendMode: BlendMode.darken,
           ),
-          new Column(
+              new Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              new Image(
-                image: new AssetImage("assets/logo only.png"),
-                height: _iconAnimation.value * 170,
-                width: _iconAnimation.value * 170,
-              ),
+             
               new Form(
                 child: new Theme(
                   data: new ThemeData(
                       brightness: Brightness.light,
-                      primarySwatch: Colors.pink[150],
+                      primarySwatch: Colors.pink,
                       inputDecorationTheme: new InputDecorationTheme(
                           labelStyle: new TextStyle(
-                              color: Colors.pink[200], fontSize: 20.0))),
+                              color: Colors.black45, fontSize: 20.0))),
                   child: new Container(
                     padding: const EdgeInsets.all(40.0),
                     child: new Column(
@@ -83,6 +73,13 @@ class LoginPageState extends State<LoginPage>
                           ),
                           keyboardType: TextInputType.text,
                         ),
+                          new TextFormField(
+                          decoration: new InputDecoration(
+                            labelText: "Enter Email",
+                          ),
+                          keyboardType: TextInputType.emailAddress,
+                          
+                        ),
                         new TextFormField(
                           decoration: new InputDecoration(
                             labelText: "Enter Password",
@@ -90,6 +87,14 @@ class LoginPageState extends State<LoginPage>
                           keyboardType: TextInputType.text,
                           obscureText: true,
                         ),
+                         new TextFormField(
+                          decoration: new InputDecoration(
+                            labelText: "Confirm Password",
+                          ),
+                          keyboardType: TextInputType.text,
+                          obscureText: true,
+                        ),
+                      
                         new Padding(
                           padding:
                               const EdgeInsets.only(bottom: 20.0, top: 20.0),
@@ -97,26 +102,16 @@ class LoginPageState extends State<LoginPage>
                         new MaterialButton(
                           height: 40.0,
                           minWidth: 300.0,
-                          color: Colors.pink[400],
+                          color: Colors.pink[300],
                           textColor: Colors.white,
-                          child: new Text("Log in"),
+                          child: new Text("Next"),
                           onPressed: ()  {
-                            Navigator.of(context).pushNamed("/Home");
+                             Navigator.of(context).pushNamed("/Category");
                           },
                           splashColor: Colors.pink[200],
                         ),
-                        new MaterialButton(
-                          height: 40.0,
-                          minWidth: 300.0,
-                          color: Colors.pink[400],
-                          textColor: Colors.white,
-                          child: new Text("Sign up"),
-                          onPressed: ()  {
-                             Navigator.of(context).pushNamed("/signup");
-                          },
-                          splashColor: Colors.pink[200],
-                          
-                        ),
+                      
+                     
                         
                        
                         
@@ -132,4 +127,3 @@ class LoginPageState extends State<LoginPage>
     );
   }
 }
-
