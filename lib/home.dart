@@ -1,7 +1,12 @@
+// import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'display.dart';
 
 class Home extends StatefulWidget{
+  // const Home({Key key, this.user}) : super(key: key);
+  // final FirebaseUser user;
+
+ 
   State<StatefulWidget> createState()=> HomeState();
 }
 class HomeState extends State<Home>{
@@ -15,7 +20,7 @@ class HomeState extends State<Home>{
   Widget build(BuildContext context){
     return Scaffold(
         //  appBar: AppBar(
-        //    title: Text('BottomBar'),
+        //    title: Text('${widget.user.email}'),
         //  ),
         body: _children[currentindex],
         
