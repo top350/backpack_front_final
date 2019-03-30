@@ -1,11 +1,11 @@
 // 
-import 'dart:convert';
+// import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'home.dart';
 import 'signup.dart';
 // import 'package:firebase_auth/firebase_auth.dart';
-import  'api_provider.dart';
+// import  'api_provider.dart';
 
 void main() => runApp(MyApp());
 
@@ -36,30 +36,31 @@ class LoginPageState extends State<LoginPage>
   Animation<double> _iconAnimation;
   TextEditingController _username = TextEditingController();
   TextEditingController _password = TextEditingController();
-  final _formkey = GlobalKey<FormState>();
-  ApiProvider apiProvider = ApiProvider();
-  Future doLogin() async {
-    if(_formkey.currentState.validate()){
-try {
-  var rs =await apiProvider.doLogin(_username.text,_password.text);
-  if(rs.statusCode==200){
-   print(rs.body);
-   var jsonRes = json.decode(rs.body);
-   if (jsonRes['ok']) {
-     String token = jsonRes['token'];
-     print(token);
+
+//   final _formkey = GlobalKey<FormState>();
+//   ApiProvider apiProvider = ApiProvider();
+//   Future doLogin() async {
+//     if(_formkey.currentState.validate()){
+// try {
+//   var rs =await apiProvider.doLogin(_username.text,_password.text);
+//   if(rs.statusCode==200){
+//    print(rs.body);
+//    var jsonRes = json.decode(rs.body);
+//    if (jsonRes['ok']) {
+//      String token = jsonRes['token'];
+//      print(token);
      
-   } else {
-     print('Server error');
-   }
-  }else{
-    print('server error');
-  }
-} catch (e) {
-  print(e);
-}
-    }
-  }
+//    } else {
+//      print('Server error');
+//    }
+//   }else{
+//     print('server error');
+//   }
+// } catch (e) {
+//   print(e);
+// }
+//     }
+//   }
 
   @override
   void initState() {
@@ -94,7 +95,7 @@ try {
                 width: _iconAnimation.value * 170,
               ),
               new Form(
-                key: _formkey,
+                // key: _formkey,
                 child: new Theme(
                   data: new ThemeData(
                       brightness: Brightness.light,
@@ -143,7 +144,8 @@ try {
                           textColor: Colors.white,
                           child: new Text("Log in"),
                           onPressed: () {
-                             doLogin();
+                            Navigator.of(context).pushNamed("/Home");
+                            //  doLogin();
                           
                           },
                           splashColor: Colors.pink[200],

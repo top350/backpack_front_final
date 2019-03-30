@@ -1,6 +1,8 @@
 // import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'display.dart';
+import 'homepage.dart';
+
 
 class Home extends StatefulWidget{
   // const Home({Key key, this.user}) : super(key: key);
@@ -12,7 +14,7 @@ class Home extends StatefulWidget{
 class HomeState extends State<Home>{
   int currentindex=0;
   final List<Widget> _children =[
-    DisplayWidget(Colors.pink),
+    Dashboard(),
     DisplayWidget(Colors.red),
     DisplayWidget(Colors.green),
     DisplayWidget(Colors.blue),
@@ -58,3 +60,4 @@ class HomeState extends State<Home>{
     });
   }
 }
+
