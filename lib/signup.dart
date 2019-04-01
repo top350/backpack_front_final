@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
-import  'category.dart';
-
+import 'category.dart';
 
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return new MaterialApp(  
+    return new MaterialApp(
         home: new SignupPage(),
-         routes: <String,WidgetBuilder>{ 
-          "/Category": (BuildContext context)=> new Category()
-          });
+        routes: <String, WidgetBuilder>{
+          "/Category": (BuildContext context) => new Category()
+        });
   }
 }
 
@@ -38,7 +37,6 @@ class SignupPageState extends State<SignupPage>
 
   @override
   Widget build(BuildContext context) {
-    
     return new Scaffold(
       backgroundColor: Colors.blueAccent,
       body: new Stack(
@@ -50,10 +48,9 @@ class SignupPageState extends State<SignupPage>
             color: Colors.black26,
             colorBlendMode: BlendMode.darken,
           ),
-              new Column(
+          new Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-             
               new Form(
                 child: new Theme(
                   data: new ThemeData(
@@ -73,12 +70,11 @@ class SignupPageState extends State<SignupPage>
                           ),
                           keyboardType: TextInputType.text,
                         ),
-                          new TextFormField(
+                        new TextFormField(
                           decoration: new InputDecoration(
                             labelText: "Enter Email",
                           ),
                           keyboardType: TextInputType.emailAddress,
-                          
                         ),
                         new TextFormField(
                           decoration: new InputDecoration(
@@ -87,14 +83,13 @@ class SignupPageState extends State<SignupPage>
                           keyboardType: TextInputType.text,
                           obscureText: true,
                         ),
-                         new TextFormField(
+                        new TextFormField(
                           decoration: new InputDecoration(
                             labelText: "Confirm Password",
                           ),
                           keyboardType: TextInputType.text,
                           obscureText: true,
                         ),
-                      
                         new Padding(
                           padding:
                               const EdgeInsets.only(bottom: 20.0, top: 20.0),
@@ -105,16 +100,11 @@ class SignupPageState extends State<SignupPage>
                           color: Colors.pink[300],
                           textColor: Colors.white,
                           child: new Text("Next"),
-                          onPressed: ()  {
-                             Navigator.of(context).pushNamed("/Category");
+                          onPressed: () {
+                            Navigator.of(context).pushNamed("/Category");
                           },
                           splashColor: Colors.pink[200],
                         ),
-                      
-                     
-                        
-                       
-                        
                       ],
                     ),
                   ),

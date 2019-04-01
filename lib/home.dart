@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'display.dart';
 import 'lent.dart';
+import 'category.dart';
 
 class Home extends StatefulWidget{
   State<StatefulWidget> createState()=> HomeState();
