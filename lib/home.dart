@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'display.dart';
+import 'lent.dart';
 
 class Home extends StatefulWidget{
   State<StatefulWidget> createState()=> HomeState();
@@ -7,8 +8,8 @@ class Home extends StatefulWidget{
 class HomeState extends State<Home>{
   int currentindex=0;
   final List<Widget> _children =[
-    DisplayWidget(Colors.pink),
     DisplayWidget(Colors.red),
+    LentPage(),
     DisplayWidget(Colors.green),
     DisplayWidget(Colors.blue),
   ];
