@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'category.dart';
+// import  'category.dart';
 
 void main() => runApp(MyApp());
 
@@ -9,7 +9,7 @@ class MyApp extends StatelessWidget {
     return new MaterialApp(
         home: new SignupPage(),
         routes: <String, WidgetBuilder>{
-          "/Category": (BuildContext context) => new Category()
+          // "/Category": (BuildContext context)=> new Category()
         });
   }
 }
@@ -19,10 +19,17 @@ class SignupPage extends StatefulWidget {
   State createState() => new SignupPageState();
 }
 
+
+
 class SignupPageState extends State<SignupPage>
     with SingleTickerProviderStateMixin {
   AnimationController _iconAnimationController;
   Animation<double> _iconAnimation;
+  TextEditingController username = TextEditingController();
+  TextEditingController email = TextEditingController();
+  TextEditingController password1 = TextEditingController();
+  TextEditingController password2 = TextEditingController();
+  
 
   @override
   void initState() {
@@ -52,6 +59,7 @@ class SignupPageState extends State<SignupPage>
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               new Form(
+                
                 child: new Theme(
                   data: new ThemeData(
                       brightness: Brightness.light,
@@ -65,18 +73,24 @@ class SignupPageState extends State<SignupPage>
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
                         new TextFormField(
+                          
+                          controller: username,
                           decoration: new InputDecoration(
                             labelText: "Enter your name",
                           ),
                           keyboardType: TextInputType.text,
                         ),
                         new TextFormField(
+                          
+                          controller: email,
                           decoration: new InputDecoration(
                             labelText: "Enter Email",
                           ),
                           keyboardType: TextInputType.emailAddress,
                         ),
                         new TextFormField(
+                         
+                          controller: password1,
                           decoration: new InputDecoration(
                             labelText: "Enter Password",
                           ),
@@ -84,6 +98,8 @@ class SignupPageState extends State<SignupPage>
                           obscureText: true,
                         ),
                         new TextFormField(
+                        
+                          controller: password2,
                           decoration: new InputDecoration(
                             labelText: "Confirm Password",
                           ),
@@ -101,7 +117,14 @@ class SignupPageState extends State<SignupPage>
                           textColor: Colors.white,
                           child: new Text("Next"),
                           onPressed: () {
-                            Navigator.of(context).pushNamed("/Category");
+                            //  Navigator.of(context).pushNamed("/Category");
+                            if (password1.text == password2.text) {
+                              print(username.text);
+                              print(password1.text);
+                              print(email.text);
+                            } else {
+                              print("Passsword not match");
+                            }
                           },
                           splashColor: Colors.pink[200],
                         ),
