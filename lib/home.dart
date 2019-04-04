@@ -4,6 +4,7 @@ import 'display.dart';
 import 'homepage.dart';
 
 import 'lent.dart';
+import 'category.dart';
 
 class Home extends StatefulWidget{
   // const Home({Key key, this.user}) : super(key: key);
