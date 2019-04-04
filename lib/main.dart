@@ -146,8 +146,8 @@ try {
                           textColor: Colors.white,
                           child: new Text("Log in"),
                           onPressed: () {
-                            // Navigator.of(context).pushNamed("/Home");
-                             doLogin();
+                             Navigator.of(context).pushNamed("/Home");
+                            // doLogin();
                           
                           },
                           splashColor: Colors.pink[200],

@@ -1,12 +1,9 @@
 // import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'display.dart';
-<<<<<<< HEAD
 import 'homepage.dart';
 
-=======
 import 'lent.dart';
->>>>>>> d4169766e919e29249628e648da8b7a0016c0936
 
 class Home extends StatefulWidget{
   // const Home({Key key, this.user}) : super(key: key);
@@ -18,10 +15,7 @@ class Home extends StatefulWidget{
 class HomeState extends State<Home>{
   int currentindex=0;
   final List<Widget> _children =[
-<<<<<<< HEAD
     Dashboard(),
-=======
->>>>>>> d4169766e919e29249628e648da8b7a0016c0936
     DisplayWidget(Colors.red),
     LentPage(),
     DisplayWidget(Colors.green),
