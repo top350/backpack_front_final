@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 
 //Pun tum eiei
@@ -15,223 +14,177 @@ class LentPage extends StatefulWidget {
 }
 
 class _LentPageState extends State<LentPage> {
-  // final formats = {
-  //   InputType.both: DateFormat("EEEE, MMMM d, yyyy 'at' h:mma"),
-  //   InputType.date: DateFormat('yyyy-MM-dd'),
-  //   InputType.time: DateFormat("HH:mm"),
-  // };
-
-
-  List _category = ["Electronic", "Clothing", "Stationary", "Other"];
-  String titleValue = ''; //user input
-  int tokenValue; // user input
-
-  List<DropdownMenuItem<String>> _dropDownMenuItems;
+  List _category = [
+    // Dropdown
+    "Stationery",
+    "Clothing",
+    "Sport Equipment",
+    "Electronics",
+    "Books",
+    "Others"
+  ];
   String _selectedCategory;
+  List<DropdownMenuItem<String>> _dropDownMenuCategory;
+  List _kiosk = [
+    // Dropdown
+    "Engineering",
+    "Arts",
+    "Science",
+    "Siam",
+  ];
+  String _selectedKiosk;
+  List<DropdownMenuItem<String>> _dropDownMenuKiosk;
 
-  DateTime _date = new DateTime.now();
-  TimeOfDay _time = new TimeOfDay.now();
+  String titleValue = ''; //user input
+  int tokenValue;
 
-  InputType inputType = InputType.both;
+  InputType inputType = InputType.both; // Date and Time
   bool editable = true;
   DateTime date;
 
-  
-
   @override
   void initState() {
-    _dropDownMenuItems = buildAndGetDropDownMenuItems(_category);
-    _selectedCategory = _dropDownMenuItems[0].value;
+    _dropDownMenuCategory = buildAndGetDropDownMenuList(_category);
+    _selectedCategory = _dropDownMenuCategory[0].value;
+    _dropDownMenuKiosk = buildAndGetDropDownMenuList(_kiosk);
+    _selectedKiosk = _dropDownMenuKiosk[0].value;
     super.initState();
   }
 
-  List<DropdownMenuItem<String>> buildAndGetDropDownMenuItems(List category) {
+  List<DropdownMenuItem<String>> buildAndGetDropDownMenuList(
+      List categorylist) {
     List<DropdownMenuItem<String>> items = new List();
-    for (String fruit in category) {
-      items.add(new DropdownMenuItem(value: fruit, child: new Text(fruit)));
+    for (String item in categorylist) {
+      items.add(new DropdownMenuItem(value: item, child: new Text(item)));
     }
     return items;
   }
 
-  void changedDropDownItem(String selectedFruit) {
+  void changedDropDownCategory(String selectedItem) {
     setState(() {
-      _selectedCategory = selectedFruit;
+      _selectedCategory = selectedItem;
     });
   }
 
-  Future<Null> _pickupDate(BuildContext context) async {
-    //pick up date
-    final DateTime picked = await showDatePicker(
-      context: context,
-      initialDate: _date,
-      firstDate: new DateTime(2018),
-      lastDate: new DateTime(2022),
-    );
-    if (picked != null && picked != _date) {
-      print('Date Selected : ${_date.toString()}');
-      setState(() {
-        _date = picked;
-      });
-    }
-  }
-
-  Future<Null> _pickupTime(BuildContext context) async {
-    //pick up time
-    final TimeOfDay picked =
-        await showTimePicker(context: context, initialTime: _time);
-    if (picked != null && picked != _time) {
-      print('Time selected: ${_time.toString()}');
-      setState(() {
-        _time = picked;
-      });
-    }
-  }
-
-  Future<Null> _returnDate(BuildContext context) async {
-    //return date
-    final DateTime picked = await showDatePicker(
-      context: context,
-      initialDate: _date,
-      firstDate: new DateTime(2018),
-      lastDate: new DateTime(2022),
-    );
-    if (picked != null && picked != _date) {
-      print('Date Selected : ${_date.toString()}');
-      setState(() {
-        _date = picked;
-      });
-    }
-  }
-
-  Future<Null> _returnTime(BuildContext context) async {
-    //return time
-    final TimeOfDay picked =
-        await showTimePicker(context: context, initialTime: _time);
-    if (picked != null && picked != _time) {
-      print('Time selected: ${_time.toString()}');
-      setState(() {
-        _time = picked;
-      });
-    }
+  void changedDropDownKiosk(String selectedItem) {
+    setState(() {
+      _selectedKiosk = selectedItem;
+    });
   }
 
   Widget build(BuildContext context) {
-    return Container(
-        margin: EdgeInsets.all(15.0),
-        child: ListView(children: <Widget>[
-          TextField(
-            decoration: InputDecoration(labelText: 'Item Name'),
-            onChanged: (String value) {
-              setState(() {
-                titleValue = value;
-              });
-            },
-          ),
-          Text("Choose Category"),
-          Center(
-            child: DropdownButton(
-              value: _selectedCategory,
-              items: _dropDownMenuItems,
-              onChanged: changedDropDownItem,
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Borrow Request"),
+      ),
+      body: Container(
+          // decoration: BoxDecoration(color: Colors.grey),
+          margin: EdgeInsets.all(15.0),
+          child: ListView(children: <Widget>[
+            TextField(
+              decoration: InputDecoration(
+                  labelText: 'Item Name',
+                  labelStyle: TextStyle(fontSize: 20, color: Colors.pink)),
+              onChanged: (String value) {
+                setState(() {
+                  titleValue = value;
+                });
+              },
             ),
-          ),
-          Container(
-            //pick up
-            padding: EdgeInsets.all(10.0), //inside
-            margin: EdgeInsets.all(5.0), // outside
-            decoration: BoxDecoration(
-                border: Border.all(width: 0.5, color: Colors.grey),
-                borderRadius: BorderRadius.circular(5.0)),
-            child: Column(
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: <Widget>[
-                new Text(
-                  'Pick-Up Time',
-                  textAlign: TextAlign.left,
-                  style: new TextStyle(
-                    fontSize: 20.0,
-                  ),
+                Text("Choose Category",
+                    style: TextStyle(fontSize: 18, color: Colors.pink)),
+                DropdownButton(
+                  value: _selectedCategory,
+                  items: _dropDownMenuCategory,
+                  onChanged: changedDropDownCategory,
                 ),
-                new Text(
-                  'Date Selected : ${_date.toString()}',
-                  textAlign: TextAlign.left,
-                ),
-                new RaisedButton(
-                  child: Text('Select Date'),
-                  onPressed: () {
-                    _pickupDate(context);
-                  },
-                ),
-                new Text(
-                  'Time selected: ${_time.toString()}',
-                  textAlign: TextAlign.left,
-                ),
-                new RaisedButton(
-                    child: new Text('Select Time'),
-                    onPressed: () {
-                      _pickupTime(context);
-                    }),
               ],
             ),
-          ),
-          Container(
-            // Return
-            padding: EdgeInsets.all(10.0), //inside
-            margin: EdgeInsets.all(5.0), // outside
-            decoration: BoxDecoration(
-                border: Border.all(width: 0.5, color: Colors.grey),
-                borderRadius: BorderRadius.circular(5.0)),
-            child: Column(
-              children: <Widget>[
-                new Text(
-                  'Return Time',
-                  textAlign: TextAlign.left,
-                  style: new TextStyle(
-                    fontSize: 20.0,
+            Container(
+              //Pick-up time
+              margin: EdgeInsets.all(10.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text("Pick-up Time",
+                      style: TextStyle(fontSize: 18, color: Colors.pink)),
+                  DateTimePickerFormField(
+                    inputType: inputType,
+                    format: DateFormat("d EEEE MMMM 'at' h:mma"),
+                    editable: editable,
+                    decoration: InputDecoration(
+                        labelText: 'Date/Time', hasFloatingPlaceholder: false),
+                    onChanged: (dt) => setState(() => date = dt),
                   ),
+                ],
+              ),
+            ),
+            Container(
+              //return time
+              margin: EdgeInsets.all(10.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text("Return Time",
+                      style: TextStyle(fontSize: 18, color: Colors.pink)),
+                  DateTimePickerFormField(
+                    inputType: inputType,
+                    format: DateFormat("d EEEE MMMM 'at' h:mma"),
+                    editable: editable,
+                    decoration: InputDecoration(
+                        labelText: 'Date/Time', hasFloatingPlaceholder: false),
+                    onChanged: (dt) => setState(() => date = dt),
+                  ),
+                ],
+              ),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: <Widget>[
+                Text("Choose Kiosk",
+                    style: TextStyle(fontSize: 18, color: Colors.pink)),
+                DropdownButton(
+                  value: _selectedKiosk,
+                  items: _dropDownMenuKiosk,
+                  onChanged: changedDropDownKiosk,
                 ),
-                new Text(
-                  'Date Selected : ${_date.toString()}',
-                  textAlign: TextAlign.left,
-                ),
-                new RaisedButton(
-                  child: Text('Select Date'),
-                  onPressed: () {
-                    _returnDate(context);
-                  },
-                ),
-                new Text(
-                  'Time selected: ${_time.toString()}',
-                  textAlign: TextAlign.left,
-                ),
-                new RaisedButton(
-                    child: new Text('Select Time'),
-                    onPressed: () {
-                      _returnTime(context);
-                    }),
               ],
             ),
-          ),
-          TextField(
-            keyboardType: TextInputType.number,
-            decoration: InputDecoration(labelText: 'Tokens Offer'),
-            onChanged: (String value) {
-              setState(() {
-                tokenValue = int.parse(value);
-              });
-            },
-          ),
-          DateTimePickerFormField(
-            inputType: inputType,
-            format: DateFormat("EEEE, MMMM d, yyyy 'at' h:mma"),
-            editable: editable,
-            decoration: InputDecoration(
-                labelText: 'Date/Time', hasFloatingPlaceholder: false),
-            onChanged: (dt) => setState(() => date = dt),
-          ),
-          RaisedButton(
-            child: Text('Submit'),
-            onPressed: () {},
-          ),
-        ]));
+            TextField(
+              keyboardType: TextInputType.number,
+              decoration: InputDecoration(
+                  labelText: 'Tokens Offer',
+                  labelStyle: TextStyle(fontSize: 15, color: Colors.pink)),
+              onChanged: (String value) {
+                setState(() {
+                  tokenValue = int.parse(value);
+                });
+              },
+            ),
+            Container(
+              margin: EdgeInsets.all(10.0),
+              child: MaterialButton(
+                height: 40.0,
+                // minWidth: 300.0,
+                color: Colors.pink[400],
+                textColor: Colors.white,
+                child: new Text("Request Item"),
+                onPressed: () {
+                  Navigator.of(context).pushNamed("/Home");
+                },
+                splashColor: Colors.pink[200],
+              ),
+            ),
+          ])),
+    );
   }
 }
+
+// Date Format
+//   InputType.both: DateFormat("EEEE, MMMM d, yyyy 'at' h:mma"),
+//   InputType.date: DateFormat('yyyy-MM-dd'),
+//   InputType.time: DateFormat("HH:mm"),

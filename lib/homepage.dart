@@ -70,21 +70,15 @@ class _DashboardState extends State<Dashboard> {
         children: <Widget>[
           GestureDetector(
             onTap: () {
-              print("Statoinaries onTap called.");
+              print("Stationery  onTap called.");
             },
-            child: myItems(Icons.edit, "Stationaries", 0xffed622b),
+            child: myItems(Icons.edit, "Stationery ", 0xffed622b),
           ),
           GestureDetector(
             onTap: () {
-              print("Clothes onTap called.");
+              print("Clothing onTap called.");
             },
-            child: myItems(Icons.wc, "Clothes", 0xff26cb3c),
-          ),
-          GestureDetector(
-            onTap: () {
-              print("Sportwares onTap called.");
-            },
-            child: myItems(Icons.directions_bike, "Sportwares", 0xffff3266),
+            child: myItems(Icons.wc, "Clothing", 0xff26cb3c),
           ),
           GestureDetector(
             onTap: () {
@@ -94,9 +88,9 @@ class _DashboardState extends State<Dashboard> {
           ),
           GestureDetector(
             onTap: () {
-              print("Electronic onTap called.");
+              print("Electronics onTap called.");
             },
-            child: myItems(Icons.usb, "Electronic ", 0xFF9575CD),
+            child: myItems(Icons.usb, "Electronics ", 0xFF9575CD),
           ),
           GestureDetector(
             onTap: () {
@@ -112,11 +106,10 @@ class _DashboardState extends State<Dashboard> {
           )
         ],
         staggeredTiles: [
-          StaggeredTile.extent(1, 150.0), //Stationaries
-          StaggeredTile.extent(1, 150.0), //Clothes
-          StaggeredTile.extent(1, 150.0), //Sportwares
+          StaggeredTile.extent(1, 150.0), //Stationery 
+          StaggeredTile.extent(1, 150.0), //Clothing
           StaggeredTile.extent(1, 150.0), //Sport Equipment
-          StaggeredTile.extent(1, 150.0), //Electronic
+          StaggeredTile.extent(1, 150.0), //Electronics
           StaggeredTile.extent(1, 150.0), //Books
           StaggeredTile.extent(1, 150.0), //Others
         ],

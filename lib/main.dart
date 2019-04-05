@@ -1,4 +1,4 @@
-// 
+//
 // import 'dart:convert';
 
 import 'dart:convert';
@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'home.dart';
 import 'signup.dart';
 // import 'package:firebase_auth/firebase_auth.dart';
-import  'api_provider.dart';
+import 'api_provider.dart';
 
 void main() => runApp(MyApp());
 
@@ -42,25 +42,24 @@ class LoginPageState extends State<LoginPage>
   final _formkey = GlobalKey<FormState>();
   ApiProvider apiProvider = ApiProvider();
   Future doLogin() async {
-    if(_formkey.currentState.validate()){
-try {
-  var rs =await apiProvider.doLogin(_username.text,_password.text);
-  if(rs.statusCode==200){
-   print(rs.body);
-   var jsonRes = json.decode(rs.body);
-   if (jsonRes['ok']) {
-     String token = jsonRes['token'];
-     print(token);
-     
-   } else {
-     print('Server error');
-   }
-  }else{
-    print('server error');
-  }
-} catch (e) {
-  print(e);
-}
+    if (_formkey.currentState.validate()) {
+      try {
+        var rs = await apiProvider.doLogin(_username.text, _password.text);
+        if (rs.statusCode == 200) {
+          print(rs.body);
+          var jsonRes = json.decode(rs.body);
+          if (jsonRes['ok']) {
+            String token = jsonRes['token'];
+            print(token);
+          } else {
+            print('Server error');
+          }
+        } else {
+          print('server error');
+        }
+      } catch (e) {
+        print(e);
+      }
     }
   }
 
@@ -146,9 +145,8 @@ try {
                           textColor: Colors.white,
                           child: new Text("Log in"),
                           onPressed: () {
-                             Navigator.of(context).pushNamed("/Home");
+                            Navigator.of(context).pushNamed("/Home");
                             // doLogin();
-                          
                           },
                           splashColor: Colors.pink[200],
                         ),
@@ -159,8 +157,7 @@ try {
                           textColor: Colors.white,
                           child: new Text("Sign up"),
                           onPressed: () {
-                           
-                             Navigator.of(context).pushNamed("/signup");
+                            Navigator.of(context).pushNamed("/signup");
                           },
                           splashColor: Colors.pink[200],
                         ),
@@ -186,8 +183,5 @@ try {
 //     } catch (e) {
 //       print(e.message);
 //     }
-    
 
-  }
-
-    
+}
