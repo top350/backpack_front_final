@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+
+
+import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
+
 //Pun tum eiei
 
 class LentPage extends StatefulWidget {
@@ -10,7 +15,14 @@ class LentPage extends StatefulWidget {
 }
 
 class _LentPageState extends State<LentPage> {
-  List _category = ["Electronic","Clothing","Stationary","Other"];
+  // final formats = {
+  //   InputType.both: DateFormat("EEEE, MMMM d, yyyy 'at' h:mma"),
+  //   InputType.date: DateFormat('yyyy-MM-dd'),
+  //   InputType.time: DateFormat("HH:mm"),
+  // };
+
+
+  List _category = ["Electronic", "Clothing", "Stationary", "Other"];
   String titleValue = ''; //user input
   int tokenValue; // user input
 
@@ -19,6 +31,12 @@ class _LentPageState extends State<LentPage> {
 
   DateTime _date = new DateTime.now();
   TimeOfDay _time = new TimeOfDay.now();
+
+  InputType inputType = InputType.both;
+  bool editable = true;
+  DateTime date;
+
+  
 
   @override
   void initState() {
@@ -202,10 +220,18 @@ class _LentPageState extends State<LentPage> {
               });
             },
           ),
+          DateTimePickerFormField(
+            inputType: inputType,
+            format: DateFormat("EEEE, MMMM d, yyyy 'at' h:mma"),
+            editable: editable,
+            decoration: InputDecoration(
+                labelText: 'Date/Time', hasFloatingPlaceholder: false),
+            onChanged: (dt) => setState(() => date = dt),
+          ),
           RaisedButton(
             child: Text('Submit'),
             onPressed: () {},
-          )
+          ),
         ]));
   }
 }
