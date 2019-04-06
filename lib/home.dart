@@ -19,7 +19,8 @@ class HomeState extends State<Home> {
     Dashboard(),
     LentPage(),
     DisplayWidget(Colors.green),
-    DisplayWidget(Colors.blue),
+    DisplayProfile()
+    //DisplayWidget(Colors.blue),
   ];
   Widget build(BuildContext context) {
     return Scaffold(
