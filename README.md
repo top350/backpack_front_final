@@ -1,6 +1,6 @@
 # front_backpack_app
 
-A new Flutter project.
+A new Flutter project. For University.
 
 ## Getting Started
 
