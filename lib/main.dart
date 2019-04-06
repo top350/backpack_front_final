@@ -145,7 +145,7 @@ class LoginPageState extends State<LoginPage>
                           textColor: Colors.white,
                           child: new Text("Log in"),
                           onPressed: () {
-                            Navigator.of(context).pushNamed("/Home");
+                            Navigator.of(context).pushReplacementNamed("/Home");
                             // doLogin();
                           },
                           splashColor: Colors.pink[200],
@@ -157,7 +157,8 @@ class LoginPageState extends State<LoginPage>
                           textColor: Colors.white,
                           child: new Text("Sign up"),
                           onPressed: () {
-                            Navigator.of(context).pushNamed("/signup");
+                            Navigator.of(context)
+                                .pushReplacementNamed("/signup");
                           },
                           splashColor: Colors.pink[200],
                         ),
