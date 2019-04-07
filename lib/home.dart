@@ -1,10 +1,9 @@
 // import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'display.dart';
-import 'homepage.dart';
 
+import 'display.dart';
+import 'dashboard.dart';
 import 'borrow.dart';
-import 'category.dart';
 
 class Home extends StatefulWidget {
   // const Home({Key key, this.user}) : super(key: key);
@@ -23,9 +22,6 @@ class HomeState extends State<Home> {
   ];
   Widget build(BuildContext context) {
     return Scaffold(
-      //  appBar: AppBar(
-      //    title: Text('${widget.user.email}'),
-      //  ),
       body: _children[currentindex],
       bottomNavigationBar: BottomNavigationBar(
           currentIndex: currentindex,
@@ -43,7 +39,7 @@ class HomeState extends State<Home> {
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.history),
-              title: Text('session'),
+              title: Text('Session'),
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.face),

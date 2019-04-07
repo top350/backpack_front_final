@@ -1,6 +1,5 @@
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter/material.dart';
-import './item_list.dart';
 
 class Dashboard extends StatefulWidget {
   @override
