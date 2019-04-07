@@ -6,6 +6,8 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'home.dart';
 import 'signup.dart';
+import './item_list.dart';
+import './item_detail.dart';
 // import 'package:firebase_auth/firebase_auth.dart';
 import 'api_provider.dart';
 
@@ -16,14 +18,22 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        //  title:'Home page',
-        //  home: Home(),
-        home: new LoginPage(),
-        theme: new ThemeData(primarySwatch: Colors.pink),
-        routes: <String, WidgetBuilder>{
-          "/Home": (BuildContext context) => new Home(),
-          "/signup": (BuildContext context) => new SignupPage(),
-        });
+      //  title:'Home page',
+      //  home: Home(),
+      home: new LoginPage(),
+      theme: new ThemeData(primarySwatch: Colors.pink),
+      routes: <String, WidgetBuilder>{
+        "/Home": (BuildContext context) => new Home(),
+        "/signup": (BuildContext context) => new SignupPage(),
+        "/item_list": (BuildContext context) => new ItemList(),
+        "/item_detail": (BuildContext context) => new ItemDetail()
+      },
+      onUnknownRoute: (RouteSettings setting) {
+        return MaterialPageRoute(
+          builder: (BuildContext context) => Home(),
+        );
+      },
+    );
   }
 }
 
@@ -157,8 +167,7 @@ class LoginPageState extends State<LoginPage>
                           textColor: Colors.white,
                           child: new Text("Sign up"),
                           onPressed: () {
-                            Navigator.of(context)
-                                .pushReplacementNamed("/signup");
+                            Navigator.of(context).pushNamed("/signup");
                           },
                           splashColor: Colors.pink[200],
                         ),
