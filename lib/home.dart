@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'display.dart';
 import 'homepage.dart';
 
-import 'lent.dart';
+import 'borrow.dart';
 import 'category.dart';
 
 class Home extends StatefulWidget {
@@ -17,10 +17,9 @@ class HomeState extends State<Home> {
   int currentindex = 0;
   final List<Widget> _children = [
     Dashboard(),
-    LentPage(),
+    BorrowPage(),
     DisplayWidget(Colors.green),
     DisplayProfile()
-    //DisplayWidget(Colors.blue),
   ];
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,7 +27,6 @@ class HomeState extends State<Home> {
       //    title: Text('${widget.user.email}'),
       //  ),
       body: _children[currentindex],
-
       bottomNavigationBar: BottomNavigationBar(
           currentIndex: currentindex,
           onTap: onTabTapped,
@@ -41,7 +39,7 @@ class HomeState extends State<Home> {
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.create),
-              title: Text('Lent'),
+              title: Text('Borrow'),
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.history),

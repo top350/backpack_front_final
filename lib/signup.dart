@@ -19,8 +19,6 @@ class SignupPage extends StatefulWidget {
   State createState() => new SignupPageState();
 }
 
-
-
 class SignupPageState extends State<SignupPage>
     with SingleTickerProviderStateMixin {
   AnimationController _iconAnimationController;
@@ -29,7 +27,6 @@ class SignupPageState extends State<SignupPage>
   TextEditingController email = TextEditingController();
   TextEditingController password1 = TextEditingController();
   TextEditingController password2 = TextEditingController();
-  
 
   @override
   void initState() {
@@ -59,7 +56,6 @@ class SignupPageState extends State<SignupPage>
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               new Form(
-                
                 child: new Theme(
                   data: new ThemeData(
                       brightness: Brightness.light,
@@ -73,7 +69,6 @@ class SignupPageState extends State<SignupPage>
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
                         new TextFormField(
-                          
                           controller: username,
                           decoration: new InputDecoration(
                             labelText: "Enter your name",
@@ -81,7 +76,6 @@ class SignupPageState extends State<SignupPage>
                           keyboardType: TextInputType.text,
                         ),
                         new TextFormField(
-                          
                           controller: email,
                           decoration: new InputDecoration(
                             labelText: "Enter Email",
@@ -89,7 +83,6 @@ class SignupPageState extends State<SignupPage>
                           keyboardType: TextInputType.emailAddress,
                         ),
                         new TextFormField(
-                         
                           controller: password1,
                           decoration: new InputDecoration(
                             labelText: "Enter Password",
@@ -98,7 +91,6 @@ class SignupPageState extends State<SignupPage>
                           obscureText: true,
                         ),
                         new TextFormField(
-                        
                           controller: password2,
                           decoration: new InputDecoration(
                             labelText: "Confirm Password",

@@ -5,15 +5,15 @@ import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 
 //Pun tum eiei
 
-class LentPage extends StatefulWidget {
+class BorrowPage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
-    return _LentPageState();
+    return _BorrowPageState();
   }
 }
 
-class _LentPageState extends State<LentPage> {
+class _BorrowPageState extends State<BorrowPage> {
   List _category = [
     // Dropdown
     "Stationery",
