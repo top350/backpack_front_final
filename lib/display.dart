@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'login.dart';
+
 class DisplayWidget extends StatelessWidget {
   final Color color;
   DisplayWidget(this.color);
@@ -17,7 +19,8 @@ class DisplayProfile extends StatelessWidget {
       EditProfile.routeName: (BuildContext context) =>
           new EditProfile(title: "Edit Profile"),
       "/SuccessPage": (BuildContext context) => new SuccessPage(),
-      "/ReviewPage": (BuildContext context) => new ReviewPage()
+      "/ReviewPage": (BuildContext context) => new ReviewPage(),
+      //"/login": (BuildContext context) => new LoginPage(),
     });
   }
 }
@@ -97,7 +100,9 @@ class ProfilePage extends State<_DisplayProfile> {
                       color: Colors.red,
                       elevation: 7.0,
                       child: GestureDetector(
-                          onTap: () {},
+                          onTap: () {
+                            //  Navigator.of(context).pushReplacementNamed("/login");
+                          },
                           child: Center(
                             child: Text('Log out',
                                 style: TextStyle(color: Colors.white)),

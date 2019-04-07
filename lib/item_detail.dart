@@ -19,7 +19,10 @@ class ItemDetail extends StatelessWidget {
                 child: Text('CONTINUE'),
                 onPressed: () {
                   Navigator.pop(context);
-                  Navigator.of(context).pushNamed("/Home");
+                  Navigator.popUntil(context, ModalRoute.withName('/Home'));
+                  // other alternative Navigator.of(context).pushNamedAndRemoveUntil('/login', (Route<dynamic> route) => false);
+                  Navigator.of(context).pushReplacementNamed("/Home");
+                  
                 },
               )
             ],

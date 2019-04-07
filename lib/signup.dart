@@ -1,18 +1,6 @@
 import 'package:flutter/material.dart';
+
 // import  'category.dart';
-
-void main() => runApp(MyApp());
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return new MaterialApp(
-        home: new SignupPage(),
-        routes: <String, WidgetBuilder>{
-          // "/Category": (BuildContext context)=> new Category()
-        });
-  }
-}
 
 class SignupPage extends StatefulWidget {
   @override
@@ -109,7 +97,7 @@ class SignupPageState extends State<SignupPage>
                           textColor: Colors.white,
                           child: new Text("Next"),
                           onPressed: () {
-                            //  Navigator.of(context).pushNamed("/Category");
+                            Navigator.of(context).pushNamed("/category");
                             if (password1.text == password2.text) {
                               print(username.text);
                               print(password1.text);
