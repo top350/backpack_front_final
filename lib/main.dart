@@ -1,188 +1,113 @@
-//
-// import 'dart:convert';
-
-import 'dart:convert';
-
+import 'dart:async';
 import 'package:flutter/material.dart';
-import 'home.dart';
-import 'signup.dart';
-// import 'package:firebase_auth/firebase_auth.dart';
-import 'api_provider.dart';
+import 'package:front_backpack_app/loginscreen.dart';
+import 'package:front_backpack_app/widgets.dart';
 
-void main() => runApp(MyApp());
-
-class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-        //  title:'Home page',
-        //  home: Home(),
-        home: new LoginPage(),
-        theme: new ThemeData(primarySwatch: Colors.pink),
-        routes: <String, WidgetBuilder>{
-          "/Home": (BuildContext context) => new Home(),
-          "/signup": (BuildContext context) => new SignupPage(),
-        });
-  }
-}
-
-class LoginPage extends StatefulWidget {
-  @override
-  State createState() => new LoginPageState();
-}
-
-class LoginPageState extends State<LoginPage>
-    with SingleTickerProviderStateMixin {
-  AnimationController _iconAnimationController;
-  Animation<double> _iconAnimation;
-  TextEditingController _username = TextEditingController();
-  TextEditingController _password = TextEditingController();
-
-  final _formkey = GlobalKey<FormState>();
-  ApiProvider apiProvider = ApiProvider();
-  Future doLogin() async {
-    if (_formkey.currentState.validate()) {
-      try {
-        var rs = await apiProvider.doLogin(_username.text, _password.text);
-        if (rs.statusCode == 200) {
-          print(rs.body);
-          var jsonRes = json.decode(rs.body);
-          if (jsonRes['ok']) {
-            String token = jsonRes['token'];
-            print(token);
-          } else {
-            print('Server error');
-          }
-        } else {
-          print('server error');
-        }
-      } catch (e) {
-        print(e);
-      }
+void main() => runApp(MaterialApp(
+    theme:
+        ThemeData(primaryColor: Colors.red, accentColor: Colors.yellowAccent),
+    debugShowCheckedModeBanner: false,
+    home: SplashScreen(),
+    routes: <String,WidgetBuilder>{ 
+      "/loginscreen": (BuildContext context)=> LoginPage()
     }
-  }
+  ));
 
+class SplashScreen extends StatefulWidget {
   @override
+  _SplashScreenState createState() => _SplashScreenState();
+}
+
+class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderStateMixin {
+
+  AnimationController _animationController;
+  Animation<double> _animation;
+
   void initState() {
+    // TODO: implement initState
     super.initState();
-    _iconAnimationController = new AnimationController(
-        vsync: this, duration: new Duration(milliseconds: 500));
-    _iconAnimation = new CurvedAnimation(
-        parent: _iconAnimationController, curve: Curves.easeOut);
-    _iconAnimation.addListener(() => this.setState(() {}));
-    _iconAnimationController.forward();
+    _animationController = new AnimationController(
+        vsync: this,
+        duration: new Duration(milliseconds: 500)
+    );
+    _animation = new CurvedAnimation(
+      parent: _animationController,
+      curve: Curves.easeOut,
+    );
+
+    _animation.addListener(()=> this.setState((){}));
+    _animationController.forward();
+
+    Timer(Duration(seconds: 5), (){
+      Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage()));
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
-      backgroundColor: Colors.pinkAccent,
-      body: new Stack(
+    return Scaffold(
+      body: Stack(
         fit: StackFit.expand,
         children: <Widget>[
-          new Image(
-            image: new AssetImage("assets/pinkbg.jpg"),
-            fit: BoxFit.cover,
-            color: Colors.white24,
-            colorBlendMode: BlendMode.lighten,
+          Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(colors: [const Color(0xFF915FB5), const Color(0xFFCA436B)],
+                begin: FractionalOffset.topLeft,
+                end: FractionalOffset.bottomRight,
+                stops: [0.0,1.0],
+                tileMode: TileMode.clamp
+                ),
+            ),
           ),
-          new Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+          Column(
+            mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
-              new Image(
-                image: new AssetImage("assets/logo only.png"),
-                height: _iconAnimation.value * 170,
-                width: _iconAnimation.value * 170,
-              ),
-              new Form(
-                key: _formkey,
-                child: new Theme(
-                  data: new ThemeData(
-                      brightness: Brightness.light,
-                      primarySwatch: Colors.pink[150],
-                      inputDecorationTheme: new InputDecorationTheme(
-                          labelStyle: new TextStyle(
-                              color: Colors.pink[200], fontSize: 20.0))),
-                  child: new Container(
-                    padding: const EdgeInsets.all(40.0),
-                    child: new Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: <Widget>[
-                        new TextFormField(
-                          validator: (value) {
-                            if (value.isEmpty) {
-                              return 'Please enter username';
-                            }
-                          },
-                          controller: _username,
-                          decoration: new InputDecoration(
-                            labelText: "Enter your name",
-                          ),
-                          keyboardType: TextInputType.text,
-                        ),
-                        new TextFormField(
-                          validator: (value) {
-                            if (value.isEmpty) {
-                              return 'Please enter password';
-                            }
-                          },
-                          controller: _password,
-                          decoration: new InputDecoration(
-                            labelText: "Enter Password",
-                          ),
-                          keyboardType: TextInputType.text,
-                          obscureText: true,
-                        ),
-                        new Padding(
-                          padding:
-                              const EdgeInsets.only(bottom: 20.0, top: 20.0),
-                        ),
-                        new MaterialButton(
-                          height: 40.0,
-                          minWidth: 300.0,
-                          color: Colors.pink[400],
-                          textColor: Colors.white,
-                          child: new Text("Log in"),
-                          onPressed: () {
-                            Navigator.of(context).pushReplacementNamed("/Home");
-                            // doLogin();
-                          },
-                          splashColor: Colors.pink[200],
-                        ),
-                        new MaterialButton(
-                          height: 40.0,
-                          minWidth: 300.0,
-                          color: Colors.pink[400],
-                          textColor: Colors.white,
-                          child: new Text("Sign up"),
-                          onPressed: () {
-                            Navigator.of(context)
-                                .pushReplacementNamed("/signup");
-                          },
-                          splashColor: Colors.pink[200],
-                        ),
-                      ],
-                    ),
+              Expanded(
+                flex: 2,
+                child: Container(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      CircleAvatar(
+                        backgroundColor: Colors.white,
+                        radius: 100.0,
+                        child: Logo(),
+                      ),
+                      Padding(padding: EdgeInsets.only(top: 10.0),
+                      ),
+                      Text(
+                        "Share That Thing!", 
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 24.0,
+                          fontWeight: FontWeight.bold),
+                      )
+                    ],
                   ),
                 ),
+              ),
+              Expanded(
+                flex: 1,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    CircularProgressIndicator(),
+                    Padding(
+                      padding: EdgeInsets.only(top: 20.0),
+                    ),
+                    Text("Designed by Mongkol Team", 
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 18.0,
+                        fontWeight: FontWeight.bold)
+                    )
+                  ],
+                )
               )
-            ],
+            ]
           )
         ],
       ),
     );
   }
-
-// Future <void> signIn() async{
-//   final formState = _formkey.currentState;
-//   if(formState.validate()){
-//     formState.save();
-//     try {
-//        FirebaseUser user = await FirebaseAuth.instance.signInWithEmailAndPassword(email:_username.text ,password:_password.text  );
-//         Navigator.push(context, MaterialPageRoute(builder: (context)=>Home(user:user)));
-//     } catch (e) {
-//       print(e.message);
-//     }
-
 }
