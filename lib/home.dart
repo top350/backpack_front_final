@@ -1,10 +1,9 @@
 // import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'display.dart';
-import 'homepage.dart';
 
-import 'lent.dart';
-import 'category.dart';
+import 'display.dart';
+import 'dashboard.dart';
+import 'borrow.dart';
 
 class Home extends StatefulWidget {
   // const Home({Key key, this.user}) : super(key: key);
@@ -17,17 +16,13 @@ class HomeState extends State<Home> {
   int currentindex = 0;
   final List<Widget> _children = [
     Dashboard(),
-    LentPage(),
+    BorrowPage(),
     DisplayWidget(Colors.green),
-    DisplayWidget(Colors.blue),
+    DisplayProfile()
   ];
   Widget build(BuildContext context) {
     return Scaffold(
-      //  appBar: AppBar(
-      //    title: Text('${widget.user.email}'),
-      //  ),
       body: _children[currentindex],
-
       bottomNavigationBar: BottomNavigationBar(
           currentIndex: currentindex,
           onTap: onTabTapped,
@@ -40,11 +35,11 @@ class HomeState extends State<Home> {
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.create),
-              title: Text('Lent'),
+              title: Text('Borrow'),
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.history),
-              title: Text('session'),
+              title: Text('Session'),
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.face),

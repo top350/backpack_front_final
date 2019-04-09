@@ -84,11 +84,12 @@ class _DashboardState extends State<Dashboard> {
             onTap: () {
               print("Sport Equipment onTap called.");
             },
-            child: myItems(Icons.fitness_center, "Sport Equipment", 0xff3399fe),
+            child: myItems(Icons.fitness_center, "Sport Equip.", 0xff3399fe),
           ),
           GestureDetector(
             onTap: () {
               print("Electronics onTap called.");
+              Navigator.pushNamed(context, "/item_list");
             },
             child: myItems(Icons.usb, "Electronics ", 0xFF9575CD),
           ),
@@ -103,10 +104,10 @@ class _DashboardState extends State<Dashboard> {
               print("Others onTap called.");
             },
             child: myItems(Icons.graphic_eq, "Others", 0xFFA1887F),
-          )
+          ),
         ],
         staggeredTiles: [
-          StaggeredTile.extent(1, 150.0), //Stationery 
+          StaggeredTile.extent(1, 150.0), //Stationery
           StaggeredTile.extent(1, 150.0), //Clothing
           StaggeredTile.extent(1, 150.0), //Sport Equipment
           StaggeredTile.extent(1, 150.0), //Electronics
@@ -117,3 +118,66 @@ class _DashboardState extends State<Dashboard> {
     );
   }
 }
+
+// class ItemList extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(
+//         title: Text('Product Card'),
+//       ),
+//       body: ListView(
+//         children: <Widget>[ItemCard(), ItemCard()],
+//       ),
+//     );
+//   }
+// }
+
+// class ItemCard extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return Card(
+//         elevation: 5.0,
+//         margin: new EdgeInsets.symmetric(horizontal: 10.0, vertical: 8.0),
+//         child: Container(
+//           child: LisTile(),
+//         ));
+//   }
+// }
+
+// class LisTile extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return ListTile(
+//         contentPadding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 15.0),
+//         leading: Container(
+//             padding: EdgeInsets.only(right: 12.0),
+//             //  decoration: new BoxDecoration(
+//             //      border: new Border(
+//             //          right: new BorderSide(width: 1, color: Colors.black38))),
+//             child: Image.asset(
+//               'assets/laptop.jpg',
+//               scale: 6,
+//             )),
+//         title: Text(
+//           "Laptop",
+//           style: TextStyle(fontWeight: FontWeight.bold),
+//         ),
+//         subtitle: Row(
+//           children: <Widget>[
+//             Icon(
+//               Icons.access_time,
+//               size: 10,
+//             ),
+//             Text("Pick Up: 12 AM", style: TextStyle())
+//           ],
+//         ),
+//         trailing: IconButton(
+//           icon: Icon(Icons.keyboard_arrow_right),
+//           iconSize: 40.0,
+//           onPressed: () {
+//             print('IconPressed');
+//           },
+//         ));
+//   }
+// }

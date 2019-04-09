@@ -1,21 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
+import 'package:intl/intl.dart';
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 
 //Pun tum eiei
 
-class LentPage extends StatefulWidget {
+class BorrowPage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    // TODO: implement createState
-    return _LentPageState();
+    return _BorrowPageState();
   }
 }
 
-class _LentPageState extends State<LentPage> {
+class _BorrowPageState extends State<BorrowPage> {
   List _category = [
-    // Dropdown
+    // Dropdown Category
     "Stationery",
     "Clothing",
     "Sport Equipment",
@@ -26,7 +25,7 @@ class _LentPageState extends State<LentPage> {
   String _selectedCategory;
   List<DropdownMenuItem<String>> _dropDownMenuCategory;
   List _kiosk = [
-    // Dropdown
+    // Dropdown Kiosk
     "Engineering",
     "Arts",
     "Science",
@@ -174,7 +173,7 @@ class _LentPageState extends State<LentPage> {
                 textColor: Colors.white,
                 child: new Text("Request Item"),
                 onPressed: () {
-                  Navigator.of(context).pushNamed("/Home");
+                  Navigator.of(context).pushReplacementNamed("/Home");
                 },
                 splashColor: Colors.pink[200],
               ),
