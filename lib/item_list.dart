@@ -32,17 +32,19 @@ class LisTile extends StatelessWidget {
     return ListTile(
         contentPadding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 15.0),
         leading: Container(
-            padding: EdgeInsets.only(right: 12.0),
-            //  decoration: new BoxDecoration(
-            //      border: new Border(
-            //          right: new BorderSide(width: 1, color: Colors.black38))),
-            child: Image.asset(
-              'assets/laptop.jpg',
-              scale: 6,
+            width: 100,
+            height: 80,
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage(
+                    'assets/laptop.jpg',
+                  ),
+                  fit: BoxFit.fill),
             )),
         title: Text(
           "Laptop",
-          style: TextStyle(fontWeight: FontWeight.bold),
+          style: TextStyle(fontWeight: FontWeight.bold,),
         ),
         subtitle: Row(
           children: <Widget>[
@@ -50,7 +52,7 @@ class LisTile extends StatelessWidget {
               Icons.access_time,
               size: 20,
             ),
-            Text(" Pick Up: 12 AM", style: TextStyle())
+            Text("Pick Up:12 AM", style: TextStyle())
           ],
         ),
         trailing: IconButton(
