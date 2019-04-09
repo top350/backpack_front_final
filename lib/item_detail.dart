@@ -53,15 +53,15 @@ class ItemDetail extends StatelessWidget {
                       Text('Laptop',
                           style: TextStyle(fontSize: 30, color: Colors.pink)),
                       Padding(
-                        padding: EdgeInsets.all(10),
+                        padding: EdgeInsets.all(8),
                       ),
                       Row(
                         // mainAxisSize: MainAxisSize.max,
                         // mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          Icon(Icons.account_circle, size: 30),
+                          Icon(Icons.account_circle, size: 20),
                           Padding(
-                            padding: EdgeInsets.all(10),
+                            padding: EdgeInsets.all(8),
                           ),
                           Text('Posted by: Patsornchai Wiboontanasarn',
                               style: TextStyle(fontSize: 15))
@@ -74,32 +74,32 @@ class ItemDetail extends StatelessWidget {
                         // mainAxisSize: MainAxisSize.max,
                         // mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          Icon(Icons.access_time, size: 30),
+                          Icon(Icons.access_time, size: 20),
                           Padding(
-                            padding: EdgeInsets.all(10),
+                            padding: EdgeInsets.all(8),
                           ),
                           Text('Pickup : 10 AM',
                               style: TextStyle(fontSize: 15)),
                           Padding(
                             padding: EdgeInsets.symmetric(
-                                vertical: 0, horizontal: 30),
+                                vertical: 0, horizontal: 20),
                           ),
-                          Icon(Icons.access_time, size: 30),
+                          Icon(Icons.access_time, size: 20),
                           Padding(
-                            padding: EdgeInsets.all(10),
+                            padding: EdgeInsets.all(8),
                           ),
                           Text('Return : 10 AM',
                               style: TextStyle(fontSize: 15)),
                         ],
                       ),
                       Padding(
-                        padding: EdgeInsets.all(10),
+                        padding: EdgeInsets.all(8),
                       ),
                       Row(
                         // mainAxisSize: MainAxisSize.max,
                         // mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          Icon(Icons.location_on, size: 30),
+                          Icon(Icons.location_on, size: 20),
                           Padding(
                             padding: EdgeInsets.all(10),
                           ),
@@ -114,7 +114,7 @@ class ItemDetail extends StatelessWidget {
                         // mainAxisSize: MainAxisSize.max,
                         // mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          Icon(Icons.attach_money, size: 30),
+                          Icon(Icons.attach_money, size: 20),
                           Padding(
                             padding: EdgeInsets.all(10),
                           ),
