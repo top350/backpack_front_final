@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'display.dart';
 import 'dashboard.dart';
 import 'borrow.dart';
+import 'session.dart';
 
 class Home extends StatefulWidget {
   // const Home({Key key, this.user}) : super(key: key);
@@ -17,7 +18,7 @@ class HomeState extends State<Home> {
   final List<Widget> _children = [
     Dashboard(),
     BorrowPage(),
-    DisplayWidget(Colors.green),
+    SessionPage(),
     DisplayProfile()
   ];
   Widget build(BuildContext context) {

@@ -1,64 +1,64 @@
-// import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
-import 'display.dart';
-import 'homepage.dart';
-import 'session.dart';
-import 'lent.dart';
+// // import 'package:firebase_auth/firebase_auth.dart';
+// import 'package:flutter/material.dart';
+// import 'display.dart';
+// import 'homepage.dart';
+// import 'session.dart';
+// import 'lent.dart';
 
-class Home extends StatefulWidget{
-  // const Home({Key key, this.user}) : super(key: key);
-  // final FirebaseUser user;
+// class Home extends StatefulWidget{
+//   // const Home({Key key, this.user}) : super(key: key);
+//   // final FirebaseUser user;
 
  
-  State<StatefulWidget> createState()=> HomeState();
-}
-class HomeState extends State<Home>{
-  int currentindex=0;
-  final List<Widget> _children =[
-    Dashboard(),
-    LentPage(),
-  SessionPage(),
-   DisplayProfile()
-  ];
-  Widget build(BuildContext context){
-    return Scaffold(
-        //  appBar: AppBar(
-        //    title: Text('${widget.user.email}'),
-        //  ),
-        body: _children[currentindex],
+//   State<StatefulWidget> createState()=> HomeState();
+// }
+// class HomeState extends State<Home>{
+//   int currentindex=0;
+//   final List<Widget> _children =[
+//     Dashboard(),
+//     LentPage(),
+//   SessionPage(),
+//    DisplayProfile()
+//   ];
+//   Widget build(BuildContext context){
+//     return Scaffold(
+//         //  appBar: AppBar(
+//         //    title: Text('${widget.user.email}'),
+//         //  ),
+//         body: _children[currentindex],
         
-         bottomNavigationBar: BottomNavigationBar(
-           currentIndex: currentindex,
-           onTap:onTabTapped,
-           fixedColor: Colors.pink[200],
-           type: BottomNavigationBarType.fixed,
-           items: <BottomNavigationBarItem>[
-             BottomNavigationBarItem(
-               icon: Icon(Icons.home),
-               title: Text('Home'),
-             ),
-               BottomNavigationBarItem(
-               icon: Icon(Icons.create),
-               title: Text('Lent'),
-             ),
-               BottomNavigationBarItem(
-               icon: Icon(Icons.history),
-               title: Text('session'),
-             ),
-               BottomNavigationBarItem(
-               icon: Icon(Icons.face),
-               title:Text('Profile'),
-             ),
-           ]
-             ),
+//          bottomNavigationBar: BottomNavigationBar(
+//            currentIndex: currentindex,
+//            onTap:onTabTapped,
+//            fixedColor: Colors.pink[200],
+//            type: BottomNavigationBarType.fixed,
+//            items: <BottomNavigationBarItem>[
+//              BottomNavigationBarItem(
+//                icon: Icon(Icons.home),
+//                title: Text('Home'),
+//              ),
+//                BottomNavigationBarItem(
+//                icon: Icon(Icons.create),
+//                title: Text('Lent'),
+//              ),
+//                BottomNavigationBarItem(
+//                icon: Icon(Icons.history),
+//                title: Text('session'),
+//              ),
+//                BottomNavigationBarItem(
+//                icon: Icon(Icons.face),
+//                title:Text('Profile'),
+//              ),
+//            ]
+//              ),
          
-         );
+//          );
     
-  }
-  void onTabTapped(int index){
-    setState(() {
-     currentindex =index; 
-    });
-  }
-}
+//   }
+//   void onTabTapped(int index){
+//     setState(() {
+//      currentindex =index; 
+//     });
+//   }
+// }
 

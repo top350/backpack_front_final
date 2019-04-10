@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating/flutter_rating.dart';
+
 import 'home.dart';
 
 void main() => runApp(new MyApp());
