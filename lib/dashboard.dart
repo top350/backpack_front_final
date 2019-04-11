@@ -1,5 +1,9 @@
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter/material.dart';
+
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+
+import "./items/item_list.dart";
+import './items/itemlists.dart';
 
 class Dashboard extends StatefulWidget {
   @override
@@ -71,37 +75,73 @@ class _DashboardState extends State<Dashboard> {
           GestureDetector(
             onTap: () {
               print("Stationery  onTap called.");
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ItemList("Stationery",stationeryList),
+                ),
+              );
             },
             child: myItems(Icons.edit, "Stationery ", 0xffed622b),
           ),
           GestureDetector(
             onTap: () {
               print("Clothing onTap called.");
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ItemList("Clothing",clothingList),
+                ),
+              );
             },
             child: myItems(Icons.wc, "Clothing", 0xff26cb3c),
           ),
           GestureDetector(
             onTap: () {
               print("Sport Equipment onTap called.");
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ItemList("Sport Equipment",sportEquipmentList),
+                ),
+              );
             },
             child: myItems(Icons.fitness_center, "Sport Equip.", 0xff3399fe),
           ),
           GestureDetector(
             onTap: () {
               print("Electronics onTap called.");
-              Navigator.pushNamed(context, "/item_list");
+              //Navigator.pushNamed(context, "/item_list");
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ItemList("Electronics",electronicsList),
+                ),
+              );
             },
             child: myItems(Icons.usb, "Electronics ", 0xFF9575CD),
           ),
           GestureDetector(
             onTap: () {
               print("Books onTap called.");
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ItemList("Books",booksList),
+                ),
+              );
             },
             child: myItems(Icons.book, "Books", 0xFF81C784),
           ),
           GestureDetector(
             onTap: () {
               print("Others onTap called.");
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ItemList("Others",othersList),
+                ),
+              );
             },
             child: myItems(Icons.graphic_eq, "Others", 0xFFA1887F),
           ),
@@ -118,66 +158,3 @@ class _DashboardState extends State<Dashboard> {
     );
   }
 }
-
-// class ItemList extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: Text('Product Card'),
-//       ),
-//       body: ListView(
-//         children: <Widget>[ItemCard(), ItemCard()],
-//       ),
-//     );
-//   }
-// }
-
-// class ItemCard extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Card(
-//         elevation: 5.0,
-//         margin: new EdgeInsets.symmetric(horizontal: 10.0, vertical: 8.0),
-//         child: Container(
-//           child: LisTile(),
-//         ));
-//   }
-// }
-
-// class LisTile extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return ListTile(
-//         contentPadding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 15.0),
-//         leading: Container(
-//             padding: EdgeInsets.only(right: 12.0),
-//             //  decoration: new BoxDecoration(
-//             //      border: new Border(
-//             //          right: new BorderSide(width: 1, color: Colors.black38))),
-//             child: Image.asset(
-//               'assets/laptop.jpg',
-//               scale: 6,
-//             )),
-//         title: Text(
-//           "Laptop",
-//           style: TextStyle(fontWeight: FontWeight.bold),
-//         ),
-//         subtitle: Row(
-//           children: <Widget>[
-//             Icon(
-//               Icons.access_time,
-//               size: 10,
-//             ),
-//             Text("Pick Up: 12 AM", style: TextStyle())
-//           ],
-//         ),
-//         trailing: IconButton(
-//           icon: Icon(Icons.keyboard_arrow_right),
-//           iconSize: 40.0,
-//           onPressed: () {
-//             print('IconPressed');
-//           },
-//         ));
-//   }
-// }
