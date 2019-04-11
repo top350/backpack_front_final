@@ -13,6 +13,11 @@ class BorrowPage extends StatefulWidget {
 }
 
 class _BorrowPageState extends State<BorrowPage> {
+  //DateTime now = DateTime.now();
+  //String formattedDate = DateFormat("d EEEE MMMM 'at' h:mma").format(now);
+
+  String pickuptime = '';
+
   List _category = [
     // Dropdown Category
     "Stationery",
@@ -36,6 +41,7 @@ class _BorrowPageState extends State<BorrowPage> {
 
   String titleValue = ''; //user input
   int tokenValue;
+  String note = '';
 
   InputType inputType = InputType.both; // Date and Time
   bool editable = true;
@@ -116,7 +122,12 @@ class _BorrowPageState extends State<BorrowPage> {
                     editable: editable,
                     decoration: InputDecoration(
                         labelText: 'Date/Time', hasFloatingPlaceholder: false),
-                    onChanged: (dt) => setState(() => date = dt),
+                    onChanged: (dt) {
+                      setState(() {
+                        date = dt;
+                        pickuptime = DateFormat.yMd().add_jm().format(dt);
+                      });
+                    },
                   ),
                 ],
               ),
@@ -164,6 +175,16 @@ class _BorrowPageState extends State<BorrowPage> {
                 });
               },
             ),
+            TextField(
+              decoration: InputDecoration(
+                  labelText: 'Note',
+                  labelStyle: TextStyle(fontSize: 15, color: Colors.pink)),
+              onChanged: (String value) {
+                setState(() {
+                  note = value;
+                });
+              },
+            ),
             Container(
               margin: EdgeInsets.all(10.0),
               child: MaterialButton(
@@ -178,6 +199,7 @@ class _BorrowPageState extends State<BorrowPage> {
                 splashColor: Colors.pink[200],
               ),
             ),
+            Text(pickuptime)
           ])),
     );
   }

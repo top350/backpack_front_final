@@ -66,7 +66,7 @@ class _TestState extends State<Test> {
                           textColor: Colors.white,
                           child: new Text("Summit"),
                           onPressed: () {
-                                              Navigator.of(context).push(MaterialPageRoute(
+                                              Navigator.of(context).pushReplacement(MaterialPageRoute(
                       builder: (context) => new Home()));
  
                                                   },
