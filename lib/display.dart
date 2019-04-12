@@ -2,22 +2,14 @@ import 'package:flutter/material.dart';
 
 import 'login.dart';
 
-class DisplayWidget extends StatelessWidget {
-  final Color color;
-  DisplayWidget(this.color);
-  Widget build(BuildContext context) {
-    return Container(
-      color: color,
-    );
-  }
-}
-
 class DisplayProfile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(home: _DisplayProfile(), routes: <String, WidgetBuilder>{
+    return MaterialApp(
+      home: _DisplayProfile(), 
+      routes: <String, WidgetBuilder>{
       EditProfile.routeName: (BuildContext context) =>
-          new EditProfile(title: "Edit Profile"),
+          new EditProfile(),
       "/SuccessPage": (BuildContext context) => new SuccessPage(),
       "/ReviewPage": (BuildContext context) => new ReviewPage(),
       //"/login": (BuildContext context) => new LoginPage(),
@@ -170,7 +162,7 @@ class _EditProfileState extends State<EditProfile> {
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: new AppBar(
-        title: new Text(widget.title),
+        title: new Text("Edit Profile"),
       ),
       // body: new Container(),
       // floatingActionButton: new FloatingActionButton(

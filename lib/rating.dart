@@ -3,23 +3,13 @@ import 'package:flutter_rating/flutter_rating.dart';
 
 import 'home.dart';
 
-void main() => runApp(new MyApp());
 
-class MyApp extends StatelessWidget {
+class RatingSession extends StatefulWidget {
   @override
-  Widget build(BuildContext context) {
-    return new MaterialApp(
-      home: new Test(),
-    );
-  }
+  _RatingSessionState createState() => new _RatingSessionState();
 }
 
-class Test extends StatefulWidget {
-  @override
-  _TestState createState() => new _TestState();
-}
-
-class _TestState extends State<Test> {
+class _RatingSessionState extends State<RatingSession> {
   double rating = 3.5;
   int starCount = 5;
 

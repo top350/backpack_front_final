@@ -16,7 +16,7 @@ class ItemDetail extends StatelessWidget {
         builder: (BuildContext context) {
           return AlertDialog(
             title: Text('Are you sure?'),
-            content: Text('This action cannot be undone!'),
+            content: Text('Are you sure you have the following item?'),
             actions: <Widget>[
               FlatButton(
                 child: Text('DISCARD'),
