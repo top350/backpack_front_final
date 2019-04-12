@@ -48,11 +48,75 @@ class _BorrowPageState extends State<BorrowPage> {
     "Siam",
   ];
 
-   void _addItem() {
-    stationeryList.add(ItemCard(ItemObject(this.itemName, this._selectedCategory, this.pickupTime, this.returnTime,
-      this._selectedKiosk, this.token, this.note, this.imageurl, this.who)));
+  void _addItem() {
+    if (_selectedCategory == "Stationery") {
+      stationeryList.add(ItemCard(ItemObject(
+          this.itemName,
+          this._selectedCategory,
+          this.pickupTime,
+          this.returnTime,
+          this._selectedKiosk,
+          this.token,
+          this.note,
+          this.imageurl,
+          this.who)));
+    } else if (_selectedCategory == "Clothing") {
+      clothingList.add(ItemCard(ItemObject(
+          this.itemName,
+          this._selectedCategory,
+          this.pickupTime,
+          this.returnTime,
+          this._selectedKiosk,
+          this.token,
+          this.note,
+          this.imageurl,
+          this.who)));
+    } else if (_selectedCategory == "Sport Equipment") {
+      sportEquipmentList.add(ItemCard(ItemObject(
+          this.itemName,
+          this._selectedCategory,
+          this.pickupTime,
+          this.returnTime,
+          this._selectedKiosk,
+          this.token,
+          this.note,
+          this.imageurl,
+          this.who)));
+    } else if (_selectedCategory == "Electronics") {
+      electronicsList.add(ItemCard(ItemObject(
+          this.itemName,
+          this._selectedCategory,
+          this.pickupTime,
+          this.returnTime,
+          this._selectedKiosk,
+          this.token,
+          this.note,
+          this.imageurl,
+          this.who)));
+    } else if (_selectedCategory == "Books") {
+      booksList.add(ItemCard(ItemObject(
+          this.itemName,
+          this._selectedCategory,
+          this.pickupTime,
+          this.returnTime,
+          this._selectedKiosk,
+          this.token,
+          this.note,
+          this.imageurl,
+          this.who)));
+    } else {
+      othersList.add(ItemCard(ItemObject(
+          this.itemName,
+          this._selectedCategory,
+          this.pickupTime,
+          this.returnTime,
+          this._selectedKiosk,
+          this.token,
+          this.note,
+          this.imageurl,
+          this.who)));
+    }
   }
-
 
   @override
   void initState() {
@@ -210,7 +274,6 @@ class _BorrowPageState extends State<BorrowPage> {
                 splashColor: Colors.pink[200],
               ),
             ),
-            Text(_selectedCategory)
           ])),
     );
   }
