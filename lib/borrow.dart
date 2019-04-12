@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 
-//Pun tum eiei
+import 'items/item_card.dart';
+import 'items/item_object.dart';
+import 'items/itemlists.dart';
 
 class BorrowPage extends StatefulWidget {
   @override
@@ -13,6 +15,20 @@ class BorrowPage extends StatefulWidget {
 }
 
 class _BorrowPageState extends State<BorrowPage> {
+  String itemName = '';
+  String _selectedCategory = '';
+  DateTime pickupTime;
+  DateTime returnTime;
+  String _selectedKiosk = '';
+  int token;
+  String note = '';
+  String imageurl = 'assets/logo.png';
+  String who = 'Patsornchai W.';
+
+  String pickuptimeString = '';
+  String returntimeString = '';
+
+  List<DropdownMenuItem<String>> _dropDownMenuCategory;
   List _category = [
     // Dropdown Category
     "Stationery",
@@ -22,8 +38,8 @@ class _BorrowPageState extends State<BorrowPage> {
     "Books",
     "Others"
   ];
-  String _selectedCategory;
-  List<DropdownMenuItem<String>> _dropDownMenuCategory;
+
+  List<DropdownMenuItem<String>> _dropDownMenuKiosk;
   List _kiosk = [
     // Dropdown Kiosk
     "Engineering",
@@ -31,15 +47,76 @@ class _BorrowPageState extends State<BorrowPage> {
     "Science",
     "Siam",
   ];
-  String _selectedKiosk;
-  List<DropdownMenuItem<String>> _dropDownMenuKiosk;
 
-  String titleValue = ''; //user input
-  int tokenValue;
-
-  InputType inputType = InputType.both; // Date and Time
-  bool editable = true;
-  DateTime date;
+  void _addItem() {
+    if (_selectedCategory == "Stationery") {
+      stationeryList.add(ItemCard(ItemObject(
+          this.itemName,
+          this._selectedCategory,
+          this.pickupTime,
+          this.returnTime,
+          this._selectedKiosk,
+          this.token,
+          this.note,
+          this.imageurl,
+          this.who)));
+    } else if (_selectedCategory == "Clothing") {
+      clothingList.add(ItemCard(ItemObject(
+          this.itemName,
+          this._selectedCategory,
+          this.pickupTime,
+          this.returnTime,
+          this._selectedKiosk,
+          this.token,
+          this.note,
+          this.imageurl,
+          this.who)));
+    } else if (_selectedCategory == "Sport Equipment") {
+      sportEquipmentList.add(ItemCard(ItemObject(
+          this.itemName,
+          this._selectedCategory,
+          this.pickupTime,
+          this.returnTime,
+          this._selectedKiosk,
+          this.token,
+          this.note,
+          this.imageurl,
+          this.who)));
+    } else if (_selectedCategory == "Electronics") {
+      electronicsList.add(ItemCard(ItemObject(
+          this.itemName,
+          this._selectedCategory,
+          this.pickupTime,
+          this.returnTime,
+          this._selectedKiosk,
+          this.token,
+          this.note,
+          this.imageurl,
+          this.who)));
+    } else if (_selectedCategory == "Books") {
+      booksList.add(ItemCard(ItemObject(
+          this.itemName,
+          this._selectedCategory,
+          this.pickupTime,
+          this.returnTime,
+          this._selectedKiosk,
+          this.token,
+          this.note,
+          this.imageurl,
+          this.who)));
+    } else {
+      othersList.add(ItemCard(ItemObject(
+          this.itemName,
+          this._selectedCategory,
+          this.pickupTime,
+          this.returnTime,
+          this._selectedKiosk,
+          this.token,
+          this.note,
+          this.imageurl,
+          this.who)));
+    }
+  }
 
   @override
   void initState() {
@@ -84,9 +161,9 @@ class _BorrowPageState extends State<BorrowPage> {
               decoration: InputDecoration(
                   labelText: 'Item Name',
                   labelStyle: TextStyle(fontSize: 20, color: Colors.pink)),
-              onChanged: (String value) {
+              onChanged: (String inputName) {
                 setState(() {
-                  titleValue = value;
+                  itemName = inputName;
                 });
               },
             ),
@@ -111,12 +188,16 @@ class _BorrowPageState extends State<BorrowPage> {
                   Text("Pick-up Time",
                       style: TextStyle(fontSize: 18, color: Colors.pink)),
                   DateTimePickerFormField(
-                    inputType: inputType,
+                    inputType: InputType.both,
                     format: DateFormat("d EEEE MMMM 'at' h:mma"),
-                    editable: editable,
                     decoration: InputDecoration(
                         labelText: 'Date/Time', hasFloatingPlaceholder: false),
-                    onChanged: (dt) => setState(() => date = dt),
+                    onChanged: (dt) {
+                      setState(() {
+                        pickupTime = dt;
+                        pickuptimeString = DateFormat.yMd().add_jm().format(dt);
+                      });
+                    },
                   ),
                 ],
               ),
@@ -131,12 +212,16 @@ class _BorrowPageState extends State<BorrowPage> {
                   Text("Return Time",
                       style: TextStyle(fontSize: 18, color: Colors.pink)),
                   DateTimePickerFormField(
-                    inputType: inputType,
+                    inputType: InputType.both,
                     format: DateFormat("d EEEE MMMM 'at' h:mma"),
-                    editable: editable,
                     decoration: InputDecoration(
                         labelText: 'Date/Time', hasFloatingPlaceholder: false),
-                    onChanged: (dt) => setState(() => date = dt),
+                    onChanged: (dt) {
+                      setState(() {
+                        returnTime = dt;
+                        returntimeString = DateFormat.yMd().add_jm().format(dt);
+                      });
+                    },
                   ),
                 ],
               ),
@@ -160,7 +245,17 @@ class _BorrowPageState extends State<BorrowPage> {
                   labelStyle: TextStyle(fontSize: 15, color: Colors.pink)),
               onChanged: (String value) {
                 setState(() {
-                  tokenValue = int.parse(value);
+                  token = int.parse(value);
+                });
+              },
+            ),
+            TextField(
+              decoration: InputDecoration(
+                  labelText: 'Note',
+                  labelStyle: TextStyle(fontSize: 15, color: Colors.pink)),
+              onChanged: (String value) {
+                setState(() {
+                  note = value;
                 });
               },
             ),
@@ -174,6 +269,7 @@ class _BorrowPageState extends State<BorrowPage> {
                 child: new Text("Request Item"),
                 onPressed: () {
                   Navigator.of(context).pushReplacementNamed("/Home");
+                  _addItem();
                 },
                 splashColor: Colors.pink[200],
               ),
@@ -187,3 +283,6 @@ class _BorrowPageState extends State<BorrowPage> {
 //   InputType.both: DateFormat("EEEE, MMMM d, yyyy 'at' h:mma"),
 //   InputType.date: DateFormat('yyyy-MM-dd'),
 //   InputType.time: DateFormat("HH:mm"),
+
+//DateTime now = DateTime.now();
+//String formattedDate = DateFormat("d EEEE MMMM 'at' h:mma").format(now);

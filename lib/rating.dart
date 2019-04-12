@@ -3,24 +3,13 @@ import 'package:flutter_rating/flutter_rating.dart';
 
 import 'home.dart';
 
-void main() => runApp(new MyApp());
 
-class MyApp extends StatelessWidget {
+class RatingSession extends StatefulWidget {
   @override
-  Widget build(BuildContext context) {
-    return new MaterialApp(
-     
-      home: new Test(),
-    );
-  }
+  _RatingSessionState createState() => new _RatingSessionState();
 }
 
-class Test extends StatefulWidget {
-  @override
-  _TestState createState() => new _TestState();
-}
-
-class _TestState extends State<Test> {
+class _RatingSessionState extends State<RatingSession> {
   double rating = 3.5;
   int starCount = 5;
 
@@ -30,8 +19,7 @@ class _TestState extends State<Test> {
       appBar: new AppBar(
         title: new Text("Star Rating"),
       ),
-      body:
-      new Column(
+      body: new Column(
         children: <Widget>[
           new Padding(
             padding: new EdgeInsets.only(
@@ -55,23 +43,22 @@ class _TestState extends State<Test> {
             "Your rating is: $rating",
             style: new TextStyle(fontSize: 30.0),
           ),
-            new Padding(
-               padding: const EdgeInsets.only(bottom: 20.0, top: 50.0),
-             ),
-           new MaterialButton(
-           
-                          height: 40.0,
-                          minWidth: 300.0,
-                          color: Colors.pink[300],
-                          textColor: Colors.white,
-                          child: new Text("Summit"),
-                          onPressed: () {
-                                              Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => new Home()));
- 
-                                                  },
-                          splashColor: Colors.pink[200],
-                        ),
+          new Padding(
+            padding: const EdgeInsets.only(bottom: 20.0, top: 50.0),
+          ),
+          new MaterialButton(
+            height: 40.0,
+            minWidth: 300.0,
+            color: Colors.pink[300],
+            textColor: Colors.white,
+            child: new Text("Summit"),
+            onPressed: () {
+              Navigator.popUntil(context, ModalRoute.withName('/Home'));
+              Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(builder: (context) => new Home()));
+            },
+            splashColor: Colors.pink[200],
+          ),
         ],
       ),
     );

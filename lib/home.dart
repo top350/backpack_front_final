@@ -19,7 +19,7 @@ class HomeState extends State<Home> {
     Dashboard(),
     BorrowPage(),
     SessionPage(),
-    DisplayProfile()
+    DisplayProfile(),
   ];
   Widget build(BuildContext context) {
     return Scaffold(
