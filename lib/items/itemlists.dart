@@ -2,37 +2,95 @@ import 'package:flutter/material.dart';
 
 import 'item_card.dart';
 import 'item_object.dart';
-//  - assets/item_example/blanket.jpg
-//  - assets/item_example/textbook.jpg
+
+//need to make list to ItemObject not ItemCard
+
+DateTime sampledate = DateTime.now();
 
 List<ItemCard> stationeryList = [
-  ItemCard(ItemObject("assets/item_example/tsquare.jpg", "T-Square Ruler",
-      "10:00 AM", "12:00 AM", "Patsornchai W.", "Engineering", 5)),
+  ItemCard(ItemObject(
+      "T-Square Ruler",
+      "Staionery",
+      sampledate,
+      sampledate,
+      "Engineering",
+      10,
+      'For drawing class',
+      "assets/item_example/tsquare.jpg",
+      "Patsornchai W.")),
 ];
 
 List<ItemCard> clothingList = [
-  ItemCard(ItemObject("assets/item_example/jacket.jpg", "Jacket", "10:00 AM",
-      "12:00 AM", "Patsornchai W.", "Engineering", 10)),
+  ItemCard(ItemObject(
+      "Jacket",
+      "Clothing",
+      sampledate,
+      sampledate,
+      "Engineering",
+      20,
+      'Need Black Jacket',
+      "assets/item_example/jacket.jpg",
+      "Patsornchai W.")),
 ];
 
 List<ItemCard> sportEquipmentList = [
-  ItemCard(ItemObject("assets/item_example/racquet.jpg", "Tennis Racquet",
-      "10:00 AM", "12:00 AM", "Patsornchai W.", "Engineering", 10)),
+  ItemCard(ItemObject(
+      "Tennis Racquet",
+      "Sport Equipment",
+      sampledate,
+      sampledate,
+      "Engineering",
+      20,
+      'Wilson preferred',
+      "assets/item_example/racquet.jpg",
+      "Patsornchai W.")),
 ];
 
 List<ItemCard> electronicsList = [
-  ItemCard(ItemObject("assets/item_example/laptop.jpg", "Laptop", "10:00 AM",
-      "12:00 AM", "Patsornchai W.", "Engineering", 20)),
-  ItemCard(ItemObject("assets/item_example/ipad.jpg", "Ipad", "11:00 AM",
-      "12:00 AM", "Pongpanod S.", "Engineering", 15))
+  ItemCard(ItemObject(
+      "Laptop",
+      "Electronics",
+      sampledate,
+      sampledate,
+      "Engineering",
+      40,
+      '',
+      "assets/item_example/laptop.jpg",
+      "Patsornchai W.")),
+      ItemCard(ItemObject(
+      "Ipad",
+      "Electronics",
+      sampledate,
+      sampledate,
+      "Engineering",
+      30,
+      '',
+      "assets/item_example/ipad.jpg",
+      "Pongpanod S.")),
 ];
 
 List<ItemCard> booksList = [
-  ItemCard(ItemObject("assets/item_example/textbook.jpg", "Software Engineering Textbook", "10:00 AM",
-      "12:00 AM", "Patsornchai W.", "Engineering", 5)),
+  ItemCard(ItemObject(
+      "Software Engineering Textbook",
+      "Books",
+      sampledate,
+      sampledate,
+      "Engineering",
+      10,
+      'Need for afternoon class',
+      "assets/item_example/textbook.jpg",
+      "Patsornchai W.")),
 ];
 
 List<ItemCard> othersList = [
-  ItemCard(ItemObject("assets/item_example/blanket.jpg", "Blanket", "10:00 AM",
-      "12:00 AM", "Patsornchai W.", "Engineering", 5)),
+  ItemCard(ItemObject(
+      "Blanket",
+      "Others",
+      sampledate,
+      sampledate,
+      "Engineering",
+      10,
+      'Need a thick one',
+      "assets/item_example/blanket.jpg",
+      "Patsornchai W.")),
 ];
