@@ -1,23 +1,23 @@
 class ItemObject {
-  String imageurl;
+  // String imageurl;
+  // String itemName;
+  // String pickupTime;
+  // String returnTime;
+  // String who;
+  // String location;
+  // int token;
+
+  //Ideal
   String itemName;
-  String pickupTime;
-  String returnTime;
-  String who;
+  String category;
+  DateTime pickupTime;
+  DateTime returnTime;
   String location;
   int token;
+  String note;
+  String imageurl;
+  String who;
 
-  //Ideal 
-  // String name
-  // String categort
-  // DateTime pickupTime
-  // DateTime returnTime
-  // String location
-  // int token
-  // String note
-  // String who
-  // image url
-
-  ItemObject(this.imageurl, this.itemName, this.pickupTime, this.returnTime,
-      this.who, this.location, this.token);
+  ItemObject(this.itemName, this.category, this.pickupTime, this.returnTime,
+      this.location, this.token, this.note, this.imageurl, this.who);
 }

@@ -27,7 +27,7 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
     _animation.addListener(()=> this.setState((){}));
     _animationController.forward();
 
-    Timer(Duration(seconds: 3), (){
+    Timer(Duration(seconds: 1), (){
       Navigator.of(context).pushReplacementNamed("/login");
     });
   }

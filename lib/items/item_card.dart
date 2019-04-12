@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:intl/intl.dart';
+
 import 'item_detail.dart';
 import 'item_object.dart';
 
@@ -47,8 +49,8 @@ class ItemCard extends StatelessWidget {
                 Icon(
                   Icons.access_time,
                   size: 20,
-                ),
-                Text("Pick Up: " + item.pickupTime, style: TextStyle())
+                ), // String formattedDate = DateFormat("d EEEE MMMM 'at' h:mma").format(now);
+                Text("Pick Up: " + DateFormat("h:mma").format(item.pickupTime), style: TextStyle())
               ],
             ),
             trailing: IconButton(
