@@ -49,6 +49,8 @@ flutter:
    - assets/jf.jpg
    - assets/189677.png
    - assets/QR_code.png
+   - assets/profile/cover.jpg
+   - assets/profile/profile.jpg
    - assets/item_example/blanket.jpg
    - assets/item_example/jacket.jpg
    - assets/item_example/laptop.jpg
