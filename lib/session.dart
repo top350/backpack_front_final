@@ -2,15 +2,6 @@ import 'package:flutter/material.dart';
 import 'rating.dart';
 // import  'category.dart';
 
-void main() => runApp(MyApp());
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return new MaterialApp(
-        home: new SessionPage(), routes: <String, WidgetBuilder>{});
-  }
-}
 
 class SessionPage extends StatefulWidget {
   @override
@@ -67,7 +58,7 @@ class SessionPageState extends State<SessionPage>
                       child: new Text("Next"),
                       onPressed: () {
                         Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => new Test()));
+                            builder: (context) => new RatingSession()));
                       },
                       splashColor: Colors.pink[200],
                     ),

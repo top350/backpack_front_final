@@ -1,13 +1,22 @@
 import 'package:flutter/material.dart';
 
+import 'package:intl/intl.dart';
+
+import 'item_object.dart';
+
 class ItemDetail extends StatelessWidget {
+//this class will tell detail of a item when click on the item class
+  ItemObject item;
+
+  ItemDetail(this.item);
+
   _showWarningDialog(BuildContext context) {
     showDialog(
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
             title: Text('Are you sure?'),
-            content: Text('This action cannot be undone!'),
+            content: Text('Are you sure you have the following item?'),
             actions: <Widget>[
               FlatButton(
                 child: Text('DISCARD'),
@@ -22,7 +31,6 @@ class ItemDetail extends StatelessWidget {
                   Navigator.popUntil(context, ModalRoute.withName('/Home'));
                   // other alternative Navigator.of(context).pushNamedAndRemoveUntil('/login', (Route<dynamic> route) => false);
                   Navigator.of(context).pushReplacementNamed("/Home");
-                  
                 },
               )
             ],
@@ -46,11 +54,11 @@ class ItemDetail extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     mainAxisSize: MainAxisSize.max,
                     children: <Widget>[
-                      Image.asset('assets/laptop.jpg'),
+                      Image.asset(item.imageurl),
                       Padding(
                         padding: EdgeInsets.all(5),
                       ),
-                      Text('Laptop',
+                      Text(item.itemName,
                           style: TextStyle(fontSize: 30, color: Colors.pink)),
                       Padding(
                         padding: EdgeInsets.all(8),
@@ -63,7 +71,7 @@ class ItemDetail extends StatelessWidget {
                           Padding(
                             padding: EdgeInsets.all(8),
                           ),
-                          Text('Posted by: Patsornchai Wiboontanasarn',
+                          Text('Posted by: ' + item.who,
                               style: TextStyle(fontSize: 15))
                         ],
                       ),
@@ -78,18 +86,29 @@ class ItemDetail extends StatelessWidget {
                           Padding(
                             padding: EdgeInsets.all(8),
                           ),
-                          Text('Pickup : 10 AM',
-                              style: TextStyle(fontSize: 15)),
-                          Padding(
-                            padding: EdgeInsets.symmetric(
-                                vertical: 0, horizontal: 20),
-                          ),
+                          Text(
+                              'Pickup : ' +
+                                  DateFormat("d EEEE MMMM 'at' h:mma")
+                                      .format(item.pickupTime),
+                              style: TextStyle(fontSize: 15)),                         
+                        ],
+                      ),
+                      Padding(
+                        padding: EdgeInsets.all(10),
+                      ),
+                      Row(
+                        // mainAxisSize: MainAxisSize.max,
+                        // mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
                           Icon(Icons.access_time, size: 20),
                           Padding(
                             padding: EdgeInsets.all(8),
                           ),
-                          Text('Return : 10 AM',
-                              style: TextStyle(fontSize: 15)),
+                          Text(
+                              'Return : ' +
+                                  DateFormat("d EEEE MMMM 'at' h:mma")
+                                      .format(item.returnTime),
+                              style: TextStyle(fontSize: 15)),                         
                         ],
                       ),
                       Padding(
@@ -103,7 +122,7 @@ class ItemDetail extends StatelessWidget {
                           Padding(
                             padding: EdgeInsets.all(10),
                           ),
-                          Text('Location : Engineering',
+                          Text('Location : ' + item.location,
                               style: TextStyle(fontSize: 15))
                         ],
                       ),
@@ -118,7 +137,23 @@ class ItemDetail extends StatelessWidget {
                           Padding(
                             padding: EdgeInsets.all(10),
                           ),
-                          Text('Offer 20 Token', style: TextStyle(fontSize: 15))
+                          Text('Offer ' + item.token.toString() + ' Token',
+                              style: TextStyle(fontSize: 15))
+                        ],
+                      ),
+                      Padding(
+                        padding: EdgeInsets.all(10),
+                      ),
+                      Row(
+                        // mainAxisSize: MainAxisSize.max,
+                        // mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Icon(Icons.speaker_notes, size: 20),
+                          Padding(
+                            padding: EdgeInsets.all(10),
+                          ),
+                          Text('Note : ' + item.note,
+                              style: TextStyle(fontSize: 15))
                         ],
                       ),
                       Container(
