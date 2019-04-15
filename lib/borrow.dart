@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 
-import 'items/item_card.dart';
 import 'items/item_object.dart';
-import 'items/itemlists.dart';
+import 'items/itemlists_data.dart';
 
 class BorrowPage extends StatefulWidget {
+  //Page Where user can input data to create new request
   @override
   State<StatefulWidget> createState() {
     return _BorrowPageState();
@@ -50,7 +50,7 @@ class _BorrowPageState extends State<BorrowPage> {
 
   void _addItem() {
     if (_selectedCategory == "Stationery") {
-      stationeryList.add(ItemCard(ItemObject(
+      stationeryList.add(ItemObject(
           this.itemName,
           this._selectedCategory,
           this.pickupTime,
@@ -59,9 +59,9 @@ class _BorrowPageState extends State<BorrowPage> {
           this.token,
           this.note,
           this.imageurl,
-          this.who)));
+          this.who));
     } else if (_selectedCategory == "Clothing") {
-      clothingList.add(ItemCard(ItemObject(
+      clothingList.add(ItemObject(
           this.itemName,
           this._selectedCategory,
           this.pickupTime,
@@ -70,9 +70,9 @@ class _BorrowPageState extends State<BorrowPage> {
           this.token,
           this.note,
           this.imageurl,
-          this.who)));
+          this.who));
     } else if (_selectedCategory == "Sport Equipment") {
-      sportEquipmentList.add(ItemCard(ItemObject(
+      sportEquipmentList.add(ItemObject(
           this.itemName,
           this._selectedCategory,
           this.pickupTime,
@@ -81,9 +81,9 @@ class _BorrowPageState extends State<BorrowPage> {
           this.token,
           this.note,
           this.imageurl,
-          this.who)));
+          this.who));
     } else if (_selectedCategory == "Electronics") {
-      electronicsList.add(ItemCard(ItemObject(
+      electronicsList.add(ItemObject(
           this.itemName,
           this._selectedCategory,
           this.pickupTime,
@@ -92,9 +92,9 @@ class _BorrowPageState extends State<BorrowPage> {
           this.token,
           this.note,
           this.imageurl,
-          this.who)));
+          this.who));
     } else if (_selectedCategory == "Books") {
-      booksList.add(ItemCard(ItemObject(
+      booksList.add(ItemObject(
           this.itemName,
           this._selectedCategory,
           this.pickupTime,
@@ -103,9 +103,9 @@ class _BorrowPageState extends State<BorrowPage> {
           this.token,
           this.note,
           this.imageurl,
-          this.who)));
+          this.who));
     } else {
-      othersList.add(ItemCard(ItemObject(
+      othersList.add(ItemObject(
           this.itemName,
           this._selectedCategory,
           this.pickupTime,
@@ -114,7 +114,7 @@ class _BorrowPageState extends State<BorrowPage> {
           this.token,
           this.note,
           this.imageurl,
-          this.who)));
+          this.who));
     }
   }
 

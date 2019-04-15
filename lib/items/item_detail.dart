@@ -5,7 +5,7 @@ import 'package:intl/intl.dart';
 import 'item_object.dart';
 
 class ItemDetail extends StatelessWidget {
-//this class will tell detail of a item when click on the item class
+//this class will tell detail of a item when click on the item c
   ItemObject item;
 
   ItemDetail(this.item);
@@ -38,6 +38,14 @@ class ItemDetail extends StatelessWidget {
         });
   }
 
+  Icon _detailIcon(IconData icon) {
+    return Icon(
+      icon,
+      size: 25,
+      color: Colors.pink[700],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -59,7 +67,7 @@ class ItemDetail extends StatelessWidget {
                         padding: EdgeInsets.all(5),
                       ),
                       Text(item.itemName,
-                          style: TextStyle(fontSize: 30, color: Colors.pink)),
+                          style: TextStyle(fontSize: 30, color: Colors.pink,fontWeight: FontWeight.w600)),
                       Padding(
                         padding: EdgeInsets.all(8),
                       ),
@@ -67,7 +75,7 @@ class ItemDetail extends StatelessWidget {
                         // mainAxisSize: MainAxisSize.max,
                         // mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          Icon(Icons.account_circle, size: 20),
+                          _detailIcon(Icons.account_circle),
                           Padding(
                             padding: EdgeInsets.all(8),
                           ),
@@ -82,7 +90,7 @@ class ItemDetail extends StatelessWidget {
                         // mainAxisSize: MainAxisSize.max,
                         // mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          Icon(Icons.access_time, size: 20),
+                          _detailIcon(Icons.access_time),
                           Padding(
                             padding: EdgeInsets.all(8),
                           ),
@@ -90,7 +98,7 @@ class ItemDetail extends StatelessWidget {
                               'Pickup : ' +
                                   DateFormat("d EEEE MMMM 'at' h:mma")
                                       .format(item.pickupTime),
-                              style: TextStyle(fontSize: 15)),                         
+                              style: TextStyle(fontSize: 15)),
                         ],
                       ),
                       Padding(
@@ -100,7 +108,7 @@ class ItemDetail extends StatelessWidget {
                         // mainAxisSize: MainAxisSize.max,
                         // mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          Icon(Icons.access_time, size: 20),
+                          _detailIcon(Icons.access_time),
                           Padding(
                             padding: EdgeInsets.all(8),
                           ),
@@ -108,7 +116,7 @@ class ItemDetail extends StatelessWidget {
                               'Return : ' +
                                   DateFormat("d EEEE MMMM 'at' h:mma")
                                       .format(item.returnTime),
-                              style: TextStyle(fontSize: 15)),                         
+                              style: TextStyle(fontSize: 15)),
                         ],
                       ),
                       Padding(
@@ -118,7 +126,7 @@ class ItemDetail extends StatelessWidget {
                         // mainAxisSize: MainAxisSize.max,
                         // mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          Icon(Icons.location_on, size: 20),
+                          _detailIcon(Icons.location_on),
                           Padding(
                             padding: EdgeInsets.all(10),
                           ),
@@ -133,7 +141,17 @@ class ItemDetail extends StatelessWidget {
                         // mainAxisSize: MainAxisSize.max,
                         // mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          Icon(Icons.attach_money, size: 20),
+                          Container(
+                              width: 30,
+                              height: 30,
+                              alignment: Alignment.center,
+                              decoration: BoxDecoration(
+                                image: DecorationImage(
+                                    image: AssetImage(
+                                      "assets/token_1.png",
+                                    ),
+                                    fit: BoxFit.fill),
+                              )),
                           Padding(
                             padding: EdgeInsets.all(10),
                           ),
@@ -148,7 +166,7 @@ class ItemDetail extends StatelessWidget {
                         // mainAxisSize: MainAxisSize.max,
                         // mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          Icon(Icons.speaker_notes, size: 20),
+                          _detailIcon(Icons.chat),
                           Padding(
                             padding: EdgeInsets.all(10),
                           ),

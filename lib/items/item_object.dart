@@ -1,13 +1,5 @@
 class ItemObject {
-  // String imageurl;
-  // String itemName;
-  // String pickupTime;
-  // String returnTime;
-  // String who;
-  // String location;
-  // int token;
 
-  //Ideal
   String itemName;
   String category;
   DateTime pickupTime;

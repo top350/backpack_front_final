@@ -9,14 +9,21 @@ class ItemCard extends StatelessWidget {
 //This class is for the itemcard widget
   ItemObject item;
 
+  Widget _imageInBox(double width,double height,String imageurl){
+    return Container(
+              width: width,
+              height: height,
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage(
+                      imageurl,
+                    ),
+                    fit: BoxFit.fill),
+              ),);
+  }
+
   ItemCard(this.item);
-
-  // String title;
-  // String time;
-  // String imageurl;
-
-  // ItemCard(this.title, this.time, this.imageurl);
-
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -26,17 +33,7 @@ class ItemCard extends StatelessWidget {
         child: ListTile(
           contentPadding:
               EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
-          leading: Container(
-              width: 100,
-              height: 80,
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                    image: AssetImage(
-                      item.imageurl,
-                    ),
-                    fit: BoxFit.fill),
-              )),
+          leading: _imageInBox(100,80, item.imageurl),
           title: Text(
             item.itemName,
             style: TextStyle(
@@ -48,7 +45,8 @@ class ItemCard extends StatelessWidget {
               Icon(
                 Icons.access_time,
                 size: 20,
-              ), // String formattedDate = DateFormat("d EEEE MMMM 'at' h:mma").format(now);
+              ),
+              SizedBox(width: 10),
               Text("Pick Up: " + DateFormat("h:mma").format(item.pickupTime),
                   style: TextStyle())
             ],
@@ -66,7 +64,7 @@ class ItemCard extends StatelessWidget {
                 builder: (context) => ItemDetail(item),
               ),
             );
-            // Navigator.pushNamed(context, "/item_detail");
+
           },
         ),
       ),
