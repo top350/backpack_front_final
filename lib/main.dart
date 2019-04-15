@@ -9,6 +9,8 @@ import 'session.dart';
 import './items/item_list.dart';
 import './items/item_detail.dart';
 
+import './profile/profile.dart';
+
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
