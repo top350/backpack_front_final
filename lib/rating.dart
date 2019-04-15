@@ -3,7 +3,6 @@ import 'package:flutter_rating/flutter_rating.dart';
 
 import 'home.dart';
 
-
 class RatingSession extends StatefulWidget {
   @override
   _RatingSessionState createState() => new _RatingSessionState();
@@ -19,45 +18,123 @@ class _RatingSessionState extends State<RatingSession> {
       appBar: new AppBar(
         title: new Text("Star Rating"),
       ),
-      body: new Column(
+      body: new ListView(
         children: <Widget>[
-          new Padding(
-            padding: new EdgeInsets.only(
-              top: 50.0,
-              bottom: 50.0,
+          SizedBox(
+            height: 20,
+          ),
+          Icon(
+            Icons.check_circle_outline,
+            size: 100,
+            color: Colors.green,
+          ),
+          SizedBox(
+            height: 20,
+          ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              Text(
+                'Success!',
+                style: TextStyle(fontSize: 50),
+              ),
+              Text(
+                'Thank you for using Share-IT',
+                style: TextStyle(fontSize: 20, color: Colors.black54),
+              ),
+            ],
+          ),
+          Container(
+            decoration: BoxDecoration(
+              color: Colors.pink[50],
+              borderRadius: BorderRadius.circular(20.0),
+              border: Border.all(
+                color: Colors.pink,
+                width: 5.0,
+              ),
             ),
-            child: new StarRating(
-              size: 50.0,
-              rating: rating,
-              color: Colors.orange,
-              borderColor: Colors.grey,
-              starCount: starCount,
-              onRatingChanged: (rating) => setState(
-                    () {
-                      this.rating = rating;
-                    },
+            margin: EdgeInsets.all(20),
+            child: Column(
+              children: <Widget>[
+                new Padding(
+                  padding: new EdgeInsets.only(
+                    top: 10.0,
+                    bottom: 10.0,
                   ),
+                  child: Text(
+                    'Please rate Patsornchai W.',
+                    style: TextStyle(fontSize: 20, color: Colors.black87),
+                  ),
+                ),
+                Container(
+                  width: 120.0,
+                  height: 120.0,
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage('assets/profile/profile.jpg'),
+                      fit: BoxFit.cover,
+                    ),
+                    borderRadius: BorderRadius.circular(80.0),
+                    border: Border.all(
+                      color: Colors.white,
+                      width: 6.0,
+                    ),
+                  ),
+                ),
+                new Padding(
+                  padding: new EdgeInsets.only(
+                    top: 5.0,
+                    bottom: 10.0,
+                  ),
+                  child: new StarRating(
+                    size: 50.0,
+                    rating: rating,
+                    color: Colors.orange,
+                    borderColor: Colors.grey,
+                    starCount: starCount,
+                    onRatingChanged: (rating) => setState(
+                          () {
+                            this.rating = rating;
+                          },
+                        ),
+                  ),
+                ),
+                // new Text(
+                //   "Your rating is: $rating",
+                //   style: new TextStyle(fontSize: 30.0),
+                // ),
+                // new Padding(
+                //   padding: const EdgeInsets.all(20),
+                // ),
+              ],
             ),
           ),
-          new Text(
-            "Your rating is: $rating",
-            style: new TextStyle(fontSize: 30.0),
-          ),
           new Padding(
-            padding: const EdgeInsets.only(bottom: 20.0, top: 50.0),
+            padding: const EdgeInsets.only(bottom: 10.0),
           ),
-          new MaterialButton(
-            height: 40.0,
-            minWidth: 300.0,
-            color: Colors.pink[300],
-            textColor: Colors.white,
-            child: new Text("Summit"),
-            onPressed: () {
-              Navigator.popUntil(context, ModalRoute.withName('/Home'));
-              Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(builder: (context) => new Home()));
-            },
-            splashColor: Colors.pink[200],
+          Column(
+            children: <Widget>[
+              Container(
+                margin: EdgeInsets.all(5),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(50.0),
+                ),
+                width: 200,
+                child: RaisedButton(
+                  color: Colors.green,
+                  child: Text(
+                    'Submit',
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
+                  onPressed: () {
+                    Navigator.of(context).pushReplacement(
+                        MaterialPageRoute(builder: (context) => new Home()));
+                  },
+                ),
+              ),
+            ],
           ),
         ],
       ),
