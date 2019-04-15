@@ -1,10 +1,12 @@
 // import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-import 'display.dart';
+
 import 'dashboard.dart';
 import 'borrow.dart';
 import 'session.dart';
+
+import './profile/profile.dart';
 
 class Home extends StatefulWidget {
   // const Home({Key key, this.user}) : super(key: key);
@@ -19,7 +21,7 @@ class HomeState extends State<Home> {
     Dashboard(),
     BorrowPage(),
     SessionPage(),
-    DisplayProfile(),
+    ProfilePage(),
   ];
   Widget build(BuildContext context) {
     return Scaffold(
