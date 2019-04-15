@@ -68,23 +68,23 @@ class _EditProfileState extends State<EditProfile> {
                             });
                           },
                         )),
-                    Container(
-                        margin: EdgeInsets.all(10),
-                        padding: EdgeInsets.symmetric(
-                            vertical: 4.0, horizontal: 6.0),
-                        decoration: BoxDecoration(
-                          color: Theme.of(context).scaffoldBackgroundColor,
-                          borderRadius: BorderRadius.circular(4.0),
-                        ),
-                        child: TextField(
-                          controller: _stuIDController,
-                          decoration: InputDecoration(labelText: 'Student ID'),
-                          onChanged: (String input) {
-                            setState(() {
-                              example.studentID = input;
-                            });
-                          },
-                        )),
+                    // Container(
+                    //     margin: EdgeInsets.all(10),
+                    //     padding: EdgeInsets.symmetric(
+                    //         vertical: 4.0, horizontal: 6.0),
+                    //     decoration: BoxDecoration(
+                    //       color: Theme.of(context).scaffoldBackgroundColor,
+                    //       borderRadius: BorderRadius.circular(4.0),
+                    //     ),
+                    //     child: TextField(
+                    //       controller: _stuIDController,
+                    //       decoration: InputDecoration(labelText: 'Student ID'),
+                    //       onChanged: (String input) {
+                    //         setState(() {
+                    //           example.studentID = input;
+                    //         });
+                    //       },
+                    //     )),
                     Container(
                         margin: EdgeInsets.all(10),
                         padding: EdgeInsets.symmetric(
