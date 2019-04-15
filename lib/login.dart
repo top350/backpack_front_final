@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'api_provider.dart';
 
-
 class LoginPage extends StatefulWidget {
   @override
   State createState() => new LoginPageState();
@@ -52,101 +51,109 @@ class LoginPageState extends State<LoginPage>
     _iconAnimationController.forward();
   }
 
+  DecorationImage _buildBackgroungImage() {
+    return DecorationImage(
+        fit: BoxFit.cover,
+        colorFilter:
+            ColorFilter.mode(Colors.black.withOpacity(0.5), BlendMode.dstATop),
+        image: AssetImage('assets/pinkbg.jpg'));
+  }
+
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      backgroundColor: Colors.pinkAccent,
-      body: new Stack(
-        fit: StackFit.expand,
-        children: <Widget>[
-          new Image(
-            image: new AssetImage("assets/pinkbg.jpg"),
-            fit: BoxFit.cover,
-            color: Colors.white24,
-            colorBlendMode: BlendMode.lighten,
-          ),
-          new Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              new Image(
-                image: new AssetImage("assets/logo only.png"),
-                height: _iconAnimation.value * 170,
-                width: _iconAnimation.value * 170,
-              ),
-              new Form(
-                key: _formkey,
-                child: new Theme(
-                  data: new ThemeData(
-                      brightness: Brightness.light,
-                      primarySwatch: Colors.pink[150],
-                      inputDecorationTheme: new InputDecorationTheme(
-                          labelStyle: new TextStyle(
-                              color: Colors.pink[200], fontSize: 20.0))),
-                  child: new Container(
-                    padding: const EdgeInsets.all(40.0),
-                    child: new Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: <Widget>[
-                        new TextFormField(
-                          validator: (value) {
-                            if (value.isEmpty) {
-                              return 'Please enter username';
-                            }
-                          },
-                          controller: _username,
-                          decoration: new InputDecoration(
-                            labelText: "Enter your name",
-                          ),
-                          keyboardType: TextInputType.text,
-                        ),
-                        new TextFormField(
-                          validator: (value) {
-                            if (value.isEmpty) {
-                              return 'Please enter password';
-                            }
-                          },
-                          controller: _password,
-                          decoration: new InputDecoration(
-                            labelText: "Enter Password",
-                          ),
-                          keyboardType: TextInputType.text,
-                          obscureText: true,
-                        ),
-                        new Padding(
-                          padding:
-                              const EdgeInsets.only(bottom: 20.0, top: 20.0),
-                        ),
-                        new MaterialButton(
-                          height: 40.0,
-                          minWidth: 300.0,
-                          color: Colors.pink[400],
-                          textColor: Colors.white,
-                          child: new Text("Log in"),
-                          onPressed: () {
-                            Navigator.of(context).pushReplacementNamed("/Home");
-                            // doLogin();
-                          },
-                          splashColor: Colors.pink[200],
-                        ),
-                        new MaterialButton(
-                          height: 40.0,
-                          minWidth: 300.0,
-                          color: Colors.pink[400],
-                          textColor: Colors.white,
-                          child: new Text("Sign up"),
-                          onPressed: () {
-                            Navigator.of(context).pushNamed("/signup");
-                          },
-                          splashColor: Colors.pink[200],
-                        ),
-                      ],
-                    ),
+      body: Container(
+        decoration: BoxDecoration(
+          image: _buildBackgroungImage(),
+        ),
+        padding: EdgeInsets.all(10),
+        child: Center(
+          child: SingleChildScrollView(
+            child: Container(
+              child: Column(
+                children: <Widget>[
+                  new Image(
+                    image: new AssetImage("assets/logo only.png"),
+                    height: _iconAnimation.value * 170,
+                    width: _iconAnimation.value * 170,
                   ),
-                ),
-              )
-            ],
-          )
-        ],
+                  new Form(
+                    key: _formkey,
+                    child: new Theme(
+                      data: new ThemeData(
+                          brightness: Brightness.light,
+                          primarySwatch: Colors.pink[150],
+                          inputDecorationTheme: new InputDecorationTheme(
+                              labelStyle: new TextStyle(
+                                  color: Colors.pink[200], fontSize: 20.0))),
+                      child: new Container(
+                        padding: const EdgeInsets.all(40.0),
+                        child: new Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: <Widget>[
+                            new TextFormField(
+                              validator: (value) {
+                                if (value.isEmpty) {
+                                  return 'Please enter username';
+                                }
+                              },
+                              controller: _username,
+                              decoration: new InputDecoration(
+                                labelText: "Enter your name",
+                              ),
+                              keyboardType: TextInputType.text,
+                            ),
+                            new TextFormField(
+                              validator: (value) {
+                                if (value.isEmpty) {
+                                  return 'Please enter password';
+                                }
+                              },
+                              controller: _password,
+                              decoration: new InputDecoration(
+                                labelText: "Enter Password",
+                              ),
+                              keyboardType: TextInputType.text,
+                              obscureText: true,
+                            ),
+                            new Padding(
+                              padding: const EdgeInsets.only(
+                                  bottom: 20.0, top: 20.0),
+                            ),
+                            new MaterialButton(
+                              height: 40.0,
+                              minWidth: 300.0,
+                              color: Colors.pink[400],
+                              textColor: Colors.white,
+                              child: new Text("Log in"),
+                              onPressed: () {
+                                Navigator.of(context)
+                                    .pushReplacementNamed("/Home");
+                                // doLogin();
+                              },
+                              splashColor: Colors.pink[200],
+                            ),
+                            new MaterialButton(
+                              height: 40.0,
+                              minWidth: 300.0,
+                              color: Colors.pink[400],
+                              textColor: Colors.white,
+                              child: new Text("Sign up"),
+                              onPressed: () {
+                                Navigator.of(context).pushNamed("/signup");
+                              },
+                              splashColor: Colors.pink[200],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  )
+                ],
+              ),
+            ),
+          ),
+        ),
       ),
     );
   }

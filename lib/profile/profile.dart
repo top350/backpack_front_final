@@ -60,7 +60,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       bus.studentID,
                       style: TextStyle(
                         color: Colors.black,
-                        fontSize: 20.0,
+                        fontSize: 15.0,
                       ),
                     ),
                   ],
@@ -88,7 +88,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       bus.phoneNum,
                       style: TextStyle(
                         color: Colors.black,
-                        fontSize: 20.0,
+                        fontSize: 15.0,
                       ),
                     ),
                   ],
@@ -96,34 +96,34 @@ class _ProfilePageState extends State<ProfilePage> {
                 SizedBox(
                   height: 10,
                 ),
-                Row(
-                  children: <Widget>[
-                    Icon(
-                      Icons.chat,
-                      size: 30,
-                      color: Colors.pink[300],
-                    ),
-                    SizedBox(width: 8),
-                    Text('Line ID.  ',
-                        style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 20.0,
-                            fontWeight: FontWeight.w600)),
-                    SizedBox(
-                      width: 40,
-                    ),
-                    Text(
-                      bus.lineID,
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 20.0,
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 10,
-                ),
+                // Row(
+                //   children: <Widget>[
+                //     Icon(
+                //       Icons.chat,
+                //       size: 30,
+                //       color: Colors.pink[300],
+                //     ),
+                //     SizedBox(width: 8),
+                //     Text('Line ID.  ',
+                //         style: TextStyle(
+                //             color: Colors.black,
+                //             fontSize: 20.0,
+                //             fontWeight: FontWeight.w600)),
+                //     SizedBox(
+                //       width: 40,
+                //     ),
+                //     Text(
+                //       bus.lineID,
+                //       style: TextStyle(
+                //         color: Colors.black,
+                //         fontSize: 20.0,
+                //       ),
+                //     ),
+                //   ],
+                // ),
+                // SizedBox(
+                //   height: 10,
+                // ),
                 Row(
                   children: <Widget>[
                     Icon(
@@ -138,13 +138,13 @@ class _ProfilePageState extends State<ProfilePage> {
                             fontSize: 20.0,
                             fontWeight: FontWeight.w600)),
                     SizedBox(
-                      width: 20,
+                      width: 10,
                     ),
                     Text(
                       bus.email,
                       style: TextStyle(
                         color: Colors.black,
-                        fontSize: 20.0,
+                        fontSize: 15.0,
                       ),
                     ),
                   ],
@@ -212,8 +212,7 @@ Widget _buildCoverImage(double screenSize) {
     decoration: BoxDecoration(
         gradient: LinearGradient(
             colors: [const Color(0xFF915FB5), const Color(0xFFCA436B)])
-        //color: Colors.pink[50],
-        // image: DecorationImage(
+        // image: DecorationImage( (for image cover photo)
         //   image: AssetImage('assets/profile/cover.jpg'),
         //   fit: BoxFit.cover,
         // ),
@@ -234,7 +233,7 @@ Widget _buildProfileImage() {
         borderRadius: BorderRadius.circular(80.0),
         border: Border.all(
           color: Colors.white,
-          width: 10.0,
+          width: 5.0,
         ),
       ),
     ),
