@@ -41,15 +41,10 @@ flutter:
   assets:
    - assets/token_1.png
    - assets/token_2.png
-   - assets/gb.jpg
-   - assets/backpack.png
-   - assets/gbpastel.png
    - assets/pinkbg.jpg
    - assets/logo only.png
    - assets/logo.png
    - assets/2.0x/logo.png
-   - assets/jf.jpg
-   - assets/189677.png
    - assets/QR_code.png
    - assets/profile/cover.jpg
    - assets/profile/profile.jpg
