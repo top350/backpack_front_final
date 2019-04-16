@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
-import "./items/item_list.dart";
-import './items/itemlists.dart';
+import './items/item_list.dart';
+import './items/item_method.dart';
+import 'items/itemlists_data.dart';
 
 class Dashboard extends StatefulWidget {
+  // Class for homePage where you can chose category
   @override
   _DashboardState createState() => _DashboardState();
 }
@@ -74,11 +76,10 @@ class _DashboardState extends State<Dashboard> {
         children: <Widget>[
           GestureDetector(
             onTap: () {
-              print("Stationery  onTap called.");
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => ItemList("Stationery",stationeryList),
+                  builder: (context) => ItemList("Stationery",convertToCard(stationeryList))
                 ),
               );
             },
@@ -86,11 +87,10 @@ class _DashboardState extends State<Dashboard> {
           ),
           GestureDetector(
             onTap: () {
-              print("Clothing onTap called.");
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => ItemList("Clothing",clothingList),
+                  builder: (context) => ItemList("Clothing",convertToCard(clothingList)),
                 ),
               );
             },
@@ -98,11 +98,10 @@ class _DashboardState extends State<Dashboard> {
           ),
           GestureDetector(
             onTap: () {
-              print("Sport Equipment onTap called.");
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => ItemList("Sport Equipment",sportEquipmentList),
+                  builder: (context) => ItemList("Sport Equipment",convertToCard(sportEquipmentList)),
                 ),
               );
             },
@@ -110,12 +109,10 @@ class _DashboardState extends State<Dashboard> {
           ),
           GestureDetector(
             onTap: () {
-              print("Electronics onTap called.");
-              //Navigator.pushNamed(context, "/item_list");
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => ItemList("Electronics",electronicsList),
+                  builder: (context) => ItemList("Electronics",convertToCard(electronicsList)),
                 ),
               );
             },
@@ -123,11 +120,10 @@ class _DashboardState extends State<Dashboard> {
           ),
           GestureDetector(
             onTap: () {
-              print("Books onTap called.");
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => ItemList("Books",booksList),
+                  builder: (context) => ItemList("Books",convertToCard(booksList)),
                 ),
               );
             },
@@ -135,11 +131,10 @@ class _DashboardState extends State<Dashboard> {
           ),
           GestureDetector(
             onTap: () {
-              print("Others onTap called.");
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => ItemList("Others",othersList),
+                  builder: (context) => ItemList("Others",convertToCard(othersList)),
                 ),
               );
             },

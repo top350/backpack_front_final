@@ -99,7 +99,7 @@ class LoginPageState extends State<LoginPage>
                               },
                               controller: _username,
                               decoration: new InputDecoration(
-                                labelText: "Enter your name",
+                                labelText: "Enter your Student ID",
                               ),
                               keyboardType: TextInputType.text,
                             ),

@@ -1,7 +1,6 @@
+import 'package:flutter/material.dart';
 
 import 'dart:async';
-import 'package:flutter/material.dart';
-import 'login.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -27,7 +26,7 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
     _animation.addListener(()=> this.setState((){}));
     _animationController.forward();
 
-    Timer(Duration(seconds: 1), (){
+    Timer(Duration(seconds: 3), (){
       Navigator.of(context).pushReplacementNamed("/login");
     });
   }
