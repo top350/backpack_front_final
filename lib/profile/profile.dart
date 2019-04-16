@@ -13,6 +13,33 @@ class _ProfilePageState extends State<ProfilePage> {
 
   _ProfilePageState(this.example);
 
+  _showWarningDialog(BuildContext context) {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('Are you sure?'),
+            content: Text('Do you want to logout?'),
+            actions: <Widget>[
+              FlatButton(
+                child: Text('DISCARD'),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
+              FlatButton(
+                child: Text('CONTINUE'),
+                onPressed: () {
+                  Navigator.pop(context);
+                  Navigator.of(context).pushNamedAndRemoveUntil(
+                      '/splash', (Route<dynamic> route) => false);
+                },
+              )
+            ],
+          );
+        });
+  }
+
   @override
   Widget build(BuildContext context) {
     double screenSize = MediaQuery.of(context).size.height;
@@ -163,12 +190,14 @@ class _ProfilePageState extends State<ProfilePage> {
                 child: RaisedButton(
                   color: Colors.black38,
                   child: Text(
-                    'Log out',
+                    'Logout',
                     style: TextStyle(
                       color: Colors.white,
                     ),
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    _showWarningDialog(context);
+                  },
                 ),
               ),
             ],
@@ -269,8 +298,10 @@ Widget _buildStatContainer() {
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: <Widget>[
-        _buildStatItem(Icon(Icons.star,color: Colors.yellowAccent,size: 30), "4.5"),
-        _buildStatItem(Container(
+        _buildStatItem(
+            Icon(Icons.star, color: Colors.yellowAccent, size: 30), "4.5"),
+        _buildStatItem(
+            Container(
                 width: 50,
                 height: 50,
                 alignment: Alignment.center,
@@ -280,7 +311,8 @@ Widget _buildStatContainer() {
                         "assets/token_2.png",
                       ),
                       fit: BoxFit.fill),
-                )), "100"),
+                )),
+            "100"),
       ],
     ),
   );

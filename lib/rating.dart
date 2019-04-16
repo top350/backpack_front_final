@@ -129,8 +129,36 @@ class _RatingSessionState extends State<RatingSession> {
                     ),
                   ),
                   onPressed: () {
-                    Navigator.of(context).pushReplacement(
-                        MaterialPageRoute(builder: (context) => new Home()));
+                    Navigator.of(context).pushNamedAndRemoveUntil('/Home', (Route<dynamic> route) => false);
+                    // Navigator.of(context).pushReplacement(
+                    //     MaterialPageRoute(builder: (context) => new Home()));
+                  },
+                ),
+              ),
+            ],
+          ),
+          new Padding(
+            padding: const EdgeInsets.only(bottom: 0.0),
+          ),
+          Column(
+            children: <Widget>[
+              Container(
+                margin: EdgeInsets.all(5),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(50.0),
+                ),
+                width: 200,
+                child: RaisedButton(
+                  color: Colors.red,
+                  child: Text(
+                    'Report',
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
+                  onPressed: () {
+                    // Navigator.of(context).pushReplacement(
+                    //     MaterialPageRoute(builder: (context) => new Home()));
                   },
                 ),
               ),

@@ -19,18 +19,19 @@ class ItemDetail extends StatelessWidget {
             content: Text('Are you sure you have the following item?'),
             actions: <Widget>[
               FlatButton(
-                child: Text('DISCARD'),
+                child: Text('NO'),
                 onPressed: () {
                   Navigator.pop(context);
                 },
               ),
               FlatButton(
-                child: Text('CONTINUE'),
+                child: Text('YES'),
                 onPressed: () {
                   Navigator.pop(context);
-                  Navigator.popUntil(context, ModalRoute.withName('/Home'));
+                  Navigator.of(context).pushNamedAndRemoveUntil('/Home', (Route<dynamic> route) => false);
+                  // Navigator.popUntil(context, ModalRoute.withName('/Home'));
+                  // Navigator.of(context).pushReplacementNamed("/Home");
                   // other alternative Navigator.of(context).pushNamedAndRemoveUntil('/login', (Route<dynamic> route) => false);
-                  Navigator.of(context).pushReplacementNamed("/Home");
                 },
               )
             ],

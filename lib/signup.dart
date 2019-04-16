@@ -14,6 +14,7 @@ class SignupPageState extends State<SignupPage>
   TextEditingController username = TextEditingController();
   TextEditingController studentID = TextEditingController();
   TextEditingController email = TextEditingController();
+  TextEditingController phoneNo = TextEditingController();
   TextEditingController password1 = TextEditingController();
   TextEditingController password2 = TextEditingController();
 
@@ -65,7 +66,7 @@ class SignupPageState extends State<SignupPage>
                           new TextFormField(
                             controller: username,
                             decoration: new InputDecoration(
-                              labelText: "Enter your name",
+                              labelText: "Enter your Name",
                             ),
                             keyboardType: TextInputType.text,
                           ),
@@ -82,6 +83,14 @@ class SignupPageState extends State<SignupPage>
                               labelText: "Enter Email",
                             ),
                             keyboardType: TextInputType.emailAddress,
+                          ),
+                          new TextFormField(
+                            controller: phoneNo,
+                            decoration: new InputDecoration(
+                              labelText: "Enter Phone no.",
+                            ),
+                            keyboardType: TextInputType.text,
+                            obscureText: true,
                           ),
                           new TextFormField(
                             controller: password1,
