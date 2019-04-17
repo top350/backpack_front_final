@@ -57,8 +57,8 @@ class SessionPageState extends State<SessionPage>
                       contentPadding:
                           EdgeInsets.symmetric(horizontal: 5.0, vertical: 10.0),
                       leading: Container(
-                        width: 75.0,
-                        height: 75.0,
+                        width: 60.0,
+                        height: 60.0,
                         decoration: BoxDecoration(
                           image: DecorationImage(
                             image: AssetImage('assets/profile/profile.jpg'),
