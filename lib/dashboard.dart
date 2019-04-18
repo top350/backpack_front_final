@@ -13,10 +13,10 @@ class Dashboard extends StatefulWidget {
 }
 
 class _DashboardState extends State<Dashboard> {
-  Material myItems(IconData icon, String heading, int color) {
+  Material myItems(IconData icon, String heading, int color1) {
     return Material(
-      color: Colors.white,
-      elevation: 14.0,
+      color: Color(color1),
+      elevation: 10.0,
       shadowColor: Color(0x802196F3),
       borderRadius: BorderRadius.circular(24.0),
       child: Center(
@@ -32,17 +32,20 @@ class _DashboardState extends State<Dashboard> {
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
                       heading,
-                      style: TextStyle(color: new Color(color), fontSize: 20.0),
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.w700),
                     ),
                   ),
                   Material(
-                    color: new Color(color),
+                    color: Colors.white,
                     borderRadius: BorderRadius.circular(24.0),
                     child: Padding(
                       padding: const EdgeInsets.all(16.0),
                       child: Icon(
                         icon,
-                        color: Colors.white,
+                        color: Color(color1),
                         size: 30.0,
                       ),
                     ),
@@ -79,51 +82,55 @@ class _DashboardState extends State<Dashboard> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => ItemList("Stationery",convertToCard(stationeryList))
-                ),
+                    builder: (context) =>
+                        ItemList("Stationery", convertToCard(stationeryList))),
               );
             },
-            child: myItems(Icons.edit, "Stationery ", 0xffed622b),
+            child: myItems(Icons.edit, "Stationery ", 0xffF7B79B),
           ),
           GestureDetector(
             onTap: () {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => ItemList("Clothing",convertToCard(clothingList)),
+                  builder: (context) =>
+                      ItemList("Clothing", convertToCard(clothingList)),
                 ),
               );
             },
-            child: myItems(Icons.wc, "Clothing", 0xff26cb3c),
+            child: myItems(Icons.wc, "Clothing", 0xff74E183),
           ),
           GestureDetector(
             onTap: () {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => ItemList("Sport Equipment",convertToCard(sportEquipmentList)),
+                  builder: (context) => ItemList(
+                      "Sport Equipment", convertToCard(sportEquipmentList)),
                 ),
               );
             },
-            child: myItems(Icons.fitness_center, "Sport Equip.", 0xff3399fe),
+            child: myItems(Icons.fitness_center, "Sport Equip.", 0xff6BA9E8),
           ),
           GestureDetector(
             onTap: () {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => ItemList("Electronics",convertToCard(electronicsList)),
+                  builder: (context) =>
+                      ItemList("Electronics", convertToCard(electronicsList)),
                 ),
               );
             },
-            child: myItems(Icons.usb, "Electronics ", 0xFF9575CD),
+            child: myItems(Icons.usb, "Electronics ", 0xFFEC90D4),
           ),
           GestureDetector(
             onTap: () {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => ItemList("Books",convertToCard(booksList)),
+                  builder: (context) =>
+                      ItemList("Books", convertToCard(booksList)),
                 ),
               );
             },
@@ -134,11 +141,12 @@ class _DashboardState extends State<Dashboard> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => ItemList("Others",convertToCard(othersList)),
+                  builder: (context) =>
+                      ItemList("Others", convertToCard(othersList)),
                 ),
               );
             },
-            child: myItems(Icons.graphic_eq, "Others", 0xFFA1887F),
+            child: myItems(Icons.graphic_eq, "Others", 0xFFDEB887),
           ),
         ],
         staggeredTiles: [

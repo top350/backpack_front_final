@@ -35,9 +35,8 @@ class _EditProfileState extends State<EditProfile> {
 
   @override
   Widget build(BuildContext context) {
-    Size screenSize = MediaQuery.of(context).size;
     return Scaffold(
-      //backgroundColor: Colors.pink[50],
+      backgroundColor: Colors.pink[50],
       appBar: AppBar(
         title: Text("Edit Profile"),
       ),
@@ -48,10 +47,11 @@ class _EditProfileState extends State<EditProfile> {
           ),
           _buildProfileImage(),
           Container(
+              // Name
               margin: EdgeInsets.all(10),
               padding: EdgeInsets.symmetric(vertical: 4.0, horizontal: 6.0),
               decoration: BoxDecoration(
-                color: Theme.of(context).scaffoldBackgroundColor,
+                color: Colors.pink[50],
                 borderRadius: BorderRadius.circular(4.0),
               ),
               child: TextField(
@@ -63,31 +63,16 @@ class _EditProfileState extends State<EditProfile> {
                   });
                 },
               )),
-          // Container(
-          //     margin: EdgeInsets.all(10),
-          //     padding: EdgeInsets.symmetric(
-          //         vertical: 4.0, horizontal: 6.0),
-          //     decoration: BoxDecoration(
-          //       color: Theme.of(context).scaffoldBackgroundColor,
-          //       borderRadius: BorderRadius.circular(4.0),
-          //     ),
-          //     child: TextField(
-          //       controller: _stuIDController,
-          //       decoration: InputDecoration(labelText: 'Student ID'),
-          //       onChanged: (String input) {
-          //         setState(() {
-          //           example.studentID = input;
-          //         });
-          //       },
-          //     )),
           Container(
+              //Phone Number
               margin: EdgeInsets.all(10),
               padding: EdgeInsets.symmetric(vertical: 4.0, horizontal: 6.0),
               decoration: BoxDecoration(
-                color: Theme.of(context).scaffoldBackgroundColor,
+                color: Colors.pink[50],
                 borderRadius: BorderRadius.circular(4.0),
               ),
               child: TextField(
+                keyboardType: TextInputType.number,
                 controller: _phoneNumController,
                 decoration: InputDecoration(labelText: 'Phone Number'),
                 onChanged: (String input) {
@@ -96,27 +81,12 @@ class _EditProfileState extends State<EditProfile> {
                   });
                 },
               )),
-          // Container(
-          //     margin: EdgeInsets.all(10),
-          //     padding: EdgeInsets.symmetric(vertical: 4.0, horizontal: 6.0),
-          //     decoration: BoxDecoration(
-          //       color: Theme.of(context).scaffoldBackgroundColor,
-          //       borderRadius: BorderRadius.circular(4.0),
-          //     ),
-          //     child: TextField(
-          //       controller: _lineIDController,
-          //       decoration: InputDecoration(labelText: 'Line ID'),
-          //       onChanged: (String input) {
-          //         setState(() {
-          //           example.lineID = input;
-          //         });
-          //       },
-          //     )),
           Container(
+              //Email
               margin: EdgeInsets.all(10),
               padding: EdgeInsets.symmetric(vertical: 4.0, horizontal: 6.0),
               decoration: BoxDecoration(
-                color: Theme.of(context).scaffoldBackgroundColor,
+                color: Colors.pink[50],
                 borderRadius: BorderRadius.circular(4.0),
               ),
               child: TextField(
@@ -143,12 +113,19 @@ class _EditProfileState extends State<EditProfile> {
                 child: RaisedButton(
                   color: Colors.pinkAccent,
                   child: Text(
-                    'Change Password',
+                    'Category',
                     style: TextStyle(
                       color: Colors.white,
                     ),
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ProfileCategory(),
+                      ),
+                    );
+                  },
                 ),
               ),
               Container(
@@ -158,21 +135,14 @@ class _EditProfileState extends State<EditProfile> {
                 ),
                 width: 150,
                 child: RaisedButton(
-                  color: Colors.pinkAccent,
+                  color: Colors.black38,
                   child: Text(
-                    'Category',
+                    'Change Password',
                     style: TextStyle(
                       color: Colors.white,
                     ),
                   ),
-                  onPressed: () {
-                    Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => ProfileCategory(),
-                ),
-              );
-                  },
+                  onPressed: () {},
                 ),
               ),
             ],
@@ -210,7 +180,6 @@ class _EditProfileState extends State<EditProfile> {
     );
   }
 }
-
 
 Widget _buildProfileImage() {
   return Center(

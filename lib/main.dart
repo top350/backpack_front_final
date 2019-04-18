@@ -5,7 +5,7 @@ import 'home.dart';
 import 'signup.dart';
 import 'login.dart';
 import 'category.dart';
-import 'session.dart';
+import './session/session.dart';
 import 'splash_page.dart';
 import './items/item_list.dart';
 import './items/item_detail.dart';

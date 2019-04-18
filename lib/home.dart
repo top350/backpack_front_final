@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 import 'dashboard.dart';
 import 'borrow.dart';
-import 'session.dart';
+import './session/session.dart';
 import './profile/profile.dart';
 
 class Home extends StatefulWidget {
