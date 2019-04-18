@@ -2,22 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
 class QrGenerator extends StatefulWidget {
-  String incomeString = '';
-
-  QrGenerator(this.incomeString);
-
   @override
-  _QrGeneratorState createState() => _QrGeneratorState(incomeString);
+  _QrGeneratorState createState() => _QrGeneratorState();
 }
 
 class _QrGeneratorState extends State<QrGenerator> {
-  String incomeString = '';
 
-  _QrGeneratorState(this.incomeString);
+  String _dataString = 'abcd';
 
   @override
   Widget build(BuildContext context) {
-    return _contentWidget();
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('QR Generate'),
+      ),
+      body: _contentWidget(),
+      resizeToAvoidBottomPadding: true,
+    );
   }
 
   @override
@@ -33,7 +34,7 @@ class _QrGeneratorState extends State<QrGenerator> {
         child: Padding(
           padding: const EdgeInsets.all(25.0),
           child: QrImage(
-            data: incomeString,
+            data: _dataString,
             gapless: false,
             foregroundColor: const Color(0xFF111111),
           ),
