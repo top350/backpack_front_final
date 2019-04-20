@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 import 'api_provider.dart';
 
@@ -18,27 +18,30 @@ class LoginPageState extends State<LoginPage>
   final _formkey = GlobalKey<FormState>();
   ApiProvider apiProvider = ApiProvider();
 
-  // Future doLogin() async {
-  //   if (_formkey.currentState.validate()) {
-  //     try {
-  //       var rs = await apiProvider.doLogin(_username.text, _password.text);
-  //       if (rs.statusCode == 200) {
-  //         print(rs.body);
-  //         var jsonRes = json.decode(rs.body);
-  //         if (jsonRes['ok']) {
-  //           String token = jsonRes['token'];
-  //           print(token);
-  //         } else {
-  //           print('Server error');
-  //         }
-  //       } else {
-  //         print('server error');
-  //       }
-  //     } catch (e) {
-  //       print(e);
-  //     }
-  //   }
-  // }
+  Future doLogin() async {
+    if (_formkey.currentState.validate()) {
+      try {
+        var rs = await apiProvider.doLogin(_username.text, _password.text);
+        if (rs.statusCode == 200) {
+          print(rs.body);
+          var jsonRes = json.decode(rs.body);
+          if (jsonRes['ok']) {
+            String token = jsonRes['token'];
+            print(token);
+            SharedPreferences prefs = await SharedPreferences.getInstance();
+            await prefs.setString('token', token);
+            Navigator.of(context).pushReplacementNamed("/Home");
+          } else {
+            print('Server error');
+          }
+        } else {
+          print('server error');
+        }
+      } catch (e) {
+        print(e);
+      }
+    }
+  }
 
   @override
   void initState() {
@@ -127,9 +130,8 @@ class LoginPageState extends State<LoginPage>
                               textColor: Colors.white,
                               child: new Text("Log in"),
                               onPressed: () {
-                                Navigator.of(context)
-                                    .pushReplacementNamed("/Home");
-                                // doLogin();
+                                
+                                doLogin();
                               },
                               splashColor: Colors.pink[200],
                             ),

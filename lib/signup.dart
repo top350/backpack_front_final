@@ -11,7 +11,8 @@ class SignupPageState extends State<SignupPage>
     with SingleTickerProviderStateMixin {
   AnimationController _iconAnimationController;
   Animation<double> _iconAnimation;
-  TextEditingController username = TextEditingController();
+  TextEditingController firstname = TextEditingController();
+  TextEditingController lastname = TextEditingController();
   TextEditingController studentID = TextEditingController();
   TextEditingController email = TextEditingController();
   TextEditingController phoneNo = TextEditingController();
@@ -64,9 +65,16 @@ class SignupPageState extends State<SignupPage>
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: <Widget>[
                           new TextFormField(
-                            controller: username,
+                            controller: firstname,
                             decoration: new InputDecoration(
-                              labelText: "Enter your Name",
+                              labelText: "Enter your Firstname",
+                            ),
+                            keyboardType: TextInputType.text,
+                          ),
+                          new TextFormField(
+                            controller: lastname,
+                            decoration: new InputDecoration(
+                              labelText: "Enter your Lastname",
                             ),
                             keyboardType: TextInputType.text,
                           ),
@@ -121,7 +129,7 @@ class SignupPageState extends State<SignupPage>
                             onPressed: () {
                               Navigator.of(context).pushNamed("/category");
                               if (password1.text == password2.text) {
-                                print(username.text);
+                               
                                 print(password1.text);
                                 print(email.text);
                               } else {
