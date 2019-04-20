@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 
+
 import 'package:intl/intl.dart';
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 
 import 'items/item_object.dart';
 import 'items/itemlists_data.dart';
+import 'imagePickerBorrow.dart';
 
 class BorrowPage extends StatefulWidget {
   //Page Where user can input data to create new request
@@ -27,6 +29,7 @@ class _BorrowPageState extends State<BorrowPage> {
 
   String pickuptimeString = '';
   String returntimeString = '';
+
 
   List<DropdownMenuItem<String>> _dropDownMenuCategory;
   List _category = [
@@ -258,6 +261,17 @@ class _BorrowPageState extends State<BorrowPage> {
                   note = value;
                 });
               },
+            ),
+            Container(
+              margin: EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10.0),
+                border: Border.all(
+                  color: Colors.grey,
+                  width: 1.0,
+                ),
+              ),
+              child: ImagePickerBorrow(),
             ),
             Container(
               margin: EdgeInsets.all(10.0),
