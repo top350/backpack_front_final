@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+//Prepare for backend
 class RegChulaObject {
   String studentID = '';
   String firstName = '';

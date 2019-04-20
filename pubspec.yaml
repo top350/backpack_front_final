@@ -21,7 +21,6 @@ dependencies:
   http: ^0.12.0
   flutter_rating: ^0.0.2
   qr_flutter: ^2.0.0
-  image_picker: ^0.5.4
   
 dev_dependencies:
   flutter_test:
@@ -47,6 +46,7 @@ flutter:
    - assets/logo only.png
    - assets/logo.png
    - assets/2.0x/logo.png
+   - assets/QR_code.png
    - assets/profile/cover.jpg
    - assets/profile/profile.jpg
    - assets/item_example/blanket.jpg
