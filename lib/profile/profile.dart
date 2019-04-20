@@ -44,7 +44,6 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     double screenSize = MediaQuery.of(context).size.height;
     return Scaffold(
-      // backgroundColor: Colors.pink[50],
       appBar: AppBar(
         title: Text("Profile"),
         actions: <Widget>[
@@ -63,122 +62,7 @@ class _ProfilePageState extends State<ProfilePage> {
         children: <Widget>[
           _buildCoverImage(screenSize),
           _buildStatContainer(),
-          Container(
-            margin: EdgeInsets.symmetric(vertical: 20, horizontal: 30),
-            child: Column(
-              children: <Widget>[
-                Row(
-                  children: <Widget>[
-                    Icon(
-                      Icons.assignment_ind,
-                      size: 30,
-                      color: Colors.pink[300],
-                    ),
-                    SizedBox(width: 5),
-                    Text('Student ID  ',
-                        style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 20.0,
-                            fontWeight: FontWeight.w600)),
-                    SizedBox(
-                      width: 20,
-                    ),
-                    Text(
-                      bus.studentID,
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 15.0,
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Row(
-                  children: <Widget>[
-                    Icon(
-                      Icons.phone,
-                      size: 30,
-                      color: Colors.pink[300],
-                    ),
-                    SizedBox(width: 8),
-                    Text('Phone no.  ',
-                        style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 20.0,
-                            fontWeight: FontWeight.w600)),
-                    SizedBox(
-                      width: 20,
-                    ),
-                    Text(
-                      bus.phoneNum,
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 15.0,
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                // Row(
-                //   children: <Widget>[
-                //     Icon(
-                //       Icons.chat,
-                //       size: 30,
-                //       color: Colors.pink[300],
-                //     ),
-                //     SizedBox(width: 8),
-                //     Text('Line ID.  ',
-                //         style: TextStyle(
-                //             color: Colors.black,
-                //             fontSize: 20.0,
-                //             fontWeight: FontWeight.w600)),
-                //     SizedBox(
-                //       width: 40,
-                //     ),
-                //     Text(
-                //       bus.lineID,
-                //       style: TextStyle(
-                //         color: Colors.black,
-                //         fontSize: 20.0,
-                //       ),
-                //     ),
-                //   ],
-                // ),
-                // SizedBox(
-                //   height: 10,
-                // ),
-                Row(
-                  children: <Widget>[
-                    Icon(
-                      Icons.email,
-                      size: 30,
-                      color: Colors.pink[300],
-                    ),
-                    SizedBox(width: 8),
-                    Text('Email  ',
-                        style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 20.0,
-                            fontWeight: FontWeight.w600)),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    Text(
-                      bus.email,
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 15.0,
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
+          _buildProfileInfo(),
           Column(
             children: <Widget>[
               Container(
@@ -302,17 +186,109 @@ Widget _buildStatContainer() {
             Icon(Icons.star, color: Colors.yellowAccent, size: 30), "4.5"),
         _buildStatItem(
             Container(
-                width: 50,
-                height: 50,
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                      image: AssetImage(
-                        "assets/token_2.png",
-                      ),
-                      fit: BoxFit.fill),
-                )),
+              width: 50,
+              height: 50,
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage(
+                      "assets/token_2.png",
+                    ),
+                    fit: BoxFit.fill),
+              ),
+            ),
             "100"),
+      ],
+    ),
+  );
+}
+
+Widget _buildProfileInfo() {
+  return Container(
+    margin: EdgeInsets.symmetric(vertical: 20, horizontal: 30),
+    child: Column(
+      children: <Widget>[
+        Row(
+          children: <Widget>[
+            Icon(
+              Icons.assignment_ind,
+              size: 30,
+              color: Colors.pink[300],
+            ),
+            SizedBox(width: 5),
+            Text('Student ID  ',
+                style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 20.0,
+                    fontWeight: FontWeight.w600)),
+            SizedBox(
+              width: 20,
+            ),
+            Text(
+              bus.studentID,
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 15.0,
+              ),
+            ),
+          ],
+        ),
+        SizedBox(
+          height: 10,
+        ),
+        Row(
+          children: <Widget>[
+            Icon(
+              Icons.phone,
+              size: 30,
+              color: Colors.pink[300],
+            ),
+            SizedBox(width: 8),
+            Text('Phone no.  ',
+                style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 20.0,
+                    fontWeight: FontWeight.w600)),
+            SizedBox(
+              width: 20,
+            ),
+            Text(
+              bus.phoneNum,
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 15.0,
+              ),
+            ),
+          ],
+        ),
+        SizedBox(
+          height: 10,
+        ),
+        Row(
+          children: <Widget>[
+            Icon(
+              Icons.email,
+              size: 30,
+              color: Colors.pink[300],
+            ),
+            SizedBox(width: 8),
+            Text('Email  ',
+                style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 20.0,
+                    fontWeight: FontWeight.w600)),
+            SizedBox(
+              width: 10,
+            ),
+            Text(
+              bus.email,
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 15.0,
+              ),
+            ),
+          ],
+        ),
       ],
     ),
   );
