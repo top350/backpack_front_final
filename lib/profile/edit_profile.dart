@@ -49,7 +49,7 @@ class _EditProfileState extends State<EditProfile> {
           //_buildProfileImage(),
           Container(
             margin: EdgeInsets.all(10),
-            child: ImagePickerProfile(),
+            child: ImagePickerProfile(example),
           ),
           Container(
               // Name

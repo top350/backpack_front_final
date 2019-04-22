@@ -20,8 +20,10 @@ class Profile {
   // double rating = '';
   // int token = '';
 
-  Profile(
-      this.fullName, this.studentID, this.phoneNum, this.lineID, this.email,this.profilepic);
+  Profile(this.fullName, this.studentID, this.phoneNum, this.lineID, this.email,
+      this.profilepic);
 }
 
-Profile bus = Profile('Patsornchai Wibontanasarn','5931307021','0812345678','patsornchaiw.','patsornchai@gmail.com',File('assets/profile/profile.jpg'));
+File empty;
+Profile bus = Profile('Patsornchai Wibontanasarn', '5931307021', '0812345678',
+    'patsornchaiw.', 'patsornchai@gmail.com', empty);

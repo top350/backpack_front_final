@@ -3,15 +3,25 @@ import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
 
+import 'profile_object.dart';
+
 class ImagePickerProfile extends StatefulWidget {
+  Profile example;
+
+  ImagePickerProfile(this.example);
   @override
   State<StatefulWidget> createState() {
-    return new ImagePickerProfileState();
+    return new ImagePickerProfileState(example);
   }
 }
 
 class ImagePickerProfileState extends State<ImagePickerProfile> {
+  // File profilepic;
+  Profile example;
+
   File imageFile;
+
+  ImagePickerProfileState(this.example);
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +34,9 @@ class ImagePickerProfileState extends State<ImagePickerProfile> {
         // maxWidth: 50.0,
       );
       print("You selected gallery image : " + imageFile.path);
-      setState(() {});
+      setState(() {
+        example.profilepic = imageFile;
+      });
     }
 
     //display image selected from camera
@@ -35,13 +47,15 @@ class ImagePickerProfileState extends State<ImagePickerProfile> {
         // maxWidth: 50.0,
       );
       print("You selected camera image : " + imageFile.path);
-      setState(() {});
+      setState(() {
+        example.profilepic = imageFile;
+      });
     }
 
     return new Column(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: <Widget>[
-        displaySelectedFile(imageFile),
+        displaySelectedFile(example.profilepic),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
@@ -99,7 +113,7 @@ class ImagePickerProfileState extends State<ImagePickerProfile> {
                     width: 10.0,
                   ),
                 ),
-              // child: Image.file(file),
+                // child: Image.file(file),
               ),
             ),
     );
