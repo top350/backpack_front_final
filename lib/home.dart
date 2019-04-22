@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 
 import 'dashboard.dart';
-import 'borrow.dart';
+import 'borrow/borrow.dart';
 import './session/session.dart';
 import './profile/profile.dart';
 

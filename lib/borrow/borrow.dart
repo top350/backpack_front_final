@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 
-
+import 'dart:io';
 import 'package:intl/intl.dart';
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
+import 'package:image_picker/image_picker.dart';
 
-import 'items/item_object.dart';
-import 'items/itemlists_data.dart';
-import 'imagePickerBorrow.dart';
+import '../items/item_object.dart';
+import '../items/itemlists_data.dart';
+//import 'imagePickerBorrow.dart';
 
 class BorrowPage extends StatefulWidget {
   //Page Where user can input data to create new request
@@ -26,10 +27,13 @@ class _BorrowPageState extends State<BorrowPage> {
   String note = '';
   String imageurl = 'assets/logo.png';
   String who = 'Patsornchai W.';
+  File examplepic;
 
   String pickuptimeString = '';
   String returntimeString = '';
 
+  ItemObject newRequest = ItemObject('itemName', '_selectedCategory', DateTime.now(),
+      DateTime.now(), 'Location', 0, '','assets/logo.png' ,'Patsornchai W.', null);
 
   List<DropdownMenuItem<String>> _dropDownMenuCategory;
   List _category = [
@@ -52,17 +56,20 @@ class _BorrowPageState extends State<BorrowPage> {
   ];
 
   void _addItem() {
-    if (_selectedCategory == "Stationery") {
-      stationeryList.add(ItemObject(
-          this.itemName,
-          this._selectedCategory,
-          this.pickupTime,
-          this.returnTime,
-          this._selectedKiosk,
-          this.token,
-          this.note,
-          this.imageurl,
-          this.who));
+    // if (_selectedCategory == "Stationery") {
+    //   stationeryList.add(ItemObject(
+    //       this.itemName,
+    //       this._selectedCategory,
+    //       this.pickupTime,
+    //       this.returnTime,
+    //       this._selectedKiosk,
+    //       this.token,
+    //       this.note,
+    //       this.imageurl,
+    //       this.who,
+    //       this.examplepic));
+    if(_selectedCategory == "Stationery") {
+      stationeryList.add(newRequest);
     } else if (_selectedCategory == "Clothing") {
       clothingList.add(ItemObject(
           this.itemName,
@@ -73,7 +80,8 @@ class _BorrowPageState extends State<BorrowPage> {
           this.token,
           this.note,
           this.imageurl,
-          this.who));
+          this.who,
+          this.examplepic));
     } else if (_selectedCategory == "Sport Equipment") {
       sportEquipmentList.add(ItemObject(
           this.itemName,
@@ -84,7 +92,8 @@ class _BorrowPageState extends State<BorrowPage> {
           this.token,
           this.note,
           this.imageurl,
-          this.who));
+          this.who,
+          this.examplepic));
     } else if (_selectedCategory == "Electronics") {
       electronicsList.add(ItemObject(
           this.itemName,
@@ -95,7 +104,8 @@ class _BorrowPageState extends State<BorrowPage> {
           this.token,
           this.note,
           this.imageurl,
-          this.who));
+          this.who,
+          this.examplepic));
     } else if (_selectedCategory == "Books") {
       booksList.add(ItemObject(
           this.itemName,
@@ -106,7 +116,8 @@ class _BorrowPageState extends State<BorrowPage> {
           this.token,
           this.note,
           this.imageurl,
-          this.who));
+          this.who,
+          this.examplepic));
     } else {
       othersList.add(ItemObject(
           this.itemName,
@@ -117,7 +128,8 @@ class _BorrowPageState extends State<BorrowPage> {
           this.token,
           this.note,
           this.imageurl,
-          this.who));
+          this.who,
+          this.examplepic));
     }
   }
 
@@ -141,13 +153,15 @@ class _BorrowPageState extends State<BorrowPage> {
 
   void changedDropDownCategory(String selectedItem) {
     setState(() {
-      _selectedCategory = selectedItem;
+      newRequest.category = selectedItem;
+      //_selectedCategory = selectedItem;
     });
   }
 
   void changedDropDownKiosk(String selectedItem) {
     setState(() {
-      _selectedKiosk = selectedItem;
+      newRequest.location = selectedItem;
+      //_selectedKiosk = selectedItem;
     });
   }
 
@@ -166,7 +180,8 @@ class _BorrowPageState extends State<BorrowPage> {
                   labelStyle: TextStyle(fontSize: 20, color: Colors.pink)),
               onChanged: (String inputName) {
                 setState(() {
-                  itemName = inputName;
+                  newRequest.itemName = inputName;
+                  //itemName = inputName;
                 });
               },
             ),
@@ -197,7 +212,7 @@ class _BorrowPageState extends State<BorrowPage> {
                         labelText: 'Date/Time', hasFloatingPlaceholder: false),
                     onChanged: (dt) {
                       setState(() {
-                        pickupTime = dt;
+                        newRequest.pickupTime = dt;
                         pickuptimeString = DateFormat.yMd().add_jm().format(dt);
                       });
                     },
@@ -221,7 +236,7 @@ class _BorrowPageState extends State<BorrowPage> {
                         labelText: 'Date/Time', hasFloatingPlaceholder: false),
                     onChanged: (dt) {
                       setState(() {
-                        returnTime = dt;
+                        newRequest.returnTime = dt;
                         returntimeString = DateFormat.yMd().add_jm().format(dt);
                       });
                     },
@@ -248,7 +263,8 @@ class _BorrowPageState extends State<BorrowPage> {
                   labelStyle: TextStyle(fontSize: 15, color: Colors.pink)),
               onChanged: (String value) {
                 setState(() {
-                  token = int.parse(value);
+                  newRequest.token = int.parse(value);
+                  //token = int.parse(value);
                 });
               },
             ),
@@ -258,7 +274,8 @@ class _BorrowPageState extends State<BorrowPage> {
                   labelStyle: TextStyle(fontSize: 15, color: Colors.pink)),
               onChanged: (String value) {
                 setState(() {
-                  note = value;
+                  newRequest.note = value;
+                  //note = value;
                 });
               },
             ),
@@ -271,7 +288,7 @@ class _BorrowPageState extends State<BorrowPage> {
                   width: 1.0,
                 ),
               ),
-              child: ImagePickerBorrow(),
+              child: ImagePickerBorrow(newRequest),
             ),
             Container(
               margin: EdgeInsets.all(10.0),
@@ -283,12 +300,122 @@ class _BorrowPageState extends State<BorrowPage> {
                 child: new Text("Request Item"),
                 onPressed: () {
                   Navigator.of(context).pushReplacementNamed("/Home");
+                  print(newRequest.examplepic);
                   _addItem();
                 },
                 splashColor: Colors.pink[200],
               ),
             ),
           ])),
+    );
+  }
+}
+
+class ImagePickerBorrow extends StatefulWidget {
+  ItemObject example;
+
+  ImagePickerBorrow(this.example);
+
+  @override
+  State<StatefulWidget> createState() {
+    return new ImagePickerBorrowState(example);
+  }
+}
+
+class ImagePickerBorrowState extends State<ImagePickerBorrow> {
+  ItemObject example;
+
+  File imageFile;
+
+  ImagePickerBorrowState(this.example);
+
+  @override
+  Widget build(BuildContext context) {
+    double screenSize = MediaQuery.of(context).size.width;
+    //display image selected from gallery
+    imageSelectorGallery() async {
+      imageFile = await ImagePicker.pickImage(
+        source: ImageSource.gallery,
+        // maxHeight: 50.0,
+        // maxWidth: 50.0,
+      );
+      print("You selected gallery imageeeeee : " + imageFile.path);
+      setState(() {
+        example.examplepic = imageFile;
+      });
+    }
+
+    //display image selected from camera
+    imageSelectorCamera() async {
+      imageFile = await ImagePicker.pickImage(
+        source: ImageSource.camera,
+        // maxHeight: 50.0,
+        // maxWidth: 50.0,
+      );
+      setState(() {
+       example.examplepic = imageFile;
+      });
+    }
+
+    return new Column(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      children: <Widget>[
+        displaySelectedFile(example.examplepic),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: <Widget>[
+            Container(
+              width: screenSize / 3,
+              child: new RaisedButton(
+                color: Colors.pink[200],
+                textColor: Colors.white,
+                child: new Text(
+                  'Select from Gallery',
+                  textAlign: TextAlign.center,
+                ),
+                onPressed: imageSelectorGallery,
+              ),
+            ),
+            Container(
+              width: screenSize / 3,
+              child: new RaisedButton(
+                color: Colors.pink[200],
+                textColor: Colors.white,
+                child: new Text(
+                  'Select from Camera',
+                  textAlign: TextAlign.center,
+                ),
+                onPressed: imageSelectorCamera,
+              ),
+            ),
+          ],
+        )
+
+        // displaySelectedFile(cameraFile)
+      ],
+    );
+  }
+
+  Widget displaySelectedFile(File file) {
+    return new Container(
+      margin: EdgeInsets.all(10),
+      // child: new Card(child: new Text('' + galleryFile.toString())),
+      // child: new Image.file(galleryFile),
+      child: file == null
+          ? new Column(
+              children: <Widget>[
+                Icon(
+                  Icons.camera_alt,
+                  color: Colors.grey,
+                ),
+                Text('Select an Example Image')
+              ],
+            )
+          : new SizedBox(
+              height: 300.0,
+              width: 300.0,
+              child: Image.file(file),
+            ),
     );
   }
 }

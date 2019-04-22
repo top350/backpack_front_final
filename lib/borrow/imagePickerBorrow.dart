@@ -4,13 +4,21 @@ import 'dart:io';
 import 'package:image_picker/image_picker.dart';
 
 class ImagePickerBorrow extends StatefulWidget {
+  File examplePic;
+
+  ImagePickerBorrow(this.examplePic);
+
   @override
   State<StatefulWidget> createState() {
-    return new ImagePickerBorrowState();
+    return new ImagePickerBorrowState(examplePic);
   }
 }
 
 class ImagePickerBorrowState extends State<ImagePickerBorrow> {
+  File examplePic;
+
+  ImagePickerBorrowState(this.examplePic);
+
   File imageFile;
 
   @override
@@ -23,8 +31,10 @@ class ImagePickerBorrowState extends State<ImagePickerBorrow> {
         // maxHeight: 50.0,
         // maxWidth: 50.0,
       );
-      print("You selected gallery image : " + imageFile.path);
-      setState(() {});
+      print("You selected gallery imageeeeee : " + imageFile.path);
+      setState(() {
+        examplePic = imageFile;
+      });
     }
 
     //display image selected from camera
@@ -34,8 +44,9 @@ class ImagePickerBorrowState extends State<ImagePickerBorrow> {
         // maxHeight: 50.0,
         // maxWidth: 50.0,
       );
-      print("You selected camera image : " + imageFile.path);
-      setState(() {});
+      setState(() {
+        examplePic = imageFile;
+      });
     }
 
     return new Column(
@@ -46,20 +57,26 @@ class ImagePickerBorrowState extends State<ImagePickerBorrow> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
             Container(
-              width: screenSize/3,
+              width: screenSize / 3,
               child: new RaisedButton(
                 color: Colors.pink[200],
                 textColor: Colors.white,
-                child: new Text('Select from Gallery',textAlign: TextAlign.center,),
+                child: new Text(
+                  'Select from Gallery',
+                  textAlign: TextAlign.center,
+                ),
                 onPressed: imageSelectorGallery,
               ),
             ),
             Container(
-              width: screenSize/3,
+              width: screenSize / 3,
               child: new RaisedButton(
                 color: Colors.pink[200],
                 textColor: Colors.white,
-                child: new Text('Select from Camera',textAlign: TextAlign.center,),
+                child: new Text(
+                  'Select from Camera',
+                  textAlign: TextAlign.center,
+                ),
                 onPressed: imageSelectorCamera,
               ),
             ),
@@ -94,4 +111,3 @@ class ImagePickerBorrowState extends State<ImagePickerBorrow> {
     );
   }
 }
-
