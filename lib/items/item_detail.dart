@@ -57,7 +57,7 @@ class ItemDetail extends StatelessWidget {
             decoration: BoxDecoration(
               image: DecorationImage(
                 image: FileImage(file),
-                fit: BoxFit.cover,
+                fit: BoxFit.fill,
               ),
             ),
             // child: Image.file(file),

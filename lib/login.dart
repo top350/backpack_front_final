@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'signUp/intro.dart';
+
 import 'dart:convert';
 import 'api_provider.dart';
 
@@ -140,7 +142,13 @@ class LoginPageState extends State<LoginPage>
                               textColor: Colors.white,
                               child: new Text("Sign up"),
                               onPressed: () {
-                                Navigator.of(context).pushNamed("/signup");
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => Intro(),
+                                  ),
+                                );
+                                //Navigator.of(context).pushNamed("/signup");
                               },
                               splashColor: Colors.pink[200],
                             ),

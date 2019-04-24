@@ -58,6 +58,10 @@ flutter:
    - assets/item_example/racquet.jpg
    - assets/item_example/textbook.jpg
    - assets/item_example/tsquare.jpg
+   - assets/intro/Intro_1.JPG
+   - assets/intro/Intro_2.JPG
+   - assets/intro/Intro_3.JPG
+   - assets/intro/Intro_4.JPG
     
 
   # An image asset can refer to one or more resolution-specific "variants", see

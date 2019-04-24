@@ -32,8 +32,8 @@ class _BorrowPageState extends State<BorrowPage> {
   String pickuptimeString = '';
   String returntimeString = '';
 
-  ItemObject newRequest = ItemObject('itemName', '_selectedCategory', DateTime.now(),
-      DateTime.now(), 'Location', 0, '','assets/logo.png' ,'Patsornchai W.', null);
+  ItemObject newRequest = ItemObject('itemName', '' , DateTime.now(),
+      DateTime.now(), '', 0, '','assets/logo.png' ,'Patsornchai W.', null);
 
   List<DropdownMenuItem<String>> _dropDownMenuCategory;
   List _category = [
@@ -56,89 +56,28 @@ class _BorrowPageState extends State<BorrowPage> {
   ];
 
   void _addItem() {
-    // if (_selectedCategory == "Stationery") {
-    //   stationeryList.add(ItemObject(
-    //       this.itemName,
-    //       this._selectedCategory,
-    //       this.pickupTime,
-    //       this.returnTime,
-    //       this._selectedKiosk,
-    //       this.token,
-    //       this.note,
-    //       this.imageurl,
-    //       this.who,
-    //       this.examplepic));
-    if(_selectedCategory == "Stationery") {
+    if(newRequest.category == "Stationery") {
       stationeryList.add(newRequest);
-    } else if (_selectedCategory == "Clothing") {
-      clothingList.add(ItemObject(
-          this.itemName,
-          this._selectedCategory,
-          this.pickupTime,
-          this.returnTime,
-          this._selectedKiosk,
-          this.token,
-          this.note,
-          this.imageurl,
-          this.who,
-          this.examplepic));
-    } else if (_selectedCategory == "Sport Equipment") {
-      sportEquipmentList.add(ItemObject(
-          this.itemName,
-          this._selectedCategory,
-          this.pickupTime,
-          this.returnTime,
-          this._selectedKiosk,
-          this.token,
-          this.note,
-          this.imageurl,
-          this.who,
-          this.examplepic));
-    } else if (_selectedCategory == "Electronics") {
-      electronicsList.add(ItemObject(
-          this.itemName,
-          this._selectedCategory,
-          this.pickupTime,
-          this.returnTime,
-          this._selectedKiosk,
-          this.token,
-          this.note,
-          this.imageurl,
-          this.who,
-          this.examplepic));
-    } else if (_selectedCategory == "Books") {
-      booksList.add(ItemObject(
-          this.itemName,
-          this._selectedCategory,
-          this.pickupTime,
-          this.returnTime,
-          this._selectedKiosk,
-          this.token,
-          this.note,
-          this.imageurl,
-          this.who,
-          this.examplepic));
-    } else {
-      othersList.add(ItemObject(
-          this.itemName,
-          this._selectedCategory,
-          this.pickupTime,
-          this.returnTime,
-          this._selectedKiosk,
-          this.token,
-          this.note,
-          this.imageurl,
-          this.who,
-          this.examplepic));
+    } else if (newRequest.category == "Clothing") {
+      clothingList.add(newRequest);
+    } else if (newRequest.category == "Sport Equipment") {
+      sportEquipmentList.add(newRequest);
+    } else if (newRequest.category == "Electronics") {
+     electronicsList.add(newRequest);
+    } else if (newRequest.category == "Books") {
+      booksList.add(newRequest);
+    } else  {
+      othersList.add(newRequest);
     }
+
   }
 
   @override
   void initState() {
     _dropDownMenuCategory = buildAndGetDropDownMenuList(_category);
-    _selectedCategory = _dropDownMenuCategory[0].value;
+    newRequest.category = _dropDownMenuCategory[0].value;
     _dropDownMenuKiosk = buildAndGetDropDownMenuList(_kiosk);
-    _selectedKiosk = _dropDownMenuKiosk[0].value;
+    newRequest.location = _dropDownMenuKiosk[0].value;
     super.initState();
   }
 
@@ -191,7 +130,7 @@ class _BorrowPageState extends State<BorrowPage> {
                 Text("Choose Category",
                     style: TextStyle(fontSize: 18, color: Colors.pink)),
                 DropdownButton(
-                  value: _selectedCategory,
+                  value: newRequest.category,
                   items: _dropDownMenuCategory,
                   onChanged: changedDropDownCategory,
                 ),
@@ -250,7 +189,7 @@ class _BorrowPageState extends State<BorrowPage> {
                 Text("Choose Kiosk",
                     style: TextStyle(fontSize: 18, color: Colors.pink)),
                 DropdownButton(
-                  value: _selectedKiosk,
+                  value: newRequest.location,
                   items: _dropDownMenuKiosk,
                   onChanged: changedDropDownKiosk,
                 ),
