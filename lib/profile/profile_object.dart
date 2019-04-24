@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:io';
 
 class Profile {
   String fullName = '';
@@ -6,6 +7,7 @@ class Profile {
   String phoneNum = '';
   String lineID = '';
   String email = '';
+  File profilepic;
 
   //Ideal
   // int accountNo ;
@@ -18,8 +20,10 @@ class Profile {
   // double rating = '';
   // int token = '';
 
-  Profile(
-      this.fullName, this.studentID, this.phoneNum, this.lineID, this.email);
+  Profile(this.fullName, this.studentID, this.phoneNum, this.lineID, this.email,
+      this.profilepic);
 }
 
-Profile bus = Profile('Patsornchai Wibontanasarn','5931307021','0812345678','patsornchaiw.','patsornchai@gmail.com');
+File empty;
+Profile bus = Profile('Patsornchai Wibontanasarn', '5931307021', '0812345678',
+    'patsornchaiw.', 'patsornchai@gmail.com', empty);

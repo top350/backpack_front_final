@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'rating.dart';
-import 'qr_generator.dart';
 import '../profile/profile.dart';
+import 'qr_generator.dart';
 // import  'category.dart';
 
 class SessionPage extends StatefulWidget {
@@ -41,9 +41,9 @@ class SessionPageState extends State<SessionPage>
             Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                Padding(
-                  padding: EdgeInsets.all(20),
-                  child: QrGenerator('Test String from server'),
+                new Padding(
+                  padding:EdgeInsets.all(20),
+                  child: QrGenerator('Hi'),
                 ),
                 new Padding(
                   padding: const EdgeInsets.only(bottom: 20.0, top: 20.0),

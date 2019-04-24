@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'profile_object.dart';
 import 'profile_category.dart';
+import 'imagePickerProfile.dart';
 
 class EditProfile extends StatefulWidget {
   Profile example;
@@ -45,7 +46,11 @@ class _EditProfileState extends State<EditProfile> {
           Padding(
             padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
           ),
-          _buildProfileImage(),
+          //_buildProfileImage(),
+          Container(
+            margin: EdgeInsets.all(10),
+            child: ImagePickerProfile(example),
+          ),
           Container(
               // Name
               margin: EdgeInsets.all(10),

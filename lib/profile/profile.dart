@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'dart:io';
+
 import 'edit_profile.dart';
 import 'profile_object.dart';
 
@@ -9,36 +11,9 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  Profile example;
+  Profile exampleProfile;
 
-  _ProfilePageState(this.example);
-
-  _showWarningDialog(BuildContext context) {
-    showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: Text('Are you sure?'),
-            content: Text('Do you want to logout?'),
-            actions: <Widget>[
-              FlatButton(
-                child: Text('DISCARD'),
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-              ),
-              FlatButton(
-                child: Text('CONTINUE'),
-                onPressed: () {
-                  Navigator.pop(context);
-                  Navigator.of(context).pushNamedAndRemoveUntil(
-                      '/splash', (Route<dynamic> route) => false);
-                },
-              )
-            ],
-          );
-        });
-  }
+  _ProfilePageState(this.exampleProfile);
 
   @override
   Widget build(BuildContext context) {
@@ -53,14 +28,14 @@ class _ProfilePageState extends State<ProfilePage> {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => EditProfile(example)));
+                      builder: (context) => EditProfile(exampleProfile)));
             },
           )
         ],
       ),
       body: ListView(
         children: <Widget>[
-          _buildCoverImage(screenSize),
+          _buildCoverImage(screenSize,exampleProfile.profilepic),
           _buildStatContainer(),
           _buildProfileInfo(),
           Column(
@@ -92,13 +67,43 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 }
 
-Widget _buildCoverImage(double screenSize) {
+
+  _showWarningDialog(BuildContext context) {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('Are you sure?'),
+            content: Text('Do you want to logout?'),
+            actions: <Widget>[
+              FlatButton(
+                child: Text('DISCARD'),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
+              FlatButton(
+                child: Text('CONTINUE'),
+                onPressed: () {
+                  Navigator.pop(context);
+                  Navigator.of(context).pushNamedAndRemoveUntil(
+                      '/splash', (Route<dynamic> route) => false);
+                },
+              )
+            ],
+          );
+        });
+  }
+
+
+Widget _buildCoverImage(double screenSize,File profilepic) {
   return Container(
     height: screenSize / 2.5,
     child: Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        _buildProfileImage(),
+        displaySelectedFile(profilepic),
+        // _buildProfileImage(),
         SizedBox(
           height: 15,
         ),
@@ -152,6 +157,7 @@ Widget _buildProfileImage() {
     ),
   );
 }
+
 
 Widget _buildStatItem(Widget input, String count) {
   TextStyle _statCountTextStyle = TextStyle(
@@ -293,3 +299,31 @@ Widget _buildProfileInfo() {
     ),
   );
 }
+
+  Widget displaySelectedFile(File file) {
+    return new Container(
+      margin: EdgeInsets.all(10),
+      // child: new Card(child: new Text('' + galleryFile.toString())),
+      // child: new Image.file(galleryFile),
+      child: file == null
+          ? _buildProfileImage()
+          : new Center(
+              child: Container(
+                width: 140.0,
+                height: 140.0,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: FileImage(file),
+                    fit: BoxFit.cover,
+                  ),
+                  borderRadius: BorderRadius.circular(80.0),
+                  border: Border.all(
+                    color: Colors.white,
+                    width: 10.0,
+                  ),
+                ),
+              // child: Image.file(file),
+              ),
+            ),
+    );
+  }

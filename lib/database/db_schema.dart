@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+//Prepare for backend
 class RegChulaObject {
   String studentID = '';
   String firstName = '';
@@ -10,43 +11,82 @@ class RegChulaObject {
 
 class UserObject {
   int accountNo;
-  String studentID = ''; //From RegChula
-  String phoneNo = '';
+  String studentID = '';
+  String password = '';
+  String firstName = '';
+  String lastName = '';
+  String email = '';
+  String telNo = '';
+  String qrCode = '';
+  int noOfFeedback;
+  double avgRating;
   int token;
-  double rating;
+  String categotyHave = '';
+  String profilePic;
+  bool inSession;
+  DateTime createdAt;
+  DateTime updatedAt;
 
   UserObject(
-      this.accountNo, this.studentID, this.phoneNo, this.token, this.rating);
+      this.accountNo,
+      this.studentID,
+      this.password,
+      this.firstName,
+      this.lastName,
+      this.email,
+      this.telNo,
+      this.qrCode,
+      this.noOfFeedback,
+      this.avgRating,
+      this.token,
+      this.categotyHave,
+      this.profilePic,
+      this.inSession,
+      this.createdAt,
+      this.updatedAt);
 }
 
 class ItemObject {
+  int itemNo;
   String itemName = '';
   String itemCategory = '';
   String qrCode = '';
-  int accountNo; //From User
+  int belongToAccountNo;
+  String examlePic = '';
+  DateTime createdAt;
+  DateTime updatedAt;
 
-  ItemObject(this.itemName, this.itemCategory, this.qrCode, this.accountNo);
+  ItemObject(this.itemNo, this.itemName, this.itemCategory, this.qrCode,
+      this.belongToAccountNo, this.examlePic, this.createdAt, this.updatedAt);
 }
 
 class RequestObject {
   int requestNo;
+  String itemName = '';
   String itemCategory = '';
-  int tokenUsed;
-  String kioskLocation = '';
   DateTime pickUpTime;
   DateTime returnTime;
+  String kioskLocation = '';
+  int tokenUsed;
+  String note;
   bool requestStatus;
-  int accountNo; //From User
+  int reqByAccountNo; //From account
+  DateTime createdAt;
+  DateTime updatedAt;
 
   RequestObject(
       this.requestNo,
+      this.itemName,
       this.itemCategory,
-      this.tokenUsed,
-      this.kioskLocation,
       this.pickUpTime,
       this.returnTime,
+      this.kioskLocation,
+      this.tokenUsed,
+      this.note,
       this.requestStatus,
-      this.accountNo);
+      this.reqByAccountNo,
+      this.createdAt,
+      this.updatedAt);
 }
 
 class SessionObject {
@@ -55,9 +95,10 @@ class SessionObject {
   DateTime endTime;
   bool sessionStatus;
   int requestID; //From Request
-  String itemName = ''; //From Item
+  String sessionItemName = ''; //From Item
   int itemOfAcountNo; //From Item
-  int feedbackNo; //From FeedBack
+  DateTime createdAt;
+  DateTime updatedAt;
 
   SessionObject(
       this.sessionNo,
@@ -65,15 +106,21 @@ class SessionObject {
       this.endTime,
       this.sessionStatus,
       this.requestID,
-      this.itemName,
+      this.sessionItemName,
       this.itemOfAcountNo,
-      this.feedbackNo);
+      this.createdAt,
+      this.updatedAt);
 }
 
 class FeedbackObject {
   int feedbackNo;
   String comment;
   double rating;
+  int fromAccountNo;
+  int toAccountNo;
+  DateTime createdAt;
+  DateTime updatedAt;
 
-  FeedbackObject(this.feedbackNo, this.comment, this.rating);
+  FeedbackObject(this.feedbackNo, this.comment, this.rating, this.createdAt,
+      this.updatedAt);
 }

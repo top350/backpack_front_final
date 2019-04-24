@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:intl/intl.dart';
+import 'dart:io';
 
 import 'item_object.dart';
 
@@ -47,6 +48,22 @@ class ItemDetail extends StatelessWidget {
     );
   }
 
+   Widget _imageInBox(String imageurl, File file) {
+    return file == null
+        ? Image.asset(item.imageurl)
+        : new Container(
+          width: 500,
+          height: 500,
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: FileImage(file),
+                fit: BoxFit.fill,
+              ),
+            ),
+            // child: Image.file(file),
+          );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -63,7 +80,7 @@ class ItemDetail extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     mainAxisSize: MainAxisSize.max,
                     children: <Widget>[
-                      Image.asset(item.imageurl),
+                      _imageInBox(item.imageurl, item.examplepic),
                       Padding(
                         padding: EdgeInsets.all(5),
                       ),

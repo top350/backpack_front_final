@@ -98,8 +98,9 @@ class _State extends State<Category> {
             textColor: Colors.white,
             child: new Text("Finish"),
             onPressed: () {
-              Navigator.popUntil(context, ModalRoute.withName('/signup'));
-              Navigator.of(context).pushReplacementNamed("/login");
+              // Navigator.popUntil(context, ModalRoute.withName('/signup'));
+              // Navigator.of(context).pushReplacementNamed("/login");
+              Navigator.of(context).pushNamedAndRemoveUntil('/login', (Route<dynamic> route) => false);
             },
             splashColor: Colors.pink[200],
           ),
