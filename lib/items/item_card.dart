@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'dart:io';
 import 'package:intl/intl.dart';
 
 import 'item_detail.dart';
@@ -9,21 +10,35 @@ class ItemCard extends StatelessWidget {
 //This class is for the itemcard widget
   ItemObject item;
 
-  Widget _imageInBox(double width,double height,String imageurl){
-    return Container(
-              width: width,
-              height: height,
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                    image: AssetImage(
-                      imageurl,
-                    ),
-                    fit: BoxFit.fill),
-              ),);
+  ItemCard(this.item);
+
+  Widget _imageInBox(double width, double height, String imageurl, File file) {
+    return file == null
+        ? Container(
+            width: width,
+            height: height,
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage(
+                    imageurl,
+                  ),
+                  fit: BoxFit.fill),
+            ),
+          )
+        : new Container(
+            width: width,
+            height: height,
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: FileImage(file),
+                fit: BoxFit.cover,
+              ),
+            ),
+            // child: Image.file(file),
+          );
   }
 
-  ItemCard(this.item);
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -33,7 +48,7 @@ class ItemCard extends StatelessWidget {
         child: ListTile(
           contentPadding:
               EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
-          leading: _imageInBox(100,80, item.imageurl),
+          leading: _imageInBox(100, 80, item.imageurl, item.examplepic),
           title: Text(
             item.itemName,
             style: TextStyle(
@@ -64,7 +79,6 @@ class ItemCard extends StatelessWidget {
                 builder: (context) => ItemDetail(item),
               ),
             );
-
           },
         ),
       ),

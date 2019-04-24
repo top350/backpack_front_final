@@ -2,15 +2,16 @@ import 'package:flutter/material.dart';
 
 import 'splash_page.dart';
 import 'home.dart';
-import 'signup.dart';
+import 'signUp/signup.dart';
 import 'login.dart';
-import 'category.dart';
+import 'signUp/category.dart';
 import './session/session.dart';
 import 'splash_page.dart';
 import './items/item_list.dart';
 import './items/item_detail.dart';
 
 import './profile/profile.dart';
+import 'signUp/intro.dart';
 
 void main() => runApp(MyApp());
 
@@ -19,6 +20,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: new SplashScreen(),
+      //home: Intro(),
       theme: new ThemeData(primarySwatch: Colors.pink),
       routes: <String, WidgetBuilder>{
         "/Home": (BuildContext context) => new Home(),
