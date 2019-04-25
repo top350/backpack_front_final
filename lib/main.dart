@@ -12,6 +12,7 @@ import './items/item_detail.dart';
 
 import './profile/profile.dart';
 import 'signUp/intro.dart';
+import 'session/waiting_session.dart';
 
 void main() => runApp(MyApp());
 
@@ -19,8 +20,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: new SplashScreen(),
-      //home: Intro(),
+       home: new SplashScreen(),
+      //home: WaitingSession(),
       theme: new ThemeData(primarySwatch: Colors.pink),
       routes: <String, WidgetBuilder>{
         "/Home": (BuildContext context) => new Home(),

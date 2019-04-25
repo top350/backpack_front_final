@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import 'dashboard.dart';
 import 'borrow/borrow.dart';
+import 'session/waiting_session.dart';
 import './session/session.dart';
 import './profile/profile.dart';
 
@@ -17,7 +18,7 @@ class HomeState extends State<Home> {
   final List<Widget> _children = [
     Dashboard(),
     BorrowPage(),
-    SessionPage(),
+    WaitingSession(),
     ProfilePage(),
   ];
   Widget build(BuildContext context) {
