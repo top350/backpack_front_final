@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 
 import 'kiosk_session.dart';
+import '../database/db_account.dart';
 
 class WaitingSession extends StatelessWidget { 
+  AccountObject currentUser;
+  WaitingSession(this.currentUser);
+
   //Session1
   @override
   Widget build(BuildContext context) {

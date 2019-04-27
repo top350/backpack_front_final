@@ -1,20 +1,24 @@
+import 'dart:io';
+
+
 class AccountObject {
   int accountNo;
   String studentID = '';
   String password = '';
-  String firstName = '';
-  String lastName = '';
-  String email = '';
-  String telNo = '';
+  String firstName = ''; //editable
+  String lastName = ''; //editable
+  String email = ''; //editable
+  String telNo = ''; //editable
   String qrCode = '';
   int noOfFeedback;
   double avgRating;
   int token;
-  String categotyHave = '';
-  String profilePic;
+  String categotyHave = ''; //editable
+  String profilePic; //editable
   String inSession;
   DateTime createdAt;
   DateTime updatedAt;
+  File newProfilePic; //For Local use only
 
   AccountObject(
       this.accountNo,
@@ -32,8 +36,12 @@ class AccountObject {
       this.profilePic,
       this.inSession,
       this.createdAt,
-      this.updatedAt);
+      this.updatedAt,
+      this.newProfilePic);
 }
+
+DateTime sampleTimeA = DateTime.parse('2019-04-20 12:12:12');
+File emptyFileA;
 
 AccountObject user1 = AccountObject(
     1,
@@ -48,12 +56,13 @@ AccountObject user1 = AccountObject(
     4.5,
     100,
     '0',
-    'bus_pic',
+    'assets/profile/Bus.PNG',
     'false',
-    DateTime.parse('2019-04-20 17:18:35'),
-    DateTime.parse('2019-04-20 17:18:35'));
+    sampleTimeA,
+    sampleTimeA,
+    emptyFileA);
 
-    AccountObject user2 = AccountObject(
+AccountObject user2 = AccountObject(
     2,
     '5931333321',
     'password',
@@ -66,7 +75,8 @@ AccountObject user1 = AccountObject(
     4.5,
     100,
     '0',
-    'hope_pic',
+    'assets/profile/Hope.PNG',
     'false',
-    DateTime.parse('2019-04-20 17:18:35'),
-    DateTime.parse('2019-04-20 17:18:35'));
+    sampleTimeA,
+    sampleTimeA,
+    emptyFileA);

@@ -10,8 +10,7 @@ import './profile/profile.dart';
 import 'database/db_account.dart';
 
 class Home extends StatefulWidget {
-  AccountObject currentUser; //Receive from Backend
-  Home(this.currentUser);
+  AccountObject currentUser = user1; //Receive from Backend
 
   State<StatefulWidget> createState() => HomeState(currentUser);
 }
@@ -23,9 +22,9 @@ class HomeState extends State<Home> {
   int currentindex = 0;
   final List<Widget> _children = [
     Dashboard(user1),
-    BorrowPage(),
-    WaitingSession(),
-    ProfilePage(),
+    BorrowPage(user1),
+    WaitingSession(user1),
+    ProfilePage(user1),
   ];
   Widget build(BuildContext context) {
     return Scaffold(

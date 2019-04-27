@@ -9,6 +9,9 @@ import '../database/db_request.dart';
 import '../database/db_account.dart';
 
 class BorrowPage extends StatefulWidget {
+  AccountObject currentUser;
+  BorrowPage(this.currentUser);
+
   //Page Where user can input data to create new request
   String sendItemName = '';
   String sendItemType = '';
@@ -20,12 +23,14 @@ class BorrowPage extends StatefulWidget {
   int reqByAcc = 0;
   @override
   State<StatefulWidget> createState() {
-    return _BorrowPageState();
+    return _BorrowPageState(currentUser);
   }
 }
 
 class _BorrowPageState extends State<BorrowPage> {
-  
+  AccountObject currentUser;
+  _BorrowPageState(this.currentUser);
+
   RequestObject newRequest = RequestObject(
       1,
       'itemName',

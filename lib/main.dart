@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
       //home: WaitingSession(),
       theme: new ThemeData(primarySwatch: Colors.pink),
       routes: <String, WidgetBuilder>{
-        "/Home": (BuildContext context) => new Home(user1),
+        "/Home": (BuildContext context) => new Home(),
         "/login": (BuildContext context) => new LoginPage(),
         "/signup": (BuildContext context) => new SignupPage(),
         "/session": (BuildContext context) => new SessionPage(),
@@ -37,7 +37,7 @@ class MyApp extends StatelessWidget {
       onUnknownRoute: (RouteSettings setting) {
         // when user try to navigate to unexist route
         return MaterialPageRoute(
-          builder: (BuildContext context) => Home(user1),
+          builder: (BuildContext context) => SplashScreen(),
         );
       },
     );
