@@ -1,19 +1,17 @@
 import 'package:flutter/material.dart';
 
-import 'package:intl/intl.dart';
-
-import 'rating.dart';
 import '../profile/profile.dart';
 import 'qr_generator.dart';
+import 'session.dart';
 // import  'category.dart';
 
-class SessionPage extends StatefulWidget {
-  //Session3
+class KioskSession extends StatefulWidget {
+  //Session2
   @override
-  State createState() => new SessionPageState();
+  State createState() => new KioskSessionState();
 }
 
-class SessionPageState extends State<SessionPage>
+class KioskSessionState extends State<KioskSession>
     with SingleTickerProviderStateMixin {
   AnimationController _iconAnimationController;
   Animation<double> _iconAnimation;
@@ -34,26 +32,26 @@ class SessionPageState extends State<SessionPage>
     return new Scaffold(
         backgroundColor: Colors.pink[50],
         appBar: AppBar(
-          title: Text('Session'),
+          title: Text('Kiosk Session'),
         ),
         body: new ListView(
           children: <Widget>[
-            new Padding(
-              padding: const EdgeInsets.only(bottom: 20.0, top: 20.0),
-            ),
+            // new Padding(
+            //   padding: const EdgeInsets.only(bottom: 20.0, top: 20.0),
+            // ),
             Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                Text('Return Time'),
                 new Padding(
-                    padding: EdgeInsets.all(10),
-                    child: Text(
-                      DateFormat("h:mm a").format(DateTime.now()),
-                      style: TextStyle(fontSize: 50,
-                          color: Colors.black, fontWeight: FontWeight.w700,),
-                    )),
+                  padding: EdgeInsets.all(10),
+                  child: Text('Use Kiosk to scan QR Code',style: TextStyle(fontSize: 20),),
+                ),
                 new Padding(
-                  padding: const EdgeInsets.only(bottom: 20.0, top: 20.0),
+                  padding: EdgeInsets.all(20),
+                  child: QrGenerator('5931333321'),
+                ),
+                new Padding(
+                  padding: const EdgeInsets.only(bottom: 10.0, top: 20.0),
                 ),
                 Card(
                   elevation: 5.0,
@@ -89,6 +87,7 @@ class SessionPageState extends State<SessionPage>
                           )
                         ],
                       ),
+                      
                     ),
                   ),
                 ),
@@ -100,11 +99,11 @@ class SessionPageState extends State<SessionPage>
                   minWidth: 300.0,
                   color: Colors.pink[300],
                   textColor: Colors.white,
-                  child: new Text("END"),
+                  child: new Text("Scanned"),
                   onPressed: () {
                     Navigator.of(context).push(
                       MaterialPageRoute(
-                        builder: (context) => new RatingSession(),
+                        builder: (context) => new SessionPage(),
                       ),
                     );
                   },

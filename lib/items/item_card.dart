@@ -3,14 +3,18 @@ import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:intl/intl.dart';
 
+import '../database/db_request.dart';
+import '../database/db_account.dart';
 import 'item_detail.dart';
-import 'item_object.dart';
 
 class ItemCard extends StatelessWidget {
 //This class is for the itemcard widget
-  ItemObject item;
+  AccountObject user;
+  RequestObject itemRequest;
+  AccountObject borrower = user2; //From Backend
 
-  ItemCard(this.item);
+  //ItemCard(this.itemRequest);
+  ItemCard(this.user,this.itemRequest,);
 
   Widget _imageInBox(double width, double height, String imageurl, File file) {
     return file == null
@@ -48,9 +52,9 @@ class ItemCard extends StatelessWidget {
         child: ListTile(
           contentPadding:
               EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
-          leading: _imageInBox(100, 80, item.imageurl, item.examplepic),
+          leading: _imageInBox(100, 80,itemRequest.examplePicUrl,itemRequest.newExamplePic),
           title: Text(
-            item.itemName,
+            itemRequest.itemName,
             style: TextStyle(
               fontWeight: FontWeight.bold,
             ),
@@ -62,7 +66,7 @@ class ItemCard extends StatelessWidget {
                 size: 20,
               ),
               SizedBox(width: 10),
-              Text("Pick Up: " + DateFormat("h:mma").format(item.pickupTime),
+              Text("Pick Up: " + DateFormat("h:mma").format(itemRequest.pickUpTime),
                   style: TextStyle())
             ],
           ),
@@ -76,7 +80,7 @@ class ItemCard extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => ItemDetail(item),
+                builder: (context) => ItemDetail(user,itemRequest,borrower),
               ),
             );
           },

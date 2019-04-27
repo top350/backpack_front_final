@@ -51,6 +51,8 @@ flutter:
    - assets/QR_code.png
    - assets/profile/cover.jpg
    - assets/profile/profile.jpg
+   - assets/profile/Hope.PNG
+   - assets/profile/Bus.PNG
    - assets/item_example/blanket.jpg
    - assets/item_example/jacket.jpg
    - assets/item_example/laptop.jpg

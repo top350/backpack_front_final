@@ -3,22 +3,28 @@ import 'package:flutter/material.dart';
 
 import 'dashboard.dart';
 import 'borrow/borrow.dart';
+import 'session/waiting_session.dart';
 import './session/session.dart';
 import './profile/profile.dart';
 
+import 'database/db_account.dart';
+
 class Home extends StatefulWidget {
-  // const Home({Key key, this.user}) : super(key: key);
-  // final FirebaseUser user;
-  State<StatefulWidget> createState() => HomeState();
+  AccountObject currentUser = user1; //Receive from Backend
+
+  State<StatefulWidget> createState() => HomeState(currentUser);
 }
 
 class HomeState extends State<Home> {
+  AccountObject currentUser;
+  HomeState(this.currentUser);
+
   int currentindex = 0;
   final List<Widget> _children = [
-    Dashboard(),
-    BorrowPage(),
-    SessionPage(),
-    ProfilePage(),
+    Dashboard(user1),
+    BorrowPage(user1),
+    WaitingSession(user1),
+    ProfilePage(user1),
   ];
   Widget build(BuildContext context) {
     return Scaffold(

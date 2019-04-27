@@ -3,16 +3,25 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 import './items/item_list.dart';
-import './items/item_method.dart';
-import 'items/itemlists_data.dart';
+
+import 'database/db_account.dart';
+import 'database/db_request.dart';
 
 class Dashboard extends StatefulWidget {
   // Class for homePage where you can chose category
+  AccountObject currentUser; //Receive from Home
+  Dashboard(this.currentUser);
+
   @override
-  _DashboardState createState() => _DashboardState();
+  _DashboardState createState() => _DashboardState(currentUser);
 }
 
 class _DashboardState extends State<Dashboard> {
+  AccountObject currentUser; //Receive from Home
+  _DashboardState(this.currentUser);
+  
+  String categoryName = ''; //Send to Backend
+
   Material myItems(IconData icon, String heading, int color1) {
     return Material(
       color: Color(color1),
@@ -79,22 +88,26 @@ class _DashboardState extends State<Dashboard> {
         children: <Widget>[
           GestureDetector(
             onTap: () {
+              categoryName = 'Stationery';
+              print(categoryName);
               Navigator.push(
                 context,
                 MaterialPageRoute(
                     builder: (context) =>
-                        ItemList("Stationery", convertToCard(stationeryList))),
+                        ItemList("Stationery", convertToCard(stationeryList,currentUser))),
               );
             },
             child: myItems(Icons.edit, "Stationery ", 0xffF7B79B),
           ),
           GestureDetector(
             onTap: () {
+              categoryName = 'Clothing';
+              print(categoryName);
               Navigator.push(
                 context,
                 MaterialPageRoute(
                   builder: (context) =>
-                      ItemList("Clothing", convertToCard(clothingList)),
+                      ItemList("Clothing", convertToCard(clothingList,currentUser)),
                 ),
               );
             },
@@ -102,11 +115,13 @@ class _DashboardState extends State<Dashboard> {
           ),
           GestureDetector(
             onTap: () {
+              categoryName = 'Sport Equipment';
+              print(categoryName);
               Navigator.push(
                 context,
                 MaterialPageRoute(
                   builder: (context) => ItemList(
-                      "Sport Equipment", convertToCard(sportEquipmentList)),
+                      "Sport Equipment", convertToCard(sportEquipmentList,currentUser)),
                 ),
               );
             },
@@ -114,11 +129,13 @@ class _DashboardState extends State<Dashboard> {
           ),
           GestureDetector(
             onTap: () {
+              categoryName = 'Electronics';
+              print(categoryName);
               Navigator.push(
                 context,
                 MaterialPageRoute(
                   builder: (context) =>
-                      ItemList("Electronics", convertToCard(electronicsList)),
+                      ItemList("Electronics", convertToCard(electronicsList,currentUser)),
                 ),
               );
             },
@@ -126,11 +143,13 @@ class _DashboardState extends State<Dashboard> {
           ),
           GestureDetector(
             onTap: () {
+              categoryName = 'Books';
+              print(categoryName);
               Navigator.push(
                 context,
                 MaterialPageRoute(
                   builder: (context) =>
-                      ItemList("Books", convertToCard(booksList)),
+                      ItemList("Books", convertToCard(booksList,currentUser)),
                 ),
               );
             },
@@ -138,11 +157,13 @@ class _DashboardState extends State<Dashboard> {
           ),
           GestureDetector(
             onTap: () {
+              categoryName = 'Others';
+              print(categoryName);
               Navigator.push(
                 context,
                 MaterialPageRoute(
                   builder: (context) =>
-                      ItemList("Others", convertToCard(othersList)),
+                      ItemList("Others", convertToCard(othersList,currentUser)),
                 ),
               );
             },

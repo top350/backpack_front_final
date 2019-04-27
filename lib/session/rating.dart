@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating/flutter_rating.dart';
 
-
-
 class RatingSession extends StatefulWidget {
+  //Session4
   @override
   _RatingSessionState createState() => new _RatingSessionState();
 }
@@ -11,6 +10,7 @@ class RatingSession extends StatefulWidget {
 class _RatingSessionState extends State<RatingSession> {
   double rating = 3.5;
   int starCount = 5;
+  String note = '';
 
   @override
   Widget build(BuildContext context) {
@@ -106,6 +106,24 @@ class _RatingSessionState extends State<RatingSession> {
                 // new Padding(
                 //   padding: const EdgeInsets.all(20),
                 // ),
+                Padding(
+                  padding: EdgeInsets.all(10),
+                  child: TextField(
+                    maxLines: 2,
+                    decoration: InputDecoration(
+                        labelText: 'Note',
+                        labelStyle:
+                            TextStyle(fontSize: 15,)),
+                    onChanged: (String value) {
+                      setState(() {
+                        note = value;
+                        //note = value;
+                      });
+                    },
+                  ),
+                ),
+
+                
               ],
             ),
           ),
@@ -129,34 +147,8 @@ class _RatingSessionState extends State<RatingSession> {
                     ),
                   ),
                   onPressed: () {
-                    Navigator.of(context).pushNamedAndRemoveUntil('/Home', (Route<dynamic> route) => false);
-                    // Navigator.of(context).pushReplacement(
-                    //     MaterialPageRoute(builder: (context) => new Home()));
-                  },
-                ),
-              ),
-            ],
-          ),
-          new Padding(
-            padding: const EdgeInsets.only(bottom: 0.0),
-          ),
-          Column(
-            children: <Widget>[
-              Container(
-                margin: EdgeInsets.all(5),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(50.0),
-                ),
-                width: 200,
-                child: RaisedButton(
-                  color: Colors.red,
-                  child: Text(
-                    'Report',
-                    style: TextStyle(
-                      color: Colors.white,
-                    ),
-                  ),
-                  onPressed: () {
+                    Navigator.of(context).pushNamedAndRemoveUntil(
+                        '/Home', (Route<dynamic> route) => false);
                     // Navigator.of(context).pushReplacement(
                     //     MaterialPageRoute(builder: (context) => new Home()));
                   },
