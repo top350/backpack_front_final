@@ -1,6 +1,9 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:front_backpack_app/api_provider.dart';
 
 import './items/item_list.dart';
 import './items/item_method.dart';
@@ -13,6 +16,22 @@ class Dashboard extends StatefulWidget {
 }
 
 class _DashboardState extends State<Dashboard> {
+    ApiProvider apiProvider = ApiProvider();
+  Future<Null>doCategory(String name) async {
+  final rs = await apiProvider.doCategory(name);
+  print(rs.body);
+  if (rs.statusCode == 200) {
+    print(rs.body);
+    var jsonRes = json.decode(rs.body);
+    if (jsonRes['ok']) {
+      
+      
+    } else {
+      print('Server error');
+      
+    }
+  }
+}
   Material myItems(IconData icon, String heading, int color) {
     return Material(
       color: Colors.white,
@@ -76,6 +95,7 @@ class _DashboardState extends State<Dashboard> {
         children: <Widget>[
           GestureDetector(
             onTap: () {
+              doCategory("Stationery");
               Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -87,6 +107,7 @@ class _DashboardState extends State<Dashboard> {
           ),
           GestureDetector(
             onTap: () {
+                    doCategory("Clothing");
               Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -98,6 +119,7 @@ class _DashboardState extends State<Dashboard> {
           ),
           GestureDetector(
             onTap: () {
+              doCategory("Sport Equip");
               Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -109,6 +131,7 @@ class _DashboardState extends State<Dashboard> {
           ),
           GestureDetector(
             onTap: () {
+              doCategory("Electronics");
               Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -120,6 +143,7 @@ class _DashboardState extends State<Dashboard> {
           ),
           GestureDetector(
             onTap: () {
+              doCategory("Books");
               Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -131,6 +155,7 @@ class _DashboardState extends State<Dashboard> {
           ),
           GestureDetector(
             onTap: () {
+              doCategory("Others");
               Navigator.push(
                 context,
                 MaterialPageRoute(

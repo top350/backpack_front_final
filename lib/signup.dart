@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-
-// import  'category.dart';
+import 'dart:convert';
+import 'api_provider.dart';
+import  'category.dart';
 
 class SignupPage extends StatefulWidget {
   @override
@@ -18,7 +19,23 @@ class SignupPageState extends State<SignupPage>
   TextEditingController phoneNo = TextEditingController();
   TextEditingController password1 = TextEditingController();
   TextEditingController password2 = TextEditingController();
-
+    // final _formkey = GlobalKey<FormState>();
+  ApiProvider apiProvider = ApiProvider();
+Future doSignup() async {
+  final rs = await apiProvider.doSignup(studentID.text, firstname.text, lastname.text, password1.text, phoneNo.text, email.text);
+  print(rs.body);
+  if (rs.statusCode == 200) {
+    print(rs.body);
+    var jsonRes = json.decode(rs.body);
+    if (jsonRes['ok']) {
+      
+      Navigator.of(context).pushReplacementNamed("/category");
+    } else {
+      print('Server error');
+      
+    }
+  }
+}
   @override
   void initState() {
     super.initState();
@@ -98,7 +115,7 @@ class SignupPageState extends State<SignupPage>
                               labelText: "Enter Phone no.",
                             ),
                             keyboardType: TextInputType.text,
-                            obscureText: true,
+                           
                           ),
                           new TextFormField(
                             controller: password1,
@@ -127,7 +144,8 @@ class SignupPageState extends State<SignupPage>
                             textColor: Colors.white,
                             child: new Text("Next"),
                             onPressed: () {
-                              Navigator.of(context).pushNamed("/category");
+                              
+                              doSignup();
                               if (password1.text == password2.text) {
                                
                                 print(password1.text);

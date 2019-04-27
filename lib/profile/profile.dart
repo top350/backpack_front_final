@@ -1,7 +1,10 @@
+import 'dart:convert';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/material.dart';
-
+import 'package:front_backpack_app/login.dart';
 import 'edit_profile.dart';
 import 'profile_object.dart';
+import 'package:http/http.dart' as http;
 
 class ProfilePage extends StatefulWidget {
   @override
@@ -10,9 +13,9 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage> {
   Profile example;
-
+  Student addprofile = new Student();
   _ProfilePageState(this.example);
-
+  
   _showWarningDialog(BuildContext context) {
     showDialog(
         context: context,
@@ -84,7 +87,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       width: 20,
                     ),
                     Text(
-                      bus.studentID,
+                     " addprofile.studentid",
                       style: TextStyle(
                         color: Colors.black,
                         fontSize: 15.0,
@@ -112,7 +115,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       width: 20,
                     ),
                     Text(
-                      bus.phoneNum,
+                      "",
                       style: TextStyle(
                         color: Colors.black,
                         fontSize: 15.0,
@@ -168,7 +171,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       width: 10,
                     ),
                     Text(
-                      bus.email,
+                      "addprofile.email",
                       style: TextStyle(
                         color: Colors.black,
                         fontSize: 15.0,
@@ -197,6 +200,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   ),
                   onPressed: () {
                     _showWarningDialog(context);
+                    
                   },
                 ),
               ),
@@ -316,4 +320,31 @@ Widget _buildStatContainer() {
       ],
     ),
   );
+}
+class Student {
+  final String studentid;
+  final String firstname;
+  final String lastname;
+  final String phoneno;
+  final String email;
+  final List<String> data;
+ 
+  Student({this.studentid, this.firstname, this.lastname, this.phoneno,this.email,this.data});
+
+  factory Student.fromJson(Map<String, dynamic> json) {
+ 
+   
+  
+    return Student(
+      studentid: json['username'],
+      firstname: json['fullname'],
+      lastname: json['lastname'],
+      phoneno: json['phoneno'],
+      email: json['email'],
+  
+      
+    );
+   
+  }
+ 
 }

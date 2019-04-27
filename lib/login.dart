@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 import 'api_provider.dart';
+import 'package:http/http.dart' as http;
+import 'package:front_backpack_app/profile/profile.dart';
+import 'dart:async';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -17,31 +20,72 @@ class LoginPageState extends State<LoginPage>
 
   final _formkey = GlobalKey<FormState>();
   ApiProvider apiProvider = ApiProvider();
+  var count; 
+  List<String> result = new List(5);
+  
+  
 
-  Future doLogin() async {
+  Future<Null> doLogin() async {
     if (_formkey.currentState.validate()) {
       try {
         var rs = await apiProvider.doLogin(_username.text, _password.text);
         if (rs.statusCode == 200) {
           print(rs.body);
+       
           var jsonRes = json.decode(rs.body);
           if (jsonRes['ok']) {
             String token = jsonRes['token'];
-            print(token);
+            // print(token);
+           
             SharedPreferences prefs = await SharedPreferences.getInstance();
             await prefs.setString('token', token);
             Navigator.of(context).pushReplacementNamed("/Home");
           } else {
             print('Server error');
+            
           }
         } else {
           print('server error');
+          count=1;
         }
       } catch (e) {
         print(e);
       }
     }
   }
+
+  Future<Student> fetchStudent(studentId) async {
+  final response =
+      await http.get(
+        'http://1633b33c.ngrok.io/users/$studentId'
+      );
+      
+
+  if (response.statusCode == 200) {
+    // If server returns an OK response, parse the JSON
+    // print(response.body);
+    print(json.decode(response.body));
+    final student = Student.fromJson(json.decode(response.body));
+    print(student.email);
+    print(student.firstname);
+    print(student.studentid);
+    result[0]=student.studentid;
+    result[1]=student.firstname;
+    result[2]=student.email;
+  
+   
+
+
+    return student;
+   
+
+  
+    
+  } else {
+    // If that response was not OK, throw an error.
+    throw Exception('Failed to load post');
+  }
+}
 
   @override
   void initState() {
@@ -99,6 +143,10 @@ class LoginPageState extends State<LoginPage>
                                 if (value.isEmpty) {
                                   return 'Please enter username';
                                 }
+                                if(count==1){
+                                  return 'Invalid username or password';
+ 
+                                }
                               },
                               controller: _username,
                               decoration: new InputDecoration(
@@ -111,6 +159,11 @@ class LoginPageState extends State<LoginPage>
                                 if (value.isEmpty) {
                                   return 'Please enter password';
                                 }
+                                 if(count==1){
+                                  return 'Invalid username or password';
+ 
+                                }
+                                
                               },
                               controller: _password,
                               decoration: new InputDecoration(
@@ -129,9 +182,14 @@ class LoginPageState extends State<LoginPage>
                               color: Colors.pink[400],
                               textColor: Colors.white,
                               child: new Text("Log in"),
-                              onPressed: () {
-                                
+                              onPressed: () async { 
                                 doLogin();
+                               await fetchStudent(int.parse(_username.text));
+                             print(result);
+                            
+                           
+                               
+                                
                               },
                               splashColor: Colors.pink[200],
                             ),
@@ -172,3 +230,39 @@ class LoginPageState extends State<LoginPage>
 //     }
 
 }
+
+class Result {
+
+}
+
+class Student {
+  final String studentid;
+  final String firstname;
+  final String lastname;
+  final String phoneno;
+  final String email;
+  final List<String> data;
+ 
+  Student({this.studentid, this.firstname, this.lastname, this.phoneno,this.email,this.data});
+
+  factory Student.fromJson(Map<String, dynamic> json) {
+ 
+   
+  
+    return Student(
+      studentid: json['username'],
+      firstname: json['fullname'],
+      lastname: json['lastname'],
+      phoneno: json['phoneno'],
+      email: json['email'],
+  
+      
+    );
+   
+  }
+ 
+}
+
+
+
+

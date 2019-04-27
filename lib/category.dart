@@ -16,7 +16,7 @@ class _State extends State<Category> {
 
 
   //we omitted the brackets '{}' and are using fat arrow '=>' instead, this is dart syntax
-  void _value1Changed(bool value) => setState(() => _value1 = value);
+  void _value1Changed(bool value) => setState(() => _value1 = value,);
   void _value2Changed(bool value) => setState(() => _value2 = value);
   void _value3Changed(bool value) => setState(() => _value3 = value);
   void _value4Changed(bool value) => setState(() => _value4 = value);
@@ -98,8 +98,10 @@ class _State extends State<Category> {
             textColor: Colors.white,
             child: new Text("Finish"),
             onPressed: () {
-              Navigator.popUntil(context, ModalRoute.withName('/signup'));
+              // Navigator.popUntil(context, ModalRoute.withName('/signup'));
               Navigator.of(context).pushReplacementNamed("/login");
+              print(_value1);
+              print(_value2);
             },
             splashColor: Colors.pink[200],
           ),

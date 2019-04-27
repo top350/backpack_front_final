@@ -33,14 +33,14 @@ class ItemCard extends StatelessWidget {
         child: ListTile(
           contentPadding:
               EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
-          leading: _imageInBox(100,80, item.imageurl),
-          title: Text(
+          leading: _imageInBox(100,80, item.imageurl), //picture
+          title: Text( //item name
             item.itemName,
             style: TextStyle(
               fontWeight: FontWeight.bold,
             ),
           ),
-          subtitle: Row(
+          subtitle: Row( //pick up time
             children: <Widget>[
               Icon(
                 Icons.access_time,
