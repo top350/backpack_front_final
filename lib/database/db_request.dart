@@ -17,7 +17,7 @@ class RequestObject {
   int reqByAccountNo; //From account
   DateTime createdAt;
   DateTime updatedAt;
-  File newExamplePic;
+  File newExamplePic; //For Local use only
 
   RequestObject(
       this.requestNo,
@@ -109,7 +109,7 @@ List<RequestObject> requestList = [
       'Engineering',
       15,
       'Ipad Pro & Pencil',
-      'assets/item_example/Ipad.jpg',
+      'assets/item_example/ipad.jpg',
       false,
       user2.accountNo,
       sampleTime,
@@ -133,7 +133,7 @@ List<RequestObject> requestList = [
   RequestObject(
       7,
       'Blanket',
-      'Other',
+      'Others',
       sampleTime,
       sampleTime,
       'Engineering',
@@ -163,10 +163,10 @@ List<RequestObject> sortCategory(String category,List<RequestObject> item){ //so
   return sortedList;
 }
 
-// List<ItemCard> convertToCard(List<RequestObject> item){ //covert ItemObject to ItemCard
-//   List<ItemCard> cardList = [];
-//     for(int i = 0 ;i<item.length;i++){
-//       cardList.add(ItemCard(item[i]));
-//   }
-//   return cardList;
-// }
+List<ItemCard> convertToCard(List<RequestObject> item,AccountObject user){ //covert ItemObject to ItemCard
+  List<ItemCard> cardList = [];
+    for(int i = 0 ;i<item.length;i++){
+      cardList.add(ItemCard(user,item[i]));
+  }
+  return cardList;
+}

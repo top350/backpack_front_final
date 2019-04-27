@@ -3,14 +3,21 @@ import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:intl/intl.dart';
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
-import 'package:image_picker/image_picker.dart';
 
-import '../items/item_object.dart';
-import '../items/itemlists_data.dart';
 import 'imagePickerBorrow.dart';
+import '../database/db_request.dart';
+import '../database/db_account.dart';
 
 class BorrowPage extends StatefulWidget {
   //Page Where user can input data to create new request
+  String sendItemName = '';
+  String sendItemType = '';
+  DateTime sendPickUpTime;
+  DateTime sendReturnTime;
+  String sendKioskLocation = ''; 
+  int sendTokenUsed = 0;
+  String sendNote = '';
+  int reqByAcc = 0;
   @override
   State<StatefulWidget> createState() {
     return _BorrowPageState();
@@ -18,22 +25,23 @@ class BorrowPage extends StatefulWidget {
 }
 
 class _BorrowPageState extends State<BorrowPage> {
-  String itemName = '';
-  String _selectedCategory = '';
-  DateTime pickupTime;
-  DateTime returnTime;
-  String _selectedKiosk = '';
-  int token;
-  String note = '';
-  String imageurl = 'assets/logo.png';
-  String who = 'Patsornchai W.';
-  File examplepic;
+  
+  RequestObject newRequest = RequestObject(
+      1,
+      'itemName',
+      'itemCategory',
+      sampleTime,
+      sampleTime,
+      'KioskLocation',
+      0,
+      'Note',
+      'assets/logo.png',
+      false,
+      user1.accountNo,
+      sampleTime,
+      sampleTime,
+      emptyFile);
 
-  String pickuptimeString = '';
-  String returntimeString = '';
-
-  ItemObject newRequest = ItemObject('itemName', '' , DateTime.now(),
-      DateTime.now(), '', 0, '','assets/logo.png' ,'Patsornchai W.', null);
 
   List<DropdownMenuItem<String>> _dropDownMenuCategory;
   List _category = [
@@ -56,28 +64,27 @@ class _BorrowPageState extends State<BorrowPage> {
   ];
 
   void _addItem() {
-    if(newRequest.category == "Stationery") {
-      itemList.add(newRequest);
-    } else if (newRequest.category == "Clothing") {
-      itemList.add(newRequest);
-    } else if (newRequest.category == "Sport Equipment") {
-      itemList.add(newRequest);
-    } else if (newRequest.category == "Electronics") {
-     itemList.add(newRequest);
-    } else if (newRequest.category == "Books") {
-      itemList.add(newRequest);
-    } else  {
-      itemList.add(newRequest);
+    if (newRequest.itemCategory == "Stationery") {
+      requestList.add(newRequest);
+    } else if (newRequest.itemCategory == "Clothing") {
+      requestList.add(newRequest);
+    } else if (newRequest.itemCategory == "Sport Equipment") {
+      requestList.add(newRequest);
+    } else if (newRequest.itemCategory == "Electronics") {
+      requestList.add(newRequest);
+    } else if (newRequest.itemCategory == "Books") {
+      requestList.add(newRequest);
+    } else {
+      requestList.add(newRequest);
     }
-
   }
 
   @override
   void initState() {
     _dropDownMenuCategory = buildAndGetDropDownMenuList(_category);
-    newRequest.category = _dropDownMenuCategory[0].value;
+    newRequest.itemCategory = _dropDownMenuCategory[0].value;
     _dropDownMenuKiosk = buildAndGetDropDownMenuList(_kiosk);
-    newRequest.location = _dropDownMenuKiosk[0].value;
+    newRequest.kioskLocation = _dropDownMenuKiosk[0].value;
     super.initState();
   }
 
@@ -92,14 +99,14 @@ class _BorrowPageState extends State<BorrowPage> {
 
   void changedDropDownCategory(String selectedItem) {
     setState(() {
-      newRequest.category = selectedItem;
+      newRequest.itemCategory = selectedItem;
       //_selectedCategory = selectedItem;
     });
   }
 
   void changedDropDownKiosk(String selectedItem) {
     setState(() {
-      newRequest.location = selectedItem;
+      newRequest.kioskLocation = selectedItem;
       //_selectedKiosk = selectedItem;
     });
   }
@@ -130,7 +137,7 @@ class _BorrowPageState extends State<BorrowPage> {
                 Text("Choose Category",
                     style: TextStyle(fontSize: 18, color: Colors.pink)),
                 DropdownButton(
-                  value: newRequest.category,
+                  value: newRequest.itemCategory,
                   items: _dropDownMenuCategory,
                   onChanged: changedDropDownCategory,
                 ),
@@ -151,8 +158,7 @@ class _BorrowPageState extends State<BorrowPage> {
                         labelText: 'Date/Time', hasFloatingPlaceholder: false),
                     onChanged: (dt) {
                       setState(() {
-                        newRequest.pickupTime = dt;
-                        pickuptimeString = DateFormat.yMd().add_jm().format(dt);
+                        newRequest.pickUpTime = dt;
                       });
                     },
                   ),
@@ -176,7 +182,6 @@ class _BorrowPageState extends State<BorrowPage> {
                     onChanged: (dt) {
                       setState(() {
                         newRequest.returnTime = dt;
-                        returntimeString = DateFormat.yMd().add_jm().format(dt);
                       });
                     },
                   ),
@@ -189,7 +194,7 @@ class _BorrowPageState extends State<BorrowPage> {
                 Text("Choose Kiosk",
                     style: TextStyle(fontSize: 18, color: Colors.pink)),
                 DropdownButton(
-                  value: newRequest.location,
+                  value: newRequest.kioskLocation,
                   items: _dropDownMenuKiosk,
                   onChanged: changedDropDownKiosk,
                 ),
@@ -202,7 +207,7 @@ class _BorrowPageState extends State<BorrowPage> {
                   labelStyle: TextStyle(fontSize: 15, color: Colors.pink)),
               onChanged: (String value) {
                 setState(() {
-                  newRequest.token = int.parse(value);
+                  newRequest.tokenUsed = int.parse(value);
                   //token = int.parse(value);
                 });
               },
@@ -239,7 +244,6 @@ class _BorrowPageState extends State<BorrowPage> {
                 child: new Text("Request Item"),
                 onPressed: () {
                   Navigator.of(context).pushReplacementNamed("/Home");
-                  print(newRequest.examplepic);
                   _addItem();
                 },
                 splashColor: Colors.pink[200],

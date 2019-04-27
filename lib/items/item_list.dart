@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 
 import 'item_card.dart';
+import '../database/db_account.dart';
 
 class ItemList extends StatelessWidget {
 //This class is show all the itemlist in a certain category
+String requestNo; //Send to Backend when pressed on card
+
+AccountObject borrower; //From Backend when pressed on card
+
 final String title;
 final List <ItemCard> itemlist ;
 

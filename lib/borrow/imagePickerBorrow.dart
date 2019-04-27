@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
-import '../items/item_object.dart';
+import '../database/db_request.dart';
 
 class ImagePickerBorrow extends StatefulWidget {
-  ItemObject example;
+  RequestObject example;
 
   ImagePickerBorrow(this.example);
 
@@ -16,7 +16,7 @@ class ImagePickerBorrow extends StatefulWidget {
 }
 
 class ImagePickerBorrowState extends State<ImagePickerBorrow> {
-  ItemObject example;
+  RequestObject example;
 
   File imageFile;
 
@@ -34,7 +34,7 @@ class ImagePickerBorrowState extends State<ImagePickerBorrow> {
       );
       print("You selected gallery imageeeeee : " + imageFile.path);
       setState(() {
-        example.examplepic = imageFile;
+        example.newExamplePic = imageFile;
       });
     }
 
@@ -46,14 +46,14 @@ class ImagePickerBorrowState extends State<ImagePickerBorrow> {
         // maxWidth: 50.0,
       );
       setState(() {
-       example.examplepic = imageFile;
+       example.newExamplePic = imageFile;
       });
     }
 
     return new Column(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: <Widget>[
-        displaySelectedFile(example.examplepic),
+        displaySelectedFile(example.newExamplePic),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
