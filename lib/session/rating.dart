@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating/flutter_rating.dart';
 
 class RatingSession extends StatefulWidget {
+  //Session4
   @override
   _RatingSessionState createState() => new _RatingSessionState();
 }

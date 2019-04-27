@@ -5,14 +5,23 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import './items/item_list.dart';
 import './items/item_method.dart';
 import 'items/itemlists_data.dart';
+import 'database/db_account.dart';
 
 class Dashboard extends StatefulWidget {
   // Class for homePage where you can chose category
+  AccountObject currentUser; //Receive from Home
+  Dashboard(this.currentUser);
+
   @override
-  _DashboardState createState() => _DashboardState();
+  _DashboardState createState() => _DashboardState(currentUser);
 }
 
 class _DashboardState extends State<Dashboard> {
+  AccountObject currentUser; //Receive from Home
+  _DashboardState(this.currentUser);
+  
+  String categoryName = ''; //Send to Backend
+
   Material myItems(IconData icon, String heading, int color1) {
     return Material(
       color: Color(color1),
@@ -79,6 +88,8 @@ class _DashboardState extends State<Dashboard> {
         children: <Widget>[
           GestureDetector(
             onTap: () {
+              categoryName = 'Stationery';
+              print(categoryName);
               Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -90,6 +101,8 @@ class _DashboardState extends State<Dashboard> {
           ),
           GestureDetector(
             onTap: () {
+              categoryName = 'Clothing';
+              print(categoryName);
               Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -102,6 +115,8 @@ class _DashboardState extends State<Dashboard> {
           ),
           GestureDetector(
             onTap: () {
+              categoryName = 'Sport Equipment';
+              print(categoryName);
               Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -114,6 +129,8 @@ class _DashboardState extends State<Dashboard> {
           ),
           GestureDetector(
             onTap: () {
+              categoryName = 'Electronics';
+              print(categoryName);
               Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -126,6 +143,8 @@ class _DashboardState extends State<Dashboard> {
           ),
           GestureDetector(
             onTap: () {
+              categoryName = 'Books';
+              print(categoryName);
               Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -138,6 +157,8 @@ class _DashboardState extends State<Dashboard> {
           ),
           GestureDetector(
             onTap: () {
+              categoryName = 'Others';
+              print(categoryName);
               Navigator.push(
                 context,
                 MaterialPageRoute(

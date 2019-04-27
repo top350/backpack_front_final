@@ -6,6 +6,7 @@ import 'session.dart';
 // import  'category.dart';
 
 class KioskSession extends StatefulWidget {
+  //Session2
   @override
   State createState() => new KioskSessionState();
 }

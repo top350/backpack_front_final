@@ -8,6 +8,7 @@ import 'qr_generator.dart';
 // import  'category.dart';
 
 class SessionPage extends StatefulWidget {
+  //Session3
   @override
   State createState() => new SessionPageState();
 }

@@ -57,17 +57,17 @@ class _BorrowPageState extends State<BorrowPage> {
 
   void _addItem() {
     if(newRequest.category == "Stationery") {
-      stationeryList.add(newRequest);
+      itemList.add(newRequest);
     } else if (newRequest.category == "Clothing") {
-      clothingList.add(newRequest);
+      itemList.add(newRequest);
     } else if (newRequest.category == "Sport Equipment") {
-      sportEquipmentList.add(newRequest);
+      itemList.add(newRequest);
     } else if (newRequest.category == "Electronics") {
-     electronicsList.add(newRequest);
+     itemList.add(newRequest);
     } else if (newRequest.category == "Books") {
-      booksList.add(newRequest);
+      itemList.add(newRequest);
     } else  {
-      othersList.add(newRequest);
+      itemList.add(newRequest);
     }
 
   }

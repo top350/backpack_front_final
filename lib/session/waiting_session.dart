@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'kiosk_session.dart';
 
-class WaitingSession extends StatelessWidget {
+class WaitingSession extends StatelessWidget { 
   //Session1
   @override
   Widget build(BuildContext context) {

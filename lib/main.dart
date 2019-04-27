@@ -10,6 +10,7 @@ import 'splash_page.dart';
 import './items/item_list.dart';
 import './items/item_detail.dart';
 
+import 'database/db_account.dart';
 import './profile/profile.dart';
 import 'signUp/intro.dart';
 import 'session/waiting_session.dart';
@@ -24,7 +25,7 @@ class MyApp extends StatelessWidget {
       //home: WaitingSession(),
       theme: new ThemeData(primarySwatch: Colors.pink),
       routes: <String, WidgetBuilder>{
-        "/Home": (BuildContext context) => new Home(),
+        "/Home": (BuildContext context) => new Home(user1),
         "/login": (BuildContext context) => new LoginPage(),
         "/signup": (BuildContext context) => new SignupPage(),
         "/session": (BuildContext context) => new SessionPage(),
@@ -36,7 +37,7 @@ class MyApp extends StatelessWidget {
       onUnknownRoute: (RouteSettings setting) {
         // when user try to navigate to unexist route
         return MaterialPageRoute(
-          builder: (BuildContext context) => Home(),
+          builder: (BuildContext context) => Home(user1),
         );
       },
     );
