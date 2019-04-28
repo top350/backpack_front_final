@@ -3,16 +3,26 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 import './items/item_list.dart';
-import './items/item_method.dart';
-import 'items/itemlists_data.dart';
+
+import 'database/db_account.dart';
+import 'database/db_request.dart';
 
 class Dashboard extends StatefulWidget {
   // Class for homePage where you can chose category
+  AccountObject currentUser; //Receive from Home
+  Dashboard(this.currentUser);
+
   @override
-  _DashboardState createState() => _DashboardState();
+  _DashboardState createState() => _DashboardState(currentUser);
 }
 
 class _DashboardState extends State<Dashboard> {
+  String categoryName = ''; //Send to Backend
+  List<RequestObject> receiveRequestList = requestList; //Receive from Backend
+
+  AccountObject currentUser; //Receive from Home
+  _DashboardState(this.currentUser);
+
   Material myItems(IconData icon, String heading, int color1) {
     return Material(
       color: Color(color1),
@@ -79,22 +89,34 @@ class _DashboardState extends State<Dashboard> {
         children: <Widget>[
           GestureDetector(
             onTap: () {
+              //Send/Receive When pressed this
+              categoryName = 'Stationery';
+              print(categoryName);
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) =>
-                        ItemList("Stationery", convertToCard(stationeryList))),
+                    builder: (context) => ItemList(
+                        "Stationery",
+                        convertToCard(
+                            sortCategory('Stationery', receiveRequestList),
+                            currentUser))),
               );
             },
             child: myItems(Icons.edit, "Stationery ", 0xffF7B79B),
           ),
           GestureDetector(
             onTap: () {
+              //Send/Receive When pressed this
+              categoryName = 'Clothing';
+              print(categoryName);
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) =>
-                      ItemList("Clothing", convertToCard(clothingList)),
+                  builder: (context) => ItemList(
+                      "Clothing",
+                      convertToCard(
+                          sortCategory('Clothing', receiveRequestList),
+                          currentUser)),
                 ),
               );
             },
@@ -102,11 +124,17 @@ class _DashboardState extends State<Dashboard> {
           ),
           GestureDetector(
             onTap: () {
+              //Send/Receive When pressed this
+              categoryName = 'Sport Equipment';
+              print(categoryName);
               Navigator.push(
                 context,
                 MaterialPageRoute(
                   builder: (context) => ItemList(
-                      "Sport Equipment", convertToCard(sportEquipmentList)),
+                      "Sport Equipment",
+                      convertToCard(
+                          sortCategory('Sport Equipment', receiveRequestList),
+                          currentUser)),
                 ),
               );
             },
@@ -114,11 +142,17 @@ class _DashboardState extends State<Dashboard> {
           ),
           GestureDetector(
             onTap: () {
+              //Send/Receive When pressed this
+              categoryName = 'Electronics';
+              print(categoryName);
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) =>
-                      ItemList("Electronics", convertToCard(electronicsList)),
+                  builder: (context) => ItemList(
+                      "Electronics",
+                      convertToCard(
+                          sortCategory('Electronics', receiveRequestList),
+                          currentUser)),
                 ),
               );
             },
@@ -126,11 +160,16 @@ class _DashboardState extends State<Dashboard> {
           ),
           GestureDetector(
             onTap: () {
+              //Send/Receive When pressed this
+              categoryName = 'Books';
+              print(categoryName);
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) =>
-                      ItemList("Books", convertToCard(booksList)),
+                  builder: (context) => ItemList(
+                      "Books",
+                      convertToCard(sortCategory('Books', receiveRequestList),
+                          currentUser)),
                 ),
               );
             },
@@ -138,11 +177,16 @@ class _DashboardState extends State<Dashboard> {
           ),
           GestureDetector(
             onTap: () {
+              //Send/Receive When pressed this
+              categoryName = 'Others';
+              print(categoryName);
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) =>
-                      ItemList("Others", convertToCard(othersList)),
+                  builder: (context) => ItemList(
+                      "Others",
+                      convertToCard(sortCategory('Others', receiveRequestList),
+                          currentUser)),
                 ),
               );
             },

@@ -3,24 +3,33 @@ import 'package:flutter/material.dart';
 
 import 'dashboard.dart';
 import 'borrow/borrow.dart';
+
 import './session/session.dart';
 import './profile/profile.dart';
 
-class Home extends StatefulWidget {
-  // const Home({Key key, this.user}) : super(key: key);
-  // final FirebaseUser user;
-  State<StatefulWidget> createState() => HomeState();
+import 'database/db_account.dart';
+
+import 'session/waiting_ses.dart';
+
+class ButtomBarHome extends StatefulWidget {
+ 
+  
+  State<StatefulWidget> createState() => ButtomBarHomeState();
 }
 
-class HomeState extends State<Home> {
+class ButtomBarHomeState extends State<ButtomBarHome> {
+  String requestAccount; //Send to Backend
+  AccountObject currentUser =  user1; //Receive from Backend
+
   int currentindex = 0;
-  final List<Widget> _children = [
-    Dashboard(),
-    BorrowPage(),
-    SessionPage(),
-    ProfilePage(),
-  ];
   Widget build(BuildContext context) {
+    
+  final List<Widget> _children = [
+    Dashboard(currentUser),
+    BorrowPage(currentUser),
+    Waiting(currentUser),
+    ProfilePage(currentUser),
+  ];
     return Scaffold(
       body: _children[currentindex],
       bottomNavigationBar: BottomNavigationBar(
@@ -51,6 +60,7 @@ class HomeState extends State<Home> {
 
   void onTabTapped(int index) {
     setState(() {
+      //Send When pressed this
       currentindex = index;
     });
   }

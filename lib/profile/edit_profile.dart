@@ -1,37 +1,39 @@
 import 'package:flutter/material.dart';
 
-import 'profile_object.dart';
+import '../database/db_account.dart';
 import 'profile_category.dart';
 import 'imagePickerProfile.dart';
 
 class EditProfile extends StatefulWidget {
-  Profile example;
-
-  EditProfile(this.example);
+  AccountObject currentUser;
+  EditProfile(this.currentUser);
 
   @override
-  _EditProfileState createState() => _EditProfileState(example);
+  _EditProfileState createState() => _EditProfileState(currentUser);
 }
 
 class _EditProfileState extends State<EditProfile> {
-  Profile example;
+  AccountObject currentUser;
+  _EditProfileState(this.currentUser);
 
-  _EditProfileState(this.example);
+  String sendFirstName = ''; //Send to Backend when pressed save
+  String sendLirstName = ''; //Send to Backend when pressed save
+  String sendEmail = ''; //Send to Backend when pressed save
+  String sendTelNo = ''; //Send to Backend when pressed save
 
-  TextEditingController _nameController;
-  TextEditingController _stuIDController;
-  TextEditingController _phoneNumController;
-  TextEditingController _lineIDController;
+  TextEditingController _firstNameController;
+  TextEditingController _lastNameController;
   TextEditingController _emailController;
+  TextEditingController _phoneNumController;
 
   @override
   void initState() {
     super.initState();
-    _nameController = new TextEditingController(text: bus.fullName);
-    _stuIDController = new TextEditingController(text: bus.studentID);
-    _phoneNumController = new TextEditingController(text: bus.phoneNum);
-    _lineIDController = new TextEditingController(text: bus.lineID);
-    _emailController = new TextEditingController(text: bus.email);
+    _firstNameController =
+        new TextEditingController(text: currentUser.firstName);
+    _lastNameController = new TextEditingController(text: currentUser.lastName);
+    _emailController = new TextEditingController(text: currentUser.email);
+    _phoneNumController = new TextEditingController(text: currentUser.telNo);
   }
 
   @override
@@ -49,25 +51,62 @@ class _EditProfileState extends State<EditProfile> {
           //_buildProfileImage(),
           Container(
             margin: EdgeInsets.all(10),
-            child: ImagePickerProfile(example),
+            child: ImagePickerProfile(currentUser),
           ),
           Container(
-              // Name
-              margin: EdgeInsets.all(10),
-              padding: EdgeInsets.symmetric(vertical: 4.0, horizontal: 6.0),
-              decoration: BoxDecoration(
-                color: Colors.pink[50],
-                borderRadius: BorderRadius.circular(4.0),
-              ),
-              child: TextField(
-                controller: _nameController,
-                decoration: InputDecoration(labelText: 'Full Name'),
-                onChanged: (String input) {
-                  setState(() {
-                    example.fullName = input;
-                  });
-                },
-              )),
+            // firstName
+            margin: EdgeInsets.all(10),
+            padding: EdgeInsets.symmetric(vertical: 4.0, horizontal: 6.0),
+            decoration: BoxDecoration(
+              color: Colors.pink[50],
+              borderRadius: BorderRadius.circular(4.0),
+            ),
+            child: TextField(
+              controller: _firstNameController,
+              decoration: InputDecoration(labelText: 'First Name'),
+              onChanged: (String input) {
+                setState(() {
+                  currentUser.firstName = input;
+                });
+              },
+            ),
+          ),
+          Container(
+            // lastName
+            margin: EdgeInsets.all(10),
+            padding: EdgeInsets.symmetric(vertical: 4.0, horizontal: 6.0),
+            decoration: BoxDecoration(
+              color: Colors.pink[50],
+              borderRadius: BorderRadius.circular(4.0),
+            ),
+            child: TextField(
+              controller: _lastNameController,
+              decoration: InputDecoration(labelText: 'Last Name'),
+              onChanged: (String input) {
+                setState(() {
+                  currentUser.lastName = input;
+                });
+              },
+            ),
+          ),
+          Container(
+            //Email
+            margin: EdgeInsets.all(10),
+            padding: EdgeInsets.symmetric(vertical: 4.0, horizontal: 6.0),
+            decoration: BoxDecoration(
+              color: Colors.pink[50],
+              borderRadius: BorderRadius.circular(4.0),
+            ),
+            child: TextField(
+              controller: _emailController,
+              decoration: InputDecoration(labelText: 'Email '),
+              onChanged: (String input) {
+                setState(() {
+                  currentUser.email = input;
+                });
+              },
+            ),
+          ),
           Container(
               //Phone Number
               margin: EdgeInsets.all(10),
@@ -82,75 +121,13 @@ class _EditProfileState extends State<EditProfile> {
                 decoration: InputDecoration(labelText: 'Phone Number'),
                 onChanged: (String input) {
                   setState(() {
-                    example.phoneNum = input;
+                    currentUser.telNo = input;
                   });
                 },
               )),
-          Container(
-              //Email
-              margin: EdgeInsets.all(10),
-              padding: EdgeInsets.symmetric(vertical: 4.0, horizontal: 6.0),
-              decoration: BoxDecoration(
-                color: Colors.pink[50],
-                borderRadius: BorderRadius.circular(4.0),
-              ),
-              child: TextField(
-                controller: _emailController,
-                decoration: InputDecoration(labelText: 'Email '),
-                onChanged: (String input) {
-                  setState(() {
-                    example.email = input;
-                  });
-                },
-              )),
+
           Padding(
             padding: EdgeInsets.all(5),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: <Widget>[
-              Container(
-                margin: EdgeInsets.all(5),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(50.0),
-                ),
-                width: 150,
-                child: RaisedButton(
-                  color: Colors.pinkAccent,
-                  child: Text(
-                    'Category',
-                    style: TextStyle(
-                      color: Colors.white,
-                    ),
-                  ),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => ProfileCategory(),
-                      ),
-                    );
-                  },
-                ),
-              ),
-              Container(
-                margin: EdgeInsets.all(5),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(50.0),
-                ),
-                width: 150,
-                child: RaisedButton(
-                  color: Colors.black38,
-                  child: Text(
-                    'Change Password',
-                    style: TextStyle(
-                      color: Colors.white,
-                    ),
-                  ),
-                  onPressed: () {},
-                ),
-              ),
-            ],
           ),
           Column(
             children: <Widget>[

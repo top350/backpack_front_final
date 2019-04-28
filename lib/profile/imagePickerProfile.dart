@@ -3,25 +3,25 @@ import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
 
-import 'profile_object.dart';
+import '../database/db_account.dart';
 
 class ImagePickerProfile extends StatefulWidget {
-  Profile example;
+  AccountObject currentUser;
+  ImagePickerProfile(this.currentUser);
 
-  ImagePickerProfile(this.example);
   @override
   State<StatefulWidget> createState() {
-    return new ImagePickerProfileState(example);
+    return new ImagePickerProfileState(currentUser);
   }
 }
 
 class ImagePickerProfileState extends State<ImagePickerProfile> {
-  // File profilepic;
-  Profile example;
+  AccountObject currentUser;
+  ImagePickerProfileState(this.currentUser);
 
   File imageFile;
 
-  ImagePickerProfileState(this.example);
+
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +35,7 @@ class ImagePickerProfileState extends State<ImagePickerProfile> {
       );
       print("You selected gallery image : " + imageFile.path);
       setState(() {
-        example.profilepic = imageFile;
+        currentUser.newProfilePic = imageFile;
       });
     }
 
@@ -48,14 +48,14 @@ class ImagePickerProfileState extends State<ImagePickerProfile> {
       );
       print("You selected camera image : " + imageFile.path);
       setState(() {
-        example.profilepic = imageFile;
+        currentUser.newProfilePic = imageFile;
       });
     }
 
     return new Column(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: <Widget>[
-        displaySelectedFile(example.profilepic),
+        displaySelectedFile(currentUser.newProfilePic),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[

@@ -1,17 +1,34 @@
 import 'package:flutter/material.dart';
 
+import 'package:intl/intl.dart';
+
 import 'rating.dart';
-import '../profile/profile.dart';
-import 'qr_generator.dart';
-// import  'category.dart';
+import '../database/db_account.dart';
+import '../database/db_session.dart';
 
 class SessionPage extends StatefulWidget {
+  //Session3
+
+  
+  AccountObject currentUser; //Receive from Session2
+  SessionObject ongoingSession; //Receive from Session2 
+  AccountObject otherPerson; //Receive from Session2
+  String endSession = 'end'; //Send to BackEnd 
+  
+  SessionPage(this.currentUser,this.ongoingSession,this.otherPerson);
   @override
-  State createState() => new SessionPageState();
+  State createState() => new SessionPageState(currentUser,ongoingSession,otherPerson);
 }
 
 class SessionPageState extends State<SessionPage>
     with SingleTickerProviderStateMixin {
+    
+  AccountObject currentUser; //Receive from Session2
+  SessionObject ongoingSession; //Receive from Session2
+  AccountObject otherPerson; //Receive from Session2
+  SessionPageState(this.currentUser,this.ongoingSession,this.otherPerson);
+
+
   AnimationController _iconAnimationController;
   Animation<double> _iconAnimation;
 
@@ -28,6 +45,7 @@ class SessionPageState extends State<SessionPage>
 
   @override
   Widget build(BuildContext context) {
+     int sesID = ongoingSession.sessionNo; //Send to BackEnd 
     return new Scaffold(
         backgroundColor: Colors.pink[50],
         appBar: AppBar(
@@ -41,10 +59,14 @@ class SessionPageState extends State<SessionPage>
             Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
+                Text('Return Time'),
                 new Padding(
-                  padding:EdgeInsets.all(20),
-                  child: QrGenerator('Hi'),
-                ),
+                    padding: EdgeInsets.all(10),
+                    child: Text(
+                      DateFormat("h:mm a").format(sesOne.endTime),
+                      style: TextStyle(fontSize: 50,
+                          color: Colors.black, fontWeight: FontWeight.w700,),
+                    )),
                 new Padding(
                   padding: const EdgeInsets.only(bottom: 20.0, top: 20.0),
                 ),
@@ -61,14 +83,14 @@ class SessionPageState extends State<SessionPage>
                         height: 75.0,
                         decoration: BoxDecoration(
                           image: DecorationImage(
-                            image: AssetImage('assets/profile/profile.jpg'),
+                            image: AssetImage(otherPerson.profilePic),
                             fit: BoxFit.cover,
                           ),
                           borderRadius: BorderRadius.circular(80.0),
                         ),
                       ),
                       title: Text(
-                        'Session With Patsornchai W.',
+                        'Session With '+otherPerson.firstName,
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                         ),
@@ -77,21 +99,10 @@ class SessionPageState extends State<SessionPage>
                         children: <Widget>[
                           Icon(Icons.phone),
                           Text(
-                            "  0812345678",
+                            otherPerson.telNo,
                             style: TextStyle(color: Colors.black87),
                           )
                         ],
-                      ),
-                      trailing: IconButton(
-                        icon: Icon(Icons.keyboard_arrow_right),
-                        iconSize: 40.0,
-                        onPressed: () {
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (context) => new ProfilePage(),
-                            ),
-                          );
-                        },
                       ),
                     ),
                   ),
@@ -106,9 +117,10 @@ class SessionPageState extends State<SessionPage>
                   textColor: Colors.white,
                   child: new Text("END"),
                   onPressed: () {
+                    //send/Receive from back
                     Navigator.of(context).push(
                       MaterialPageRoute(
-                        builder: (context) => new RatingSession(),
+                        builder: (context) => new RatingSession(currentUser,ongoingSession,otherPerson),
                       ),
                     );
                   },

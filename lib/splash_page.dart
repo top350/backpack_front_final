@@ -16,7 +16,7 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
     super.initState();
     _animationController = new AnimationController(
         vsync: this,
-        duration: new Duration(milliseconds: 500)
+        duration: new Duration(milliseconds: 100)
     );
     _animation = new CurvedAnimation(
       parent: _animationController,

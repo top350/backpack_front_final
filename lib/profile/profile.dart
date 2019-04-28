@@ -3,17 +3,22 @@ import 'package:flutter/material.dart';
 import 'dart:io';
 
 import 'edit_profile.dart';
-import 'profile_object.dart';
+
+import '../database/db_account.dart';
+
+
 
 class ProfilePage extends StatefulWidget {
+  
+  AccountObject currentUser; //Receive from Home
+  ProfilePage(this.currentUser);
   @override
-  _ProfilePageState createState() => _ProfilePageState(bus);
+  _ProfilePageState createState() => _ProfilePageState(currentUser);
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  Profile exampleProfile;
-
-  _ProfilePageState(this.exampleProfile);
+  AccountObject currentUser;
+  _ProfilePageState(this.currentUser);
 
   @override
   Widget build(BuildContext context) {
@@ -28,16 +33,17 @@ class _ProfilePageState extends State<ProfilePage> {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => EditProfile(exampleProfile)));
+                      builder: (context) => EditProfile(currentUser)));
             },
           )
         ],
       ),
       body: ListView(
         children: <Widget>[
-          _buildCoverImage(screenSize,exampleProfile.profilepic),
-          _buildStatContainer(),
-          _buildProfileInfo(),
+          _buildCoverImage(screenSize,currentUser.newProfilePic,currentUser),
+          _buildStatContainer(
+            currentUser),
+          _buildProfileInfo(currentUser),
           Column(
             children: <Widget>[
               Container(
@@ -96,19 +102,19 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 
 
-Widget _buildCoverImage(double screenSize,File profilepic) {
+Widget _buildCoverImage(double screenSize,File profilepic,AccountObject currentUser) {
   return Container(
     height: screenSize / 2.5,
     child: Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        displaySelectedFile(profilepic),
+        displaySelectedFile(profilepic,currentUser),
         // _buildProfileImage(),
         SizedBox(
           height: 15,
         ),
         Text(
-          bus.fullName,
+         currentUser.firstName+" " +currentUser.lastName,
           style: TextStyle(
             color: Colors.white,
             fontSize: 25.0,
@@ -119,7 +125,7 @@ Widget _buildCoverImage(double screenSize,File profilepic) {
           height: 5,
         ),
         Text(
-          '3rd year, Engineering',
+          '3rd year, Engineering',//need to make a method
           style: TextStyle(
             color: Colors.white,
             fontSize: 20.0,
@@ -130,22 +136,46 @@ Widget _buildCoverImage(double screenSize,File profilepic) {
     decoration: BoxDecoration(
         gradient: LinearGradient(
             colors: [const Color(0xFF915FB5), const Color(0xFFCA436B)])
-        // image: DecorationImage( (for image cover photo)
-        //   image: AssetImage('assets/profile/cover.jpg'),
-        //   fit: BoxFit.cover,
-        // ),
         ),
   );
 }
 
-Widget _buildProfileImage() {
+  Widget displaySelectedFile(File file,AccountObject currentUser) {
+    return new Container(
+      margin: EdgeInsets.all(10),
+      // child: new Card(child: new Text('' + galleryFile.toString())),
+      // child: new Image.file(galleryFile),
+      child: file == null
+          ? _buildProfileImage(currentUser)
+          : new Center(
+              child: Container(
+                width: 140.0,
+                height: 140.0,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: FileImage(file),
+                    fit: BoxFit.cover,
+                  ),
+                  borderRadius: BorderRadius.circular(80.0),
+                  border: Border.all(
+                    color: Colors.white,
+                    width: 10.0,
+                  ),
+                ),
+              // child: Image.file(file),
+              ),
+            ),
+    );
+  }
+
+Widget _buildProfileImage(AccountObject currentUser) {
   return Center(
     child: Container(
       width: 120.0,
       height: 120.0,
       decoration: BoxDecoration(
         image: DecorationImage(
-          image: AssetImage('assets/profile/profile.jpg'),
+          image: AssetImage(currentUser.profilePic),
           fit: BoxFit.cover,
         ),
         borderRadius: BorderRadius.circular(80.0),
@@ -158,6 +188,36 @@ Widget _buildProfileImage() {
   );
 }
 
+
+Widget _buildStatContainer(AccountObject currentUser) {
+  return Container(
+    height: 60.0,
+    decoration: BoxDecoration(
+      color: Colors.black12,
+    ),
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      children: <Widget>[
+        _buildStatItem(
+            Icon(Icons.star, color: Colors.yellowAccent, size: 30), currentUser.avgRating.toString()),
+        _buildStatItem(
+            Container(
+              width: 50,
+              height: 50,
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage(
+                      "assets/token_2.png",
+                    ),
+                    fit: BoxFit.fill),
+              ),
+            ),
+            currentUser.token.toString()),
+      ],
+    ),
+  );
+}
 
 Widget _buildStatItem(Widget input, String count) {
   TextStyle _statCountTextStyle = TextStyle(
@@ -179,37 +239,7 @@ Widget _buildStatItem(Widget input, String count) {
   );
 }
 
-Widget _buildStatContainer() {
-  return Container(
-    height: 60.0,
-    decoration: BoxDecoration(
-      color: Colors.black12,
-    ),
-    child: Row(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
-      children: <Widget>[
-        _buildStatItem(
-            Icon(Icons.star, color: Colors.yellowAccent, size: 30), "4.5"),
-        _buildStatItem(
-            Container(
-              width: 50,
-              height: 50,
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                    image: AssetImage(
-                      "assets/token_2.png",
-                    ),
-                    fit: BoxFit.fill),
-              ),
-            ),
-            "100"),
-      ],
-    ),
-  );
-}
-
-Widget _buildProfileInfo() {
+Widget _buildProfileInfo(AccountObject currentUser) {
   return Container(
     margin: EdgeInsets.symmetric(vertical: 20, horizontal: 30),
     child: Column(
@@ -231,7 +261,7 @@ Widget _buildProfileInfo() {
               width: 20,
             ),
             Text(
-              bus.studentID,
+              currentUser.studentID,
               style: TextStyle(
                 color: Colors.black,
                 fontSize: 15.0,
@@ -259,7 +289,7 @@ Widget _buildProfileInfo() {
               width: 20,
             ),
             Text(
-              bus.phoneNum,
+              currentUser.telNo,
               style: TextStyle(
                 color: Colors.black,
                 fontSize: 15.0,
@@ -287,7 +317,7 @@ Widget _buildProfileInfo() {
               width: 10,
             ),
             Text(
-              bus.email,
+              currentUser.email,
               style: TextStyle(
                 color: Colors.black,
                 fontSize: 15.0,
@@ -300,30 +330,4 @@ Widget _buildProfileInfo() {
   );
 }
 
-  Widget displaySelectedFile(File file) {
-    return new Container(
-      margin: EdgeInsets.all(10),
-      // child: new Card(child: new Text('' + galleryFile.toString())),
-      // child: new Image.file(galleryFile),
-      child: file == null
-          ? _buildProfileImage()
-          : new Center(
-              child: Container(
-                width: 140.0,
-                height: 140.0,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: FileImage(file),
-                    fit: BoxFit.cover,
-                  ),
-                  borderRadius: BorderRadius.circular(80.0),
-                  border: Border.all(
-                    color: Colors.white,
-                    width: 10.0,
-                  ),
-                ),
-              // child: Image.file(file),
-              ),
-            ),
-    );
-  }
+

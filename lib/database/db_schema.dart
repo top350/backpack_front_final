@@ -69,6 +69,7 @@ class RequestObject {
   String kioskLocation = '';
   int tokenUsed;
   String note;
+  String examplePic;
   bool requestStatus;
   int reqByAccountNo; //From account
   DateTime createdAt;
@@ -83,6 +84,7 @@ class RequestObject {
       this.kioskLocation,
       this.tokenUsed,
       this.note,
+      this.examplePic,
       this.requestStatus,
       this.reqByAccountNo,
       this.createdAt,
