@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 
 import 'dashboard.dart';
 import 'borrow/borrow.dart';
-import 'session/waiting_session.dart';
+
 import './session/session.dart';
 import './profile/profile.dart';
 
 import 'database/db_account.dart';
+
+import 'session/waiting_ses.dart';
 
 class ButtomBarHome extends StatefulWidget {
  
@@ -25,7 +27,7 @@ class ButtomBarHomeState extends State<ButtomBarHome> {
   final List<Widget> _children = [
     Dashboard(currentUser),
     BorrowPage(currentUser),
-    WaitingSession(currentUser),
+    Waiting(currentUser),
     ProfilePage(currentUser),
   ];
     return Scaffold(

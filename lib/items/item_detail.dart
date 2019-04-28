@@ -5,6 +5,7 @@ import 'dart:io';
 
 import '../database/db_request.dart';
 import '../database/db_account.dart';
+import '../session/kiosk_session.dart';
 
 class ItemDetail extends StatelessWidget {
 //this class will tell detail of a item when click on the item card
@@ -13,10 +14,10 @@ class ItemDetail extends StatelessWidget {
   int requestNo = 0; //Send to Backend when press Lent
   int sessionID = 0; //Recieve to Backend when press Lent
 
-  AccountObject user; //Reviece from itemCard
+  AccountObject currentUser; //Reviece from itemCard
   RequestObject itemRequest; //Reviece from itemCard
-  AccountObject borrower; //Reviece from itemCard
-  ItemDetail(this.user, this.itemRequest, this.borrower);
+  AccountObject borrower = user2; //Reviece from itemCard
+  ItemDetail(this.currentUser, this.itemRequest, this.borrower);
 
   _showWarningDialog(BuildContext context) {
     showDialog(
@@ -36,11 +37,16 @@ class ItemDetail extends StatelessWidget {
                 child: Text('YES'),
                 onPressed: () {
                   Navigator.pop(context);
-                  Navigator.of(context).pushNamedAndRemoveUntil(
-                      '/Home', (Route<dynamic> route) => false);
-                  // Navigator.popUntil(context, ModalRoute.withName('/Home'));
-                  // Navigator.of(context).pushReplacementNamed("/Home");
-                  // other alternative Navigator.of(context).pushNamedAndRemoveUntil('/login', (Route<dynamic> route) => false);
+                  // Navigator.of(context).pushNamedAndRemoveUntil(
+                  //     '/Home', (Route<dynamic> route) => false);
+
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => KioskSession(currentUser,requestNo,borrower),
+                    ),
+                  );
+                  //  Navigator.popUntil(context, ModalRoute.withName('/Home'));
                 },
               )
             ],
@@ -218,7 +224,7 @@ class ItemDetail extends StatelessWidget {
                       child: new Text("Lent!!"),
                       onPressed: () {
                         // Send/Receive to Backend here
-                        lenderAccountId = user.accountNo;
+                        lenderAccountId = currentUser.accountNo;
                         requestNo = itemRequest.requestNo;
                         print(lenderAccountId.toString() +
                             "  " +
