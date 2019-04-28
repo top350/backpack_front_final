@@ -9,24 +9,31 @@ import './profile/profile.dart';
 
 import 'database/db_account.dart';
 
-class Home extends StatefulWidget {
-  AccountObject currentUser = user1; //Receive from Backend
-
-  State<StatefulWidget> createState() => HomeState(currentUser);
+class ButtomBarHome extends StatefulWidget {
+  AccountObject currentUser =  user1; //Receive from Backend
+  
+  State<StatefulWidget> createState() => ButtomBarHomeState(currentUser);
 }
 
-class HomeState extends State<Home> {
+class ButtomBarHomeState extends State<ButtomBarHome> {
   AccountObject currentUser;
-  HomeState(this.currentUser);
+  ButtomBarHomeState(this.currentUser);
 
   int currentindex = 0;
-  final List<Widget> _children = [
-    Dashboard(user1),
-    BorrowPage(user1),
-    WaitingSession(user1),
-    ProfilePage(user1),
-  ];
+  // final List<Widget> _children = [
+  //   Dashboard(currentUser),
+  //   BorrowPage(currentUser),
+  //   WaitingSession(currentUser),
+  //   ProfilePage(currentUser),
+  // ];
   Widget build(BuildContext context) {
+    
+  final List<Widget> _children = [
+    Dashboard(currentUser),
+    BorrowPage(currentUser),
+    WaitingSession(currentUser),
+    ProfilePage(currentUser),
+  ];
     return Scaffold(
       body: _children[currentindex],
       bottomNavigationBar: BottomNavigationBar(
