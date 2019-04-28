@@ -4,14 +4,6 @@ import '../database/db_account.dart';
 import 'profile_category.dart';
 import 'imagePickerProfile.dart';
 
-// String firstName = ''; //editable
-// String lastName = ''; //editable
-// String email = ''; //editable
-// String telNo = ''; //editable
-
-// String categotyHave = ''; //editable
-// String profilePic; //editable
-
 class EditProfile extends StatefulWidget {
   AccountObject currentUser;
   EditProfile(this.currentUser);
@@ -23,6 +15,11 @@ class EditProfile extends StatefulWidget {
 class _EditProfileState extends State<EditProfile> {
   AccountObject currentUser;
   _EditProfileState(this.currentUser);
+
+  String sendFirstName = ''; //Send to Backend when pressed save
+  String sendLirstName = ''; //Send to Backend when pressed save
+  String sendEmail = ''; //Send to Backend when pressed save
+  String sendTelNo = ''; //Send to Backend when pressed save
 
   TextEditingController _firstNameController;
   TextEditingController _lastNameController;
@@ -132,52 +129,6 @@ class _EditProfileState extends State<EditProfile> {
           Padding(
             padding: EdgeInsets.all(5),
           ),
-          // Row(
-          //   mainAxisAlignment: MainAxisAlignment.spaceAround,
-          //   children: <Widget>[
-          //     Container(
-          //       margin: EdgeInsets.all(5),
-          //       decoration: BoxDecoration(
-          //         borderRadius: BorderRadius.circular(50.0),
-          //       ),
-          //       width: 150,
-          //       child: RaisedButton(
-          //         color: Colors.pinkAccent,
-          //         child: Text(
-          //           'Category',
-          //           style: TextStyle(
-          //             color: Colors.white,
-          //           ),
-          //         ),
-          //         onPressed: () {
-          //           Navigator.push(
-          //             context,
-          //             MaterialPageRoute(
-          //               builder: (context) => ProfileCategory(),
-          //             ),
-          //           );
-          //         },
-          //       ),
-          //     ),
-          //     Container(
-          //       margin: EdgeInsets.all(5),
-          //       decoration: BoxDecoration(
-          //         borderRadius: BorderRadius.circular(50.0),
-          //       ),
-          //       width: 150,
-          //       child: RaisedButton(
-          //         color: Colors.black38,
-          //         child: Text(
-          //           'Change Password',
-          //           style: TextStyle(
-          //             color: Colors.white,
-          //           ),
-          //         ),
-          //         onPressed: () {},
-          //       ),
-          //     ),
-          //   ],
-          // ),
           Column(
             children: <Widget>[
               Container(

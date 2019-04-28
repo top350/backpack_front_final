@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'splash_page.dart';
-import 'home.dart';
+import 'bottombar_home.dart';
 import 'signUp/signup.dart';
 import 'login.dart';
 import 'signUp/category.dart';
@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
       //home: WaitingSession(),
       theme: new ThemeData(primarySwatch: Colors.pink),
       routes: <String, WidgetBuilder>{
-        "/Home": (BuildContext context) => new Home(),
+        "/Home": (BuildContext context) => new  ButtomBarHome(),
         "/login": (BuildContext context) => new LoginPage(),
         "/signup": (BuildContext context) => new SignupPage(),
         "/session": (BuildContext context) => new SessionPage(),

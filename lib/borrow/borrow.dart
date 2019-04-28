@@ -9,18 +9,11 @@ import '../database/db_request.dart';
 import '../database/db_account.dart';
 
 class BorrowPage extends StatefulWidget {
-  AccountObject currentUser;
+  AccountObject currentUser; //Recieve from home
   BorrowPage(this.currentUser);
 
   //Page Where user can input data to create new request
-  String sendItemName = '';
-  String sendItemType = '';
-  DateTime sendPickUpTime;
-  DateTime sendReturnTime;
-  String sendKioskLocation = ''; 
-  int sendTokenUsed = 0;
-  String sendNote = '';
-  int reqByAcc = 0;
+
   @override
   State<StatefulWidget> createState() {
     return _BorrowPageState(currentUser);
@@ -30,6 +23,15 @@ class BorrowPage extends StatefulWidget {
 class _BorrowPageState extends State<BorrowPage> {
   AccountObject currentUser;
   _BorrowPageState(this.currentUser);
+
+  String sendItemName = ''; //Send to Backend 
+  String sendItemType = '';
+  DateTime sendPickUpTime;
+  DateTime sendReturnTime;
+  String sendKioskLocation = '';
+  int sendTokenUsed = 0;
+  String sendNote = '';
+  int reqByAcc = 0;  //Send to Backend
 
   RequestObject newRequest = RequestObject(
       1,
@@ -46,7 +48,6 @@ class _BorrowPageState extends State<BorrowPage> {
       sampleTime,
       sampleTime,
       emptyFile);
-
 
   List<DropdownMenuItem<String>> _dropDownMenuCategory;
   List _category = [
@@ -69,6 +70,7 @@ class _BorrowPageState extends State<BorrowPage> {
   ];
 
   void _addItem() {
+    //No need when connect with backend
     if (newRequest.itemCategory == "Stationery") {
       requestList.add(newRequest);
     } else if (newRequest.itemCategory == "Clothing") {
@@ -122,9 +124,10 @@ class _BorrowPageState extends State<BorrowPage> {
         title: Text("Borrow Request"),
       ),
       body: Container(
-          // decoration: BoxDecoration(color: Colors.grey),
-          margin: EdgeInsets.all(15.0),
-          child: ListView(children: <Widget>[
+        // decoration: BoxDecoration(color: Colors.grey),
+        margin: EdgeInsets.all(15.0),
+        child: ListView(
+          children: <Widget>[
             TextField(
               decoration: InputDecoration(
                   labelText: 'Item Name',
@@ -248,130 +251,34 @@ class _BorrowPageState extends State<BorrowPage> {
                 textColor: Colors.white,
                 child: new Text("Request Item"),
                 onPressed: () {
+                  //Send/Receive when press this
+                  sendItemName = newRequest.itemName;
+                  sendItemType = newRequest.itemCategory;
+                  sendPickUpTime = newRequest.pickUpTime;
+                  sendReturnTime = newRequest.returnTime;
+                  sendKioskLocation = newRequest.kioskLocation;
+                  sendTokenUsed = newRequest.tokenUsed;
+                  sendNote = newRequest.note;
+                  reqByAcc = newRequest.reqByAccountNo;
                   Navigator.of(context).pushReplacementNamed("/Home");
                   _addItem();
                 },
                 splashColor: Colors.pink[200],
               ),
             ),
-          ])),
+          ],
+        ),
+      ),
     );
   }
 }
 
-// class ImagePickerBorrow extends StatefulWidget {
-//   ItemObject example;
 
-//   ImagePickerBorrow(this.example);
-
-//   @override
-//   State<StatefulWidget> createState() {
-//     return new ImagePickerBorrowState(example);
-//   }
-// }
-
-// class ImagePickerBorrowState extends State<ImagePickerBorrow> {
-//   ItemObject example;
-
-//   File imageFile;
-
-//   ImagePickerBorrowState(this.example);
-
-//   @override
-//   Widget build(BuildContext context) {
-//     double screenSize = MediaQuery.of(context).size.width;
-//     //display image selected from gallery
-//     imageSelectorGallery() async {
-//       imageFile = await ImagePicker.pickImage(
-//         source: ImageSource.gallery,
-//         // maxHeight: 50.0,
-//         // maxWidth: 50.0,
-//       );
-//       print("You selected gallery imageeeeee : " + imageFile.path);
-//       setState(() {
-//         example.examplepic = imageFile;
-//       });
-//     }
-
-//     //display image selected from camera
-//     imageSelectorCamera() async {
-//       imageFile = await ImagePicker.pickImage(
-//         source: ImageSource.camera,
-//         // maxHeight: 50.0,
-//         // maxWidth: 50.0,
-//       );
-//       setState(() {
-//        example.examplepic = imageFile;
-//       });
-//     }
-
-//     return new Column(
-//       mainAxisAlignment: MainAxisAlignment.spaceAround,
-//       children: <Widget>[
-//         displaySelectedFile(example.examplepic),
-//         Row(
-//           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-//           children: <Widget>[
-//             Container(
-//               width: screenSize / 3,
-//               child: new RaisedButton(
-//                 color: Colors.pink[200],
-//                 textColor: Colors.white,
-//                 child: new Text(
-//                   'Select from Gallery',
-//                   textAlign: TextAlign.center,
-//                 ),
-//                 onPressed: imageSelectorGallery,
-//               ),
-//             ),
-//             Container(
-//               width: screenSize / 3,
-//               child: new RaisedButton(
-//                 color: Colors.pink[200],
-//                 textColor: Colors.white,
-//                 child: new Text(
-//                   'Select from Camera',
-//                   textAlign: TextAlign.center,
-//                 ),
-//                 onPressed: imageSelectorCamera,
-//               ),
-//             ),
-//           ],
-//         )
-
-//         // displaySelectedFile(cameraFile)
-//       ],
-//     );
-//   }
-
-//   Widget displaySelectedFile(File file) {
-//     return new Container(
-//       margin: EdgeInsets.all(10),
-//       // child: new Card(child: new Text('' + galleryFile.toString())),
-//       // child: new Image.file(galleryFile),
-//       child: file == null
-//           ? new Column(
-//               children: <Widget>[
-//                 Icon(
-//                   Icons.camera_alt,
-//                   color: Colors.grey,
-//                 ),
-//                 Text('Select an Example Image')
-//               ],
-//             )
-//           : new SizedBox(
-//               height: 300.0,
-//               width: 300.0,
-//               child: Image.file(file),
-//             ),
-//     );
-//   }
-// }
-
-// Date Format
-//   InputType.both: DateFormat("EEEE, MMMM d, yyyy 'at' h:mma"),
-//   InputType.date: DateFormat('yyyy-MM-dd'),
-//   InputType.time: DateFormat("HH:mm"),
-
-//DateTime now = DateTime.now();
-//String formattedDate = DateFormat("d EEEE MMMM 'at' h:mma").format(now);
+  String sendItemName = '';
+  String sendItemType = '';
+  DateTime sendPickUpTime;
+  DateTime sendReturnTime;
+  String sendKioskLocation = ''; 
+  int sendTokenUsed = 0;
+  String sendNote = '';
+  int reqByAcc = 0;

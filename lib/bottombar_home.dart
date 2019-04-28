@@ -9,24 +9,25 @@ import './profile/profile.dart';
 
 import 'database/db_account.dart';
 
-class Home extends StatefulWidget {
-  AccountObject currentUser = user1; //Receive from Backend
-
-  State<StatefulWidget> createState() => HomeState(currentUser);
+class ButtomBarHome extends StatefulWidget {
+ 
+  
+  State<StatefulWidget> createState() => ButtomBarHomeState();
 }
 
-class HomeState extends State<Home> {
-  AccountObject currentUser;
-  HomeState(this.currentUser);
+class ButtomBarHomeState extends State<ButtomBarHome> {
+  String requestAccount; //Send to Backend
+  AccountObject currentUser =  user1; //Receive from Backend
 
   int currentindex = 0;
-  final List<Widget> _children = [
-    Dashboard(user1),
-    BorrowPage(user1),
-    WaitingSession(user1),
-    ProfilePage(user1),
-  ];
   Widget build(BuildContext context) {
+    
+  final List<Widget> _children = [
+    Dashboard(currentUser),
+    BorrowPage(currentUser),
+    WaitingSession(currentUser),
+    ProfilePage(currentUser),
+  ];
     return Scaffold(
       body: _children[currentindex],
       bottomNavigationBar: BottomNavigationBar(
@@ -57,6 +58,7 @@ class HomeState extends State<Home> {
 
   void onTabTapped(int index) {
     setState(() {
+      //Send When pressed this
       currentindex = index;
     });
   }
