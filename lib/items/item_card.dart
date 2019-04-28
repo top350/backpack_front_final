@@ -9,9 +9,12 @@ import 'item_detail.dart';
 
 class ItemCard extends StatelessWidget {
 //This class is for the itemcard widget
-  AccountObject user;
-  RequestObject itemRequest;
-  AccountObject borrower = user2; //From Backend
+  
+  int requestNoPress = 0; // Send to Backend
+  AccountObject borrower = user2; //Reviece from Backend
+
+  AccountObject user; //Recieve From Dashboard
+  RequestObject itemRequest; //Recieve From Dashboard
 
   //ItemCard(this.itemRequest);
   ItemCard(this.user,this.itemRequest,);
@@ -76,7 +79,7 @@ class ItemCard extends StatelessWidget {
             onPressed: () {},
           ),
           onTap: () {
-            print('IconPressed');
+            //Send/Receive When pressed this
             Navigator.push(
               context,
               MaterialPageRoute(

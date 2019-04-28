@@ -8,12 +8,14 @@ import '../database/db_account.dart';
 
 class ItemDetail extends StatelessWidget {
 //this class will tell detail of a item when click on the item card
+
   int lenderAccountId = 0; //Send to Backend when press Lent
   int requestNo = 0; //Send to Backend when press Lent
+  int sessionID = 0; //Recieve to Backend when press Lent
 
-  AccountObject user;
-  RequestObject itemRequest;
-  AccountObject borrower;
+  AccountObject user; //Reviece from itemCard
+  RequestObject itemRequest; //Reviece from itemCard
+  AccountObject borrower; //Reviece from itemCard
   ItemDetail(this.user, this.itemRequest, this.borrower);
 
   _showWarningDialog(BuildContext context) {
@@ -215,6 +217,7 @@ class ItemDetail extends StatelessWidget {
                       textColor: Colors.white,
                       child: new Text("Lent!!"),
                       onPressed: () {
+                        // Send/Receive to Backend here
                         lenderAccountId = user.accountNo;
                         requestNo = itemRequest.requestNo;
                         print(lenderAccountId.toString() +

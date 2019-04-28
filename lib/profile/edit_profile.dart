@@ -4,11 +4,6 @@ import '../database/db_account.dart';
 import 'profile_category.dart';
 import 'imagePickerProfile.dart';
 
-String firstName = ''; //editable
-String lastName = ''; //editable
-String email = ''; //editable
-String telNo = ''; //editable
-
 class EditProfile extends StatefulWidget {
   AccountObject currentUser;
   EditProfile(this.currentUser);
@@ -134,52 +129,6 @@ class _EditProfileState extends State<EditProfile> {
           Padding(
             padding: EdgeInsets.all(5),
           ),
-          // Row(
-          //   mainAxisAlignment: MainAxisAlignment.spaceAround,
-          //   children: <Widget>[
-          //     Container(
-          //       margin: EdgeInsets.all(5),
-          //       decoration: BoxDecoration(
-          //         borderRadius: BorderRadius.circular(50.0),
-          //       ),
-          //       width: 150,
-          //       child: RaisedButton(
-          //         color: Colors.pinkAccent,
-          //         child: Text(
-          //           'Category',
-          //           style: TextStyle(
-          //             color: Colors.white,
-          //           ),
-          //         ),
-          //         onPressed: () {
-          //           Navigator.push(
-          //             context,
-          //             MaterialPageRoute(
-          //               builder: (context) => ProfileCategory(),
-          //             ),
-          //           );
-          //         },
-          //       ),
-          //     ),
-          //     Container(
-          //       margin: EdgeInsets.all(5),
-          //       decoration: BoxDecoration(
-          //         borderRadius: BorderRadius.circular(50.0),
-          //       ),
-          //       width: 150,
-          //       child: RaisedButton(
-          //         color: Colors.black38,
-          //         child: Text(
-          //           'Change Password',
-          //           style: TextStyle(
-          //             color: Colors.white,
-          //           ),
-          //         ),
-          //         onPressed: () {},
-          //       ),
-          //     ),
-          //   ],
-          // ),
           Column(
             children: <Widget>[
               Container(
