@@ -9,7 +9,7 @@ import '../database/db_request.dart';
 import '../database/db_account.dart';
 
 class BorrowPage extends StatefulWidget {
-  AccountObject currentUser;
+  AccountObject currentUser; //Recieve from home
   BorrowPage(this.currentUser);
 
   //Page Where user can input data to create new request
@@ -24,14 +24,14 @@ class _BorrowPageState extends State<BorrowPage> {
   AccountObject currentUser;
   _BorrowPageState(this.currentUser);
 
-  String sendItemName = '';
+  String sendItemName = ''; //Send to Backend 
   String sendItemType = '';
   DateTime sendPickUpTime;
   DateTime sendReturnTime;
   String sendKioskLocation = '';
   int sendTokenUsed = 0;
   String sendNote = '';
-  int reqByAcc = 0;
+  int reqByAcc = 0;  //Send to Backend
 
   RequestObject newRequest = RequestObject(
       1,
@@ -251,6 +251,7 @@ class _BorrowPageState extends State<BorrowPage> {
                 textColor: Colors.white,
                 child: new Text("Request Item"),
                 onPressed: () {
+                  //Send/Receive when press this
                   sendItemName = newRequest.itemName;
                   sendItemType = newRequest.itemCategory;
                   sendPickUpTime = newRequest.pickUpTime;

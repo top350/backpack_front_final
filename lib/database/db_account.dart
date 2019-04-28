@@ -1,5 +1,12 @@
 import 'dart:io';
 
+// accountStatus
+// -'NoSession'
+// -'SessionOne'
+// -'SessionTwo'
+// -'SessionThree'
+// -'SessionFour'
+
 
 class AccountObject {
   int accountNo;

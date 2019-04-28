@@ -9,7 +9,8 @@ import '../database/db_account.dart';
 
 
 class ProfilePage extends StatefulWidget {
-  AccountObject currentUser;
+  
+  AccountObject currentUser; //Receive from Home
   ProfilePage(this.currentUser);
   @override
   _ProfilePageState createState() => _ProfilePageState(currentUser);
@@ -18,10 +19,6 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   AccountObject currentUser;
   _ProfilePageState(this.currentUser);
-
-  // Profile exampleProfile;
-
-  // _ProfilePageState(this.exampleProfile);
 
   @override
   Widget build(BuildContext context) {
