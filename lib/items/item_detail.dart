@@ -9,7 +9,17 @@ import '../database/db_account.dart';
 import '../database/db_session.dart';
 import '../session/kiosk_session.dart';
 import 'api_provider.dart';
-class ItemDetail extends StatelessWidget {
+
+class ItemDetail extends StatefulWidget{
+  AccountObject currentUser; //Reviece from itemCard
+  RequestObject itemRequest; //Reviece from itemCard
+  AccountObject borrower = user2; //Reviece from itemCard
+  ItemDetail(this.currentUser, this.itemRequest, this.borrower);
+  @override
+  State createState() => new ItemDetailState(this.currentUser, this.itemRequest, this.borrower);
+  
+}
+class ItemDetailState extends State<ItemDetail> {
 //this class will tell detail of a item when click on the item card
 
   int lenderAccountId = 0; //Send to Backend when press Lent
@@ -19,7 +29,7 @@ class ItemDetail extends StatelessWidget {
   AccountObject currentUser; //Reviece from itemCard
   RequestObject itemRequest; //Reviece from itemCard
   AccountObject borrower = user2; //Reviece from itemCard
-  ItemDetail(this.currentUser, this.itemRequest, this.borrower);
+  ItemDetailState(this.currentUser, this.itemRequest, this.borrower);
   final _formkey = GlobalKey<FormState>();
   ApiProvider apiProvider = ApiProvider();
  
@@ -34,12 +44,24 @@ class ItemDetail extends StatelessWidget {
           final session = SessionObject.fromJsonSID(jsonRes);
           print(session.sessionNo);
           sessionID = session.sessionNo;
+                                
+              //     Navigator.pop(context);
+              //     // Navigator.of(context).pushNamedAndRemoveUntil(
+              //     //     '/Home', (Route<dynamic> route) => false);
+
+              //     Navigator.push(
+              // context,
+              //       MaterialPageRoute(
+              //         builder: (context) => KioskSession(currentUser,requestNo,borrower),
+              //       ),
+              //     );
+                  //  Navigator.popUntil(context, ModalRoute.withName('/Home'));
         } else {
-          print('server error');
+         print('server error');
         }
       } catch (e) {
         print(e);
-      }
+     }
     }
   }
 
@@ -61,18 +83,7 @@ class ItemDetail extends StatelessWidget {
                 child: Text('YES'),
                 onPressed: () {
                       doLent();
-                      
-                  Navigator.pop(context);
-                  // Navigator.of(context).pushNamedAndRemoveUntil(
-                  //     '/Home', (Route<dynamic> route) => false);
 
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => KioskSession(currentUser,requestNo,borrower),
-                    ),
-                  );
-                  //  Navigator.popUntil(context, ModalRoute.withName('/Home'));
                 },
               )
             ],

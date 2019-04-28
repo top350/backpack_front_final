@@ -32,6 +32,8 @@ class LoginPageState extends State<LoginPage>
           if (jsonRes['ok']) {
             String token = jsonRes['token'];
             print(token);
+            // Navigator.of(context)
+            //                         .pushReplacementNamed("/Home");
           } else {
             print('Server error');
           }
@@ -131,7 +133,7 @@ class LoginPageState extends State<LoginPage>
                               textColor: Colors.white,
                               child: new Text("Log in"),
                               onPressed: () {
-                                Navigator.of(context)
+                                  Navigator.of(context)
                                     .pushReplacementNamed("/Home");
                                  doLogin();
                               },
