@@ -63,7 +63,7 @@ class SessionPageState extends State<SessionPage>
                 new Padding(
                     padding: EdgeInsets.all(10),
                     child: Text(
-                      DateFormat("h:mm a").format(sesOne.endTime),
+                      DateFormat("h:mm a").format(ongoingSession.endTime),
                       style: TextStyle(fontSize: 50,
                           color: Colors.black, fontWeight: FontWeight.w700,),
                     )),

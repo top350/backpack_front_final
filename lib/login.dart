@@ -20,27 +20,29 @@ class LoginPageState extends State<LoginPage>
   final _formkey = GlobalKey<FormState>();
   ApiProvider apiProvider = ApiProvider();
 
-  // Future doLogin() async {
-  //   if (_formkey.currentState.validate()) {
-  //     try {
-  //       var rs = await apiProvider.doLogin(_username.text, _password.text);
-  //       if (rs.statusCode == 200) {
-  //         print(rs.body);
-  //         var jsonRes = json.decode(rs.body);
-  //         if (jsonRes['ok']) {
-  //           String token = jsonRes['token'];
-  //           print(token);
-  //         } else {
-  //           print('Server error');
-  //         }
-  //       } else {
-  //         print('server error');
-  //       }
-  //     } catch (e) {
-  //       print(e);
-  //     }
-  //   }
-  // }
+  Future doLogin() async {
+    if (_formkey.currentState.validate()) {
+      try {
+        var rs = await apiProvider.doLogin(_username.text, _password.text);
+        if (rs.statusCode == 200) {
+          print(rs.body);
+          var jsonRes = json.decode(rs.body);
+          final student = Student.fromJson(jsonRes);
+          print(student.studentid);
+          if (jsonRes['ok']) {
+            String token = jsonRes['token'];
+            print(token);
+          } else {
+            print('Server error');
+          }
+        } else {
+          print('server error');
+        }
+      } catch (e) {
+        print(e);
+      }
+    }
+  }
 
   @override
   void initState() {
@@ -131,7 +133,7 @@ class LoginPageState extends State<LoginPage>
                               onPressed: () {
                                 Navigator.of(context)
                                     .pushReplacementNamed("/Home");
-                                // doLogin();
+                                 doLogin();
                               },
                               splashColor: Colors.pink[200],
                             ),
@@ -165,7 +167,33 @@ class LoginPageState extends State<LoginPage>
       ),
     );
   }
+    }
+class Student {
+  final String studentid;
+  //final Boolean okboolean;
+  final String firstname;
+  final String lastname;
+  final String phoneno;
+  final String email;
+ 
+ 
+  Student({this.studentid, this.firstname, this.lastname, this.phoneno,this.email,});
 
+  factory Student.fromJson(Map<String, dynamic> json) {
+
+  
+    return Student(
+      //okboolean:json['ok'],
+      studentid: json['username']
+      // firstname: json['fullname'],
+      // lastname: json['lastname'],
+      // phoneno: json['phoneno'],
+      // email: json['email'],
+  
+      
+    );
+   
+  }
 // Future <void> signIn() async{
 //   final formState = _formkey.currentState;
 //   if(formState.validate()){

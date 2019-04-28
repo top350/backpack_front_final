@@ -1,12 +1,14 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 
 import 'package:intl/intl.dart';
 import 'dart:io';
-
 import '../database/db_request.dart';
 import '../database/db_account.dart';
+import '../database/db_session.dart';
 import '../session/kiosk_session.dart';
-
+import 'api_provider.dart';
 class ItemDetail extends StatelessWidget {
 //this class will tell detail of a item when click on the item card
 
@@ -18,6 +20,28 @@ class ItemDetail extends StatelessWidget {
   RequestObject itemRequest; //Reviece from itemCard
   AccountObject borrower = user2; //Reviece from itemCard
   ItemDetail(this.currentUser, this.itemRequest, this.borrower);
+  final _formkey = GlobalKey<FormState>();
+  ApiProvider apiProvider = ApiProvider();
+ 
+
+  Future doLent() async {
+    if (_formkey.currentState.validate()) {
+      try {
+        var rs = await apiProvider.doLent(lenderAccountId, requestNo);
+        if (rs.statusCode == 200) {
+          print(rs.body);
+          var jsonRes = json.decode(rs.body);
+          final session = SessionObject.fromJsonSID(jsonRes);
+          print(session.sessionNo);
+          sessionID = session.sessionNo;
+        } else {
+          print('server error');
+        }
+      } catch (e) {
+        print(e);
+      }
+    }
+  }
 
   _showWarningDialog(BuildContext context) {
     showDialog(
@@ -36,6 +60,8 @@ class ItemDetail extends StatelessWidget {
               FlatButton(
                 child: Text('YES'),
                 onPressed: () {
+                      doLent();
+                      
                   Navigator.pop(context);
                   // Navigator.of(context).pushNamedAndRemoveUntil(
                   //     '/Home', (Route<dynamic> route) => false);
@@ -223,6 +249,7 @@ class ItemDetail extends StatelessWidget {
                       textColor: Colors.white,
                       child: new Text("Lent!!"),
                       onPressed: () {
+                        
                         // Send/Receive to Backend here
                         lenderAccountId = currentUser.accountNo;
                         requestNo = itemRequest.requestNo;
@@ -230,6 +257,7 @@ class ItemDetail extends StatelessWidget {
                             "  " +
                             requestNo.toString());
                         _showWarningDialog(context);
+                        
                       },
                       splashColor: Colors.pink[200],
                     ),

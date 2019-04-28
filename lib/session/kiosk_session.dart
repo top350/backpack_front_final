@@ -24,7 +24,7 @@ class KioskSessionState extends State<KioskSession>
     with SingleTickerProviderStateMixin {
   
   String verifyResult = ''; //Receive from Back
-  SessionObject ongoingSession = sesOne; //Receive from Back
+  SessionObject ongoingSession ; //Receive from Back
 
   AccountObject currentUser; //Receive from Session1
   int sessionID; //Receive from Session1 and Send to Back
@@ -124,7 +124,7 @@ class KioskSessionState extends State<KioskSession>
                 onPressed: () {
                   Navigator.of(context).push(
                     MaterialPageRoute(
-                      builder: (context) => new SessionPage(currentUser,sesOne,otherPerson),
+                      builder: (context) => new SessionPage(currentUser,ongoingSession,otherPerson),
                     ),
                   );
                 },
