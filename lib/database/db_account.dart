@@ -45,12 +45,34 @@ class AccountObject {
       this.createdAt,
       this.updatedAt,
       this.newProfilePic);
-}
+     
+//       factory AccountObject.fromJson(Map<String, dynamic> json) {
+  
+//     return AccountObject(
+//       accountNo: json['username'],
+//       firstName: json['fullname'],
+//       lastName: json['lastname'],
+//       telNo: json['phoneno'],
+//       email: json['email'],
+//        studentID: json['username'],
+//       qrCode: json['fullname'],
+//       noOfFeedback: json['lastname'],
+//       avgRating: json['phoneno'],
+//        token: json['username'],
+//       categotyHave: json['fullname'],
+//       profilePic: json['lastname'],
+//       inSession: json['phoneno'],
+  
+      
+//     );
+   
+//   }
+ }
 
 DateTime sampleTimeA = DateTime.parse('2019-04-20 12:12:12');
 File emptyFileA;
 
-AccountObject user1 = AccountObject(
+AccountObject user1 =  AccountObject(
     1,
     '5931307021',
     'password',
