@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 import './items/item_list.dart';
+import './items/item_card.dart';
 import 'package:front_backpack_app/api_provider.dart';
 import 'database/db_account.dart';
 import 'database/db_request.dart';
@@ -20,29 +21,58 @@ class Dashboard extends StatefulWidget {
 
 class _DashboardState extends State<Dashboard> {
   String categoryName = ''; //Send to Backend
-  List<RequestObject> receiveRequestList = requestList; //Receive from Backend
+  List<RequestObject> receiveRequestList; //Receive from Backend
 
   AccountObject currentUser; //Receive from Home
   _DashboardState(this.currentUser);
-ApiProvider apiProvider = ApiProvider();
-  Future<Null>doCategory(String name) async {
-  final rs = await apiProvider.doCategory(name);
-  print(rs.body);
-  if (rs.statusCode == 200) {
-    print(rs.body);
-    var jsonRes = json.decode(rs.body);
-    final itemdata = RequestObjects.fromJson(jsonRes);
-    print(itemdata.pickUpTime);
-    print(itemdata.itemName);
-    if (jsonRes['ok']) {
-      
-      
-    } else {
-      print('Server error');
-      
+
+  List<ItemCard> convertToCard(List<RequestObject> item, AccountObject user) {
+    //covert ItemObject to ItemCard
+    List<ItemCard> cardList = [];
+    if (0 < item.length) {
+      for (int i = 0; i < item.length; i++) {
+        cardList.add(ItemCard(user, item[i]));
+      }
+      return cardList;
+    }
+    return cardList;
+  }
+
+  ApiProvider apiProvider = ApiProvider();
+  Future<Null> doCategory(String name) async {
+    final rs = await apiProvider.doCategory(name);
+    //print(rs.body);
+    if (rs.statusCode == 200) {
+      //print(rs.body);
+      if (rs.body == 'no request') {
+        print('no request');
+      } else {
+       // print(rs.body);
+        var jsonRes = json.decode(rs.body);
+        //print(jsonRes);
+       final rRequestList = RequestList.fromJson(jsonRes);
+       print(rRequestList.request_list[0].requestNo);
+       print(rRequestList.request_list[0].itemCategory);
+       receiveRequestList = rRequestList.request_list;
+       
+        
+        // while (jsonRes[i]){
+        //   listRequestObject.add(RequestObjects.fromJson(jsonRes[i]));
+        //   ++i;
+        // }
+        //  print(listRequestObject[0].item_name);
+        //print(itemdata.pickUpTime);
+        //print(itemdata.itemName);
+        // if (jsonRes['ok']) {
+
+        // } else {
+        //   print('Server error');
+
+        // }
+      }
     }
   }
-}
+
   Material myItems(IconData icon, String heading, int color1) {
     return Material(
       color: Color(color1),
@@ -116,11 +146,11 @@ ApiProvider apiProvider = ApiProvider();
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => ItemList(
+                  builder: (context) => ItemList(
                         "Stationery",
-                        convertToCard(
-                            sortCategory('Stationery', receiveRequestList),
-                            currentUser))),
+                        convertToCard(receiveRequestList, currentUser),
+                      ),
+                ),
               );
             },
             child: myItems(Icons.edit, "Stationery ", 0xffF7B79B),
@@ -130,15 +160,14 @@ ApiProvider apiProvider = ApiProvider();
               //Send/Receive When pressed this
               categoryName = 'Clothing';
               print(categoryName);
-                doCategory(categoryName);
+              doCategory(categoryName);
               Navigator.push(
                 context,
                 MaterialPageRoute(
                   builder: (context) => ItemList(
-                      "Clothing",
-                      convertToCard(
-                          sortCategory('Clothing', receiveRequestList),
-                          currentUser)),
+                        "Clothing",
+                        convertToCard(receiveRequestList, currentUser),
+                      ),
                 ),
               );
             },
@@ -149,15 +178,14 @@ ApiProvider apiProvider = ApiProvider();
               //Send/Receive When pressed this
               categoryName = 'Sport Equipment';
               print(categoryName);
-                doCategory(categoryName);
+              doCategory(categoryName);
               Navigator.push(
                 context,
                 MaterialPageRoute(
                   builder: (context) => ItemList(
-                      "Sport Equipment",
-                      convertToCard(
-                          sortCategory('Sport Equipment', receiveRequestList),
-                          currentUser)),
+                        "Sport Equipment",
+                        convertToCard(receiveRequestList, currentUser),
+                      ),
                 ),
               );
             },
@@ -168,15 +196,14 @@ ApiProvider apiProvider = ApiProvider();
               //Send/Receive When pressed this
               categoryName = 'Electronics';
               print(categoryName);
-                doCategory(categoryName);
+              doCategory(categoryName);
               Navigator.push(
                 context,
                 MaterialPageRoute(
                   builder: (context) => ItemList(
-                      "Electronics",
-                      convertToCard(
-                          sortCategory('Electronics', receiveRequestList),
-                          currentUser)),
+                        "Electronics",
+                        convertToCard(receiveRequestList, currentUser),
+                      ),
                 ),
               );
             },
@@ -187,14 +214,14 @@ ApiProvider apiProvider = ApiProvider();
               //Send/Receive When pressed this
               categoryName = 'Books';
               print(categoryName);
-                doCategory(categoryName);
+              doCategory(categoryName);
               Navigator.push(
                 context,
                 MaterialPageRoute(
                   builder: (context) => ItemList(
-                      "Books",
-                      convertToCard(sortCategory('Books', receiveRequestList),
-                          currentUser)),
+                        "Books",
+                        convertToCard(receiveRequestList, currentUser),
+                      ),
                 ),
               );
             },
@@ -204,15 +231,15 @@ ApiProvider apiProvider = ApiProvider();
             onTap: () {
               //Send/Receive When pressed this
               categoryName = 'Others';
-                doCategory(categoryName);
+              doCategory(categoryName);
               print(categoryName);
               Navigator.push(
                 context,
                 MaterialPageRoute(
                   builder: (context) => ItemList(
-                      "Others",
-                      convertToCard(sortCategory('Others', receiveRequestList),
-                          currentUser)),
+                        "Others",
+                        convertToCard(receiveRequestList, currentUser),
+                      ),
                 ),
               );
             },

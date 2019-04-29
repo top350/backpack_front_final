@@ -69,7 +69,7 @@ class ItemCard extends StatelessWidget {
                 size: 20,
               ),
               SizedBox(width: 10),
-              Text("Pick Up: " + DateFormat("h:mma").format(itemRequest.pickUpTime),
+              Text("Pick Up: " + itemRequest.pickUpTime,
                   style: TextStyle())
             ],
           ),
