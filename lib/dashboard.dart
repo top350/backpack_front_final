@@ -1,5 +1,5 @@
 import 'dart:convert';
-
+import 'package:front_backpack_app/database/db_schema.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
@@ -31,6 +31,9 @@ ApiProvider apiProvider = ApiProvider();
   if (rs.statusCode == 200) {
     print(rs.body);
     var jsonRes = json.decode(rs.body);
+    final itemdata = RequestObjects.fromJson(jsonRes);
+    print(itemdata.pickUpTime);
+    print(itemdata.itemName);
     if (jsonRes['ok']) {
       
       
