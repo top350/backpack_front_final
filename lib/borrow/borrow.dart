@@ -5,7 +5,7 @@ import 'package:front_backpack_app/api_provider.dart';
 import 'dart:io';
 import 'package:intl/intl.dart';
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
-import 'package:front_backpack_app/database/db_schema.dart';
+
 import 'imagePickerBorrow.dart';
 import '../database/db_request.dart';
 import '../database/db_account.dart';
@@ -46,9 +46,7 @@ Future doBorrow() async {
   if (rs.statusCode == 200) {
     print(rs.body);
     var jsonRes = json.decode(rs.body);
-    final itemdata = RequestObjects.fromJson(jsonRes);
-    print(itemdata.pickUpTime);
-    print(itemdata.itemName);
+    
     if (jsonRes['ok']) {
       
         Navigator.of(context).pushReplacementNamed("/Home");

@@ -77,8 +77,9 @@ class ItemObject {
   DateTime createdAt;
   DateTime updatedAt;
 
-  ItemObject(this.itemNo, this.itemName, this.itemCategory, this.qrCode,
-      this.belongToAccountNo, this.examlePic, this.createdAt, this.updatedAt);
+  ItemObject({this.itemNo, this.itemName, this.itemCategory, this.qrCode,
+      this.belongToAccountNo, this.examlePic, this.createdAt, this.updatedAt});
+      
 }
 
 class RequestObjects {
