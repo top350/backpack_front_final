@@ -4,10 +4,11 @@ import 'package:http/http.dart' as http;
 
 import 'dart:io';
 import 'dart:async';
-
+q
 class ApiProvider {
   ApiProvider();
-  String endpoint = " http://192.168.43.40:3000";
+  String endpoint ="http://192.168.43.173:3000";
+
   Future<http.Response> doLogin(String id, String password) async {
     String _url = '$endpoint/login';
     var body = {"id": id, "password": password};
@@ -56,7 +57,7 @@ Future<http.Response> doBorrow(
     return http.post(_url, body:body);
   }
    Future<http.Response> doLent(String rid,String aid){
-    String _url = '$endpoint/requestPage';
+    String _url = '$endpoint/acceptRequest';
     var body = {"rid":rid,"aid":aid};
     return http.post(_url, body:body);
   }

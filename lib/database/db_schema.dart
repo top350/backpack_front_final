@@ -140,21 +140,40 @@ class SessionObject {
   DateTime endTime;
   bool sessionStatus;
   int requestID; //From Request
-  String sessionItemName = ''; //From Item
+  int sessionItemName; //From Item
   int itemOfAcountNo; //From Item
-  DateTime createdAt;
-  DateTime updatedAt;
 
-  SessionObject(
+
+ 
+  SessionObject({
       this.sessionNo,
       this.startTime,
       this.endTime,
       this.sessionStatus,
       this.requestID,
       this.sessionItemName,
-      this.itemOfAcountNo,
-      this.createdAt,
-      this.updatedAt);
+      this.itemOfAcountNo}
+  );
+    
+
+factory SessionObject.fromJson(Map<String, dynamic> json) {
+
+  
+    return 
+    SessionObject(
+      sessionNo: json['sid'],
+      startTime: json['start_time'],
+      endTime: json['end_time'],
+      sessionStatus: json['s_status'],
+      requestID : json['rid'], 
+      sessionItemName :json['iid'],
+      itemOfAcountNo :json['aid']
+     
+    
+    );
+}
+
+    
 }
 
 class FeedbackObject {

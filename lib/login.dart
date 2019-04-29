@@ -22,36 +22,34 @@ class LoginPageState extends State<LoginPage>
 
   final _formkey = GlobalKey<FormState>();
   ApiProvider apiProvider = ApiProvider();
-  var count; 
+  var count;
   List<String> result = new List(5);
-
 
   Future<Null> doLogin() async {
     if (_formkey.currentState.validate()) {
       try {
         var rs = await apiProvider.doLogin(_username.text, _password.text);
         if (rs.statusCode == 200) {
-          print(rs.body);         
-          var jsonRes = json.decode(rs.body);    
-          if (rs.body=='false') {
-            print('error'); 
-          } 
-            else {
-          print(jsonRes);
-          final student = AccountObject.fromJson(jsonRes[0]);
-          print(student.aid);     
-             print('Log in' );          
-             //Navigator.of(context).pushReplacementNamed("/Home");
-     Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => ButtomBarHome(student),
-                                  ),
-                                );
+          print(rs.body);
+          var jsonRes = json.decode(rs.body);
+          if (rs.body == 'false') {
+            print('error');
+          } else {
+            print(jsonRes);
+            final student = AccountObject.fromJson(jsonRes[0]);
+            print(student.aid);
+            print('Log in');
+            //Navigator.of(context).pushReplacementNamed("/Home");
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => ButtomBarHome(student),
+              ),
+            );
           }
         } else {
           print('server error');
-          count=1;
+          count = 1;
         }
       } catch (e) {
         print(e);
@@ -59,7 +57,6 @@ class LoginPageState extends State<LoginPage>
     }
   }
 
- 
   @override
   void initState() {
     super.initState();
@@ -146,10 +143,10 @@ class LoginPageState extends State<LoginPage>
                               color: Colors.pink[400],
                               textColor: Colors.white,
                               child: new Text("Log in"),
-                              onPressed: () async{
-                             Navigator.of(context).pushReplacementNamed("/Home");
+                              onPressed: () async {
+                                // Navigator.of(context)
+                                //     .pushReplacementNamed("/Home");
                                 await doLogin();
-                              
                               },
                               splashColor: Colors.pink[200],
                             ),
@@ -196,33 +193,29 @@ class LoginPageState extends State<LoginPage>
 //     }
 
 }
+
 class Student {
   final String studentid;
   final String firstname;
   final String lastname;
   final String phoneno;
   final String email;
- 
- 
-  Student({this.studentid, this.firstname, this.lastname, this.phoneno,this.email,});
+
+  Student({
+    this.studentid,
+    this.firstname,
+    this.lastname,
+    this.phoneno,
+    this.email,
+  });
 
   factory Student.fromJson(Map<String, dynamic> json) {
-
-  
     return Student(
       studentid: json['username'],
       firstname: json['fullname'],
       lastname: json['lastname'],
       phoneno: json['phoneno'],
       email: json['email'],
-  
-      
     );
-   
   }
- 
 }
-
-
-
-
