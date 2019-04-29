@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+
 import 'signUp/intro.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -141,7 +141,7 @@ class LoginPageState extends State<LoginPage>
                               textColor: Colors.white,
                               child: new Text("Log in"),
                               onPressed: () async{
-                             
+                             Navigator.of(context).pushReplacementNamed("/Home");
                                 await doLogin();
                               
                               },
