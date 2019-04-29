@@ -62,15 +62,34 @@ Future<http.Response> doBorrow(
     return http.post(_url, body:body);
   }
     Future<http.Response> doBottombar(String aid){
+    String _url = '$endpoint/profile';
+    var body = {"aid":aid};
+    return http.post(_url, body:body);
+  }
+   Future<http.Response> doeditProfile(String aid,String firstname,String lastname,String phoneNo,String email ){
+    String _url = '$endpoint/requestPage';
+    var body = {"aid":aid,"firstname":firstname ,"lastname":lastname ,"tel_no":phoneNo,"email":email};
+    return http.post(_url, body:body);
+  }
+    Future<http.Response> doAccountsession(String aid){
     String _url = '$endpoint/requestPage';
     var body = {"aid":aid};
     return http.post(_url, body:body);
   }
-   Future<http.Response> doeditProfile(String firstname,String lastname, String password,String phoneNo,String email ){
+     Future<http.Response> doEndsession(String sid){
     String _url = '$endpoint/requestPage';
-    var body = {"firstname":firstname ,"lastname":lastname ,"password": password,"tel_no":phoneNo,"email":email};
+    var body = {"sid":sid};
     return http.post(_url, body:body);
   }
-
+   Future<http.Response> doScan(String sid){
+    String _url = '$endpoint/requestPage';
+    var body = {"sid":sid};
+    return http.post(_url, body:body);
+  }
+   Future<http.Response> doFeedback(String feedbackNo,String comment,String aid,String sid){
+    String _url = '$endpoint/requestPage';
+    var body = {"feedbackNo":feedbackNo,"comment":comment,"aid":aid,"sid":sid};
+    return http.post(_url, body:body);
+  }
 
 }

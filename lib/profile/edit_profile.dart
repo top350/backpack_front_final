@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:front_backpack_app/api_provider.dart';
 
 import '../database/db_account.dart';
 import 'profile_category.dart';
@@ -25,6 +26,28 @@ class _EditProfileState extends State<EditProfile> {
   TextEditingController _lastNameController;
   TextEditingController _emailController;
   TextEditingController _phoneNumController;
+  String aid;
+
+
+// Future doSignup() async {
+//   final rs = await apiProvider.doSignup(studentID.text, firstname.text, lastname.text, password1.text, phoneNo.text, email.text);
+//   print(rs.body);
+//   if (rs.statusCode == 200) {
+//     print(rs.body);
+//     //var jsonRes = json.decode(rs.body);
+//     if (rs.body == 'signed up') {
+//       Navigator.of(context).pushReplacementNamed("/login");
+//     } else {
+//       print('Server error');
+      
+//     }
+//   }
+// }
+ApiProvider apiProvider = ApiProvider();
+Future doeditProfile() async {
+  final rs = await apiProvider.doeditProfile(aid,_firstNameController.text, _lastNameController.text, _phoneNumController.text,_emailController.text);
+  print(rs.body);
+}
 
   @override
   void initState() {
@@ -146,6 +169,7 @@ class _EditProfileState extends State<EditProfile> {
                     ),
                   ),
                   onPressed: () {
+                    doeditProfile();
                     setState(() {
                       Navigator.pop(context);
                     });

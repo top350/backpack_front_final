@@ -177,7 +177,7 @@ factory SessionObject.fromJson(Map<String, dynamic> json) {
 }
 
 class FeedbackObject {
-  int feedbackNo;
+  String feedbackNo;
   String comment;
   double rating;
   int fromAccountNo;
