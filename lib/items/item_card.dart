@@ -1,8 +1,10 @@
-import 'package:flutter/material.dart';
+import 'dart:convert';
 
+import 'package:flutter/material.dart';
+import 'package:front_backpack_app/api_provider.dart';
 import 'dart:io';
 import 'package:intl/intl.dart';
-
+import 'package:front_backpack_app/database/db_schema.dart';
 import '../database/db_request.dart';
 import '../database/db_account.dart';
 import 'item_detail.dart';
@@ -18,7 +20,27 @@ class ItemCard extends StatelessWidget {
 
   //ItemCard(this.itemRequest);
   ItemCard(this.user,this.itemRequest,);
-
+  ApiProvider apiProvider = ApiProvider();
+    
+  UserObject  account = new UserObject();
+  Future<Null>doReqestitem() async {
+  
+  final rs = await apiProvider.doRequestitem(account.aid);
+  print(rs.body);
+  if (rs.statusCode == 200) {
+    print(rs.body);
+    var jsonRes = json.decode(rs.body);
+    
+   
+    if (jsonRes['ok']) {
+      
+      
+    } else {
+      print('Server error');
+      
+    }
+  }
+}
   Widget _imageInBox(double width, double height, String imageurl, File file) {
     return file == null
         ? Container(
