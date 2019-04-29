@@ -44,9 +44,10 @@ Future<http.Response> doBorrow(
   String _selectedKiosk ,
   String token,
   String note , 
+  String aid,
 ) async {
-    String _url = '$endpoint/borrow';
-    var body = {"itemname": itemName, "category":_selectedCategory ,"pickupTime":pickupTime ,"returnTime": returnTime,"Kiosk":_selectedKiosk,"token":token,"note":note};
+    String _url = '$endpoint/borrowRequest';
+    var body = {"item_name": itemName, "item_type":_selectedCategory ,"borrow_time":pickupTime ,"return_time": returnTime,"k_location":_selectedKiosk,"token_used":token,"note":note,"aid":aid};
     return http.post(_url, body: body);
   }
 }

@@ -90,7 +90,7 @@ class RequestObjects {
   String pickUpTime;
   String returnTime;
   String kioskLocation = '';
-  String tokenUsed;
+  int tokenUsed;
   String note;
   String examplePic;
   bool requestStatus;

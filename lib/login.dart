@@ -5,6 +5,8 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'api_provider.dart';
 import 'database/db_schema.dart';
+import 'bottombar_home.dart';
+import 'database/db_account.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -37,11 +39,16 @@ class LoginPageState extends State<LoginPage>
           } 
             else {
           print(jsonRes);
-          final student = UserObject.fromJson(jsonRes[0]);
+          final student = AccountObject.fromJson(jsonRes[0]);
           print(student.aid);     
              print('Log in' );          
-             Navigator.of(context).pushReplacementNamed("/Home");
-     
+             //Navigator.of(context).pushReplacementNamed("/Home");
+     Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => ButtomBarHome(student),
+                                  ),
+                                );
           }
         } else {
           print('server error');

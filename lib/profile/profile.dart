@@ -40,7 +40,7 @@ class _ProfilePageState extends State<ProfilePage> {
       ),
       body: ListView(
         children: <Widget>[
-          _buildCoverImage(screenSize,currentUser.newProfilePic,currentUser),
+          _buildCoverImage(screenSize,null,currentUser),
           _buildStatContainer(
             currentUser),
           _buildProfileInfo(currentUser),
@@ -114,7 +114,7 @@ Widget _buildCoverImage(double screenSize,File profilepic,AccountObject currentU
           height: 15,
         ),
         Text(
-         currentUser.firstName+" " +currentUser.lastName,
+         currentUser.first_Name+" " +currentUser.last_Name,
           style: TextStyle(
             color: Colors.white,
             fontSize: 25.0,
@@ -175,7 +175,7 @@ Widget _buildProfileImage(AccountObject currentUser) {
       height: 120.0,
       decoration: BoxDecoration(
         image: DecorationImage(
-          image: AssetImage(currentUser.profilePic),
+          image: AssetImage(currentUser.image),
           fit: BoxFit.cover,
         ),
         borderRadius: BorderRadius.circular(80.0),
@@ -199,7 +199,7 @@ Widget _buildStatContainer(AccountObject currentUser) {
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: <Widget>[
         _buildStatItem(
-            Icon(Icons.star, color: Colors.yellowAccent, size: 30), currentUser.avgRating.toString()),
+            Icon(Icons.star, color: Colors.yellowAccent, size: 30), currentUser.avg_Rating.toString()),
         _buildStatItem(
             Container(
               width: 50,
@@ -261,7 +261,7 @@ Widget _buildProfileInfo(AccountObject currentUser) {
               width: 20,
             ),
             Text(
-              currentUser.studentID,
+              currentUser.it_chula,
               style: TextStyle(
                 color: Colors.black,
                 fontSize: 15.0,
@@ -289,7 +289,7 @@ Widget _buildProfileInfo(AccountObject currentUser) {
               width: 20,
             ),
             Text(
-              currentUser.telNo,
+              currentUser.tel_No,
               style: TextStyle(
                 color: Colors.black,
                 fontSize: 15.0,

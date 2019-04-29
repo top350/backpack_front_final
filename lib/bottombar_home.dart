@@ -10,14 +10,15 @@ import './profile/profile.dart';
 import 'database/db_account.dart';
 
 class ButtomBarHome extends StatefulWidget {
- 
+  AccountObject currentUser;
+  ButtomBarHome(this.currentUser);
   
   State<StatefulWidget> createState() => ButtomBarHomeState();
 }
 
 class ButtomBarHomeState extends State<ButtomBarHome> {
   String requestAccount; //Send to Backend
-  AccountObject currentUser =  user1; //Receive from Backend
+  AccountObject currentUser ; //user1; //Receive from Backend
 
   int currentindex = 0;
   Widget build(BuildContext context) {

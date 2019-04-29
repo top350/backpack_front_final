@@ -30,10 +30,10 @@ class _EditProfileState extends State<EditProfile> {
   void initState() {
     super.initState();
     _firstNameController =
-        new TextEditingController(text: currentUser.firstName);
-    _lastNameController = new TextEditingController(text: currentUser.lastName);
+        new TextEditingController(text: currentUser.first_Name);
+    _lastNameController = new TextEditingController(text: currentUser.last_Name);
     _emailController = new TextEditingController(text: currentUser.email);
-    _phoneNumController = new TextEditingController(text: currentUser.telNo);
+    _phoneNumController = new TextEditingController(text: currentUser.tel_No);
   }
 
   @override
@@ -51,7 +51,7 @@ class _EditProfileState extends State<EditProfile> {
           //_buildProfileImage(),
           Container(
             margin: EdgeInsets.all(10),
-            child: ImagePickerProfile(currentUser),
+            //child: ImagePickerProfile(currentUser),
           ),
           Container(
             // firstName
@@ -66,7 +66,7 @@ class _EditProfileState extends State<EditProfile> {
               decoration: InputDecoration(labelText: 'First Name'),
               onChanged: (String input) {
                 setState(() {
-                  currentUser.firstName = input;
+                  currentUser.first_Name = input;
                 });
               },
             ),
@@ -84,7 +84,7 @@ class _EditProfileState extends State<EditProfile> {
               decoration: InputDecoration(labelText: 'Last Name'),
               onChanged: (String input) {
                 setState(() {
-                  currentUser.lastName = input;
+                  currentUser.last_Name = input;
                 });
               },
             ),
@@ -121,7 +121,7 @@ class _EditProfileState extends State<EditProfile> {
                 decoration: InputDecoration(labelText: 'Phone Number'),
                 onChanged: (String input) {
                   setState(() {
-                    currentUser.telNo = input;
+                    currentUser.tel_No = input;
                   });
                 },
               )),
