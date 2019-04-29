@@ -18,7 +18,7 @@ class ApiProvider {
   
    Future<http.Response> doSignup(String studentid,String firstname,String lastname, String password,String phoneNo,String email) async {
     String _url = '$endpoint/signup';
-    var body = {"studentid": studentid, "firstname":firstname ,"lastname":lastname ,"password": password,"phoneNo":phoneNo,"email":email};
+    var body = {"it_chula": studentid, "firstname":firstname ,"lastname":lastname ,"password": password,"tel_no":phoneNo,"email":email};
     return http.post(_url, body: body);
   }
    Future<http.Response> getSignup() async {
