@@ -147,8 +147,8 @@ class LoginPageState extends State<LoginPage>
                               textColor: Colors.white,
                               child: new Text("Log in"),
                               onPressed: () async{
-                             Navigator.of(context).pushReplacementNamed("/Home");
-                                await doLogin();
+                             
+                                // await doLogin();
                               
                               },
                               splashColor: Colors.pink[200],
