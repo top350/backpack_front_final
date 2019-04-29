@@ -7,7 +7,7 @@ import 'dart:async';
 
 class ApiProvider {
   ApiProvider();
-  String endpoint = "http://192.168.43.173:3000";
+  String endpoint = " http://192.168.43.40:3000";
   Future<http.Response> doLogin(String id, String password) async {
     String _url = '$endpoint/login';
     var body = {"id": id, "password": password};
@@ -50,4 +50,26 @@ Future<http.Response> doBorrow(
     var body = {"item_name": itemName, "item_type":_selectedCategory ,"borrow_time":pickupTime ,"return_time": returnTime,"k_location":_selectedKiosk,"token_used":token,"note":note,"aid":aid};
     return http.post(_url, body: body);
   }
+  Future<http.Response> doRequestitem(String rid){
+    String _url = '$endpoint/requestPage';
+    var body = {"rid":rid};
+    return http.post(_url, body:body);
+  }
+   Future<http.Response> doLent(String rid,String aid){
+    String _url = '$endpoint/requestPage';
+    var body = {"rid":rid,"aid":aid};
+    return http.post(_url, body:body);
+  }
+    Future<http.Response> doBottombar(String aid){
+    String _url = '$endpoint/requestPage';
+    var body = {"aid":aid};
+    return http.post(_url, body:body);
+  }
+   Future<http.Response> doeditProfile(String firstname,String lastname, String password,String phoneNo,String email ){
+    String _url = '$endpoint/requestPage';
+    var body = {"firstname":firstname ,"lastname":lastname ,"password": password,"tel_no":phoneNo,"email":email};
+    return http.post(_url, body:body);
+  }
+
+
 }

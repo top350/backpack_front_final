@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+
 import 'signUp/intro.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -24,8 +24,7 @@ class LoginPageState extends State<LoginPage>
   ApiProvider apiProvider = ApiProvider();
   var count; 
   List<String> result = new List(5);
-  
-  
+
 
   Future<Null> doLogin() async {
     if (_formkey.currentState.validate()) {
@@ -148,7 +147,7 @@ class LoginPageState extends State<LoginPage>
                               textColor: Colors.white,
                               child: new Text("Log in"),
                               onPressed: () async{
-                             
+                             Navigator.of(context).pushReplacementNamed("/Home");
                                 await doLogin();
                               
                               },
