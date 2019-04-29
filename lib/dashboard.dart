@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'package:front_backpack_app/database/db_schema.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +22,7 @@ class Dashboard extends StatefulWidget {
 
 class _DashboardState extends State<Dashboard> {
   String categoryName = ''; //Send to Backend
-  List<RequestObject> receiveRequestList; //Receive from Backend
+  List<RequestObject> receiveRequestList =[]; //Receive from Backend
 
   AccountObject currentUser; //Receive from Home
   _DashboardState(this.currentUser);
@@ -29,6 +30,7 @@ class _DashboardState extends State<Dashboard> {
   List<ItemCard> convertToCard(List<RequestObject> item, AccountObject user) {
     //covert ItemObject to ItemCard
     List<ItemCard> cardList = [];
+    //print('item length = ' + item.length.toString());
     if (0 < item.length) {
       for (int i = 0; i < item.length; i++) {
         cardList.add(ItemCard(user, item[i]));
@@ -51,9 +53,13 @@ class _DashboardState extends State<Dashboard> {
         var jsonRes = json.decode(rs.body);
         //print(jsonRes);
        final rRequestList = RequestList.fromJson(jsonRes);
-       print(rRequestList.request_list[0].requestNo);
-       print(rRequestList.request_list[0].itemCategory);
+       //print(rRequestList.request_list[0].requestNo);
+       //print(rRequestList.request_list[0].itemCategory);
        receiveRequestList = rRequestList.request_list;
+       print(rRequestList.request_list[0].itemName);
+       receiveRequestList = rRequestList.request_list.toList();
+       print(receiveRequestList[0].itemName);
+       print(receiveRequestList.length);
        
         
         // while (jsonRes[i]){
@@ -142,7 +148,10 @@ class _DashboardState extends State<Dashboard> {
               //Send/Receive When pressed this
               categoryName = 'Stationery';
               print(categoryName);
+              
               doCategory(categoryName);
+              Timer(Duration(seconds: 3), (){
+                print('item length = ' + receiveRequestList.length.toString());
               Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -152,6 +161,17 @@ class _DashboardState extends State<Dashboard> {
                       ),
                 ),
               );
+              });
+              // print('item length = ' + receiveRequestList.length.toString());
+              // Navigator.push(
+              //   context,
+              //   MaterialPageRoute(
+              //     builder: (context) => ItemList(
+              //           "Stationery",
+              //           convertToCard(receiveRequestList, currentUser),
+              //         ),
+              //   ),
+              // );
             },
             child: myItems(Icons.edit, "Stationery ", 0xffF7B79B),
           ),

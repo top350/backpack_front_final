@@ -32,6 +32,7 @@ class RequestObject {
       this.reqByAccountNo,
       this.createdAt,
       this.updatedAt,
+      this.examplePicUrl
   });
 
   factory RequestObject.fromJson(Map<String, dynamic> json) {
@@ -49,7 +50,8 @@ class RequestObject {
       requestStatus:json['l_status'],
       reqByAccountNo:json['aid'],
       createdAt:json['createdAt'],
-      updatedAt:json['updatedAt']
+      updatedAt:json['updatedAt'],
+      examplePicUrl: 'assets/item_example/tsquare.jpg'
       
     );
    
