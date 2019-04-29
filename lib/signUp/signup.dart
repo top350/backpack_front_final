@@ -26,10 +26,9 @@ Future doSignup() async {
   print(rs.body);
   if (rs.statusCode == 200) {
     print(rs.body);
-    var jsonRes = json.decode(rs.body);
-    if (jsonRes['ok']) {
-      
-      Navigator.of(context).pushReplacementNamed("/category");
+    //var jsonRes = json.decode(rs.body);
+    if (rs.body == 'signed up') {
+      Navigator.of(context).pushReplacementNamed("/login");
     } else {
       print('Server error');
       
@@ -146,10 +145,11 @@ Future doSignup() async {
                             onPressed: () {
                               
                               doSignup();
+                              print('pressed');
                               if (password1.text == password2.text) {
                                
-                                print(password1.text);
-                                print(email.text);
+                               // print(password1.text);
+                               // print(email.text);
                               } else {
                                 print("Passsword not match");
                               }
