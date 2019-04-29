@@ -10,7 +10,7 @@ class RegChulaObject {
 }
 
 class UserObject {
-  int accountNo;
+  int aid;
   String studentID = '';
   String password = '';
   String firstName = '';
@@ -28,7 +28,7 @@ class UserObject {
   DateTime updatedAt;
 
   UserObject({
-      this.accountNo,
+      this.aid,
       this.studentID,
       this.password,
       this.firstName,
@@ -44,11 +44,12 @@ class UserObject {
       this.inSession,
       this.createdAt,
       this.updatedAt});
+
       factory UserObject.fromJson(Map<String, dynamic> json) {
 
   
     return UserObject(
-      accountNo: json['username'],
+      aid: json['aid'],
       firstName: json['firstname'],
       lastName: json['lastname'],
       telNo: json['phoneno'],

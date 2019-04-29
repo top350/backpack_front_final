@@ -30,21 +30,18 @@ class LoginPageState extends State<LoginPage>
       try {
         var rs = await apiProvider.doLogin(_username.text, _password.text);
         if (rs.statusCode == 200) {
-          print(rs.body);
-          
-          var jsonRes = json.decode(rs.body);
-          final student = UserObject.fromJson(jsonRes);
-          print(student.studentID);
-          if (jsonRes['ok']) {
-            String token = jsonRes['token'];
-            // print(token);
-           
-            SharedPreferences prefs = await SharedPreferences.getInstance();
-            await prefs.setString('token', token);
-            Navigator.of(context).pushReplacementNamed("/Home");
-          } else {
-            print('Server error');
-            
+          print(rs.body);         
+          var jsonRes = json.decode(rs.body);    
+          if (rs.body=='false') {
+            print('error'); 
+          } 
+            else {
+          print(jsonRes);
+          final student = UserObject.fromJson(jsonRes[0]);
+          print(student.aid);     
+             print('Log in' );          
+             Navigator.of(context).pushReplacementNamed("/Home");
+     
           }
         } else {
           print('server error');
@@ -56,34 +53,7 @@ class LoginPageState extends State<LoginPage>
     }
   }
 
-  Future<Student> fetchStudent(studentId) async {
-  final response =
-      await http.get(
-        'http://1633b33c.ngrok.io/users/$studentId'
-      );
-      
-
-  if (response.statusCode == 200) {
-    // If server returns an OK response, parse the JSON
-    // print(response.body);
-    print(json.decode(response.body));
-    final student = Student.fromJson(json.decode(response.body));
-    print(student.email);
-    // print(student.firstname);
-    // print(student.studentid);
-    // result[0]=student.studentid;
-    // result[1]=student.firstname;
-    // result[2]=student.email;
-  
-
-    return student;
-   
-    
-  } else {
-    // If that response was not OK, throw an error.
-    throw Exception('Failed to load post');
-  }
-}
+ 
   @override
   void initState() {
     super.initState();
@@ -173,7 +143,7 @@ class LoginPageState extends State<LoginPage>
                               onPressed: () async{
                              
                                 await doLogin();
-                                fetchStudent(_username.text);
+                              
                               },
                               splashColor: Colors.pink[200],
                             ),
