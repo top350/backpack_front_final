@@ -9,6 +9,7 @@ import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'imagePickerBorrow.dart';
 import '../database/db_request.dart';
 import '../database/db_account.dart';
+import '../bottombar_home.dart';
 
 class BorrowPage extends StatefulWidget {
   AccountObject currentUser; //Recieve from home
@@ -36,6 +37,7 @@ class _BorrowPageState extends State<BorrowPage> {
   int reqByAcc = 0;  //Send to Backend
 ApiProvider apiProvider = ApiProvider();
 Future doBorrow() async {
+  print(reqByAcc);
   String pickuptime = sendPickUpTime.toString();
    String returntime = sendReturnTime.toString();
    String tokenused =sendTokenUsed.toString();
@@ -49,7 +51,12 @@ Future doBorrow() async {
     
     if (rs.body=='ok') {
       
-        Navigator.of(context).pushReplacementNamed("/Home");
+         Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => ButtomBarHome(currentUser),
+              ),
+            );
     } else {
       print('Server error');
       
