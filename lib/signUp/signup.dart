@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-
-// import  'category.dart';
+import 'dart:convert';
+import 'package:front_backpack_app/api_provider.dart';
+import  'category.dart';
 
 class SignupPage extends StatefulWidget {
   @override
@@ -11,13 +12,30 @@ class SignupPageState extends State<SignupPage>
     with SingleTickerProviderStateMixin {
   AnimationController _iconAnimationController;
   Animation<double> _iconAnimation;
-  TextEditingController username = TextEditingController();
+  TextEditingController firstname = TextEditingController();
+  TextEditingController lastname = TextEditingController();
   TextEditingController studentID = TextEditingController();
   TextEditingController email = TextEditingController();
   TextEditingController phoneNo = TextEditingController();
   TextEditingController password1 = TextEditingController();
   TextEditingController password2 = TextEditingController();
-
+    // final _formkey = GlobalKey<FormState>();
+  ApiProvider apiProvider = ApiProvider();
+Future doSignup() async {
+  final rs = await apiProvider.doSignup(studentID.text, firstname.text, lastname.text, password1.text, phoneNo.text, email.text);
+  print(rs.body);
+  if (rs.statusCode == 200) {
+    print(rs.body);
+    var jsonRes = json.decode(rs.body);
+    if (jsonRes['ok']) {
+      
+      Navigator.of(context).pushReplacementNamed("/category");
+    } else {
+      print('Server error');
+      
+    }
+  }
+}
   @override
   void initState() {
     super.initState();
@@ -64,9 +82,16 @@ class SignupPageState extends State<SignupPage>
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: <Widget>[
                           new TextFormField(
-                            controller: username,
+                            controller: firstname,
                             decoration: new InputDecoration(
-                              labelText: "Enter your Name",
+                              labelText: "Enter your Firstname",
+                            ),
+                            keyboardType: TextInputType.text,
+                          ),
+                          new TextFormField(
+                            controller: lastname,
+                            decoration: new InputDecoration(
+                              labelText: "Enter your Lastname",
                             ),
                             keyboardType: TextInputType.text,
                           ),
@@ -90,7 +115,7 @@ class SignupPageState extends State<SignupPage>
                               labelText: "Enter Phone no.",
                             ),
                             keyboardType: TextInputType.text,
-                            obscureText: true,
+                           
                           ),
                           new TextFormField(
                             controller: password1,
@@ -119,9 +144,10 @@ class SignupPageState extends State<SignupPage>
                             textColor: Colors.white,
                             child: new Text("Next"),
                             onPressed: () {
-                              Navigator.of(context).pushNamed("/category");
+                              
+                              doSignup();
                               if (password1.text == password2.text) {
-                                print(username.text);
+                               
                                 print(password1.text);
                                 print(email.text);
                               } else {

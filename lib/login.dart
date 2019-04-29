@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-
+import 'package:shared_preferences/shared_preferences.dart';
 import 'signUp/intro.dart';
-
+import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'api_provider.dart';
+import 'database/db_schema.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -19,29 +20,70 @@ class LoginPageState extends State<LoginPage>
 
   final _formkey = GlobalKey<FormState>();
   ApiProvider apiProvider = ApiProvider();
+  var count; 
+  List<String> result = new List(5);
+  
+  
 
-  // Future doLogin() async {
-  //   if (_formkey.currentState.validate()) {
-  //     try {
-  //       var rs = await apiProvider.doLogin(_username.text, _password.text);
-  //       if (rs.statusCode == 200) {
-  //         print(rs.body);
-  //         var jsonRes = json.decode(rs.body);
-  //         if (jsonRes['ok']) {
-  //           String token = jsonRes['token'];
-  //           print(token);
-  //         } else {
-  //           print('Server error');
-  //         }
-  //       } else {
-  //         print('server error');
-  //       }
-  //     } catch (e) {
-  //       print(e);
-  //     }
-  //   }
-  // }
+  Future<Null> doLogin() async {
+    if (_formkey.currentState.validate()) {
+      try {
+        var rs = await apiProvider.doLogin(_username.text, _password.text);
+        if (rs.statusCode == 200) {
+          print(rs.body);
+          
+          var jsonRes = json.decode(rs.body);
+          final student = UserObject.fromJson(jsonRes);
+          print(student.studentID);
+          if (jsonRes['ok']) {
+            String token = jsonRes['token'];
+            // print(token);
+           
+            SharedPreferences prefs = await SharedPreferences.getInstance();
+            await prefs.setString('token', token);
+            Navigator.of(context).pushReplacementNamed("/Home");
+          } else {
+            print('Server error');
+            
+          }
+        } else {
+          print('server error');
+          count=1;
+        }
+      } catch (e) {
+        print(e);
+      }
+    }
+  }
 
+  Future<Student> fetchStudent(studentId) async {
+  final response =
+      await http.get(
+        'http://1633b33c.ngrok.io/users/$studentId'
+      );
+      
+
+  if (response.statusCode == 200) {
+    // If server returns an OK response, parse the JSON
+    // print(response.body);
+    print(json.decode(response.body));
+    final student = Student.fromJson(json.decode(response.body));
+    print(student.email);
+    // print(student.firstname);
+    // print(student.studentid);
+    // result[0]=student.studentid;
+    // result[1]=student.firstname;
+    // result[2]=student.email;
+  
+
+    return student;
+   
+    
+  } else {
+    // If that response was not OK, throw an error.
+    throw Exception('Failed to load post');
+  }
+}
   @override
   void initState() {
     super.initState();
@@ -128,10 +170,10 @@ class LoginPageState extends State<LoginPage>
                               color: Colors.pink[400],
                               textColor: Colors.white,
                               child: new Text("Log in"),
-                              onPressed: () {
-                                Navigator.of(context)
-                                    .pushReplacementNamed("/Home");
-                                // doLogin();
+                              onPressed: () async{
+                             
+                                await doLogin();
+                                fetchStudent(_username.text);
                               },
                               splashColor: Colors.pink[200],
                             ),
@@ -178,3 +220,33 @@ class LoginPageState extends State<LoginPage>
 //     }
 
 }
+class Student {
+  final String studentid;
+  final String firstname;
+  final String lastname;
+  final String phoneno;
+  final String email;
+ 
+ 
+  Student({this.studentid, this.firstname, this.lastname, this.phoneno,this.email,});
+
+  factory Student.fromJson(Map<String, dynamic> json) {
+
+  
+    return Student(
+      studentid: json['username'],
+      firstname: json['fullname'],
+      lastname: json['lastname'],
+      phoneno: json['phoneno'],
+      email: json['email'],
+  
+      
+    );
+   
+  }
+ 
+}
+
+
+
+

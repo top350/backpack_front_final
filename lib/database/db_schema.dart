@@ -27,7 +27,7 @@ class UserObject {
   DateTime createdAt;
   DateTime updatedAt;
 
-  UserObject(
+  UserObject({
       this.accountNo,
       this.studentID,
       this.password,
@@ -43,7 +43,28 @@ class UserObject {
       this.profilePic,
       this.inSession,
       this.createdAt,
-      this.updatedAt);
+      this.updatedAt});
+      factory UserObject.fromJson(Map<String, dynamic> json) {
+
+  
+    return UserObject(
+      accountNo: json['username'],
+      firstName: json['firstname'],
+      lastName: json['lastname'],
+      telNo: json['phoneno'],
+      email: json['email'],
+       studentID: json['username'],
+      // qrCode: json['fullname'],
+      // noOfFeedback: json['lastname'],
+      // avgRating: json['phoneno'],
+      //  token: json['username'],
+      // categotyHave: json['fullname'],
+      // profilePic: json['lastname'],
+      // inSession: json['phoneno'],
+  
+      
+    );
+}
 }
 
 class ItemObject {
@@ -60,14 +81,14 @@ class ItemObject {
       this.belongToAccountNo, this.examlePic, this.createdAt, this.updatedAt);
 }
 
-class RequestObject {
+class RequestObjects {
   int requestNo;
   String itemName = '';
   String itemCategory = '';
-  DateTime pickUpTime;
-  DateTime returnTime;
+  String pickUpTime;
+  String returnTime;
   String kioskLocation = '';
-  int tokenUsed;
+  String tokenUsed;
   String note;
   String examplePic;
   bool requestStatus;
@@ -75,7 +96,7 @@ class RequestObject {
   DateTime createdAt;
   DateTime updatedAt;
 
-  RequestObject(
+  RequestObjects({
       this.requestNo,
       this.itemName,
       this.itemCategory,
@@ -88,7 +109,27 @@ class RequestObject {
       this.requestStatus,
       this.reqByAccountNo,
       this.createdAt,
-      this.updatedAt);
+      this.updatedAt});
+     
+     
+  factory RequestObjects.fromJson(Map<String, dynamic> json) {
+
+  
+    return RequestObjects(
+      itemName: json['itemname'],
+      itemCategory: json['category'],
+      pickUpTime: json['pickupTime'],
+      returnTime: json['returnTime'],
+      kioskLocation: json['Kios'],
+        tokenUsed: json['token'],
+      note: json['note'],
+  
+      
+    );
+   
+  }
+ 
+      
 }
 
 class SessionObject {
