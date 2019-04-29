@@ -1,6 +1,9 @@
 // import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
+import 'dart:convert';
 
+import 'package:flutter/material.dart';
+import 'package:front_backpack_app/api_provider.dart';
+import 'package:front_backpack_app/database/db_schema.dart';
 import 'dashboard.dart';
 import 'borrow/borrow.dart';
 import 'session/waiting_session.dart';
@@ -57,10 +60,29 @@ class ButtomBarHomeState extends State<ButtomBarHome> {
     );
   }
 
+  ApiProvider apiProvider = ApiProvider();
+  Future<Null>doBottombar(String aid) async {
+  final rs = await apiProvider.doBottombar(aid);
+  print(rs.body);
+  if (rs.statusCode == 200) {
+    print(rs.body);
+    var jsonRes = json.decode(rs.body);
+    final itemdata = AccountObject.fromJson(jsonRes[0]);
+    if (jsonRes['ok']) {
+      
+      
+    } else {
+      print('Server error');
+      
+    }
+  }
+}
+
   void onTabTapped(int index) {
     setState(() {
       //Send When pressed this
       currentindex = index;
+
     });
   }
 }

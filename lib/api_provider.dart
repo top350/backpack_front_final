@@ -61,13 +61,13 @@ Future<http.Response> doBorrow(
     return http.post(_url, body:body);
   }
     Future<http.Response> doBottombar(String aid){
-    String _url = '$endpoint/requestPage';
+    String _url = '$endpoint/profile';
     var body = {"aid":aid};
     return http.post(_url, body:body);
   }
-   Future<http.Response> doeditProfile(String firstname,String lastname, String password,String phoneNo,String email ){
+   Future<http.Response> doeditProfile(String aid,String firstname,String lastname,String phoneNo,String email ){
     String _url = '$endpoint/requestPage';
-    var body = {"firstname":firstname ,"lastname":lastname ,"password": password,"tel_no":phoneNo,"email":email};
+    var body = {"aid":aid,"firstname":firstname ,"lastname":lastname ,"tel_no":phoneNo,"email":email};
     return http.post(_url, body:body);
   }
 
