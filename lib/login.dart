@@ -22,8 +22,7 @@ class LoginPageState extends State<LoginPage>
   ApiProvider apiProvider = ApiProvider();
   var count; 
   List<String> result = new List(5);
-  
-  
+
 
   Future<Null> doLogin() async {
     if (_formkey.currentState.validate()) {

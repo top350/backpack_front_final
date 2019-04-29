@@ -10,7 +10,7 @@ class RegChulaObject {
 }
 
 class UserObject {
-  int aid;
+  String aid;
   String it_chula = '';
   String password = '';
   String first_Name = '';
@@ -18,9 +18,9 @@ class UserObject {
   String email = '';
   String tel_No = '';
   String qrCode = '';
-  int no_Of_Feedback;
-  int avg_Rating;
-  int token;
+  String no_Of_Feedback;
+  String avg_Rating;
+  String token;
  // String categotyHave = '';
   String image;
   bool in_session;
