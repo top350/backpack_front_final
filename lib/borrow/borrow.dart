@@ -29,7 +29,6 @@ class _BorrowPageState extends State<BorrowPage> {
   String sendItemName = ''; //Send to Backend 
   String sendItemType = '';
   DateTime sendPickUpTime;
-  
   DateTime sendReturnTime;
   String sendKioskLocation = '';
   int sendTokenUsed = 0;
@@ -40,14 +39,15 @@ Future doBorrow() async {
   String pickuptime = sendPickUpTime.toString();
    String returntime = sendReturnTime.toString();
    String tokenused =sendTokenUsed.toString();
+   String sendAcc = reqByAcc.toString();
   print(pickuptime);
-  final rs = await apiProvider.doBorrow(sendItemName, sendItemType,pickuptime, returntime, sendKioskLocation, tokenused,sendNote);
+  final rs = await apiProvider.doBorrow(sendItemName, sendItemType,pickuptime, returntime, sendKioskLocation, tokenused,sendNote,sendAcc);
   print(rs.body);
   if (rs.statusCode == 200) {
     print(rs.body);
-    var jsonRes = json.decode(rs.body);
+   // var jsonRes = json.decode(rs.body);
     
-    if (jsonRes['ok']) {
+    if (rs.body=='ok') {
       
         Navigator.of(context).pushReplacementNamed("/Home");
     } else {
@@ -67,7 +67,7 @@ Future doBorrow() async {
       'Note',
       'assets/logo.png',
       false,
-      user1.accountNo,
+      0,
       sampleTime,
       sampleTime,
       emptyFile);
@@ -92,22 +92,22 @@ Future doBorrow() async {
     "Siam",
   ];
 
-  void _addItem() {
-    //No need when connect with backend
-    if (newRequest.itemCategory == "Stationery") {
-      requestList.add(newRequest);
-    } else if (newRequest.itemCategory == "Clothing") {
-      requestList.add(newRequest);
-    } else if (newRequest.itemCategory == "Sport Equipment") {
-      requestList.add(newRequest);
-    } else if (newRequest.itemCategory == "Electronics") {
-      requestList.add(newRequest);
-    } else if (newRequest.itemCategory == "Books") {
-      requestList.add(newRequest);
-    } else {
-      requestList.add(newRequest);
-    }
-  }
+  // void _addItem() {
+  //   //No need when connect with backend
+  //   if (newRequest.itemCategory == "Stationery") {
+  //     requestList.add(newRequest);
+  //   } else if (newRequest.itemCategory == "Clothing") {
+  //     requestList.add(newRequest);
+  //   } else if (newRequest.itemCategory == "Sport Equipment") {
+  //     requestList.add(newRequest);
+  //   } else if (newRequest.itemCategory == "Electronics") {
+  //     requestList.add(newRequest);
+  //   } else if (newRequest.itemCategory == "Books") {
+  //     requestList.add(newRequest);
+  //   } else {
+  //     requestList.add(newRequest);
+  //   }
+  // }
 
   @override
   void initState() {
@@ -282,10 +282,10 @@ Future doBorrow() async {
                   sendKioskLocation = newRequest.kioskLocation;
                   sendTokenUsed = newRequest.tokenUsed;
                   sendNote = newRequest.note;
-                  reqByAcc = newRequest.reqByAccountNo;
+                  reqByAcc = currentUser.aid;
               doBorrow();
                   print(sendItemType);
-                  _addItem();
+                  //_addItem();
                 },
                 splashColor: Colors.pink[200],
               ),

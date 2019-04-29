@@ -22,7 +22,9 @@ class Dashboard extends StatefulWidget {
 
 class _DashboardState extends State<Dashboard> {
   String categoryName = ''; //Send to Backend
+
   List<RequestObject> receiveRequestList =[]; //Receive from Backend
+
 
   AccountObject currentUser; //Receive from Home
   _DashboardState(this.currentUser);

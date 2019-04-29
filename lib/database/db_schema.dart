@@ -10,57 +10,58 @@ class RegChulaObject {
 }
 
 class UserObject {
-  int accountNo;
-  String studentID = '';
+  String aid;
+  String it_chula = '';
   String password = '';
-  String firstName = '';
-  String lastName = '';
+  String first_Name = '';
+  String last_Name = '';
   String email = '';
-  String telNo = '';
+  String tel_No = '';
   String qrCode = '';
-  int noOfFeedback;
-  double avgRating;
-  int token;
-  String categotyHave = '';
-  String profilePic;
-  bool inSession;
+  String no_Of_Feedback;
+  String avg_Rating;
+  String token;
+ // String categotyHave = '';
+  String image;
+  bool in_session;
   DateTime createdAt;
   DateTime updatedAt;
 
   UserObject({
-      this.accountNo,
-      this.studentID,
+      this.aid,
+      this.it_chula,
       this.password,
-      this.firstName,
-      this.lastName,
+      this.first_Name,
+      this.last_Name,
       this.email,
-      this.telNo,
+      this.tel_No,
       this.qrCode,
-      this.noOfFeedback,
-      this.avgRating,
+      this.no_Of_Feedback,
+      this.avg_Rating,
       this.token,
-      this.categotyHave,
-      this.profilePic,
-      this.inSession,
+   //   this.categotyHave,
+      this.image,
+      this.in_session,
       this.createdAt,
       this.updatedAt});
+
       factory UserObject.fromJson(Map<String, dynamic> json) {
 
   
     return UserObject(
-      accountNo: json['username'],
-      firstName: json['firstname'],
-      lastName: json['lastname'],
-      telNo: json['phoneno'],
+      aid: json['aid'],
+      first_Name: json['first_name'],
+      last_Name: json['last_name'],
+      tel_No: json['tel_no'],
       email: json['email'],
-       studentID: json['username'],
-      // qrCode: json['fullname'],
-      // noOfFeedback: json['lastname'],
-      // avgRating: json['phoneno'],
-      //  token: json['username'],
-      // categotyHave: json['fullname'],
-      // profilePic: json['lastname'],
-      // inSession: json['phoneno'],
+       it_chula: json['it_chula'],
+       qrCode: json['qrcode'],
+       no_Of_Feedback: json['no_of_feedback'],
+       avg_Rating: json['avg_rating'],
+        token: json['token'],
+       //categotyHave: json['fullname'],
+       image: json['image'],
+       in_session: json['in_session'],
   
       
     );
@@ -89,7 +90,7 @@ class RequestObjects {
   String pickUpTime;
   String returnTime;
   String kioskLocation = '';
-  String tokenUsed;
+  int tokenUsed;
   String note;
   String examplePic;
   bool requestStatus;
@@ -157,7 +158,7 @@ class SessionObject {
 }
 
 class FeedbackObject {
-  int feedbackNo;
+  String feedbackNo;
   String comment;
   double rating;
   int fromAccountNo;

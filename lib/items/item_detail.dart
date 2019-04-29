@@ -110,7 +110,7 @@ class ItemDetail extends StatelessWidget {
                       ),
                       Text(
                           'Posted by: ' +
-                              borrower.firstName, //need to show name
+                              'borrower.firstName', //need to show name
                           style: TextStyle(fontSize: 15))
                     ],
                   ),
@@ -218,7 +218,7 @@ class ItemDetail extends StatelessWidget {
                       child: new Text("Lent!!"),
                       onPressed: () {
                         // Send/Receive to Backend here
-                        lenderAccountId = user.accountNo;
+                        lenderAccountId = user.aid;
                         requestNo = itemRequest.requestNo;
                         print(lenderAccountId.toString() +
                             "  " +
