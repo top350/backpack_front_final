@@ -7,8 +7,9 @@ import 'dart:async';
 
 class ApiProvider {
   ApiProvider();
-  String endpoint = " http://192.168.43.40:3000";
-  Future<http.Response> doLogin(String id, String password) async {
+
+  String endpoint = "http://172.20.10.14:3000";
+  Future<http.Response> doLogin(String username, String password) async {
     String _url = '$endpoint/login';
     var body = {"id": id, "password": password};
     print(id+ " " + password);
@@ -28,8 +29,8 @@ class ApiProvider {
   }
 
   Future<http.Response> doCategory(String categoryname){
-    String _url = '$endpoint/requestPage';
-    var body = {"categoryname":categoryname};
+    String _url = '$endpoint/homepage';
+    var body = {"item_type":categoryname};
     return http.post(_url, body:body);
   }
   Future<http.Response> fetchPost() {
