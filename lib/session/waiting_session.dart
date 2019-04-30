@@ -22,9 +22,9 @@ class WaitingSession extends StatelessWidget {
               Icons.navigate_next,
             ),
             onPressed: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) => new KioskSession()),
-              );
+              // Navigator.of(context).push(
+              //   MaterialPageRoute(builder: (context) => new KioskSession()),
+              // );
             },
           )
         ],

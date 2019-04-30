@@ -3,10 +3,19 @@ import 'package:flutter/material.dart';
 import '../profile/profile.dart';
 import 'qr_generator.dart';
 import 'session.dart';
+import '../database/db_account.dart';
+import '../database/db_schema.dart';
+
 // import  'category.dart';
 
 class KioskSession extends StatefulWidget {
+  AccountObject currentUSer;
+  AccountObject borrower;  
+  int sessionID;
+KioskSession(this.currentUSer,this.borrower,this.sessionID); 
+  
   //Session2
+  
   @override
   State createState() => new KioskSessionState();
 }

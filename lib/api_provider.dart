@@ -57,7 +57,9 @@ Future<http.Response> doBorrow(
     var body = {"rid":rid};
     return http.post(_url, body:body);
   }
-   Future<http.Response> doLent(String rid,String aid){
+   Future<http.Response> doLent(String rid,String aid)async{
+    print('Lent');
+    print(rid+ " "+aid);
     String _url = '$endpoint/acceptRequest';
     var body = {"rid":rid,"aid":aid};
     return http.post(_url, body:body);
