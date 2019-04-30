@@ -39,26 +39,14 @@ class ItemCard extends StatelessWidget {
     }
   }
 
-  Widget _imageInBox(double width, double height, String imageurl, File file) {
-    return file == null
-        ? Container(
-            width: width,
-            height: height,
-            alignment: Alignment.center,
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                  image: AssetImage(
-                    imageurl,
-                  ),
-                  fit: BoxFit.fill),
-            ),
-          )
-        : new Container(
+  Widget _imageInBox(double width, double height, String imageurl) {
+    return 
+         new Container(
             width: width,
             height: height,
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: FileImage(file),
+                image: NetworkImage(imageurl),
                 fit: BoxFit.cover,
               ),
             ),
@@ -79,7 +67,7 @@ class ItemCard extends StatelessWidget {
           contentPadding:
               EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
           leading: _imageInBox(
-              100, 80, itemRequest.examplePicUrl, itemRequest.newExamplePic),
+              100, 80, itemRequest.examplePicUrl,),
           title: Text(
             itemRequest.itemName,
             style: TextStyle(

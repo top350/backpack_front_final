@@ -7,7 +7,7 @@ import 'dart:async';
 
 class ApiProvider {
   ApiProvider();
-  String endpoint = "http://192.168.137.1:3000";
+  String endpoint = "https://share-it-backend-dev.herokuapp.com";
   Future<http.Response> doLogin(String id, String password) async {
     String _url = '$endpoint/login';
     var body = {"id": id, "password": password};

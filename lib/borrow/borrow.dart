@@ -10,6 +10,7 @@ import 'imagePickerBorrow.dart';
 import '../database/db_request.dart';
 import '../database/db_account.dart';
 import '../bottombar_home.dart';
+import '../session/waiting_session.dart';
 
 class BorrowPage extends StatefulWidget {
   AccountObject currentUser; //Recieve from home
@@ -64,7 +65,7 @@ class _BorrowPageState extends State<BorrowPage> {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => ButtomBarHome(currentUser),
+            builder: (context) => WaitingSession(currentUser),
           ),
         );
       } else {

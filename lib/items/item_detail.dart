@@ -95,15 +95,13 @@ class ItemDetail extends StatelessWidget {
     );
   }
 
-  Widget _imageInBox(File file) {
-    return file == null
-        ? Image.asset(itemRequest.examplePicUrl)
-        : new Container(
+  Widget _imageInBox(String imageurl) {
+    return new Container(
             width: 500,
             height: 500,
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: FileImage(file),
+                image: NetworkImage(imageurl),
                 fit: BoxFit.fill,
               ),
             ),
@@ -135,7 +133,7 @@ class ItemDetail extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 mainAxisSize: MainAxisSize.max,
                 children: <Widget>[
-                  _imageInBox(itemRequest.newExamplePic),
+                  _imageInBox(itemRequest.examplePicUrl),
                   Padding(
                     padding: EdgeInsets.all(5),
                   ),
