@@ -66,7 +66,7 @@ Future<http.Response> doBorrow(
     return http.post(_url, body:body);
   }
    Future<http.Response> doeditProfile(String aid,String firstname,String lastname,String phoneNo,String email ){
-    String _url = '$endpoint/requestPage';
+    String _url = '$endpoint/editProfile';
     var body = {"aid":aid,"firstname":firstname ,"lastname":lastname ,"tel_no":phoneNo,"email":email};
     return http.post(_url, body:body);
   }
@@ -75,9 +75,9 @@ Future<http.Response> doBorrow(
     var body = {"aid":aid};
     return http.post(_url, body:body);
   }
-     Future<http.Response> doEndsession(String sid){
+     Future<http.Response> doEndsession(String sid,String status){
     String _url = '$endpoint/requestPage';
-    var body = {"sid":sid};
+    var body = {"sid":sid,"status":status};
     return http.post(_url, body:body);
   }
    Future<http.Response> doScan(String sid){
