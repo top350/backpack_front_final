@@ -51,7 +51,8 @@ class _EditProfileState extends State<EditProfile> {
         _firstNameController.text,
         _lastNameController.text,
         _phoneNumController.text,
-        _emailController.text);
+        _emailController.text,currentUser.image
+        );
     print(rs.body);
   }
 

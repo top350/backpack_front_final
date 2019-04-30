@@ -53,7 +53,8 @@ class _BorrowPageState extends State<BorrowPage> {
         sendKioskLocation,
         tokenused,
         sendNote,
-        sendAcc);
+        sendAcc,newRequest.examplePicUrl
+        );
     print(rs.body);
     if (rs.statusCode == 200) {
       print(rs.body);
@@ -293,7 +294,6 @@ class _BorrowPageState extends State<BorrowPage> {
                 textColor: Colors.white,
                 child: new Text("Request Item"),
                 onPressed: () {
-                  
                   //Send/Receive when press this
                   sendItemName = newRequest.itemName;
                   sendItemType = newRequest.itemCategory;

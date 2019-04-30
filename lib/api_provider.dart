@@ -54,7 +54,7 @@ class ApiProvider {
     String _selectedKiosk,
     String token,
     String note,
-    String aid,
+    String aid,String examplePic
   ) async {
     String _url = '$endpoint/borrowRequest';
     var body = {
@@ -65,7 +65,8 @@ class ApiProvider {
       "k_location": _selectedKiosk,
       "token_used": token,
       "note": note,
-      "aid": aid
+      "aid": aid.toString(),
+      "examplePicURL":examplePic
     };
     return http.post(_url, body: body);
   }
@@ -91,14 +92,15 @@ class ApiProvider {
   }
 
   Future<http.Response> doeditProfile(String aid, String firstname,
-      String lastname, String phoneNo, String email) {
+      String lastname, String phoneNo, String email,String image) {
     String _url = '$endpoint/editProfile';
     var body = {
       "aid": aid,
       "firstname": firstname,
       "lastname": lastname,
       "tel_no": phoneNo,
-      "email": email
+      "email": email,
+      "image":image
     };
     return http.post(_url, body: body);
   }
