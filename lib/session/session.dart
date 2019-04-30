@@ -93,14 +93,14 @@ Future doEndsession(BuildContext context) async {
                         height: 75.0,
                         decoration: BoxDecoration(
                           image: DecorationImage(
-                            image: AssetImage('assets/profile/profile.jpg'),
+                            image: NetworkImage('https://firebasestorage.googleapis.com/v0/b/shareit-60e65.appspot.com/o/profile.png?alt=media&token=297c1341-5c7d-4b1e-902b-2a98e4951f52'),//AssetImage('assets/profile/profile.jpg'),
                             fit: BoxFit.cover,
                           ),
                           borderRadius: BorderRadius.circular(80.0),
                         ),
                       ),
                       title: Text(
-                        'Session With Patsornchai W.',
+                        'Session With '+opposite.first_Name,
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                         ),
@@ -109,7 +109,7 @@ Future doEndsession(BuildContext context) async {
                         children: <Widget>[
                           Icon(Icons.phone),
                           Text(
-                            "  0812345678",
+                            opposite.tel_No,
                             style: TextStyle(color: Colors.black87),
                           )
                         ],

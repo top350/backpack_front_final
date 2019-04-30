@@ -45,7 +45,7 @@ ApiProvider apiProvider = ApiProvider();
        print(session.sessionNo);
       final borrower = AccountObject.fromJson(jsonRes[0]);
        print(borrower.tel_No);
-         Navigator.push(
+         Navigator.pushReplacement(
               context,
               MaterialPageRoute(
                 builder: (context) => KioskSession(user,borrower,session.sessionNo),
@@ -117,6 +117,14 @@ ApiProvider apiProvider = ApiProvider();
 
   @override
   Widget build(BuildContext context) {
+    String pickTime = itemRequest.pickUpTime;
+    DateTime pickDate = DateTime.parse(pickTime);
+    String pickFormattedDate = DateFormat('yMd').format(pickDate);
+    String pickFormattedTime = DateFormat('jm').format(pickDate);
+    String returnTime = itemRequest.pickUpTime;
+    DateTime returndate = DateTime.parse(returnTime);
+    String returnFormattedDate = DateFormat('yMd').format(returndate);
+    String returnFormattedTime = DateFormat('jm').format(pickDate);
     return Scaffold(
         appBar: AppBar(
             title: Text(
@@ -155,7 +163,7 @@ ApiProvider apiProvider = ApiProvider();
                       ),
                       Text(
                           'Pickup : ' +
-                              (itemRequest.pickUpTime),
+                              pickFormattedDate+pickFormattedTime,
                           style: TextStyle(fontSize: 15)),
                     ],
                   ),
@@ -172,7 +180,7 @@ ApiProvider apiProvider = ApiProvider();
                       ),
                       Text(
                           'Return : ' +
-                              (itemRequest.returnTime),
+                              returnFormattedDate+returnFormattedTime,
                           style: TextStyle(fontSize: 15)),
                     ],
                   ),

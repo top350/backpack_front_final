@@ -70,6 +70,9 @@ class ItemCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String time = itemRequest.pickUpTime;
+    DateTime date = DateTime.parse(time);
+    String formattedDate = DateFormat('jm').format(date);
     return Card(
       elevation: 5.0,
       margin: new EdgeInsets.symmetric(horizontal: 10.0, vertical: 8.0),
@@ -91,7 +94,7 @@ class ItemCard extends StatelessWidget {
                 size: 20,
               ),
               SizedBox(width: 10),
-              Text("Pick Up: " + itemRequest.pickUpTime,
+              Text("Pick Up: " + formattedDate,
                   style: TextStyle())
             ],
           ),

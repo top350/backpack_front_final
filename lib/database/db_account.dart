@@ -75,7 +75,7 @@ class AccountObject {
        it_chula: json['it_chula'],
        qrCode: json['qrcode'],
        no_Of_Feedback: json['no_of_feedback'],
-       avg_Rating: json['avg_rating'],
+       avg_Rating: json['avg_rating'].toDouble(),
         token: json['token'],
        //categotyHave: json['fullname'],
        image: json['image'],
