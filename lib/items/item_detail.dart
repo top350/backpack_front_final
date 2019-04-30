@@ -24,23 +24,31 @@ class ItemDetail extends StatelessWidget {
   
   ItemDetail(this.user, this.itemRequest);
 ApiProvider apiProvider = ApiProvider();
+
   Future doLent(BuildContext context)async {
     String aid = lenderAccountId.toString();
     String rid = requestNo.toString();
+    print('pressed');
     final rs = await apiProvider.doLent(rid,aid);
     if(rs.statusCode == 200){
        var jsonRes = json.decode(rs.body); 
+      //  print(jsonRes);
+      //  print(rs.body);
+      
     
     if(rs.body == 'not enough token'){
       print('not enough token');
     }
     else{
-       final session = SessionObject.fromJson(jsonRes[0].sid);
-        borrower = AccountObject.fromJson(jsonRes[0]);
+      print(jsonRes[0]);
+       final session = SessionObject.fromJson(jsonRes[0]);
+       print(session.sessionNo);
+      final borrower = AccountObject.fromJson(jsonRes[0]);
+       print(borrower.tel_No);
          Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => KioskSession(),
+                builder: (context) => KioskSession(user,borrower,session.sessionNo),
               ),
             );
         
@@ -235,9 +243,12 @@ ApiProvider apiProvider = ApiProvider();
                       textColor: Colors.white,
                       child: new Text("Lent!!"),
                       onPressed: () {
-                        
+                        print('1');
                         lenderAccountId = user.aid;
+                        print('2');
                         requestNo = itemRequest.requestNo;
+                        print('3');
+                        doLent(context);
                         print(lenderAccountId.toString() +
                             "  " +
                             requestNo.toString());
