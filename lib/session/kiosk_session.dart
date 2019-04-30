@@ -45,6 +45,7 @@ class KioskSessionState extends State<KioskSession>
   Future doScan(BuildContext context) async {
     String sendSID = sessionID.toString();
     var rs = await apiProvider.doScan(sendSID);
+    print(sendSID);
     var jsonRes = json.decode(rs.body);
     if (rs.statusCode == 200) {
       print(rs.body);
