@@ -90,9 +90,9 @@ Future<http.Response> doBorrow(
     var body = {"sid":sid};
     return http.post(_url, body:body);
   }
-   Future<http.Response> doFeedback(String feedbackNo,String comment,String aid,String sid){
-    String _url = '$endpoint/requestPage';
-    var body = {"feedbackNo":feedbackNo,"comment":comment,"aid":aid,"sid":sid};
+   Future<http.Response> doFeedback(String feedbackNo,String comment,String taid,String faid){
+    String _url = '$endpoint/feedback';
+    var body = {"rating":feedbackNo,"comment":comment,"t_aid":taid,"f_aid":faid};
     return http.post(_url, body:body);
   }
 

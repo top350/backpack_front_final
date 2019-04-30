@@ -1,5 +1,9 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_rating/flutter_rating.dart';
+import 'package:front_backpack_app/api_provider.dart';
+import 'package:front_backpack_app/bottombar_home.dart';
 import '../database/db_schema.dart';
 import '../database/db_account.dart';
 
@@ -10,13 +14,40 @@ class RatingSession extends StatefulWidget {
   SessionObject session;
   RatingSession(this.currentUser,this.opposite,this.session);
   @override
-  _RatingSessionState createState() => new _RatingSessionState();
+  _RatingSessionState createState() => new _RatingSessionState(this.currentUser,this.opposite,this.session);
+
+
 }
 
 class _RatingSessionState extends State<RatingSession> {
+    AccountObject currentUser;
+  AccountObject opposite;
+  SessionObject session;
+  _RatingSessionState(this.currentUser,this.opposite,this.session);
   double rating = 3.5;
   int starCount = 5;
   String note = '';
+
+ 
+               
+  ApiProvider apiProvider = ApiProvider();  
+    Future doFeedback() async {
+        String faid = currentUser.aid.toString();
+    String taid = opposite.aid.toString();
+   
+    var rs = await apiProvider.doFeedback(rating.toString(),note,taid,faid);
+    if(rs.statusCode==200){
+        print('feedback inserted');
+               
+          Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => ButtomBarHome(currentUser),
+                      ),
+                  );
+      }
+
+
+    } 
 
   @override
   Widget build(BuildContext context) {
@@ -153,8 +184,9 @@ class _RatingSessionState extends State<RatingSession> {
                     ),
                   ),
                   onPressed: () {
-                    Navigator.of(context).pushNamedAndRemoveUntil(
-                        '/Home', (Route<dynamic> route) => false);
+                    doFeedback();
+                    // Navigator.of(context).pushNamedAndRemoveUntil(
+                    //     '/Home', (Route<dynamic> route) => false);
                     // Navigator.of(context).pushReplacement(
                     //     MaterialPageRoute(builder: (context) => new Home()));
                   },

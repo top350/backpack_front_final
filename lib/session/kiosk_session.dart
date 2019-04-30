@@ -58,6 +58,7 @@ KioskSessionState(this.currentUser,this.opposite,this.sessionID);
         print('havent scanned');
       }
       else{
+        print('else laew');
          final session = SessionObject.fromJson(jsonRes[0]);
          print(session);
                
@@ -156,6 +157,14 @@ KioskSessionState(this.currentUser,this.opposite,this.sessionID);
                   textColor: Colors.white,
                   child: new Text("Scanned"),
                   onPressed: () {
+                          
+          Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => new SessionPage(currentUser,opposite,session),
+                      ),
+                  );
+      
+                    print('pressed');
                     doScan(context);
                   },
                   splashColor: Colors.pink[200],
