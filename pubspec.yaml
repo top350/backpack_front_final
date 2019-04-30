@@ -52,6 +52,7 @@ flutter:
     - assets/profile/profile.jpg
     - assets/profile/Hope.PNG
     - assets/profile/Bus.PNG
+    - assets/profile/profilepic.png
     - assets/item_example/blanket.jpg
     - assets/item_example/jacket.jpg
     - assets/item_example/laptop.jpg

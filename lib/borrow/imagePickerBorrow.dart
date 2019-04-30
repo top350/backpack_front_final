@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:front_backpack_app/database/db_schema.dart';
 
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
@@ -24,6 +25,7 @@ class ImagePickerBorrow extends StatefulWidget {
 
 class ImagePickerBorrowState extends State<ImagePickerBorrow> {
   NewRequestObject example;
+  
 
 
   ImagePickerBorrowState(this.example);
@@ -132,13 +134,13 @@ Widget uploadArea() {
     ],
   );
 }
-
-Future<String> uploadImage(String imageUrl) async{
+Image1 temp;
+Future<String> uploadImage() async{
   StorageReference ref = FirebaseStorage.instance.ref().child(fileName);
   StorageUploadTask uploadTask =ref.putFile(imageFile);
   var downUrl = await (await uploadTask.onComplete).ref.getDownloadURL();
   var url = downUrl.toString(); //download url
-  imageUrl = url;
+  temp = new Image1(url);
   print('Download URL : $url');
   return url;
 }

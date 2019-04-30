@@ -38,13 +38,16 @@ class SessionPageState extends State<SessionPage>
   ApiProvider apiProvider = ApiProvider();
   Future doEndsession(BuildContext context) async {
     final rs = await apiProvider.doEndsession('end',session.sessionNo.toString(),currentUser.aid.toString());
+    if(rs.body=='false'){
+      print('You are not allowed');
+    }else{
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => new RatingSession(currentUser, opposite, session),
       ),
     );
     print(rs.body);
-  }
+  }}
 
   @override
   void initState() {

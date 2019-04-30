@@ -36,7 +36,7 @@ class ItemDetail extends StatelessWidget {
       //  print(jsonRes);
       //  print(rs.body);
 
-      if (rs.body == 'not enough token') {
+      if (rs.body == 'false') {
         print('not enough token');
       } else {
         print(jsonRes[0]);
@@ -95,13 +95,13 @@ class ItemDetail extends StatelessWidget {
     );
   }
 
-  Widget _imageInBox(String imageurl) {
+  Widget _imageInBox() {
     return new Container(
             width: 500,
             height: 500,
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: NetworkImage(imageurl),
+                image: AssetImage('assets/logo.png'),
                 fit: BoxFit.fill,
               ),
             ),
@@ -111,14 +111,14 @@ class ItemDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String pickTime = itemRequest.pickUpTime;
-    DateTime pickDate = DateTime.parse(pickTime);
-    String pickFormattedDate = DateFormat('yMd').format(pickDate);
-    String pickFormattedTime = DateFormat('jm').format(pickDate);
-    String returnTime = itemRequest.pickUpTime;
-    DateTime returndate = DateTime.parse(returnTime);
-    String returnFormattedDate = DateFormat('yMd').format(returndate);
-    String returnFormattedTime = DateFormat('jm').format(pickDate);
+    // String pickTime = itemRequest.pickUpTime;
+    // DateTime pickDate = DateTime.parse(pickTime);
+    // String pickFormattedDate = DateFormat('yMd').format(pickDate);
+    // String pickFormattedTime = DateFormat('jm').format(pickDate);
+    // String returnTime = itemRequest.pickUpTime;
+    // DateTime returndate = DateTime.parse(returnTime);
+    // String returnFormattedDate = DateFormat('yMd').format(returndate);
+    // String returnFormattedTime = DateFormat('jm').format(pickDate);
     return Scaffold(
         appBar: AppBar(
             title: Text(
@@ -133,7 +133,7 @@ class ItemDetail extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 mainAxisSize: MainAxisSize.max,
                 children: <Widget>[
-                  _imageInBox(itemRequest.examplePicUrl),
+                  _imageInBox(),
                   Padding(
                     padding: EdgeInsets.all(5),
                   ),
@@ -155,10 +155,8 @@ class ItemDetail extends StatelessWidget {
                       ),
                       Text(
                           'Pickup : ' +
-                              pickFormattedDate +
-                              '  ' +
-                              pickFormattedTime,
-                          style: TextStyle(fontSize: 15)),
+                             itemRequest.pickUpTime,
+                          style: TextStyle(fontSize: 16)),
                     ],
                   ),
                   Padding(
@@ -174,9 +172,7 @@ class ItemDetail extends StatelessWidget {
                       ),
                       Text(
                           'Return : ' +
-                              returnFormattedDate +
-                              '  ' +
-                              returnFormattedTime,
+                             itemRequest.pickUpTime,
                           style: TextStyle(fontSize: 15)),
                     ],
                   ),

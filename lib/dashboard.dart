@@ -134,7 +134,7 @@ class _DashboardState extends State<Dashboard> {
               categoryName = 'Stationery';
               print(categoryName);
               doCategory(categoryName);
-              Timer(Duration(seconds: 1), () {
+              Timer(Duration(seconds: 2), () {
                 print('item length = ' + receiveRequestList.length.toString());
                 Navigator.push(
                   context,
@@ -154,8 +154,8 @@ class _DashboardState extends State<Dashboard> {
               //Send/Receive When pressed this
               categoryName = 'Clothing';
               print(categoryName);
-              doCategory(categoryName);
-              Timer(Duration(seconds: 1), () {
+             doCategory(categoryName);
+              Timer(Duration(seconds: 2), () {
                 print('item length = ' + receiveRequestList.length.toString());
                 Navigator.push(
                   context,
@@ -176,7 +176,7 @@ class _DashboardState extends State<Dashboard> {
               categoryName = 'Sport Equipment';
               print(categoryName);
               doCategory(categoryName);
-              Timer(Duration(seconds: 1), () {
+              Timer(Duration(seconds: 2), () {
                 print('item length = ' + receiveRequestList.length.toString());
                 Navigator.push(
                   context,
@@ -197,7 +197,7 @@ class _DashboardState extends State<Dashboard> {
               categoryName = 'Electronics';
               print(categoryName);
               doCategory(categoryName);
-              Timer(Duration(seconds: 1), () {
+              Timer(Duration(seconds: 2), () {
                 print('item length = ' + receiveRequestList.length.toString());
                 Navigator.push(
                   context,
@@ -218,7 +218,7 @@ class _DashboardState extends State<Dashboard> {
               categoryName = 'Books';
               print(categoryName);
               doCategory(categoryName);
-              Timer(Duration(seconds: 1), () {
+              Timer(Duration(seconds: 2), () {
                 print('item length = ' + receiveRequestList.length.toString());
                 Navigator.push(
                   context,
@@ -238,7 +238,7 @@ class _DashboardState extends State<Dashboard> {
               //Send/Receive When pressed this
               categoryName = 'Others';
               doCategory(categoryName);
-              Timer(Duration(seconds: 1), () {
+              Timer(Duration(seconds: 2), () {
                 print('item length = ' + receiveRequestList.length.toString());
                 Navigator.push(
                   context,

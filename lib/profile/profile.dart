@@ -136,40 +136,24 @@ Widget _buildCoverImage(
 
 Widget displaySelectedFile(File file, AccountObject currentUser) {
   return new Container(
-    margin: EdgeInsets.all(10),
-    // child: new Card(child: new Text('' + galleryFile.toString())),
-    // child: new Image.file(galleryFile),
-    child: file == null
-        ? _buildProfileImage(currentUser)
-        : new Center(
-            child: Container(
-              width: 140.0,
-              height: 140.0,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: FileImage(file),
-                  fit: BoxFit.cover,
-                ),
-                borderRadius: BorderRadius.circular(80.0),
-                border: Border.all(
-                  color: Colors.white,
-                  width: 10.0,
-                ),
-              ),
-              // child: Image.file(file),
-            ),
-          ),
-  );
+      margin: EdgeInsets.all(10),
+      // child: new Card(child: new Text('' + galleryFile.toString())),
+      // child: new Image.file(galleryFile),
+      child: _buildProfileImage()
+
+      // child: Image.file(file),
+
+      );
 }
 
-Widget _buildProfileImage(AccountObject currentUser) {
+Widget _buildProfileImage() {
   return Center(
     child: Container(
       width: 120.0,
       height: 120.0,
       decoration: BoxDecoration(
         image: DecorationImage(
-          image: AssetImage('assets/profile/Bus.PNG'),
+          image: AssetImage('assets/profile/profilepic.png'),
           fit: BoxFit.cover,
         ),
         borderRadius: BorderRadius.circular(80.0),

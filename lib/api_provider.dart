@@ -68,6 +68,7 @@ class ApiProvider {
       "aid": aid.toString(),
       "examplePicURL":examplePic
     };
+    print(examplePic);
     return http.post(_url, body: body);
   }
 

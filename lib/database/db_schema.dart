@@ -221,3 +221,13 @@ class SessionandOppAcc {
         srid: json['rid'].toString());
   }
 }
+class Image1{
+  String url;
+
+
+Image1(String url){
+  this.url=url;
+}
+
+
+}

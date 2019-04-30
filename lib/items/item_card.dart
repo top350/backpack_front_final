@@ -46,8 +46,8 @@ class ItemCard extends StatelessWidget {
             height: height,
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: NetworkImage(imageurl),
-                fit: BoxFit.cover,
+                image: AssetImage('assets/logo.png'),
+                fit: BoxFit.fill,
               ),
             ),
             // child: Image.file(file),
@@ -56,9 +56,9 @@ class ItemCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String time = itemRequest.pickUpTime;
-    DateTime date = DateTime.parse(time);
-    String formattedDate = DateFormat('jm').format(date);
+    // String time = itemRequest.pickUpTime;
+    // DateTime date = DateTime.parse(time);
+    // String formattedDate = DateFormat('jm').format(date);
     return Card(
       elevation: 5.0,
       margin: new EdgeInsets.symmetric(horizontal: 10.0, vertical: 8.0),
@@ -78,10 +78,10 @@ class ItemCard extends StatelessWidget {
             children: <Widget>[
               Icon(
                 Icons.access_time,
-                size: 20,
+                size: 10,
               ),
               SizedBox(width: 10),
-              Text("Pick Up: " + formattedDate, style: TextStyle())
+              Text(itemRequest.pickUpTime, style: TextStyle(fontSize: 10))
             ],
           ),
           trailing: IconButton(

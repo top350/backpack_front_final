@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:front_backpack_app/api_provider.dart';
+import 'package:front_backpack_app/database/db_schema.dart';
 import 'dart:io';
 import 'package:intl/intl.dart';
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
@@ -45,6 +46,7 @@ class _BorrowPageState extends State<BorrowPage> {
     String returntime = sendReturnTime.toString();
     String tokenused = sendTokenUsed.toString();
     String sendAcc = reqByAcc.toString();
+    String u = '0';
     print(pickuptime);
     final rs = await apiProvider.doBorrow(
         sendItemName,
@@ -54,7 +56,7 @@ class _BorrowPageState extends State<BorrowPage> {
         sendKioskLocation,
         tokenused,
         sendNote,
-        sendAcc,newRequest.examplePicUrl
+        sendAcc,u
         );
     print(rs.body);
     if (rs.statusCode == 200) {
@@ -109,6 +111,8 @@ class _BorrowPageState extends State<BorrowPage> {
     "Science",
     "Siam",
   ];
+
+  Image1 image1;
 
   // void _addItem() {
   //   //No need when connect with backend
@@ -275,17 +279,17 @@ class _BorrowPageState extends State<BorrowPage> {
                 });
               },
             ),
-            Container(
-              margin: EdgeInsets.all(10),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10.0),
-                border: Border.all(
-                  color: Colors.grey,
-                  width: 1.0,
-                ),
-              ),
-              child: ImagePickerBorrow(newRequest),
-            ),
+            // Container(
+            //   margin: EdgeInsets.all(10),
+            //   decoration: BoxDecoration(
+            //     borderRadius: BorderRadius.circular(10.0),
+            //     border: Border.all(
+            //       color: Colors.grey,
+            //       width: 1.0,
+            //     ),
+            //   ),
+            //   child: ImagePickerBorrow(newRequest),
+            // ),
             Container(
               margin: EdgeInsets.all(10.0),
               child: MaterialButton(
@@ -304,7 +308,7 @@ class _BorrowPageState extends State<BorrowPage> {
                   sendTokenUsed = newRequest.tokenUsed;
                   sendNote = newRequest.note;
                   reqByAcc = currentUser.aid;
-                  uploadImage(newRequest.examplePicUrl);
+                  uploadImage();
                   doBorrow();
                   print(sendItemType);
                   //_addItem();
