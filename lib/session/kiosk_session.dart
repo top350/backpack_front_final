@@ -1,4 +1,9 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+
+import 'package:front_backpack_app/api_provider.dart';
+
 import 'package:front_backpack_app/database/db_account.dart';
 import 'package:front_backpack_app/database/db_schema.dart';
 
@@ -20,17 +25,51 @@ class KioskSession extends StatefulWidget {
   int sessionID;
 KioskSession(this.currentUSer,this.borrower,this.sessionID); 
 
-  
   //Session2
-  
+
+
+
   @override
-  State createState() => new KioskSessionState();
+  State createState() => new KioskSessionState(currentUSer,borrower,sessionID);
 }
 
 class KioskSessionState extends State<KioskSession>
     with SingleTickerProviderStateMixin {
+
+  
+  AccountObject currentUSer;
+  AccountObject borrower;  
+  
+  int sessionID;
+
+  SessionObject session;
+  
+KioskSessionState(this.currentUSer,this.borrower,this.sessionID); 
   AnimationController _iconAnimationController;
   Animation<double> _iconAnimation;
+
+  ApiProvider apiProvider = ApiProvider();  
+    Future doScan(BuildContext context) async {
+    String sendSID = sessionID.toString();
+    var rs = await apiProvider.doScan(sendSID);
+    var jsonRes = json.decode(rs.body);
+    if(rs.statusCode==200){
+      if(rs.body=='false'){
+        print('havent scanned');
+      }
+      else{
+         final session = SessionObject.fromJson(jsonRes[0]);
+         print(session);
+               
+          Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => new SessionPage(session),
+                      ),
+                  );
+      }
+
+    }
+  }
 
   @override
   void initState() {
@@ -117,11 +156,7 @@ class KioskSessionState extends State<KioskSession>
                   textColor: Colors.white,
                   child: new Text("Scanned"),
                   onPressed: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => new SessionPage(),
-                      ),
-                    );
+                    doScan(context);
                   },
                   splashColor: Colors.pink[200],
                 ),

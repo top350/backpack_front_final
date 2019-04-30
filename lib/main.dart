@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
         // "/Home": (BuildContext context) => new  ButtomBarHome(),
         "/login": (BuildContext context) => new LoginPage(),
         "/signup": (BuildContext context) => new SignupPage(),
-        "/session": (BuildContext context) => new SessionPage(),
+        //"/session": (BuildContext context) => new SessionPage(),
         "/splash": (BuildContext context) => new SplashScreen(),
         "/category": (BuildContext context) => new Category(),
         //"/item_list": (BuildContext context) => new ItemList(),

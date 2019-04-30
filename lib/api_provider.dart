@@ -86,7 +86,7 @@ Future<http.Response> doBorrow(
     return http.post(_url, body:body);
   }
    Future<http.Response> doScan(String sid){
-    String _url = '$endpoint/requestPage';
+    String _url = '$endpoint/sessionStart';
     var body = {"sid":sid};
     return http.post(_url, body:body);
   }
