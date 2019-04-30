@@ -143,9 +143,11 @@ class LoginPageState extends State<LoginPage>
                               color: Colors.pink[400],
                               textColor: Colors.white,
                               child: new Text("Log in"),
+
                               onPressed: () {
                                 doLogin();
                               },
+
                               splashColor: Colors.pink[200],
                             ),
                             new MaterialButton(
@@ -190,8 +192,8 @@ class LoginPageState extends State<LoginPage>
 //       print(e.message);
 //     }
 
-}
-
+//}
+    }
 class Student {
   final String studentid;
   final String firstname;
@@ -216,4 +218,5 @@ class Student {
       email: json['email'],
     );
   }
+
 }

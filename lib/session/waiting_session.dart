@@ -54,7 +54,9 @@ ApiProvider apiProvider = ApiProvider();
             ),
             onPressed: () {
               // Navigator.of(context).push(
+
               //   MaterialPageRoute(builder: (context) => new KioskSession(currentUser,opposite,session)),
+
               // );
             },
           )
