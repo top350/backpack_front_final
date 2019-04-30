@@ -7,7 +7,7 @@ import 'dart:async';
 
 class ApiProvider {
   ApiProvider();
-   String endpoint ="http://192.168.43.173:3000";
+   String endpoint ="http://192.168.137.1:3000";
   Future<http.Response> doLogin(String id, String password) async {
 
  
@@ -75,7 +75,8 @@ Future<http.Response> doBorrow(
     return http.post(_url, body:body);
   }
     Future<http.Response> doAccountsession(String aid){
-    String _url = '$endpoint/requestPage';
+    String _url = '$endpoint/checkAccept';
+    print(aid);
     var body = {"aid":aid};
     return http.post(_url, body:body);
   }
