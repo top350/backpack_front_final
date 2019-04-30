@@ -16,13 +16,13 @@ class ButtomBarHome extends StatefulWidget {
   AccountObject currentUser;
   ButtomBarHome(this.currentUser);
   
-  State<StatefulWidget> createState() => ButtomBarHomeState();
+  State<StatefulWidget> createState() => ButtomBarHomeState(currentUser);
 }
 
 class ButtomBarHomeState extends State<ButtomBarHome> {
   String requestAccount; //Send to Backend
   AccountObject currentUser ; //user1; //Receive from Backend
-
+   ButtomBarHomeState(this.currentUser);
   int currentindex = 0;
   Widget build(BuildContext context) {
     

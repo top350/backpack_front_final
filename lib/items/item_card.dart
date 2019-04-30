@@ -13,7 +13,7 @@ class ItemCard extends StatelessWidget {
 //This class is for the itemcard widget
   
   int requestNoPress = 0; // Send to Backend
-  AccountObject borrower ;//= user2; //Reviece from Backend
+  
 
   AccountObject user; //Recieve From Dashboard
   RequestObject itemRequest; //Recieve From Dashboard
@@ -91,7 +91,7 @@ class ItemCard extends StatelessWidget {
                 size: 20,
               ),
               SizedBox(width: 10),
-              Text("Pick Up: " + DateFormat("h:mma").format(itemRequest.pickUpTime),
+              Text("Pick Up: " + itemRequest.pickUpTime,
                   style: TextStyle())
             ],
           ),
@@ -105,7 +105,7 @@ class ItemCard extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => ItemDetail(user,itemRequest,borrower),
+                builder: (context) => ItemDetail(user,itemRequest),
               ),
             );
           },

@@ -9,6 +9,7 @@ import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'imagePickerBorrow.dart';
 import '../database/db_request.dart';
 import '../database/db_account.dart';
+import '../bottombar_home.dart';
 
 class BorrowPage extends StatefulWidget {
   AccountObject currentUser; //Recieve from home
@@ -28,14 +29,15 @@ class _BorrowPageState extends State<BorrowPage> {
 
   String sendItemName = ''; //Send to Backend 
   String sendItemType = '';
-  DateTime sendPickUpTime;
-  DateTime sendReturnTime;
+  String sendPickUpTime;
+  String sendReturnTime;
   String sendKioskLocation = '';
   int sendTokenUsed = 0;
   String sendNote = '';
   int reqByAcc = 0;  //Send to Backend
 ApiProvider apiProvider = ApiProvider();
 Future doBorrow() async {
+  print(reqByAcc);
   String pickuptime = sendPickUpTime.toString();
    String returntime = sendReturnTime.toString();
    String tokenused =sendTokenUsed.toString();
@@ -49,28 +51,33 @@ Future doBorrow() async {
     
     if (rs.body=='ok') {
       
-        Navigator.of(context).pushReplacementNamed("/Home");
+         Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => ButtomBarHome(currentUser),
+              ),
+            );
     } else {
       print('Server error');
       
     }
   }
 }
-  RequestObject newRequest = RequestObject(
+  NewRequestObject newRequest = NewRequestObject(
       1,
       'itemName',
       'itemCategory',
-      sampleTime,
-      sampleTime,
+      'sampleTime',
+      'sampleTime',
       'KioskLocation',
       0,
       'Note',
       'assets/logo.png',
-      false,
+      'false',
       0,
-      sampleTime,
-      sampleTime,
-      emptyFile);
+      'sampleTime',
+      'sampleTime',
+      );
 
   List<DropdownMenuItem<String>> _dropDownMenuCategory;
   List _category = [
@@ -189,7 +196,9 @@ Future doBorrow() async {
                         labelText: 'Date/Time', hasFloatingPlaceholder: false),
                     onChanged: (dt) {
                       setState(() {
-                        newRequest.pickUpTime = dt;
+                        
+                        newRequest.pickUpTime = DateFormat("d EEEE MMMM 'at' h:mma")
+                                  .format(dt);
                       });
                     },
                   ),
@@ -212,7 +221,8 @@ Future doBorrow() async {
                         labelText: 'Date/Time', hasFloatingPlaceholder: false),
                     onChanged: (dt) {
                       setState(() {
-                        newRequest.returnTime = dt;
+                        newRequest.returnTime = DateFormat("d EEEE MMMM 'at' h:mma")
+                                  .format(dt);;
                       });
                     },
                   ),
@@ -263,7 +273,7 @@ Future doBorrow() async {
                   width: 1.0,
                 ),
               ),
-              child: ImagePickerBorrow(newRequest),
+              //child: ImagePickerBorrow(newRequest),
             ),
             Container(
               margin: EdgeInsets.all(10.0),
@@ -298,11 +308,35 @@ Future doBorrow() async {
 }
 
 
-  String sendItemName = '';
-  String sendItemType = '';
-  DateTime sendPickUpTime;
-  DateTime sendReturnTime;
-  String sendKioskLocation = ''; 
-  int sendTokenUsed = 0;
-  String sendNote = '';
-  int reqByAcc = 0;
+
+class NewRequestObject {
+  int requestNo;
+  String itemName = '';
+  String itemCategory = '';
+  String pickUpTime;
+  String returnTime;
+  String kioskLocation = '';
+  int tokenUsed;
+  String note;
+  String examplePicUrl;
+  String requestStatus;
+  int reqByAccountNo; //From account
+  String createdAt ='';
+  String updatedAt='';
+
+  NewRequestObject(
+      this.requestNo,
+      this.itemName,
+      this.itemCategory,
+      this.pickUpTime,
+      this.returnTime,
+      this.kioskLocation,
+      this.tokenUsed,
+      this.note,
+      this.examplePicUrl,
+      this.requestStatus,
+      this.reqByAccountNo,
+      this.createdAt,
+      this.updatedAt,
+      
+  );}
