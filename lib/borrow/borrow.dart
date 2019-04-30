@@ -260,8 +260,10 @@ class _BorrowPageState extends State<BorrowPage> {
                   sendTokenUsed = newRequest.tokenUsed;
                   sendNote = newRequest.note;
                   reqByAcc = newRequest.reqByAccountNo;
+                  uploadImage();
                   Navigator.of(context).pushReplacementNamed("/Home");
                   _addItem();
+                   
                 },
                 splashColor: Colors.pink[200],
               ),

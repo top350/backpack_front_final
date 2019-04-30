@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
 import '../database/db_request.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:path/path.dart';
 
 class ImagePickerBorrow extends StatefulWidget {
   RequestObject example;
@@ -15,10 +17,13 @@ class ImagePickerBorrow extends StatefulWidget {
   }
 }
 
+  File imageFile;
+  String fileName;
+
+
 class ImagePickerBorrowState extends State<ImagePickerBorrow> {
   RequestObject example;
 
-  File imageFile;
 
   ImagePickerBorrowState(this.example);
 
@@ -32,6 +37,7 @@ class ImagePickerBorrowState extends State<ImagePickerBorrow> {
         // maxHeight: 50.0,
         // maxWidth: 50.0,
       );
+      fileName = basename(imageFile.path);
       print("You selected gallery imageeeeee : " + imageFile.path);
       setState(() {
         example.newExamplePic = imageFile;
@@ -104,11 +110,33 @@ class ImagePickerBorrowState extends State<ImagePickerBorrow> {
                 Text('Select an Example Image')
               ],
             )
-          : new SizedBox(
-              height: 300.0,
-              width: 300.0,
-              child: Image.file(file),
-            ),
+          : uploadArea()
     );
   }
+}
+
+Widget uploadArea() {
+  return Column(
+    children: <Widget>[
+      Image.file(
+        imageFile,
+        width: double.infinity,
+      ),
+      // RaisedButton(
+      //   child: Text('Upload'),
+      //   onPressed: () {
+      //     uploadImage();
+      //   },
+      // )
+    ],
+  );
+}
+
+Future<String> uploadImage() async{
+  StorageReference ref = FirebaseStorage.instance.ref().child(fileName);
+  StorageUploadTask uploadTask =ref.putFile(imageFile);
+  var downUrl = await (await uploadTask.onComplete).ref.getDownloadURL();
+  var url = downUrl.toString(); //download url
+  print('Download URL : $url');
+  return url;
 }

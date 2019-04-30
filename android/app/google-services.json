@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "334078570702",
+    "firebase_url": "https://shareit-60e65.firebaseio.com",
+    "project_id": "shareit-60e65",
+    "storage_bucket": "shareit-60e65.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:334078570702:android:fe31086f17001d0c",
+        "android_client_info": {
+          "package_name": "com.example.frontbackpackapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "334078570702-vkhum4vrs0righgbgoq4rgvoii4e5p44.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDO-YpH2dTbk7M6JnGZh4D8wwcLKb9UKeM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "334078570702-vkhum4vrs0righgbgoq4rgvoii4e5p44.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

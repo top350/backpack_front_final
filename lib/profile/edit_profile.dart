@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../database/db_account.dart';
 import 'profile_category.dart';
 import 'imagePickerProfile.dart';
+// import '../borrow/imagePickerBorrow.dart';
 
 class EditProfile extends StatefulWidget {
   AccountObject currentUser;
@@ -147,7 +148,9 @@ class _EditProfileState extends State<EditProfile> {
                   ),
                   onPressed: () {
                     setState(() {
+                       uploadImage();
                       Navigator.pop(context);
+                      
                     });
                   },
                 ),
