@@ -92,6 +92,10 @@ Future<http.Response> doBorrow(
   }
    Future<http.Response> doFeedback(String feedbackNo,String comment,String taid,String faid){
     String _url = '$endpoint/feedback';
+    print(feedbackNo);
+    print(comment);
+    print(taid);
+    print(faid);
     var body = {"rating":feedbackNo,"comment":comment,"t_aid":taid,"f_aid":faid};
     return http.post(_url, body:body);
   }

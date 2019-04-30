@@ -54,6 +54,7 @@ KioskSessionState(this.currentUser,this.opposite,this.sessionID);
     var rs = await apiProvider.doScan(sendSID);
     var jsonRes = json.decode(rs.body);
     if(rs.statusCode==200){
+      print(rs.body);
       if(rs.body=='false'){
         print('havent scanned');
       }
@@ -68,7 +69,9 @@ KioskSessionState(this.currentUser,this.opposite,this.sessionID);
                       ),
                   );
       }
-
+   
+    }else{
+      print('error');
     }
   }
 
@@ -158,11 +161,11 @@ KioskSessionState(this.currentUser,this.opposite,this.sessionID);
                   child: new Text("Scanned"),
                   onPressed: () {
                           
-          Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => new SessionPage(currentUser,opposite,session),
-                      ),
-                  );
+          // Navigator.of(context).push(
+          //             MaterialPageRoute(
+          //               builder: (context) => new SessionPage(currentUser,opposite,session),
+          //             ),
+          //         );
       
                     print('pressed');
                     doScan(context);

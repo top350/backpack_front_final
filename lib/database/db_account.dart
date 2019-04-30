@@ -18,7 +18,7 @@ class AccountObject {
   String tel_No = '';
   String qrCode = '';
   int no_Of_Feedback;
-  int avg_Rating;
+  double avg_Rating;
   int token;
  // String categotyHave = '';
   String image;
