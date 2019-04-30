@@ -37,7 +37,7 @@ class SessionPageState extends State<SessionPage>
 
   ApiProvider apiProvider = ApiProvider();
   Future doEndsession(BuildContext context) async {
-    final rs = await apiProvider.doEndsession("sid", "end");
+    final rs = await apiProvider.doEndsession('end',session.sessionNo.toString(),currentUser.aid.toString());
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => new RatingSession(currentUser, opposite, session),

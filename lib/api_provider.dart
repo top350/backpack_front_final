@@ -110,9 +110,9 @@ class ApiProvider {
     return http.post(_url, body: body);
   }
 
-  Future<http.Response> doEndsession(String sid, String status) {
+  Future<http.Response> doEndsession(String status,String sid, String aid) {
     String _url = '$endpoint/requestPage';
-    var body = {"sid": sid, "status": status};
+    var body = {"status":status,"sid": sid,"aid":aid};
     return http.post(_url, body: body);
   }
 
