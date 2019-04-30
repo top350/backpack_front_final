@@ -52,7 +52,7 @@ class ImagePickerBorrowState extends State<ImagePickerBorrow> {
         // maxWidth: 50.0,
       );
       setState(() {
-       example.newExamplePic = imageFile;
+        example.newExamplePic = imageFile;
       });
     }
 
@@ -113,30 +113,4 @@ class ImagePickerBorrowState extends State<ImagePickerBorrow> {
           : uploadArea()
     );
   }
-}
-
-Widget uploadArea() {
-  return Column(
-    children: <Widget>[
-      Image.file(
-        imageFile,
-        width: double.infinity,
-      ),
-      // RaisedButton(
-      //   child: Text('Upload'),
-      //   onPressed: () {
-      //     uploadImage();
-      //   },
-      // )
-    ],
-  );
-}
-
-Future<String> uploadImage() async{
-  StorageReference ref = FirebaseStorage.instance.ref().child(fileName);
-  StorageUploadTask uploadTask =ref.putFile(imageFile);
-  var downUrl = await (await uploadTask.onComplete).ref.getDownloadURL();
-  var url = downUrl.toString(); //download url
-  print('Download URL : $url');
-  return url;
 }

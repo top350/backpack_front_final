@@ -1,23 +1,61 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 
 import 'package:intl/intl.dart';
 import 'dart:io';
 
+import '../session/kiosk_session.dart';
+import '../api_provider.dart';
 import '../database/db_request.dart';
 import '../database/db_account.dart';
 import '../session/kiosk_session.dart';
+import '../database/db_schema.dart';
 
 class ItemDetail extends StatelessWidget {
 //this class will tell detail of a item when click on the item card
 
   int lenderAccountId = 0; //Send to Backend when press Lent
   int requestNo = 0; //Send to Backend when press Lent
-  int sessionID = 0; //Recieve to Backend when press Lent
+  SessionObject session; //Recieve to Backend when press Lent
+  AccountObject opposite; //Reviece from Backend
 
   AccountObject currentUser; //Reviece from itemCard
   RequestObject itemRequest; //Reviece from itemCard
-  AccountObject borrower = user2; //Reviece from itemCard
-  ItemDetail(this.currentUser, this.itemRequest, this.borrower);
+
+  ItemDetail(this.currentUser, this.itemRequest);
+  ApiProvider apiProvider = ApiProvider();
+
+  Future doLent(BuildContext context) async {
+    String aid = lenderAccountId.toString();
+    String rid = requestNo.toString();
+    print('pressed');
+    final rs = await apiProvider.doLent(rid, aid);
+    if (rs.statusCode == 200) {
+      var jsonRes = json.decode(rs.body);
+      //  print(jsonRes);
+      //  print(rs.body);
+
+      if (rs.body == 'not enough token') {
+        print('not enough token');
+      } else {
+        print(jsonRes[0]);
+        final session = SessionObject.fromJson(jsonRes[0]);
+        print(session.sessionNo);
+        final borrower = AccountObject.fromJson(jsonRes[0]);
+        print(borrower.tel_No);
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) =>
+                KioskSession(currentUser, borrower, session.sessionNo),
+          ),
+        );
+      }
+    } else {
+      print('error');
+    }
+  }
 
   _showWarningDialog(BuildContext context) {
     showDialog(
@@ -36,17 +74,12 @@ class ItemDetail extends StatelessWidget {
               FlatButton(
                 child: Text('YES'),
                 onPressed: () {
-                  Navigator.pop(context);
-                  // Navigator.of(context).pushNamedAndRemoveUntil(
-                  //     '/Home', (Route<dynamic> route) => false);
+                  doLent(context);
+                  // Send/Receive to Backend here
 
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => KioskSession(currentUser,requestNo,borrower),
-                    ),
-                  );
-                  //  Navigator.popUntil(context, ModalRoute.withName('/Home'));
+                  // Navigator.popUntil(context, ModalRoute.withName('/Home'));
+                  // Navigator.of(context).pushReplacementNamed("/Home");
+                  // other alternative Navigator.of(context).pushNamedAndRemoveUntil('/login', (Route<dynamic> route) => false);
                 },
               )
             ],
@@ -80,6 +113,14 @@ class ItemDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String pickTime = itemRequest.pickUpTime;
+    DateTime pickDate = DateTime.parse(pickTime);
+    String pickFormattedDate = DateFormat('yMd').format(pickDate);
+    String pickFormattedTime = DateFormat('jm').format(pickDate);
+    String returnTime = itemRequest.pickUpTime;
+    DateTime returndate = DateTime.parse(returnTime);
+    String returnFormattedDate = DateFormat('yMd').format(returndate);
+    String returnFormattedTime = DateFormat('jm').format(pickDate);
     return Scaffold(
         appBar: AppBar(
             title: Text(
@@ -110,31 +151,15 @@ class ItemDetail extends StatelessWidget {
                     // mainAxisSize: MainAxisSize.max,
                     // mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      _detailIcon(Icons.account_circle),
-                      Padding(
-                        padding: EdgeInsets.all(8),
-                      ),
-                      Text(
-                          'Posted by: ' +
-                              borrower.firstName, //need to show name
-                          style: TextStyle(fontSize: 15))
-                    ],
-                  ),
-                  Padding(
-                    padding: EdgeInsets.all(10),
-                  ),
-                  Row(
-                    // mainAxisSize: MainAxisSize.max,
-                    // mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
                       _detailIcon(Icons.access_time),
                       Padding(
                         padding: EdgeInsets.all(8),
                       ),
                       Text(
                           'Pickup : ' +
-                              DateFormat("d EEEE MMMM 'at' h:mma")
-                                  .format(itemRequest.pickUpTime),
+                              pickFormattedDate +
+                              '  ' +
+                              pickFormattedTime,
                           style: TextStyle(fontSize: 15)),
                     ],
                   ),
@@ -151,8 +176,9 @@ class ItemDetail extends StatelessWidget {
                       ),
                       Text(
                           'Return : ' +
-                              DateFormat("d EEEE MMMM 'at' h:mma")
-                                  .format(itemRequest.returnTime),
+                              returnFormattedDate +
+                              '  ' +
+                              returnFormattedTime,
                           style: TextStyle(fontSize: 15)),
                     ],
                   ),
@@ -223,9 +249,12 @@ class ItemDetail extends StatelessWidget {
                       textColor: Colors.white,
                       child: new Text("Lent!!"),
                       onPressed: () {
-                        // Send/Receive to Backend here
-                        lenderAccountId = currentUser.accountNo;
+                        print('1');
+                        lenderAccountId = currentUser.aid;
+                        print('2');
                         requestNo = itemRequest.requestNo;
+                        print('3');
+
                         print(lenderAccountId.toString() +
                             "  " +
                             requestNo.toString());

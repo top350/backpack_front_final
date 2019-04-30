@@ -1,36 +1,50 @@
 import 'package:flutter/material.dart';
+import 'package:front_backpack_app/api_provider.dart';
 
 import 'package:intl/intl.dart';
 
 import 'rating.dart';
+import '../profile/profile.dart';
 import '../database/db_account.dart';
-import '../database/db_session.dart';
+import '../database/db_schema.dart';
+
+import 'qr_generator.dart';
+// import  'category.dart';
 
 class SessionPage extends StatefulWidget {
-  //Session3
+  AccountObject currentUser;
+  AccountObject opposite;
+  SessionObject session;
+  SessionPage(this.currentUser, this.opposite, this.session);
+  //Session
+  String endSession = 'end'; //Send to BackEnd
 
-  
-  AccountObject currentUser; //Receive from Session2
-  SessionObject ongoingSession; //Receive from Session2 
-  AccountObject otherPerson; //Receive from Session2
-  String endSession = 'end'; //Send to BackEnd 
-  
-  SessionPage(this.currentUser,this.ongoingSession,this.otherPerson);
   @override
-  State createState() => new SessionPageState(currentUser,ongoingSession,otherPerson);
+  State createState() => new SessionPageState(currentUser, opposite, session);
 }
 
 class SessionPageState extends State<SessionPage>
     with SingleTickerProviderStateMixin {
-    
-  AccountObject currentUser; //Receive from Session2
-  SessionObject ongoingSession; //Receive from Session2
-  AccountObject otherPerson; //Receive from Session2
-  SessionPageState(this.currentUser,this.ongoingSession,this.otherPerson);
 
 
   AnimationController _iconAnimationController;
   Animation<double> _iconAnimation;
+
+  AccountObject currentUser;
+  AccountObject opposite;
+  SessionObject session;
+  SessionPageState(this.currentUser, this.opposite, this.session);
+
+  ApiProvider apiProvider = ApiProvider();
+  Future doEndsession(BuildContext context) async {
+    final rs = await apiProvider.doEndsession("sid", "end");
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => new RatingSession(currentUser, opposite, session),
+      ),
+    );
+    print(rs.body);
+  }
 
   @override
   void initState() {
@@ -45,7 +59,8 @@ class SessionPageState extends State<SessionPage>
 
   @override
   Widget build(BuildContext context) {
-     int sesID = ongoingSession.sessionNo; //Send to BackEnd 
+    DateTime sesEnd = DateTime.parse(session.endTime);
+
     return new Scaffold(
         backgroundColor: Colors.pink[50],
         appBar: AppBar(
@@ -63,9 +78,12 @@ class SessionPageState extends State<SessionPage>
                 new Padding(
                     padding: EdgeInsets.all(10),
                     child: Text(
-                      DateFormat("h:mm a").format(sesOne.endTime),
-                      style: TextStyle(fontSize: 50,
-                          color: Colors.black, fontWeight: FontWeight.w700,),
+                      DateFormat("h:mm a").format(sesEnd),
+                      style: TextStyle(
+                        fontSize: 50,
+                        color: Colors.black,
+                        fontWeight: FontWeight.w700,
+                      ),
                     )),
                 new Padding(
                   padding: const EdgeInsets.only(bottom: 20.0, top: 20.0),
@@ -83,14 +101,15 @@ class SessionPageState extends State<SessionPage>
                         height: 75.0,
                         decoration: BoxDecoration(
                           image: DecorationImage(
-                            image: AssetImage(otherPerson.profilePic),
+                            image: NetworkImage(
+                                'https://firebasestorage.googleapis.com/v0/b/shareit-60e65.appspot.com/o/profile.png?alt=media&token=297c1341-5c7d-4b1e-902b-2a98e4951f52'), //AssetImage('assets/profile/profile.jpg'),
                             fit: BoxFit.cover,
                           ),
                           borderRadius: BorderRadius.circular(80.0),
                         ),
                       ),
                       title: Text(
-                        'Session With '+otherPerson.firstName,
+                        'Session With ' + opposite.first_Name,
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                         ),
@@ -99,7 +118,7 @@ class SessionPageState extends State<SessionPage>
                         children: <Widget>[
                           Icon(Icons.phone),
                           Text(
-                            otherPerson.telNo,
+                            opposite.tel_No,
                             style: TextStyle(color: Colors.black87),
                           )
                         ],
@@ -117,12 +136,7 @@ class SessionPageState extends State<SessionPage>
                   textColor: Colors.white,
                   child: new Text("END"),
                   onPressed: () {
-                    //send/Receive from back
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => new RatingSession(currentUser,ongoingSession,otherPerson),
-                      ),
-                    );
+                    doEndsession(context);
                   },
                   splashColor: Colors.pink[200],
                 ),

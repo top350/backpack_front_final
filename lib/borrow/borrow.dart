@@ -9,6 +9,7 @@ import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'imagePickerBorrow.dart';
 import '../database/db_request.dart';
 import '../database/db_account.dart';
+import '../bottombar_home.dart';
 
 class BorrowPage extends StatefulWidget {
   AccountObject currentUser; //Recieve from home
@@ -26,51 +27,65 @@ class _BorrowPageState extends State<BorrowPage> {
   AccountObject currentUser;
   _BorrowPageState(this.currentUser);
 
-  String sendItemName = ''; //Send to Backend 
+  String sendItemName = ''; //Send to Backend
   String sendItemType = '';
-  DateTime sendPickUpTime;
-  
-  DateTime sendReturnTime;
+  String sendPickUpTime;
+  String sendReturnTime;
   String sendKioskLocation = '';
   int sendTokenUsed = 0;
   String sendNote = '';
-  int reqByAcc = 0;  //Send to Backend
-ApiProvider apiProvider = ApiProvider();
-Future doBorrow() async {
-  String pickuptime = sendPickUpTime.toString();
-   String returntime = sendReturnTime.toString();
-   String tokenused =sendTokenUsed.toString();
-  print(pickuptime);
-  final rs = await apiProvider.doBorrow(sendItemName, sendItemType,pickuptime, returntime, sendKioskLocation, tokenused,sendNote);
-  print(rs.body);
-  if (rs.statusCode == 200) {
+  int reqByAcc = 0; //Send to Backend
+  ApiProvider apiProvider = ApiProvider();
+
+  Future doBorrow() async {
+    print(reqByAcc);
+    String pickuptime = sendPickUpTime.toString();
+    String returntime = sendReturnTime.toString();
+    String tokenused = sendTokenUsed.toString();
+    String sendAcc = reqByAcc.toString();
+    print(pickuptime);
+    final rs = await apiProvider.doBorrow(
+        sendItemName,
+        sendItemType,
+        pickuptime,
+        returntime,
+        sendKioskLocation,
+        tokenused,
+        sendNote,
+        sendAcc);
     print(rs.body);
-    var jsonRes = json.decode(rs.body);
-    
-    if (jsonRes['ok']) {
-      
-        Navigator.of(context).pushReplacementNamed("/Home");
-    } else {
-      print('Server error');
-      
+    if (rs.statusCode == 200) {
+      print(rs.body);
+      // var jsonRes = json.decode(rs.body);
+
+      if (rs.body == 'ok') {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => ButtomBarHome(currentUser),
+          ),
+        );
+      } else {
+        print('Server error');
+      }
     }
   }
-}
-  RequestObject newRequest = RequestObject(
-      1,
-      'itemName',
-      'itemCategory',
-      sampleTime,
-      sampleTime,
-      'KioskLocation',
-      0,
-      'Note',
-      'assets/logo.png',
-      false,
-      user1.accountNo,
-      sampleTime,
-      sampleTime,
-      emptyFile);
+
+  NewRequestObject newRequest = NewRequestObject(
+    1,
+    'itemName',
+    'itemCategory',
+    'sampleTime',
+    'sampleTime',
+    'KioskLocation',
+    0,
+    'Note',
+    'assets/logo.png',
+    'false',
+    0,
+    'sampleTime',
+    'sampleTime',
+  );
 
   List<DropdownMenuItem<String>> _dropDownMenuCategory;
   List _category = [
@@ -92,22 +107,22 @@ Future doBorrow() async {
     "Siam",
   ];
 
-  void _addItem() {
-    //No need when connect with backend
-    if (newRequest.itemCategory == "Stationery") {
-      requestList.add(newRequest);
-    } else if (newRequest.itemCategory == "Clothing") {
-      requestList.add(newRequest);
-    } else if (newRequest.itemCategory == "Sport Equipment") {
-      requestList.add(newRequest);
-    } else if (newRequest.itemCategory == "Electronics") {
-      requestList.add(newRequest);
-    } else if (newRequest.itemCategory == "Books") {
-      requestList.add(newRequest);
-    } else {
-      requestList.add(newRequest);
-    }
-  }
+  // void _addItem() {
+  //   //No need when connect with backend
+  //   if (newRequest.itemCategory == "Stationery") {
+  //     requestList.add(newRequest);
+  //   } else if (newRequest.itemCategory == "Clothing") {
+  //     requestList.add(newRequest);
+  //   } else if (newRequest.itemCategory == "Sport Equipment") {
+  //     requestList.add(newRequest);
+  //   } else if (newRequest.itemCategory == "Electronics") {
+  //     requestList.add(newRequest);
+  //   } else if (newRequest.itemCategory == "Books") {
+  //     requestList.add(newRequest);
+  //   } else {
+  //     requestList.add(newRequest);
+  //   }
+  // }
 
   @override
   void initState() {
@@ -189,7 +204,8 @@ Future doBorrow() async {
                         labelText: 'Date/Time', hasFloatingPlaceholder: false),
                     onChanged: (dt) {
                       setState(() {
-                        newRequest.pickUpTime = dt;
+                        newRequest.pickUpTime =
+                            DateFormat("d EEEE MMMM 'at' h:mma").format(dt);
                       });
                     },
                   ),
@@ -212,7 +228,9 @@ Future doBorrow() async {
                         labelText: 'Date/Time', hasFloatingPlaceholder: false),
                     onChanged: (dt) {
                       setState(() {
-                        newRequest.returnTime = dt;
+                        newRequest.returnTime =
+                            DateFormat("d EEEE MMMM 'at' h:mma").format(dt);
+                        ;
                       });
                     },
                   ),
@@ -263,7 +281,7 @@ Future doBorrow() async {
                   width: 1.0,
                 ),
               ),
-              child: ImagePickerBorrow(newRequest),
+              //child: ImagePickerBorrow(newRequest),
             ),
             Container(
               margin: EdgeInsets.all(10.0),
@@ -282,16 +300,10 @@ Future doBorrow() async {
                   sendKioskLocation = newRequest.kioskLocation;
                   sendTokenUsed = newRequest.tokenUsed;
                   sendNote = newRequest.note;
-                  reqByAcc = newRequest.reqByAccountNo;
-
-                  uploadImage();
-                 
-
-              doBorrow();
+                  reqByAcc = currentUser.aid;
+                  doBorrow();
                   print(sendItemType);
-
-                  _addItem();
-                   
+                  //_addItem();
                 },
                 splashColor: Colors.pink[200],
               ),
@@ -303,12 +315,34 @@ Future doBorrow() async {
   }
 }
 
+class NewRequestObject {
+  int requestNo;
+  String itemName = '';
+  String itemCategory = '';
+  String pickUpTime;
+  String returnTime;
+  String kioskLocation = '';
+  int tokenUsed;
+  String note;
+  String examplePicUrl;
+  String requestStatus;
+  int reqByAccountNo; //From account
+  String createdAt = '';
+  String updatedAt = '';
 
-  String sendItemName = '';
-  String sendItemType = '';
-  DateTime sendPickUpTime;
-  DateTime sendReturnTime;
-  String sendKioskLocation = ''; 
-  int sendTokenUsed = 0;
-  String sendNote = '';
-  int reqByAcc = 0;
+  NewRequestObject(
+    this.requestNo,
+    this.itemName,
+    this.itemCategory,
+    this.pickUpTime,
+    this.returnTime,
+    this.kioskLocation,
+    this.tokenUsed,
+    this.note,
+    this.examplePicUrl,
+    this.requestStatus,
+    this.reqByAccountNo,
+    this.createdAt,
+    this.updatedAt,
+  );
+}

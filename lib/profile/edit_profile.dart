@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:front_backpack_app/api_provider.dart';
 
 import '../database/db_account.dart';
 import 'profile_category.dart';
@@ -27,14 +28,42 @@ class _EditProfileState extends State<EditProfile> {
   TextEditingController _emailController;
   TextEditingController _phoneNumController;
 
+// Future doSignup() async {
+//   final rs = await apiProvider.doSignup(studentID.text, firstname.text, lastname.text, password1.text, phoneNo.text, email.text);
+//   print(rs.body);
+//   if (rs.statusCode == 200) {
+//     print(rs.body);
+//     //var jsonRes = json.decode(rs.body);
+//     if (rs.body == 'signed up') {
+//       Navigator.of(context).pushReplacementNamed("/login");
+//     } else {
+//       print('Server error');
+
+//     }
+//   }
+// }
+  ApiProvider apiProvider = ApiProvider();
+  Future doeditProfile() async {
+    String aid = this.currentUser.aid.toString();
+    print(aid);
+    final rs = await apiProvider.doeditProfile(
+        aid,
+        _firstNameController.text,
+        _lastNameController.text,
+        _phoneNumController.text,
+        _emailController.text);
+    print(rs.body);
+  }
+
   @override
   void initState() {
     super.initState();
     _firstNameController =
-        new TextEditingController(text: currentUser.firstName);
-    _lastNameController = new TextEditingController(text: currentUser.lastName);
+        new TextEditingController(text: currentUser.first_Name);
+    _lastNameController =
+        new TextEditingController(text: currentUser.last_Name);
     _emailController = new TextEditingController(text: currentUser.email);
-    _phoneNumController = new TextEditingController(text: currentUser.telNo);
+    _phoneNumController = new TextEditingController(text: currentUser.tel_No);
   }
 
   @override
@@ -52,7 +81,7 @@ class _EditProfileState extends State<EditProfile> {
           //_buildProfileImage(),
           Container(
             margin: EdgeInsets.all(10),
-            child: ImagePickerProfile(currentUser),
+            //child: ImagePickerProfile(currentUser),
           ),
           Container(
             // firstName
@@ -67,7 +96,7 @@ class _EditProfileState extends State<EditProfile> {
               decoration: InputDecoration(labelText: 'First Name'),
               onChanged: (String input) {
                 setState(() {
-                  currentUser.firstName = input;
+                  currentUser.first_Name = input;
                 });
               },
             ),
@@ -85,7 +114,7 @@ class _EditProfileState extends State<EditProfile> {
               decoration: InputDecoration(labelText: 'Last Name'),
               onChanged: (String input) {
                 setState(() {
-                  currentUser.lastName = input;
+                  currentUser.last_Name = input;
                 });
               },
             ),
@@ -122,7 +151,7 @@ class _EditProfileState extends State<EditProfile> {
                 decoration: InputDecoration(labelText: 'Phone Number'),
                 onChanged: (String input) {
                   setState(() {
-                    currentUser.telNo = input;
+                    currentUser.tel_No = input;
                   });
                 },
               )),
@@ -147,6 +176,7 @@ class _EditProfileState extends State<EditProfile> {
                     ),
                   ),
                   onPressed: () {
+                    doeditProfile();
                     setState(() {
                        uploadImage();
                       Navigator.pop(context);

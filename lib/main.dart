@@ -16,9 +16,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       home: new SplashScreen(),
       // home: MyAppoo(),
+      //home: WaitingSession(),
       theme: new ThemeData(primarySwatch: Colors.pink),
       routes: <String, WidgetBuilder>{
-        "/Home": (BuildContext context) => new  ButtomBarHome(),
+        // "/Home": (BuildContext context) => new  ButtomBarHome(),
         "/login": (BuildContext context) => new LoginPage(),
         "/signup": (BuildContext context) => new SignupPage(),
         //"/session": (BuildContext context) => new SessionPage(),

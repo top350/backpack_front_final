@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:front_backpack_app/api_provider.dart';
-import  'category.dart';
+import 'category.dart';
 
 class SignupPage extends StatefulWidget {
   @override
@@ -19,22 +19,23 @@ class SignupPageState extends State<SignupPage>
   TextEditingController phoneNo = TextEditingController();
   TextEditingController password1 = TextEditingController();
   TextEditingController password2 = TextEditingController();
-    // final _formkey = GlobalKey<FormState>();
+  // final _formkey = GlobalKey<FormState>();
   ApiProvider apiProvider = ApiProvider();
-Future doSignup() async {
-  final rs = await apiProvider.doSignup(studentID.text, firstname.text, lastname.text, password1.text, phoneNo.text, email.text);
-  print(rs.body);
-  if (rs.statusCode == 200) {
+  Future doSignup() async {
+    final rs = await apiProvider.doSignup(studentID.text, firstname.text,
+        lastname.text, password1.text, phoneNo.text, email.text);
     print(rs.body);
-    //var jsonRes = json.decode(rs.body);
-    if (rs.body == 'signed up') {
-      Navigator.of(context).pushReplacementNamed("/login");
-    } else {
-      print('Server error');
-      
+    if (rs.statusCode == 200) {
+      print(rs.body);
+      //var jsonRes = json.decode(rs.body);
+      if (rs.body == 'signed up') {
+        Navigator.of(context).pushReplacementNamed("/login");
+      } else {
+        print('Server error');
+      }
     }
   }
-}
+
   @override
   void initState() {
     super.initState();
@@ -114,7 +115,6 @@ Future doSignup() async {
                               labelText: "Enter Phone no.",
                             ),
                             keyboardType: TextInputType.text,
-                           
                           ),
                           new TextFormField(
                             controller: password1,
@@ -143,13 +143,11 @@ Future doSignup() async {
                             textColor: Colors.white,
                             child: new Text("Next"),
                             onPressed: () {
-                              
                               doSignup();
                               print('pressed');
                               if (password1.text == password2.text) {
-                               
-                               // print(password1.text);
-                               // print(email.text);
+                                // print(password1.text);
+                                // print(email.text);
                               } else {
                                 print("Passsword not match");
                               }

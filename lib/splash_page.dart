@@ -7,26 +7,24 @@ class SplashScreen extends StatefulWidget {
   _SplashScreenState createState() => _SplashScreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderStateMixin {
-
+class _SplashScreenState extends State<SplashScreen>
+    with SingleTickerProviderStateMixin {
   AnimationController _animationController;
   Animation<double> _animation;
 
   void initState() {
     super.initState();
-    _animationController = new AnimationController(
-        vsync: this,
-        duration: new Duration(milliseconds: 100)
-    );
-    _animation = new CurvedAnimation(
+    _animationController =
+        AnimationController(vsync: this, duration: Duration(milliseconds: 100));
+    _animation = CurvedAnimation(
       parent: _animationController,
       curve: Curves.easeOut,
     );
 
-    _animation.addListener(()=> this.setState((){}));
+    _animation.addListener(() => this.setState(() {}));
     _animationController.forward();
 
-    Timer(Duration(seconds: 3), (){
+    Timer(Duration(seconds: 3), () {
       Navigator.of(context).pushReplacementNamed("/login");
     });
   }
@@ -39,42 +37,41 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
         children: <Widget>[
           Container(
             decoration: BoxDecoration(
-              gradient: LinearGradient(colors: [const Color(0xFF915FB5), const Color(0xFFCA436B)],
-                begin: FractionalOffset.topLeft,
-                end: FractionalOffset.bottomRight,
-                stops: [0.0,1.0],
-                tileMode: TileMode.clamp
-                ),
+              gradient: LinearGradient(
+                  colors: [const Color(0xFF915FB5), const Color(0xFFCA436B)],
+                  begin: FractionalOffset.topLeft,
+                  end: FractionalOffset.bottomRight,
+                  stops: [0.0, 1.0],
+                  tileMode: TileMode.clamp),
             ),
           ),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: <Widget>[
-              Expanded(
-                flex: 2,
-                child: Container(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      CircleAvatar(
-                        backgroundColor: Colors.white,
-                        radius: 100.0,
-                        child: Logo(),
-                      ),
-                      Padding(padding: EdgeInsets.only(top: 10.0),
-                      ),
-                      Text(
-                        "Share That Thing!", 
-                        style: TextStyle(
+          Column(mainAxisAlignment: MainAxisAlignment.start, children: <Widget>[
+            Expanded(
+              flex: 2,
+              child: Container(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    CircleAvatar(
+                      backgroundColor: Colors.white,
+                      radius: 100.0,
+                      child: Logo(),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(top: 10.0),
+                    ),
+                    Text(
+                      "Share That Thing!",
+                      style: TextStyle(
                           color: Colors.white,
                           fontSize: 24.0,
                           fontWeight: FontWeight.bold),
-                      )
-                    ],
-                  ),
+                    )
+                  ],
                 ),
               ),
-              Expanded(
+            ),
+            Expanded(
                 flex: 1,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -83,17 +80,14 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
                     Padding(
                       padding: EdgeInsets.only(top: 20.0),
                     ),
-                    Text("Designed by Mongkol Team", 
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 18.0,
-                        fontWeight: FontWeight.bold)
-                    )
+                    Text("Designed by Mongkol Team",
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 18.0,
+                            fontWeight: FontWeight.bold))
                   ],
-                )
-              )
-            ]
-          )
+                ))
+          ])
         ],
       ),
     );

@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'package:front_backpack_app/database/db_schema.dart';
 import 'package:flutter/material.dart';
@@ -5,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 import './items/item_list.dart';
+import './items/item_card.dart';
 import 'package:front_backpack_app/api_provider.dart';
 import 'database/db_account.dart';
 import 'database/db_request.dart';
@@ -20,29 +22,48 @@ class Dashboard extends StatefulWidget {
 
 class _DashboardState extends State<Dashboard> {
   String categoryName = ''; //Send to Backend
-  List<RequestObject> receiveRequestList = requestList; //Receive from Backend
+
+  List<RequestObject> receiveRequestList = []; //Receive from Backend
+  List<RequestObject> emptyRequestList = [];
 
   AccountObject currentUser; //Receive from Home
   _DashboardState(this.currentUser);
-ApiProvider apiProvider = ApiProvider();
-  Future<Null>doCategory(String name) async {
-  final rs = await apiProvider.doCategory(name);
-  print(rs.body);
-  if (rs.statusCode == 200) {
-    print(rs.body);
-    var jsonRes = json.decode(rs.body);
-    final itemdata = RequestObjects.fromJson(jsonRes);
-    print(itemdata.pickUpTime);
-    print(itemdata.itemName);
-    if (jsonRes['ok']) {
-      
-      
-    } else {
-      print('Server error');
-      
+
+  List<ItemCard> convertToCard(List<RequestObject> item, AccountObject user) {
+    //covert ItemObject to ItemCard
+    List<ItemCard> cardList = [];
+    //print('item length = ' + item.length.toString());
+    if (0 < item.length) {
+      for (int i = 0; i < item.length; i++) {
+        cardList.add(ItemCard(user, item[i]));
+      }
+      return cardList;
+    }
+    return cardList;
+  }
+
+  ApiProvider apiProvider = ApiProvider();
+  Future<Null> doCategory(String name) async {
+    final rs = await apiProvider.doCategory(name);
+
+    if (rs.statusCode == 200) {
+      if (rs.body == 'no request') {
+        print('no request');
+        receiveRequestList = emptyRequestList.toList();
+      } else {
+        var jsonRes = json.decode(rs.body);
+        final rRequestList = RequestList.fromJson(jsonRes);
+
+        receiveRequestList = rRequestList.request_list;
+
+        print(rRequestList.request_list[0].itemName);
+        receiveRequestList = rRequestList.request_list.toList();
+        print(receiveRequestList[0].itemName);
+        print(receiveRequestList.length);
+      }
     }
   }
-}
+
   Material myItems(IconData icon, String heading, int color1) {
     return Material(
       color: Color(color1),
@@ -113,15 +134,18 @@ ApiProvider apiProvider = ApiProvider();
               categoryName = 'Stationery';
               print(categoryName);
               doCategory(categoryName);
-              Navigator.push(
-                context,
-                MaterialPageRoute(
+              Timer(Duration(seconds: 1), () {
+                print('item length = ' + receiveRequestList.length.toString());
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
                     builder: (context) => ItemList(
-                        "Stationery",
-                        convertToCard(
-                            sortCategory('Stationery', receiveRequestList),
-                            currentUser))),
-              );
+                          "Stationery",
+                          convertToCard(receiveRequestList, currentUser),
+                        ),
+                  ),
+                );
+              });
             },
             child: myItems(Icons.edit, "Stationery ", 0xffF7B79B),
           ),
@@ -130,17 +154,19 @@ ApiProvider apiProvider = ApiProvider();
               //Send/Receive When pressed this
               categoryName = 'Clothing';
               print(categoryName);
-                doCategory(categoryName);
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => ItemList(
-                      "Clothing",
-                      convertToCard(
-                          sortCategory('Clothing', receiveRequestList),
-                          currentUser)),
-                ),
-              );
+              doCategory(categoryName);
+              Timer(Duration(seconds: 1), () {
+                print('item length = ' + receiveRequestList.length.toString());
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ItemList(
+                          "Clothing",
+                          convertToCard(receiveRequestList, currentUser),
+                        ),
+                  ),
+                );
+              });
             },
             child: myItems(Icons.wc, "Clothing", 0xff74E183),
           ),
@@ -149,17 +175,19 @@ ApiProvider apiProvider = ApiProvider();
               //Send/Receive When pressed this
               categoryName = 'Sport Equipment';
               print(categoryName);
-                doCategory(categoryName);
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => ItemList(
-                      "Sport Equipment",
-                      convertToCard(
-                          sortCategory('Sport Equipment', receiveRequestList),
-                          currentUser)),
-                ),
-              );
+              doCategory(categoryName);
+              Timer(Duration(seconds: 1), () {
+                print('item length = ' + receiveRequestList.length.toString());
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ItemList(
+                          "Sport Equipment",
+                          convertToCard(receiveRequestList, currentUser),
+                        ),
+                  ),
+                );
+              });
             },
             child: myItems(Icons.fitness_center, "Sport Equip.", 0xff6BA9E8),
           ),
@@ -168,17 +196,19 @@ ApiProvider apiProvider = ApiProvider();
               //Send/Receive When pressed this
               categoryName = 'Electronics';
               print(categoryName);
-                doCategory(categoryName);
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => ItemList(
-                      "Electronics",
-                      convertToCard(
-                          sortCategory('Electronics', receiveRequestList),
-                          currentUser)),
-                ),
-              );
+              doCategory(categoryName);
+              Timer(Duration(seconds: 1), () {
+                print('item length = ' + receiveRequestList.length.toString());
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ItemList(
+                          "Electronics",
+                          convertToCard(receiveRequestList, currentUser),
+                        ),
+                  ),
+                );
+              });
             },
             child: myItems(Icons.usb, "Electronics ", 0xFFEC90D4),
           ),
@@ -187,16 +217,19 @@ ApiProvider apiProvider = ApiProvider();
               //Send/Receive When pressed this
               categoryName = 'Books';
               print(categoryName);
-                doCategory(categoryName);
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => ItemList(
-                      "Books",
-                      convertToCard(sortCategory('Books', receiveRequestList),
-                          currentUser)),
-                ),
-              );
+              doCategory(categoryName);
+              Timer(Duration(seconds: 1), () {
+                print('item length = ' + receiveRequestList.length.toString());
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ItemList(
+                          "Books",
+                          convertToCard(receiveRequestList, currentUser),
+                        ),
+                  ),
+                );
+              });
             },
             child: myItems(Icons.book, "Books", 0xFF81C784),
           ),
@@ -204,17 +237,19 @@ ApiProvider apiProvider = ApiProvider();
             onTap: () {
               //Send/Receive When pressed this
               categoryName = 'Others';
-                doCategory(categoryName);
-              print(categoryName);
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => ItemList(
-                      "Others",
-                      convertToCard(sortCategory('Others', receiveRequestList),
-                          currentUser)),
-                ),
-              );
+              doCategory(categoryName);
+              Timer(Duration(seconds: 1), () {
+                print('item length = ' + receiveRequestList.length.toString());
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ItemList(
+                          "Others",
+                          convertToCard(receiveRequestList, currentUser),
+                        ),
+                  ),
+                );
+              });
             },
             child: myItems(Icons.graphic_eq, "Others", 0xFFDEB887),
           ),

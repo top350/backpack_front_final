@@ -12,7 +12,6 @@ class _QrGeneratorState extends State<QrGenerator> {
   String input;
   _QrGeneratorState(this.input);
 
-
   @override
   Widget build(BuildContext context) {
     return _contentWidget();

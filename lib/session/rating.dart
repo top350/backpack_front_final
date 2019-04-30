@@ -1,40 +1,62 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_rating/flutter_rating.dart';
+import 'package:front_backpack_app/api_provider.dart';
+import 'package:front_backpack_app/bottombar_home.dart';
+import '../database/db_schema.dart';
+import '../database/db_account.dart';
 
 import '../database/db_account.dart';
-import '../database/db_session.dart';
+
 
 class RatingSession extends StatefulWidget {
   //Session4
-  AccountObject currentUser; //Receive from Session3
-  SessionObject ongoingSession; //Receive from Session3
-  AccountObject otherPerson; //Receive from Session3
-  RatingSession(this.currentUser, this.ongoingSession, this.otherPerson);
-
+  AccountObject currentUser;
+  AccountObject opposite;
+  SessionObject session;
+  RatingSession(this.currentUser, this.opposite, this.session);
   @override
   _RatingSessionState createState() =>
-      new _RatingSessionState(currentUser, ongoingSession, otherPerson);
+      new _RatingSessionState(this.currentUser, this.opposite, this.session);
 }
 
 class _RatingSessionState extends State<RatingSession> {
-  AccountObject currentUser; //Receive from Session3
-  SessionObject ongoingSession; //Receive from Session3
-  AccountObject otherPerson; //Receive from Session3
-  _RatingSessionState(this.currentUser, this.ongoingSession, this.otherPerson);
-  double rating = 3.5; //Send to Backend
+  AccountObject currentUser;
+  AccountObject opposite;
+  SessionObject session;
+  _RatingSessionState(this.currentUser, this.opposite, this.session);
+  double rating = 3.5;
   int starCount = 5;
   String note = ''; //Send to Backend
 
+  ApiProvider apiProvider = ApiProvider();
+  Future doFeedback() async {
+    String faid = currentUser.aid.toString();
+    String taid = opposite.aid.toString();
+
+    var rs = await apiProvider.doFeedback(rating.toString(), note, taid, faid);
+    if (rs.statusCode == 200) {
+      print('feedback inserted');
+      Navigator.of(context).popUntil((route) => route.isFirst);
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(
+          builder: (context) => ButtomBarHome(currentUser),
+        ),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    String user1 = currentUser.studentID; //Send to Backend
-    String user2 = otherPerson.studentID; //Send to Backend
-    int sesID = ongoingSession.sessionNo; //Send to Backend
+    int user1 = currentUser.aid; //Send to Backend
+    int user2 = opposite.aid; //Send to Backend
+    int sesID = session.sessionNo; //Send to Backend
     return Scaffold(
-      appBar: new AppBar(
-        title: new Text("Star Rating"),
+      appBar: AppBar(
+        title: Text("Star Rating"),
       ),
-      body: new ListView(
+      body: ListView(
         children: <Widget>[
           SizedBox(
             height: 20,
@@ -72,13 +94,13 @@ class _RatingSessionState extends State<RatingSession> {
             margin: EdgeInsets.all(20),
             child: Column(
               children: <Widget>[
-                new Padding(
-                  padding: new EdgeInsets.only(
+                Padding(
+                  padding: EdgeInsets.only(
                     top: 10.0,
                     bottom: 10.0,
                   ),
                   child: Text(
-                    'Please rate ' + otherPerson.firstName,
+                    'Please rate ' + opposite.first_Name,
                     style: TextStyle(fontSize: 20, color: Colors.black87),
                   ),
                 ),
@@ -87,7 +109,8 @@ class _RatingSessionState extends State<RatingSession> {
                   height: 120.0,
                   decoration: BoxDecoration(
                     image: DecorationImage(
-                      image: AssetImage(otherPerson.profilePic),
+                      image: NetworkImage(
+                          'https://firebasestorage.googleapis.com/v0/b/shareit-60e65.appspot.com/o/profile.png?alt=media&token=297c1341-5c7d-4b1e-902b-2a98e4951f52'), //AssetImage('assets/profile/profile.jpg'),
                       fit: BoxFit.cover,
                     ),
                     borderRadius: BorderRadius.circular(80.0),
@@ -97,12 +120,12 @@ class _RatingSessionState extends State<RatingSession> {
                     ),
                   ),
                 ),
-                new Padding(
-                  padding: new EdgeInsets.only(
+                Padding(
+                  padding: EdgeInsets.only(
                     top: 5.0,
                     bottom: 10.0,
                   ),
-                  child: new StarRating(
+                  child: StarRating(
                     size: 50.0,
                     rating: rating,
                     color: Colors.orange,
@@ -142,7 +165,7 @@ class _RatingSessionState extends State<RatingSession> {
               ],
             ),
           ),
-          new Padding(
+          Padding(
             padding: const EdgeInsets.only(bottom: 10.0),
           ),
           Column(
@@ -162,8 +185,9 @@ class _RatingSessionState extends State<RatingSession> {
                     ),
                   ),
                   onPressed: () {
-                    Navigator.of(context).pushNamedAndRemoveUntil(
-                        '/Home', (Route<dynamic> route) => false);
+                    doFeedback();
+                    // Navigator.of(context).pushNamedAndRemoveUntil(
+                    //     '/Home', (Route<dynamic> route) => false);
                     // Navigator.of(context).pushReplacement(
                     //     MaterialPageRoute(builder: (context) => new Home()));
                   },

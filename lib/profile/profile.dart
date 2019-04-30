@@ -6,10 +6,7 @@ import 'edit_profile.dart';
 
 import '../database/db_account.dart';
 
-
-
 class ProfilePage extends StatefulWidget {
-  
   AccountObject currentUser; //Receive from Home
   ProfilePage(this.currentUser);
   @override
@@ -40,9 +37,8 @@ class _ProfilePageState extends State<ProfilePage> {
       ),
       body: ListView(
         children: <Widget>[
-          _buildCoverImage(screenSize,currentUser.newProfilePic,currentUser),
-          _buildStatContainer(
-            currentUser),
+          _buildCoverImage(screenSize, null, currentUser),
+          _buildStatContainer(currentUser),
           _buildProfileInfo(currentUser),
           Column(
             children: <Widget>[
@@ -73,48 +69,47 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 }
 
+_showWarningDialog(BuildContext context) {
+  showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Are you sure?'),
+          content: Text('Do you want to logout?'),
+          actions: <Widget>[
+            FlatButton(
+              child: Text('DISCARD'),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+            FlatButton(
+              child: Text('CONTINUE'),
+              onPressed: () {
+                Navigator.pop(context);
+                Navigator.of(context).pushNamedAndRemoveUntil(
+                    '/splash', (Route<dynamic> route) => false);
+              },
+            )
+          ],
+        );
+      });
+}
 
-  _showWarningDialog(BuildContext context) {
-    showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: Text('Are you sure?'),
-            content: Text('Do you want to logout?'),
-            actions: <Widget>[
-              FlatButton(
-                child: Text('DISCARD'),
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-              ),
-              FlatButton(
-                child: Text('CONTINUE'),
-                onPressed: () {
-                  Navigator.pop(context);
-                  Navigator.of(context).pushNamedAndRemoveUntil(
-                      '/splash', (Route<dynamic> route) => false);
-                },
-              )
-            ],
-          );
-        });
-  }
-
-
-Widget _buildCoverImage(double screenSize,File profilepic,AccountObject currentUser) {
+Widget _buildCoverImage(
+    double screenSize, File profilepic, AccountObject currentUser) {
   return Container(
     height: screenSize / 2.5,
     child: Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        displaySelectedFile(profilepic,currentUser),
+        displaySelectedFile(profilepic, currentUser),
         // _buildProfileImage(),
         SizedBox(
           height: 15,
         ),
         Text(
-         currentUser.firstName+" " +currentUser.lastName,
+          currentUser.first_Name + " " + currentUser.last_Name,
           style: TextStyle(
             color: Colors.white,
             fontSize: 25.0,
@@ -125,7 +120,7 @@ Widget _buildCoverImage(double screenSize,File profilepic,AccountObject currentU
           height: 5,
         ),
         Text(
-          '3rd year, Engineering',//need to make a method
+          '3rd year, Engineering', //need to make a method
           style: TextStyle(
             color: Colors.white,
             fontSize: 20.0,
@@ -135,38 +130,37 @@ Widget _buildCoverImage(double screenSize,File profilepic,AccountObject currentU
     ),
     decoration: BoxDecoration(
         gradient: LinearGradient(
-            colors: [const Color(0xFF915FB5), const Color(0xFFCA436B)])
-        ),
+            colors: [const Color(0xFF915FB5), const Color(0xFFCA436B)])),
   );
 }
 
-  Widget displaySelectedFile(File file,AccountObject currentUser) {
-    return new Container(
-      margin: EdgeInsets.all(10),
-      // child: new Card(child: new Text('' + galleryFile.toString())),
-      // child: new Image.file(galleryFile),
-      child: file == null
-          ? _buildProfileImage(currentUser)
-          : new Center(
-              child: Container(
-                width: 140.0,
-                height: 140.0,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: FileImage(file),
-                    fit: BoxFit.cover,
-                  ),
-                  borderRadius: BorderRadius.circular(80.0),
-                  border: Border.all(
-                    color: Colors.white,
-                    width: 10.0,
-                  ),
+Widget displaySelectedFile(File file, AccountObject currentUser) {
+  return new Container(
+    margin: EdgeInsets.all(10),
+    // child: new Card(child: new Text('' + galleryFile.toString())),
+    // child: new Image.file(galleryFile),
+    child: file == null
+        ? _buildProfileImage(currentUser)
+        : new Center(
+            child: Container(
+              width: 140.0,
+              height: 140.0,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: FileImage(file),
+                  fit: BoxFit.cover,
                 ),
-              // child: Image.file(file),
+                borderRadius: BorderRadius.circular(80.0),
+                border: Border.all(
+                  color: Colors.white,
+                  width: 10.0,
+                ),
               ),
+              // child: Image.file(file),
             ),
-    );
-  }
+          ),
+  );
+}
 
 Widget _buildProfileImage(AccountObject currentUser) {
   return Center(
@@ -175,7 +169,7 @@ Widget _buildProfileImage(AccountObject currentUser) {
       height: 120.0,
       decoration: BoxDecoration(
         image: DecorationImage(
-          image: AssetImage(currentUser.profilePic),
+          image: AssetImage('assets/profile/Bus.PNG'),
           fit: BoxFit.cover,
         ),
         borderRadius: BorderRadius.circular(80.0),
@@ -188,7 +182,6 @@ Widget _buildProfileImage(AccountObject currentUser) {
   );
 }
 
-
 Widget _buildStatContainer(AccountObject currentUser) {
   return Container(
     height: 60.0,
@@ -198,8 +191,8 @@ Widget _buildStatContainer(AccountObject currentUser) {
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: <Widget>[
-        _buildStatItem(
-            Icon(Icons.star, color: Colors.yellowAccent, size: 30), currentUser.avgRating.toString()),
+        _buildStatItem(Icon(Icons.star, color: Colors.yellowAccent, size: 30),
+            currentUser.avg_Rating.toString()),
         _buildStatItem(
             Container(
               width: 50,
@@ -261,7 +254,7 @@ Widget _buildProfileInfo(AccountObject currentUser) {
               width: 20,
             ),
             Text(
-              currentUser.studentID,
+              currentUser.it_chula,
               style: TextStyle(
                 color: Colors.black,
                 fontSize: 15.0,
@@ -289,7 +282,7 @@ Widget _buildProfileInfo(AccountObject currentUser) {
               width: 20,
             ),
             Text(
-              currentUser.telNo,
+              currentUser.tel_No,
               style: TextStyle(
                 color: Colors.black,
                 fontSize: 15.0,
@@ -329,5 +322,3 @@ Widget _buildProfileInfo(AccountObject currentUser) {
     ),
   );
 }
-
-

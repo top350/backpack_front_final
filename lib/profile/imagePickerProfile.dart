@@ -37,7 +37,7 @@ class ImagePickerProfileState extends State<ImagePickerProfile> {
       fileName = basename(imageFile.path);
       print("You selected gallery image : " + imageFile.path);
       setState(() {
-        currentUser.newProfilePic = imageFile;
+        imageFile = imageFile;
       });
     }
 
@@ -51,14 +51,14 @@ class ImagePickerProfileState extends State<ImagePickerProfile> {
       fileName = basename(imageFile.path);
       print("You selected camera image : " + imageFile.path);
       setState(() {
-        currentUser.newProfilePic = imageFile;
+        imageFile = imageFile;
       });
     }
 
     return new Column(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: <Widget>[
-        displaySelectedFile(currentUser.newProfilePic),
+        displaySelectedFile(imageFile),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
@@ -161,11 +161,12 @@ Widget uploadArea() {
   );
 }
 
-Future<String> uploadImage() async{
+Future<String> uploadImage(String imageUrl) async{
   StorageReference ref = FirebaseStorage.instance.ref().child(fileName);
   StorageUploadTask uploadTask =ref.putFile(imageFile);
   var downUrl = await (await uploadTask.onComplete).ref.getDownloadURL();
   var url = downUrl.toString(); //download url
+  imageUrl = url;
   print('Download URL : $url');
   return url;
 }
