@@ -79,7 +79,7 @@ class ItemCard extends StatelessWidget {
             onPressed: () {},
           ),
           onTap: () {
-            //Send/Receive When pressed this
+            // Send/Receive When pressed this
             Navigator.push(
               context,
               MaterialPageRoute(

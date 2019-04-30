@@ -10,40 +10,62 @@ class RegChulaObject {
 }
 
 class UserObject {
-  int accountNo;
-  String studentID = '';
+  int aid;
+  String it_chula = '';
   String password = '';
-  String firstName = '';
-  String lastName = '';
+  String first_Name = '';
+  String last_Name = '';
   String email = '';
-  String telNo = '';
+  String tel_No = '';
   String qrCode = '';
-  int noOfFeedback;
-  double avgRating;
+  int no_Of_Feedback;
+  int avg_Rating;
   int token;
-  String categotyHave = '';
-  String profilePic;
-  bool inSession;
+ // String categotyHave = '';
+  String image;
+  bool in_session;
   DateTime createdAt;
   DateTime updatedAt;
 
-  UserObject(
-      this.accountNo,
-      this.studentID,
+  UserObject({
+      this.aid,
+      this.it_chula,
       this.password,
-      this.firstName,
-      this.lastName,
+      this.first_Name,
+      this.last_Name,
       this.email,
-      this.telNo,
+      this.tel_No,
       this.qrCode,
-      this.noOfFeedback,
-      this.avgRating,
+      this.no_Of_Feedback,
+      this.avg_Rating,
       this.token,
-      this.categotyHave,
-      this.profilePic,
-      this.inSession,
+   //   this.categotyHave,
+      this.image,
+      this.in_session,
       this.createdAt,
-      this.updatedAt);
+      this.updatedAt});
+
+      factory UserObject.fromJson(Map<String, dynamic> json) {
+
+  
+    return UserObject(
+      aid: json['aid'],
+      first_Name: json['first_name'],
+      last_Name: json['last_name'],
+      tel_No: json['tel_no'],
+      email: json['email'],
+       it_chula: json['it_chula'],
+       qrCode: json['qrcode'],
+       no_Of_Feedback: json['no_of_feedback'],
+       avg_Rating: json['avg_rating'],
+        token: json['token'],
+       //categotyHave: json['fullname'],
+       image: json['image'],
+       in_session: json['in_session'],
+  
+      
+    );
+}
 }
 
 class ItemObject {
@@ -56,18 +78,19 @@ class ItemObject {
   DateTime createdAt;
   DateTime updatedAt;
 
-  ItemObject(this.itemNo, this.itemName, this.itemCategory, this.qrCode,
-      this.belongToAccountNo, this.examlePic, this.createdAt, this.updatedAt);
+  ItemObject({this.itemNo, this.itemName, this.itemCategory, this.qrCode,
+      this.belongToAccountNo, this.examlePic, this.createdAt, this.updatedAt});
+      
 }
 
-class RequestObject {
+class RequestObjects {
   int requestNo;
   String itemName = '';
   String itemCategory = '';
-  DateTime pickUpTime;
-  DateTime returnTime;
+  String pickUpTime;
+  String returnTime;
   String kioskLocation = '';
-  int tokenUsed;
+  String tokenUsed;
   String note;
   String examplePic;
   bool requestStatus;
@@ -75,7 +98,7 @@ class RequestObject {
   DateTime createdAt;
   DateTime updatedAt;
 
-  RequestObject(
+  RequestObjects({
       this.requestNo,
       this.itemName,
       this.itemCategory,
@@ -88,7 +111,27 @@ class RequestObject {
       this.requestStatus,
       this.reqByAccountNo,
       this.createdAt,
-      this.updatedAt);
+      this.updatedAt});
+     
+     
+  factory RequestObjects.fromJson(Map<String, dynamic> json) {
+
+  
+    return RequestObjects(
+      itemName: json['itemname'],
+      itemCategory: json['category'],
+      pickUpTime: json['pickupTime'],
+      returnTime: json['returnTime'],
+      kioskLocation: json['Kios'],
+        tokenUsed: json['token'],
+      note: json['note'],
+  
+      
+    );
+   
+  }
+ 
+      
 }
 
 class SessionObject {

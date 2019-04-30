@@ -1,9 +1,11 @@
+import 'dart:convert';
+import 'package:front_backpack_app/database/db_schema.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 import './items/item_list.dart';
-
+import 'package:front_backpack_app/api_provider.dart';
 import 'database/db_account.dart';
 import 'database/db_request.dart';
 
@@ -22,7 +24,25 @@ class _DashboardState extends State<Dashboard> {
 
   AccountObject currentUser; //Receive from Home
   _DashboardState(this.currentUser);
-
+ApiProvider apiProvider = ApiProvider();
+  Future<Null>doCategory(String name) async {
+  final rs = await apiProvider.doCategory(name);
+  print(rs.body);
+  if (rs.statusCode == 200) {
+    print(rs.body);
+    var jsonRes = json.decode(rs.body);
+    final itemdata = RequestObjects.fromJson(jsonRes);
+    print(itemdata.pickUpTime);
+    print(itemdata.itemName);
+    if (jsonRes['ok']) {
+      
+      
+    } else {
+      print('Server error');
+      
+    }
+  }
+}
   Material myItems(IconData icon, String heading, int color1) {
     return Material(
       color: Color(color1),
@@ -92,6 +112,7 @@ class _DashboardState extends State<Dashboard> {
               //Send/Receive When pressed this
               categoryName = 'Stationery';
               print(categoryName);
+              doCategory(categoryName);
               Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -109,6 +130,7 @@ class _DashboardState extends State<Dashboard> {
               //Send/Receive When pressed this
               categoryName = 'Clothing';
               print(categoryName);
+                doCategory(categoryName);
               Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -127,6 +149,7 @@ class _DashboardState extends State<Dashboard> {
               //Send/Receive When pressed this
               categoryName = 'Sport Equipment';
               print(categoryName);
+                doCategory(categoryName);
               Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -145,6 +168,7 @@ class _DashboardState extends State<Dashboard> {
               //Send/Receive When pressed this
               categoryName = 'Electronics';
               print(categoryName);
+                doCategory(categoryName);
               Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -163,6 +187,7 @@ class _DashboardState extends State<Dashboard> {
               //Send/Receive When pressed this
               categoryName = 'Books';
               print(categoryName);
+                doCategory(categoryName);
               Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -179,6 +204,7 @@ class _DashboardState extends State<Dashboard> {
             onTap: () {
               //Send/Receive When pressed this
               categoryName = 'Others';
+                doCategory(categoryName);
               print(categoryName);
               Navigator.push(
                 context,

@@ -1,5 +1,7 @@
-import 'package:flutter/material.dart';
+import 'dart:convert';
 
+import 'package:flutter/material.dart';
+import 'package:front_backpack_app/api_provider.dart';
 import 'dart:io';
 import 'package:intl/intl.dart';
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
@@ -27,12 +29,33 @@ class _BorrowPageState extends State<BorrowPage> {
   String sendItemName = ''; //Send to Backend 
   String sendItemType = '';
   DateTime sendPickUpTime;
+  
   DateTime sendReturnTime;
   String sendKioskLocation = '';
   int sendTokenUsed = 0;
   String sendNote = '';
   int reqByAcc = 0;  //Send to Backend
-
+ApiProvider apiProvider = ApiProvider();
+Future doBorrow() async {
+  String pickuptime = sendPickUpTime.toString();
+   String returntime = sendReturnTime.toString();
+   String tokenused =sendTokenUsed.toString();
+  print(pickuptime);
+  final rs = await apiProvider.doBorrow(sendItemName, sendItemType,pickuptime, returntime, sendKioskLocation, tokenused,sendNote);
+  print(rs.body);
+  if (rs.statusCode == 200) {
+    print(rs.body);
+    var jsonRes = json.decode(rs.body);
+    
+    if (jsonRes['ok']) {
+      
+        Navigator.of(context).pushReplacementNamed("/Home");
+    } else {
+      print('Server error');
+      
+    }
+  }
+}
   RequestObject newRequest = RequestObject(
       1,
       'itemName',
@@ -260,8 +283,13 @@ class _BorrowPageState extends State<BorrowPage> {
                   sendTokenUsed = newRequest.tokenUsed;
                   sendNote = newRequest.note;
                   reqByAcc = newRequest.reqByAccountNo;
+
                   uploadImage();
-                  Navigator.of(context).pushReplacementNamed("/Home");
+                 
+
+              doBorrow();
+                  print(sendItemType);
+
                   _addItem();
                    
                 },
