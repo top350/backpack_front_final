@@ -138,7 +138,6 @@ Future<String> uploadImage(String imageUrl) async{
   StorageUploadTask uploadTask =ref.putFile(imageFile);
   var downUrl = await (await uploadTask.onComplete).ref.getDownloadURL();
   var url = downUrl.toString(); //download url
-  imageUrl = url;
   print('Download URL : $url');
   return url;
 }
