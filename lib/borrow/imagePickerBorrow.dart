@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:front_backpack_app/profile/imagePickerProfile.dart';
 
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
 import '../database/db_request.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:path/path.dart';
+import 'borrow.dart';
 
 class ImagePickerBorrow extends StatefulWidget {
-  RequestObject example;
+ NewRequestObject example;
 
   ImagePickerBorrow(this.example);
 
@@ -23,7 +23,7 @@ class ImagePickerBorrow extends StatefulWidget {
 
 
 class ImagePickerBorrowState extends State<ImagePickerBorrow> {
-  RequestObject example;
+  NewRequestObject example;
 
 
   ImagePickerBorrowState(this.example);
@@ -33,34 +33,34 @@ class ImagePickerBorrowState extends State<ImagePickerBorrow> {
     double screenSize = MediaQuery.of(context).size.width;
     //display image selected from gallery
     imageSelectorGallery() async {
-      imageFile = await ImagePicker.pickImage(
+      File image = await ImagePicker.pickImage(
         source: ImageSource.gallery,
         // maxHeight: 50.0,
         // maxWidth: 50.0,
       );
-      fileName = basename(imageFile.path);
-      print("You selected gallery imageeeeee : " + imageFile.path);
+      fileName = basename(image.path);
+      print("You selected gallery imageeeeee : " + image.path);
       setState(() {
-        example.newExamplePic = imageFile;
+         imageFile = image;
       });
     }
 
     //display image selected from camera
     imageSelectorCamera() async {
-      imageFile = await ImagePicker.pickImage(
+      File image = await ImagePicker.pickImage(
         source: ImageSource.camera,
         // maxHeight: 50.0,
         // maxWidth: 50.0,
       );
       setState(() {
-        example.newExamplePic = imageFile;
+         imageFile = image;
       });
     }
 
     return new Column(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: <Widget>[
-        displaySelectedFile(example.newExamplePic),
+        displaySelectedFile(imageFile),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
@@ -114,4 +114,31 @@ class ImagePickerBorrowState extends State<ImagePickerBorrow> {
           : uploadArea()
     );
   }
+}
+
+Widget uploadArea() {
+  return Column(
+    children: <Widget>[
+      Image.file(
+        imageFile,
+        width: double.infinity,
+      ),
+      // RaisedButton(
+      //   child: Text('Upload'),
+      //   onPressed: () {
+      //     uploadImage();
+      //   },
+      // )
+    ],
+  );
+}
+
+Future<String> uploadImage(String imageUrl) async{
+  StorageReference ref = FirebaseStorage.instance.ref().child(fileName);
+  StorageUploadTask uploadTask =ref.putFile(imageFile);
+  var downUrl = await (await uploadTask.onComplete).ref.getDownloadURL();
+  var url = downUrl.toString(); //download url
+  imageUrl = url;
+  print('Download URL : $url');
+  return url;
 }

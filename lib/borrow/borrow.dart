@@ -281,7 +281,7 @@ class _BorrowPageState extends State<BorrowPage> {
                   width: 1.0,
                 ),
               ),
-              //child: ImagePickerBorrow(newRequest),
+              child: ImagePickerBorrow(newRequest),
             ),
             Container(
               margin: EdgeInsets.all(10.0),

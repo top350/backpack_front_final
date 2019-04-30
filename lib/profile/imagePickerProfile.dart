@@ -7,6 +7,7 @@ import '../database/db_account.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:path/path.dart';
 
+
 class ImagePickerProfile extends StatefulWidget {
   AccountObject currentUser;
   ImagePickerProfile(this.currentUser);
@@ -29,36 +30,36 @@ class ImagePickerProfileState extends State<ImagePickerProfile> {
     double screenSize = MediaQuery.of(context).size.width;
     //display image selected from gallery
     imageSelectorGallery() async {
-      imageFile = await ImagePicker.pickImage(
+      File image = await ImagePicker.pickImage(
         source: ImageSource.gallery,
         // maxHeight: 50.0,
         // maxWidth: 50.0,
       );
-      fileName = basename(imageFile.path);
-      print("You selected gallery image : " + imageFile.path);
+      fileName = basename(image.path);
+      print("You selected gallery image : " + image.path);
       setState(() {
-        imageFile = imageFile;
+        imageFile = image;
       });
     }
 
     //display image selected from camera
     imageSelectorCamera() async {
-      imageFile = await ImagePicker.pickImage(
+      File image = await ImagePicker.pickImage(
         source: ImageSource.camera,
         // maxHeight: 50.0,
         // maxWidth: 50.0,
       );
-      fileName = basename(imageFile.path);
-      print("You selected camera image : " + imageFile.path);
+      fileName = basename(image.path);
+      print("You selected camera image : " + image.path);
       setState(() {
-        imageFile = imageFile;
+        imageFile = image;
       });
     }
 
     return new Column(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: <Widget>[
-        displaySelectedFile(imageFile),
+        displaySelectedFile(imageFile,currentUser),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
@@ -94,13 +95,13 @@ class ImagePickerProfileState extends State<ImagePickerProfile> {
     );
   }
 
-  Widget displaySelectedFile(File file) {
+  Widget displaySelectedFile(File file,AccountObject currentUser) {
     return new Container(
       margin: EdgeInsets.all(10),
       // child: new Card(child: new Text('' + galleryFile.toString())),
       // child: new Image.file(galleryFile),
       child: file == null
-          ? _buildProfileImage()
+          ? _buildProfileImage(currentUser)
           //: uploadArea()
           : new Center(
               child: Container(
@@ -124,14 +125,14 @@ class ImagePickerProfileState extends State<ImagePickerProfile> {
   }
 }
 
-Widget _buildProfileImage() {
+Widget _buildProfileImage(AccountObject currentUser) {
   return Center(
     child: Container(
       width: 140.0,
       height: 140.0,
       decoration: BoxDecoration(
         image: DecorationImage(
-          image: AssetImage('assets/profile/profile.jpg'),
+          image: NetworkImage(currentUser.image),
           fit: BoxFit.cover,
         ),
         borderRadius: BorderRadius.circular(80.0),
