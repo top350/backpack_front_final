@@ -36,7 +36,7 @@ class _RatingSessionState extends State<RatingSession> {
     String taid = opposite.aid.toString();
    
     var rs = await apiProvider.doFeedback(rating.toString(),note,taid,faid);
-    if(rs.statusCode==200){
+    if (rs.statusCode==200){
         print('feedback inserted');
            Navigator.of(context).popUntil((route) => route.isFirst);  
           Navigator.of(context).pushReplacement(
@@ -52,10 +52,10 @@ class _RatingSessionState extends State<RatingSession> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: new AppBar(
-        title: new Text("Star Rating"),
+      appBar: AppBar(
+        title: Text("Star Rating"),
       ),
-      body: new ListView(
+      body: ListView(
         children: <Widget>[
           SizedBox(
             height: 20,
@@ -93,8 +93,8 @@ class _RatingSessionState extends State<RatingSession> {
             margin: EdgeInsets.all(20),
             child: Column(
               children: <Widget>[
-                new Padding(
-                  padding: new EdgeInsets.only(
+                Padding(
+                  padding: EdgeInsets.only(
                     top: 10.0,
                     bottom: 10.0,
                   ),
@@ -118,12 +118,12 @@ class _RatingSessionState extends State<RatingSession> {
                     ),
                   ),
                 ),
-                new Padding(
-                  padding: new EdgeInsets.only(
+                Padding(
+                  padding: EdgeInsets.only(
                     top: 5.0,
                     bottom: 10.0,
                   ),
-                  child: new StarRating(
+                  child: StarRating(
                     size: 50.0,
                     rating: rating,
                     color: Colors.orange,
@@ -164,7 +164,7 @@ class _RatingSessionState extends State<RatingSession> {
               ],
             ),
           ),
-          new Padding(
+          Padding(
             padding: const EdgeInsets.only(bottom: 10.0),
           ),
           Column(

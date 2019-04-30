@@ -13,14 +13,13 @@ import 'qr_generator.dart';
 
 class SessionPage extends StatefulWidget {
   AccountObject currentUser;
-  AccountObject opposite; 
+  AccountObject opposite;
   SessionObject session;
-  SessionPage(this.currentUser,this.opposite,this.session);
+  SessionPage(this.currentUser, this.opposite, this.session);
   //Session3
   @override
-  State createState() => new SessionPageState(currentUser,opposite,session);
+  State createState() => new SessionPageState(currentUser, opposite, session);
 }
-
 
 class SessionPageState extends State<SessionPage>
     with SingleTickerProviderStateMixin {
@@ -28,20 +27,20 @@ class SessionPageState extends State<SessionPage>
   Animation<double> _iconAnimation;
 
   AccountObject currentUser;
-  AccountObject opposite; 
+  AccountObject opposite;
   SessionObject session;
-  SessionPageState(this.currentUser,this.opposite,this.session);
+  SessionPageState(this.currentUser, this.opposite, this.session);
 
   ApiProvider apiProvider = ApiProvider();
-Future doEndsession(BuildContext context) async {
-  final rs = await apiProvider.doEndsession("sid","end");
-  Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => new RatingSession(currentUser,opposite,session),
-                      ),
-                    );
-  print(rs.body);
-}
+  Future doEndsession(BuildContext context) async {
+    final rs = await apiProvider.doEndsession("sid", "end");
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => new RatingSession(currentUser, opposite, session),
+      ),
+    );
+    print(rs.body);
+  }
 
   @override
   void initState() {
@@ -76,8 +75,11 @@ Future doEndsession(BuildContext context) async {
                     padding: EdgeInsets.all(10),
                     child: Text(
                       DateFormat("h:mm a").format(sesEnd),
-                      style: TextStyle(fontSize: 50,
-                          color: Colors.black, fontWeight: FontWeight.w700,),
+                      style: TextStyle(
+                        fontSize: 50,
+                        color: Colors.black,
+                        fontWeight: FontWeight.w700,
+                      ),
                     )),
                 new Padding(
                   padding: const EdgeInsets.only(bottom: 20.0, top: 20.0),
@@ -95,14 +97,15 @@ Future doEndsession(BuildContext context) async {
                         height: 75.0,
                         decoration: BoxDecoration(
                           image: DecorationImage(
-                            image: NetworkImage('https://firebasestorage.googleapis.com/v0/b/shareit-60e65.appspot.com/o/profile.png?alt=media&token=297c1341-5c7d-4b1e-902b-2a98e4951f52'),//AssetImage('assets/profile/profile.jpg'),
+                            image: NetworkImage(
+                                'https://firebasestorage.googleapis.com/v0/b/shareit-60e65.appspot.com/o/profile.png?alt=media&token=297c1341-5c7d-4b1e-902b-2a98e4951f52'), //AssetImage('assets/profile/profile.jpg'),
                             fit: BoxFit.cover,
                           ),
                           borderRadius: BorderRadius.circular(80.0),
                         ),
                       ),
                       title: Text(
-                        'Session With '+opposite.first_Name,
+                        'Session With ' + opposite.first_Name,
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                         ),
@@ -129,7 +132,7 @@ Future doEndsession(BuildContext context) async {
                   textColor: Colors.white,
                   child: new Text("END"),
                   onPressed: () {
-                     doEndsession(context);
+                    doEndsession(context);
                   },
                   splashColor: Colors.pink[200],
                 ),

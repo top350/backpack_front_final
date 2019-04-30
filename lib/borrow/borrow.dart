@@ -27,58 +27,65 @@ class _BorrowPageState extends State<BorrowPage> {
   AccountObject currentUser;
   _BorrowPageState(this.currentUser);
 
-  String sendItemName = ''; //Send to Backend 
+  String sendItemName = ''; //Send to Backend
   String sendItemType = '';
   String sendPickUpTime;
   String sendReturnTime;
   String sendKioskLocation = '';
   int sendTokenUsed = 0;
   String sendNote = '';
-  int reqByAcc = 0;  //Send to Backend
-ApiProvider apiProvider = ApiProvider();
+  int reqByAcc = 0; //Send to Backend
+  ApiProvider apiProvider = ApiProvider();
 
-Future doBorrow() async {
-  print(reqByAcc);
-  String pickuptime = sendPickUpTime.toString();
-   String returntime = sendReturnTime.toString();
-   String tokenused =sendTokenUsed.toString();
-   String sendAcc = reqByAcc.toString();
-  print(pickuptime);
-  final rs = await apiProvider.doBorrow(sendItemName, sendItemType,pickuptime, returntime, sendKioskLocation, tokenused,sendNote,sendAcc);
-  print(rs.body);
-  if (rs.statusCode == 200) {
+  Future doBorrow() async {
+    print(reqByAcc);
+    String pickuptime = sendPickUpTime.toString();
+    String returntime = sendReturnTime.toString();
+    String tokenused = sendTokenUsed.toString();
+    String sendAcc = reqByAcc.toString();
+    print(pickuptime);
+    final rs = await apiProvider.doBorrow(
+        sendItemName,
+        sendItemType,
+        pickuptime,
+        returntime,
+        sendKioskLocation,
+        tokenused,
+        sendNote,
+        sendAcc);
     print(rs.body);
-   // var jsonRes = json.decode(rs.body);
-    
-    if (rs.body=='ok') {
-      
-         Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => ButtomBarHome(currentUser),
-              ),
-            );
-    } else {
-      print('Server error');
-      
+    if (rs.statusCode == 200) {
+      print(rs.body);
+      // var jsonRes = json.decode(rs.body);
+
+      if (rs.body == 'ok') {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => ButtomBarHome(currentUser),
+          ),
+        );
+      } else {
+        print('Server error');
+      }
     }
   }
-}
+
   NewRequestObject newRequest = NewRequestObject(
-      1,
-      'itemName',
-      'itemCategory',
-      'sampleTime',
-      'sampleTime',
-      'KioskLocation',
-      0,
-      'Note',
-      'assets/logo.png',
-      'false',
-      0,
-      'sampleTime',
-      'sampleTime',
-      );
+    1,
+    'itemName',
+    'itemCategory',
+    'sampleTime',
+    'sampleTime',
+    'KioskLocation',
+    0,
+    'Note',
+    'assets/logo.png',
+    'false',
+    0,
+    'sampleTime',
+    'sampleTime',
+  );
 
   List<DropdownMenuItem<String>> _dropDownMenuCategory;
   List _category = [
@@ -197,9 +204,8 @@ Future doBorrow() async {
                         labelText: 'Date/Time', hasFloatingPlaceholder: false),
                     onChanged: (dt) {
                       setState(() {
-                        
-                        newRequest.pickUpTime = DateFormat("d EEEE MMMM 'at' h:mma")
-                                  .format(dt);
+                        newRequest.pickUpTime =
+                            DateFormat("d EEEE MMMM 'at' h:mma").format(dt);
                       });
                     },
                   ),
@@ -222,8 +228,9 @@ Future doBorrow() async {
                         labelText: 'Date/Time', hasFloatingPlaceholder: false),
                     onChanged: (dt) {
                       setState(() {
-                        newRequest.returnTime = DateFormat("d EEEE MMMM 'at' h:mma")
-                                  .format(dt);;
+                        newRequest.returnTime =
+                            DateFormat("d EEEE MMMM 'at' h:mma").format(dt);
+                        ;
                       });
                     },
                   ),
@@ -294,7 +301,7 @@ Future doBorrow() async {
                   sendTokenUsed = newRequest.tokenUsed;
                   sendNote = newRequest.note;
                   reqByAcc = currentUser.aid;
-              doBorrow();
+                  doBorrow();
                   print(sendItemType);
                   //_addItem();
                 },
@@ -308,8 +315,6 @@ Future doBorrow() async {
   }
 }
 
-
-
 class NewRequestObject {
   int requestNo;
   String itemName = '';
@@ -322,22 +327,22 @@ class NewRequestObject {
   String examplePicUrl;
   String requestStatus;
   int reqByAccountNo; //From account
-  String createdAt ='';
-  String updatedAt='';
+  String createdAt = '';
+  String updatedAt = '';
 
   NewRequestObject(
-      this.requestNo,
-      this.itemName,
-      this.itemCategory,
-      this.pickUpTime,
-      this.returnTime,
-      this.kioskLocation,
-      this.tokenUsed,
-      this.note,
-      this.examplePicUrl,
-      this.requestStatus,
-      this.reqByAccountNo,
-      this.createdAt,
-      this.updatedAt,
-      
-  );}
+    this.requestNo,
+    this.itemName,
+    this.itemCategory,
+    this.pickUpTime,
+    this.returnTime,
+    this.kioskLocation,
+    this.tokenUsed,
+    this.note,
+    this.examplePicUrl,
+    this.requestStatus,
+    this.reqByAccountNo,
+    this.createdAt,
+    this.updatedAt,
+  );
+}

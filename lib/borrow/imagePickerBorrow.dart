@@ -46,7 +46,7 @@ class ImagePickerBorrowState extends State<ImagePickerBorrow> {
         // maxWidth: 50.0,
       );
       setState(() {
-       example.newExamplePic = imageFile;
+        example.newExamplePic = imageFile;
       });
     }
 

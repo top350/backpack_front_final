@@ -17,48 +17,43 @@ class ItemDetail extends StatelessWidget {
   int lenderAccountId = 0; //Send to Backend when press Lent
   int requestNo = 0; //Send to Backend when press Lent
   SessionObject session; //Recieve to Backend when press Lent
-  AccountObject opposite ; //Reviece from Backend
+  AccountObject opposite; //Reviece from Backend
 
   AccountObject user; //Reviece from itemCard
   RequestObject itemRequest; //Reviece from itemCard
-  
-  ItemDetail(this.user, this.itemRequest);
-ApiProvider apiProvider = ApiProvider();
 
-  Future doLent(BuildContext context)async {
+  ItemDetail(this.user, this.itemRequest);
+  ApiProvider apiProvider = ApiProvider();
+
+  Future doLent(BuildContext context) async {
     String aid = lenderAccountId.toString();
     String rid = requestNo.toString();
     print('pressed');
-    final rs = await apiProvider.doLent(rid,aid);
-    if(rs.statusCode == 200){
-       var jsonRes = json.decode(rs.body); 
+    final rs = await apiProvider.doLent(rid, aid);
+    if (rs.statusCode == 200) {
+      var jsonRes = json.decode(rs.body);
       //  print(jsonRes);
       //  print(rs.body);
-      
-    
-    if(rs.body == 'not enough token'){
-      print('not enough token');
-    }
-    else{
-      print(jsonRes[0]);
-       final session = SessionObject.fromJson(jsonRes[0]);
-       print(session.sessionNo);
-      final borrower = AccountObject.fromJson(jsonRes[0]);
-       print(borrower.tel_No);
-         Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(
-                builder: (context) => KioskSession(user,borrower,session.sessionNo),
-              ),
-            );
-        
-    }
-    }
-    else{
-      print('error');
 
+      if (rs.body == 'not enough token') {
+        print('not enough token');
+      } else {
+        print(jsonRes[0]);
+        final session = SessionObject.fromJson(jsonRes[0]);
+        print(session.sessionNo);
+        final borrower = AccountObject.fromJson(jsonRes[0]);
+        print(borrower.tel_No);
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) =>
+                KioskSession(user, borrower, session.sessionNo),
+          ),
+        );
+      }
+    } else {
+      print('error');
     }
-    
   }
 
   _showWarningDialog(BuildContext context) {
@@ -78,9 +73,9 @@ ApiProvider apiProvider = ApiProvider();
               FlatButton(
                 child: Text('YES'),
                 onPressed: () {
-                  doLent(context );
-                        // Send/Receive to Backend here
-                  
+                  doLent(context);
+                  // Send/Receive to Backend here
+
                   // Navigator.popUntil(context, ModalRoute.withName('/Home'));
                   // Navigator.of(context).pushReplacementNamed("/Home");
                   // other alternative Navigator.of(context).pushNamedAndRemoveUntil('/login', (Route<dynamic> route) => false);
@@ -151,8 +146,6 @@ ApiProvider apiProvider = ApiProvider();
                   Padding(
                     padding: EdgeInsets.all(8),
                   ),
-                
-                  
                   Row(
                     // mainAxisSize: MainAxisSize.max,
                     // mainAxisAlignment: MainAxisAlignment.center,
@@ -163,7 +156,9 @@ ApiProvider apiProvider = ApiProvider();
                       ),
                       Text(
                           'Pickup : ' +
-                              pickFormattedDate+'  '+pickFormattedTime,
+                              pickFormattedDate +
+                              '  ' +
+                              pickFormattedTime,
                           style: TextStyle(fontSize: 15)),
                     ],
                   ),
@@ -180,7 +175,9 @@ ApiProvider apiProvider = ApiProvider();
                       ),
                       Text(
                           'Return : ' +
-                              returnFormattedDate+'  '+returnFormattedTime,
+                              returnFormattedDate +
+                              '  ' +
+                              returnFormattedTime,
                           style: TextStyle(fontSize: 15)),
                     ],
                   ),
@@ -256,7 +253,7 @@ ApiProvider apiProvider = ApiProvider();
                         print('2');
                         requestNo = itemRequest.requestNo;
                         print('3');
-                        
+
                         print(lenderAccountId.toString() +
                             "  " +
                             requestNo.toString());

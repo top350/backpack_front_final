@@ -10,30 +10,28 @@ import '../database/db_schema.dart';
 class WaitingSession extends StatelessWidget {
   AccountObject currentUser;
   AccountObject opposite;
- SessionObject session;
+  SessionObject session;
   WaitingSession(this.currentUser);
-ApiProvider apiProvider = ApiProvider();
-  Future<Null> checkBorrowerSession(int aid,BuildContext context) async {
+  ApiProvider apiProvider = ApiProvider();
+  Future<Null> checkBorrowerSession(int aid, BuildContext context) async {
     final rs = await apiProvider.doAccountsession(aid.toString());
-    
+
     if (rs.statusCode == 200) {
       //print(rs.body);
       var jsonRes = json.decode(rs.body);
       if (rs.body == 'false') {
         print('no session');
-        
       } else {
-       print(rs.body);
-       final session = SessionObject.fromJson(jsonRes[0]);
-       final opposite = AccountObject.fromJson(jsonRes[0]);
-       print(session.sessionNo);
-       print(opposite.aid);
+        print(rs.body);
+        final session = SessionObject.fromJson(jsonRes[0]);
+        final opposite = AccountObject.fromJson(jsonRes[0]);
+        print(session.sessionNo);
+        print(opposite.aid);
         Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) => new KioskSession(currentUser,opposite,session.sessionNo))
-                ,);
-       
-        
-    
+          MaterialPageRoute(
+              builder: (context) =>
+                  new KioskSession(currentUser, opposite, session.sessionNo)),
+        );
       }
     }
   }
@@ -65,11 +63,11 @@ ApiProvider apiProvider = ApiProvider();
       body: Center(
         child: GestureDetector(
           onTap: () {
-            checkBorrowerSession(currentUser.aid,context);
+            checkBorrowerSession(currentUser.aid, context);
             // Navigator.of(context).push(
             //     MaterialPageRoute(builder: (context) => new KioskSession())
             //     ,);
-                },
+          },
           child: Icon(Icons.refresh,
               size: screenSizeWidth / 1.5, color: Colors.pink[200]),
         ),

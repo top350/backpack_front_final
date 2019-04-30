@@ -23,8 +23,8 @@ class Dashboard extends StatefulWidget {
 class _DashboardState extends State<Dashboard> {
   String categoryName = ''; //Send to Backend
 
-  List<RequestObject> receiveRequestList =[]; //Receive from Backend
-   List<RequestObject> emptyRequestList =[];
+  List<RequestObject> receiveRequestList = []; //Receive from Backend
+  List<RequestObject> emptyRequestList = [];
 
   AccountObject currentUser; //Receive from Home
   _DashboardState(this.currentUser);
@@ -45,25 +45,21 @@ class _DashboardState extends State<Dashboard> {
   ApiProvider apiProvider = ApiProvider();
   Future<Null> doCategory(String name) async {
     final rs = await apiProvider.doCategory(name);
-   
+
     if (rs.statusCode == 200) {
-     
       if (rs.body == 'no request') {
         print('no request');
         receiveRequestList = emptyRequestList.toList();
       } else {
         var jsonRes = json.decode(rs.body);
-       final rRequestList = RequestList.fromJson(jsonRes);
-   
-       receiveRequestList = rRequestList.request_list;
+        final rRequestList = RequestList.fromJson(jsonRes);
 
-       print(rRequestList.request_list[0].itemName);
-       receiveRequestList = rRequestList.request_list.toList();
-       print(receiveRequestList[0].itemName);
-       print(receiveRequestList.length);
-       
-        
-    
+        receiveRequestList = rRequestList.request_list;
+
+        print(rRequestList.request_list[0].itemName);
+        receiveRequestList = rRequestList.request_list.toList();
+        print(receiveRequestList[0].itemName);
+        print(receiveRequestList.length);
       }
     }
   }
@@ -133,22 +129,22 @@ class _DashboardState extends State<Dashboard> {
         ),
         children: <Widget>[
           GestureDetector(
-             onTap: () {
+            onTap: () {
               //Send/Receive When pressed this
               categoryName = 'Stationery';
               print(categoryName);
               doCategory(categoryName);
-              Timer(Duration(seconds: 1), (){
+              Timer(Duration(seconds: 1), () {
                 print('item length = ' + receiveRequestList.length.toString());
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => ItemList(
-                        "Stationery",
-                        convertToCard(receiveRequestList, currentUser),
-                      ),
-                ),
-              );
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ItemList(
+                          "Stationery",
+                          convertToCard(receiveRequestList, currentUser),
+                        ),
+                  ),
+                );
               });
             },
             child: myItems(Icons.edit, "Stationery ", 0xffF7B79B),
@@ -159,17 +155,17 @@ class _DashboardState extends State<Dashboard> {
               categoryName = 'Clothing';
               print(categoryName);
               doCategory(categoryName);
-                Timer(Duration(seconds: 1), (){
-                  print('item length = ' + receiveRequestList.length.toString());
-                  Navigator.push(
-                     context,
-                MaterialPageRoute(
-                  builder: (context) => ItemList(
-                        "Clothing",
-                        convertToCard(receiveRequestList, currentUser),
-                      ),
-                ),
-              );
+              Timer(Duration(seconds: 1), () {
+                print('item length = ' + receiveRequestList.length.toString());
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ItemList(
+                          "Clothing",
+                          convertToCard(receiveRequestList, currentUser),
+                        ),
+                  ),
+                );
               });
             },
             child: myItems(Icons.wc, "Clothing", 0xff74E183),
@@ -180,17 +176,17 @@ class _DashboardState extends State<Dashboard> {
               categoryName = 'Sport Equipment';
               print(categoryName);
               doCategory(categoryName);
-                Timer(Duration(seconds: 1), (){
+              Timer(Duration(seconds: 1), () {
                 print('item length = ' + receiveRequestList.length.toString());
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => ItemList(
-                        "Sport Equipment",
-                        convertToCard(receiveRequestList, currentUser),
-                      ),
-                ),
-              );
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ItemList(
+                          "Sport Equipment",
+                          convertToCard(receiveRequestList, currentUser),
+                        ),
+                  ),
+                );
               });
             },
             child: myItems(Icons.fitness_center, "Sport Equip.", 0xff6BA9E8),
@@ -201,17 +197,17 @@ class _DashboardState extends State<Dashboard> {
               categoryName = 'Electronics';
               print(categoryName);
               doCategory(categoryName);
-                Timer(Duration(seconds: 1), (){
+              Timer(Duration(seconds: 1), () {
                 print('item length = ' + receiveRequestList.length.toString());
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => ItemList(
-                        "Electronics",
-                        convertToCard(receiveRequestList, currentUser),
-                      ),
-                ),
-              );
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ItemList(
+                          "Electronics",
+                          convertToCard(receiveRequestList, currentUser),
+                        ),
+                  ),
+                );
               });
             },
             child: myItems(Icons.usb, "Electronics ", 0xFFEC90D4),
@@ -222,17 +218,17 @@ class _DashboardState extends State<Dashboard> {
               categoryName = 'Books';
               print(categoryName);
               doCategory(categoryName);
-               Timer(Duration(seconds: 1), (){
+              Timer(Duration(seconds: 1), () {
                 print('item length = ' + receiveRequestList.length.toString());
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => ItemList(
-                        "Books",
-                        convertToCard(receiveRequestList, currentUser),
-                      ),
-                ),
-              );
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ItemList(
+                          "Books",
+                          convertToCard(receiveRequestList, currentUser),
+                        ),
+                  ),
+                );
               });
             },
             child: myItems(Icons.book, "Books", 0xFF81C784),
@@ -242,17 +238,17 @@ class _DashboardState extends State<Dashboard> {
               //Send/Receive When pressed this
               categoryName = 'Others';
               doCategory(categoryName);
-               Timer(Duration(seconds: 1), (){
+              Timer(Duration(seconds: 1), () {
                 print('item length = ' + receiveRequestList.length.toString());
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => ItemList(
-                        "Others",
-                        convertToCard(receiveRequestList, currentUser),
-                      ),
-                ),
-              );
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ItemList(
+                          "Others",
+                          convertToCard(receiveRequestList, currentUser),
+                        ),
+                  ),
+                );
               });
             },
             child: myItems(Icons.graphic_eq, "Others", 0xFFDEB887),

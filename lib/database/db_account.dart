@@ -7,7 +7,6 @@ import 'dart:io';
 // -'SessionThree'
 // -'SessionFour'
 
-
 class AccountObject {
   int aid;
   String it_chula = '';
@@ -20,13 +19,13 @@ class AccountObject {
   int no_Of_Feedback;
   double avg_Rating;
   int token;
- // String categotyHave = '';
+  // String categotyHave = '';
   String image;
   bool in_session;
   DateTime createdAt;
   DateTime updatedAt;
-   AccountObject({
-      this.aid,
+  AccountObject(
+      {this.aid,
       this.it_chula,
       this.password,
       this.first_Name,
@@ -37,13 +36,13 @@ class AccountObject {
       this.no_Of_Feedback,
       this.avg_Rating,
       this.token,
-   //   this.categotyHave,
+      //   this.categotyHave,
       this.image,
       this.in_session,
       this.createdAt,
       this.updatedAt});
 //       factory AccountObject.fromJson(Map<String, dynamic> json) {
-  
+
 //     return AccountObject(
 //       accountNo: json['username'],
 //       firstName: json['fullname'],
@@ -58,34 +57,28 @@ class AccountObject {
 //       categotyHave: json['fullname'],
 //       profilePic: json['lastname'],
 //       inSession: json['phoneno'],
-  
-      
-//     );
-   
-//   }
- factory AccountObject.fromJson(Map<String, dynamic> json) {
 
-  
+//     );
+
+//   }
+  factory AccountObject.fromJson(Map<String, dynamic> json) {
     return AccountObject(
       aid: json['aid'],
       first_Name: json['first_name'],
       last_Name: json['last_name'],
       tel_No: json['tel_no'],
       email: json['email'],
-       it_chula: json['it_chula'],
-       qrCode: json['qrcode'],
-       no_Of_Feedback: json['no_of_feedback'],
-       avg_Rating: json['avg_rating'].toDouble(),
-        token: json['token'],
-       //categotyHave: json['fullname'],
-       image: json['image'],
-       in_session: json['in_session'],
-  
-      
+      it_chula: json['it_chula'],
+      qrCode: json['qrcode'],
+      no_Of_Feedback: json['no_of_feedback'],
+      avg_Rating: json['avg_rating'].toDouble(),
+      token: json['token'],
+      //categotyHave: json['fullname'],
+      image: json['image'],
+      in_session: json['in_session'],
     );
+  }
 }
- }
- 
 
 DateTime sampleTimeA = DateTime.parse('2019-04-20 12:12:12');
 File emptyFileA;

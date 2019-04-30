@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-       home: new SplashScreen(),
+      home: new SplashScreen(),
       //home: WaitingSession(),
       theme: new ThemeData(primarySwatch: Colors.pink),
       routes: <String, WidgetBuilder>{

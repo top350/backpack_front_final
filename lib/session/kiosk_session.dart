@@ -30,7 +30,7 @@ KioskSession(this.currentUSer,this.opposite,this.sessionID);
 
 
   @override
-  State createState() => new KioskSessionState(currentUSer,opposite,sessionID);
+  State createState() => KioskSessionState(currentUSer,opposite,sessionID);
 }
 
 class KioskSessionState extends State<KioskSession>
@@ -79,9 +79,9 @@ KioskSessionState(this.currentUser,this.opposite,this.sessionID);
   @override
   void initState() {
     super.initState();
-    _iconAnimationController = new AnimationController(
-        vsync: this, duration: new Duration(milliseconds: 500));
-    _iconAnimation = new CurvedAnimation(
+    _iconAnimationController = AnimationController(
+        vsync: this, duration: Duration(milliseconds: 500));
+    _iconAnimation = CurvedAnimation(
         parent: _iconAnimationController, curve: Curves.easeOut);
     _iconAnimation.addListener(() => this.setState(() {}));
     _iconAnimationController.forward();
@@ -89,12 +89,12 @@ KioskSessionState(this.currentUser,this.opposite,this.sessionID);
 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
+    return Scaffold(
         backgroundColor: Colors.pink[50],
         appBar: AppBar(
           title: Text('Kiosk Session'),
         ),
-        body: new ListView(
+        body: ListView(
           children: <Widget>[
             // new Padding(
             //   padding: const EdgeInsets.only(bottom: 20.0, top: 20.0),
@@ -102,21 +102,21 @@ KioskSessionState(this.currentUser,this.opposite,this.sessionID);
             Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                new Padding(
+                Padding(
                   padding: EdgeInsets.all(10),
                   child: Text('Use Kiosk to scan QR Code',style: TextStyle(fontSize: 20),),
                 ),
-                new Padding(
+                Padding(
                   padding: EdgeInsets.all(20),
                   child: QrGenerator(currentUser.qrCode),
                 ),
-                new Padding(
+                Padding(
                   padding: const EdgeInsets.only(bottom: 10.0, top: 20.0),
                 ),
                 Card(
                   elevation: 5.0,
                   margin:
-                      new EdgeInsets.symmetric(horizontal: 10.0, vertical: 8.0),
+                      EdgeInsets.symmetric(horizontal: 10.0, vertical: 8.0),
                   child: Container(
                     child: ListTile(
                       contentPadding:
@@ -151,15 +151,15 @@ KioskSessionState(this.currentUser,this.opposite,this.sessionID);
                     ),
                   ),
                 ),
-                new Padding(
+                Padding(
                   padding: EdgeInsets.all(15),
                 ),
-                new MaterialButton(
+                MaterialButton(
                   height: 40.0,
                   minWidth: 300.0,
                   color: Colors.pink[300],
                   textColor: Colors.white,
-                  child: new Text("Scanned"),
+                  child: Text("Scanned"),
                   onPressed: () {
                           
           // Navigator.of(context).push(
@@ -173,7 +173,7 @@ KioskSessionState(this.currentUser,this.opposite,this.sessionID);
                   },
                   splashColor: Colors.pink[200],
                 ),
-                new Padding(
+                Padding(
                   padding: EdgeInsets.all(15),
                 ),
               ],

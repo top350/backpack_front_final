@@ -6,10 +6,10 @@ import '../database/db_account.dart';
 class ItemList extends StatelessWidget {
 //This class is show all the itemlist in a certain category
 
-final String title;
-final List <ItemCard> itemlist ;
+  final String title;
+  final List<ItemCard> itemlist;
 
-ItemList(this.title,this.itemlist);
+  ItemList(this.title, this.itemlist);
 
   @override
   Widget build(BuildContext context) {
@@ -17,8 +17,7 @@ ItemList(this.title,this.itemlist);
       appBar: AppBar(
         title: Text(title),
       ),
-      body: ListView(children:itemlist),
+      body: ListView(children: itemlist),
     );
   }
 }
-

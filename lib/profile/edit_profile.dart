@@ -26,9 +26,6 @@ class _EditProfileState extends State<EditProfile> {
   TextEditingController _lastNameController;
   TextEditingController _emailController;
   TextEditingController _phoneNumController;
-  
-
-
 
 // Future doSignup() async {
 //   final rs = await apiProvider.doSignup(studentID.text, firstname.text, lastname.text, password1.text, phoneNo.text, email.text);
@@ -40,24 +37,30 @@ class _EditProfileState extends State<EditProfile> {
 //       Navigator.of(context).pushReplacementNamed("/login");
 //     } else {
 //       print('Server error');
-      
+
 //     }
 //   }
 // }
-ApiProvider apiProvider = ApiProvider();
-Future doeditProfile() async {
-  String aid = this.currentUser.aid.toString();
-  print(aid);
-  final rs = await apiProvider.doeditProfile(aid,_firstNameController.text, _lastNameController.text, _phoneNumController.text,_emailController.text);
-  print(rs.body);
-}
+  ApiProvider apiProvider = ApiProvider();
+  Future doeditProfile() async {
+    String aid = this.currentUser.aid.toString();
+    print(aid);
+    final rs = await apiProvider.doeditProfile(
+        aid,
+        _firstNameController.text,
+        _lastNameController.text,
+        _phoneNumController.text,
+        _emailController.text);
+    print(rs.body);
+  }
 
   @override
   void initState() {
     super.initState();
     _firstNameController =
         new TextEditingController(text: currentUser.first_Name);
-    _lastNameController = new TextEditingController(text: currentUser.last_Name);
+    _lastNameController =
+        new TextEditingController(text: currentUser.last_Name);
     _emailController = new TextEditingController(text: currentUser.email);
     _phoneNumController = new TextEditingController(text: currentUser.tel_No);
   }

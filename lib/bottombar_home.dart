@@ -15,23 +15,22 @@ import 'database/db_account.dart';
 class ButtomBarHome extends StatefulWidget {
   AccountObject currentUser;
   ButtomBarHome(this.currentUser);
-  
+
   State<StatefulWidget> createState() => ButtomBarHomeState(currentUser);
 }
 
 class ButtomBarHomeState extends State<ButtomBarHome> {
   String requestAccount; //Send to Backend
-  AccountObject currentUser ; //user1; //Receive from Backend
-   ButtomBarHomeState(this.currentUser);
+  AccountObject currentUser; //user1; //Receive from Backend
+  ButtomBarHomeState(this.currentUser);
   int currentindex = 0;
   Widget build(BuildContext context) {
-    
-  final List<Widget> _children = [
-    Dashboard(currentUser),
-    BorrowPage(currentUser),
-    WaitingSession(currentUser),
-    ProfilePage(currentUser),
-  ];
+    final List<Widget> _children = [
+      Dashboard(currentUser),
+      BorrowPage(currentUser),
+      WaitingSession(currentUser),
+      ProfilePage(currentUser),
+    ];
     return Scaffold(
       body: _children[currentindex],
       bottomNavigationBar: BottomNavigationBar(
@@ -61,28 +60,24 @@ class ButtomBarHomeState extends State<ButtomBarHome> {
   }
 
   ApiProvider apiProvider = ApiProvider();
-  Future<Null>doBottombar(String aid) async {
-  final rs = await apiProvider.doBottombar(aid);
-  print(rs.body);
-  if (rs.statusCode == 200) {
+  Future<Null> doBottombar(String aid) async {
+    final rs = await apiProvider.doBottombar(aid);
     print(rs.body);
-    var jsonRes = json.decode(rs.body);
-    final itemdata = AccountObject.fromJson(jsonRes[0]);
-    if (jsonRes['ok']) {
-      
-      
-    } else {
-      print('Server error');
-      
+    if (rs.statusCode == 200) {
+      print(rs.body);
+      var jsonRes = json.decode(rs.body);
+      final itemdata = AccountObject.fromJson(jsonRes[0]);
+      if (jsonRes['ok']) {
+      } else {
+        print('Server error');
+      }
     }
   }
-}
 
   void onTabTapped(int index) {
     setState(() {
       //Send When pressed this
       currentindex = index;
-
     });
   }
 }
