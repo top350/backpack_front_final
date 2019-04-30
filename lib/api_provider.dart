@@ -73,7 +73,8 @@ Future<http.Response> doBorrow(
     return http.post(_url, body:body);
   }
     Future<http.Response> doAccountsession(String aid){
-    String _url = '$endpoint/requestPage';
+    String _url = '$endpoint/checkAccept';
+    print(aid);
     var body = {"aid":aid};
     return http.post(_url, body:body);
   }
