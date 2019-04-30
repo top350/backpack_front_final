@@ -62,12 +62,13 @@ KioskSessionState(this.currentUser,this.opposite,this.sessionID);
         print('else laew');
          final session = SessionObject.fromJson(jsonRes[0]);
          print(session);
-               
-          Navigator.of(context).push(
+           Navigator.of(context).popUntil((route) => route.isFirst);  
+          Navigator.of(context).pushReplacement(
                       MaterialPageRoute(
                         builder: (context) => new SessionPage(currentUser,opposite,session),
                       ),
                   );
+                  
       }
    
     }else{

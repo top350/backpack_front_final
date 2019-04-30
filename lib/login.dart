@@ -40,7 +40,7 @@ class LoginPageState extends State<LoginPage>
             print(student.aid);
             print('Log in');
             //Navigator.of(context).pushReplacementNamed("/Home");
-            Navigator.push(
+            Navigator.pushReplacement(
               context,
               MaterialPageRoute(
                 builder: (context) => ButtomBarHome(student),

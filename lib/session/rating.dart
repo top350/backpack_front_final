@@ -38,8 +38,8 @@ class _RatingSessionState extends State<RatingSession> {
     var rs = await apiProvider.doFeedback(rating.toString(),note,taid,faid);
     if(rs.statusCode==200){
         print('feedback inserted');
-               
-          Navigator.of(context).push(
+           Navigator.of(context).popUntil((route) => route.isFirst);  
+          Navigator.of(context).pushReplacement(
                       MaterialPageRoute(
                         builder: (context) => ButtomBarHome(currentUser),
                       ),

@@ -163,7 +163,7 @@ ApiProvider apiProvider = ApiProvider();
                       ),
                       Text(
                           'Pickup : ' +
-                              pickFormattedDate+pickFormattedTime,
+                              pickFormattedDate+'  '+pickFormattedTime,
                           style: TextStyle(fontSize: 15)),
                     ],
                   ),
@@ -180,7 +180,7 @@ ApiProvider apiProvider = ApiProvider();
                       ),
                       Text(
                           'Return : ' +
-                              returnFormattedDate+returnFormattedTime,
+                              returnFormattedDate+'  '+returnFormattedTime,
                           style: TextStyle(fontSize: 15)),
                     ],
                   ),
@@ -256,7 +256,7 @@ ApiProvider apiProvider = ApiProvider();
                         print('2');
                         requestNo = itemRequest.requestNo;
                         print('3');
-                        doLent(context);
+                        
                         print(lenderAccountId.toString() +
                             "  " +
                             requestNo.toString());

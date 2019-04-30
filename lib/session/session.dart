@@ -56,6 +56,8 @@ Future doEndsession(BuildContext context) async {
 
   @override
   Widget build(BuildContext context) {
+    DateTime sesEnd = DateTime.parse(session.endTime);
+
     return new Scaffold(
         backgroundColor: Colors.pink[50],
         appBar: AppBar(
@@ -73,7 +75,7 @@ Future doEndsession(BuildContext context) async {
                 new Padding(
                     padding: EdgeInsets.all(10),
                     child: Text(
-                      DateFormat("h:mm a").format(DateTime.now()),
+                      DateFormat("h:mm a").format(sesEnd),
                       style: TextStyle(fontSize: 50,
                           color: Colors.black, fontWeight: FontWeight.w700,),
                     )),
