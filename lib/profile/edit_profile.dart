@@ -78,7 +78,7 @@ class _EditProfileState extends State<EditProfile> {
           Padding(
             padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
           ),
-          //_buildProfileImage(),
+          ImagePickerProfile(currentUser),
           Container(
             margin: EdgeInsets.all(10),
             //child: ImagePickerProfile(currentUser),
@@ -176,6 +176,7 @@ class _EditProfileState extends State<EditProfile> {
                     ),
                   ),
                   onPressed: () {
+                    uploadImage(currentUser.image);
                     doeditProfile();
                     setState(() {
                       uploadImage(currentUser.image);

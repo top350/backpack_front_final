@@ -35,6 +35,7 @@ class _BorrowPageState extends State<BorrowPage> {
   int sendTokenUsed = 0;
   String sendNote = '';
   int reqByAcc = 0; //Send to Backend
+  String image;
   ApiProvider apiProvider = ApiProvider();
 
   Future doBorrow() async {
@@ -281,7 +282,7 @@ class _BorrowPageState extends State<BorrowPage> {
                   width: 1.0,
                 ),
               ),
-              //child: ImagePickerBorrow(newRequest),
+              child: ImagePickerBorrow(newRequest),
             ),
             Container(
               margin: EdgeInsets.all(10.0),
@@ -292,6 +293,7 @@ class _BorrowPageState extends State<BorrowPage> {
                 textColor: Colors.white,
                 child: new Text("Request Item"),
                 onPressed: () {
+                  
                   //Send/Receive when press this
                   sendItemName = newRequest.itemName;
                   sendItemType = newRequest.itemCategory;
@@ -301,6 +303,7 @@ class _BorrowPageState extends State<BorrowPage> {
                   sendTokenUsed = newRequest.tokenUsed;
                   sendNote = newRequest.note;
                   reqByAcc = currentUser.aid;
+                  uploadImage(newRequest.examplePicUrl);
                   doBorrow();
                   print(sendItemType);
                   //_addItem();
