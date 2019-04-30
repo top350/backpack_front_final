@@ -4,6 +4,8 @@ import 'dart:io';
 import 'package:image_picker/image_picker.dart';
 
 import '../database/db_account.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:path/path.dart';
 
 class ImagePickerProfile extends StatefulWidget {
   AccountObject currentUser;
@@ -14,13 +16,12 @@ class ImagePickerProfile extends StatefulWidget {
     return new ImagePickerProfileState(currentUser);
   }
 }
+  File imageFile;
+  String fileName;
 
 class ImagePickerProfileState extends State<ImagePickerProfile> {
   AccountObject currentUser;
   ImagePickerProfileState(this.currentUser);
-
-  File imageFile;
-
 
 
   @override
@@ -33,6 +34,7 @@ class ImagePickerProfileState extends State<ImagePickerProfile> {
         // maxHeight: 50.0,
         // maxWidth: 50.0,
       );
+      fileName = basename(imageFile.path);
       print("You selected gallery image : " + imageFile.path);
       setState(() {
         currentUser.newProfilePic = imageFile;
@@ -46,6 +48,7 @@ class ImagePickerProfileState extends State<ImagePickerProfile> {
         // maxHeight: 50.0,
         // maxWidth: 50.0,
       );
+      fileName = basename(imageFile.path);
       print("You selected camera image : " + imageFile.path);
       setState(() {
         currentUser.newProfilePic = imageFile;
@@ -98,6 +101,7 @@ class ImagePickerProfileState extends State<ImagePickerProfile> {
       // child: new Image.file(galleryFile),
       child: file == null
           ? _buildProfileImage()
+          //: uploadArea()
           : new Center(
               child: Container(
                 width: 140.0,
@@ -138,4 +142,30 @@ Widget _buildProfileImage() {
       ),
     ),
   );
+}
+
+Widget uploadArea() {
+  return Column(
+    children: <Widget>[
+      Image.file(
+        imageFile,
+        width: double.infinity,
+      ),
+      // RaisedButton(
+      //   child: Text('Upload'),
+      //   onPressed: () {
+      //     uploadImage();
+      //   },
+      // )
+    ],
+  );
+}
+
+Future<String> uploadImage() async{
+  StorageReference ref = FirebaseStorage.instance.ref().child(fileName);
+  StorageUploadTask uploadTask =ref.putFile(imageFile);
+  var downUrl = await (await uploadTask.onComplete).ref.getDownloadURL();
+  var url = downUrl.toString(); //download url
+  print('Download URL : $url');
+  return url;
 }

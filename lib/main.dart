@@ -7,6 +7,7 @@ import 'login.dart';
 import 'signUp/category.dart';
 import './session/session.dart';
 
+
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -14,7 +15,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: new SplashScreen(),
-      //home: Waiting(),
+      // home: MyAppoo(),
       theme: new ThemeData(primarySwatch: Colors.pink),
       routes: <String, WidgetBuilder>{
         "/Home": (BuildContext context) => new  ButtomBarHome(),

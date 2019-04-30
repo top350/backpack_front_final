@@ -283,9 +283,15 @@ Future doBorrow() async {
                   sendTokenUsed = newRequest.tokenUsed;
                   sendNote = newRequest.note;
                   reqByAcc = newRequest.reqByAccountNo;
+
+                  uploadImage();
+                 
+
               doBorrow();
                   print(sendItemType);
+
                   _addItem();
+                   
                 },
                 splashColor: Colors.pink[200],
               ),
