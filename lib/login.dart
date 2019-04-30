@@ -143,8 +143,9 @@ class LoginPageState extends State<LoginPage>
                               color: Colors.pink[400],
                               textColor: Colors.white,
                               child: new Text("Log in"),
-                                //     .pushReplacementNamed("/Home");
-                              
+                              onPressed: () {
+                                doLogin();
+                              },
                               splashColor: Colors.pink[200],
                             ),
                             new MaterialButton(
