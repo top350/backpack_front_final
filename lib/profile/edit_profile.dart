@@ -26,7 +26,8 @@ class _EditProfileState extends State<EditProfile> {
   TextEditingController _lastNameController;
   TextEditingController _emailController;
   TextEditingController _phoneNumController;
-  String aid;
+  
+
 
 
 // Future doSignup() async {
@@ -45,6 +46,8 @@ class _EditProfileState extends State<EditProfile> {
 // }
 ApiProvider apiProvider = ApiProvider();
 Future doeditProfile() async {
+  String aid = this.currentUser.aid.toString();
+  print(aid);
   final rs = await apiProvider.doeditProfile(aid,_firstNameController.text, _lastNameController.text, _phoneNumController.text,_emailController.text);
   print(rs.body);
 }
