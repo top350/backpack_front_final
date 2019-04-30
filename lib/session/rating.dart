@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating/flutter_rating.dart';
+import '../database/db_schema.dart';
+import '../database/db_account.dart';
 
 class RatingSession extends StatefulWidget {
   //Session4
+  AccountObject currentUser;
+  AccountObject opposite;
+  SessionObject session;
+  RatingSession(this.currentUser,this.opposite,this.session);
   @override
   _RatingSessionState createState() => new _RatingSessionState();
 }

@@ -21,30 +21,30 @@ class KioskSession extends StatefulWidget {
 
 
   AccountObject currentUSer;
-  AccountObject borrower;  
+  AccountObject opposite;  
   int sessionID;
-KioskSession(this.currentUSer,this.borrower,this.sessionID); 
+KioskSession(this.currentUSer,this.opposite,this.sessionID); 
 
   //Session2
 
 
 
   @override
-  State createState() => new KioskSessionState(currentUSer,borrower,sessionID);
+  State createState() => new KioskSessionState(currentUSer,opposite,sessionID);
 }
 
 class KioskSessionState extends State<KioskSession>
     with SingleTickerProviderStateMixin {
 
   
-  AccountObject currentUSer;
-  AccountObject borrower;  
+  AccountObject currentUser;
+  AccountObject opposite;  
   
   int sessionID;
 
   SessionObject session;
   
-KioskSessionState(this.currentUSer,this.borrower,this.sessionID); 
+KioskSessionState(this.currentUser,this.opposite,this.sessionID); 
   AnimationController _iconAnimationController;
   Animation<double> _iconAnimation;
 
@@ -63,7 +63,7 @@ KioskSessionState(this.currentUSer,this.borrower,this.sessionID);
                
           Navigator.of(context).push(
                       MaterialPageRoute(
-                        builder: (context) => new SessionPage(session),
+                        builder: (context) => new SessionPage(currentUser,opposite,session),
                       ),
                   );
       }

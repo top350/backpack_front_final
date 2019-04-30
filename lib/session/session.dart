@@ -12,25 +12,36 @@ import 'qr_generator.dart';
 // import  'category.dart';
 
 class SessionPage extends StatefulWidget {
+  AccountObject currentUser;
+  AccountObject opposite; 
   SessionObject session;
-  SessionPage(this.session);
+  SessionPage(this.currentUser,this.opposite,this.session);
   //Session3
   @override
-  State createState() => new SessionPageState(session);
+  State createState() => new SessionPageState(currentUser,opposite,session);
 }
-ApiProvider apiProvider = ApiProvider();
-Future doEndsession() async {
-  final rs = await apiProvider.doEndsession("sid","end");
-  print(rs.body);
-}
+
 
 class SessionPageState extends State<SessionPage>
     with SingleTickerProviderStateMixin {
   AnimationController _iconAnimationController;
   Animation<double> _iconAnimation;
 
+  AccountObject currentUser;
+  AccountObject opposite; 
   SessionObject session;
-  SessionPageState(this.session);
+  SessionPageState(this.currentUser,this.opposite,this.session);
+
+  ApiProvider apiProvider = ApiProvider();
+Future doEndsession(BuildContext context) async {
+  final rs = await apiProvider.doEndsession("sid","end");
+  Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => new RatingSession(currentUser,opposite,session),
+                      ),
+                    );
+  print(rs.body);
+}
 
   @override
   void initState() {
@@ -116,11 +127,7 @@ class SessionPageState extends State<SessionPage>
                   textColor: Colors.white,
                   child: new Text("END"),
                   onPressed: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => new RatingSession(),
-                      ),
-                    );
+                     doEndsession(context);
                   },
                   splashColor: Colors.pink[200],
                 ),
