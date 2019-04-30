@@ -147,8 +147,7 @@ ApiProvider apiProvider = ApiProvider();
                       ),
                       Text(
                           'Pickup : ' +
-                              DateFormat("d EEEE MMMM 'at' h:mma")
-                                  .format(itemRequest.pickUpTime),
+                              (itemRequest.pickUpTime),
                           style: TextStyle(fontSize: 15)),
                     ],
                   ),
@@ -165,8 +164,7 @@ ApiProvider apiProvider = ApiProvider();
                       ),
                       Text(
                           'Return : ' +
-                              DateFormat("d EEEE MMMM 'at' h:mma")
-                                  .format(itemRequest.returnTime),
+                              (itemRequest.returnTime),
                           style: TextStyle(fontSize: 15)),
                     ],
                   ),
