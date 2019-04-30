@@ -12,7 +12,7 @@ import './profile/profile.dart';
 
 import 'database/db_account.dart';
 
-import 'session/waiting_ses.dart';
+import 'session/waiting_session.dart';
 
 class ButtomBarHome extends StatefulWidget {
   AccountObject currentUser;

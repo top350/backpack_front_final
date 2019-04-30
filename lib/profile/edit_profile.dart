@@ -178,9 +178,8 @@ class _EditProfileState extends State<EditProfile> {
                   onPressed: () {
                     doeditProfile();
                     setState(() {
-                       uploadImage();
+                      uploadImage(currentUser.image);
                       Navigator.pop(context);
-                      
                     });
                   },
                 ),
