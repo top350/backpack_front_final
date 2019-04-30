@@ -175,7 +175,7 @@ Widget _buildProfileImage(AccountObject currentUser) {
       height: 120.0,
       decoration: BoxDecoration(
         image: DecorationImage(
-          image: AssetImage(currentUser.image),
+          image: AssetImage("assets/item_example/blanket.jpg"),
           fit: BoxFit.cover,
         ),
         borderRadius: BorderRadius.circular(80.0),
