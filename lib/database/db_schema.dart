@@ -136,9 +136,9 @@ class RequestObjects {
 
 class SessionObject {
   int sessionNo;
-  DateTime startTime;
-  DateTime endTime;
-  bool sessionStatus;
+  String startTime;
+  String endTime;
+  String sessionStatus;
   int requestID; //From Request
   int sessionItemName; //From Item
   int itemOfAcountNo; //From Item

@@ -4,19 +4,27 @@ import 'package:intl/intl.dart';
 
 import 'rating.dart';
 import '../profile/profile.dart';
+import '../database/db_account.dart';
+import '../database/db_schema.dart';
+
 import 'qr_generator.dart';
 // import  'category.dart';
 
 class SessionPage extends StatefulWidget {
+  SessionObject session;
+  SessionPage(this.session);
   //Session3
   @override
-  State createState() => new SessionPageState();
+  State createState() => new SessionPageState(session);
 }
 
 class SessionPageState extends State<SessionPage>
     with SingleTickerProviderStateMixin {
   AnimationController _iconAnimationController;
   Animation<double> _iconAnimation;
+
+  SessionObject session;
+  SessionPageState(this.session);
 
   @override
   void initState() {

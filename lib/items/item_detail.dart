@@ -17,7 +17,7 @@ class ItemDetail extends StatelessWidget {
   int lenderAccountId = 0; //Send to Backend when press Lent
   int requestNo = 0; //Send to Backend when press Lent
   SessionObject session; //Recieve to Backend when press Lent
-  AccountObject borrower; //Reviece from Backend
+  AccountObject opposite ; //Reviece from Backend
 
   AccountObject user; //Reviece from itemCard
   RequestObject itemRequest; //Reviece from itemCard
