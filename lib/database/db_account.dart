@@ -9,7 +9,7 @@ import 'dart:io';
 
 
 class AccountObject {
-int aid;
+  int aid;
   String it_chula = '';
   String password = '';
   String first_Name = '';

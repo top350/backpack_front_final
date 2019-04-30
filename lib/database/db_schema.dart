@@ -188,3 +188,49 @@ class FeedbackObject {
   FeedbackObject(this.feedbackNo, this.comment, this.rating, this.createdAt,
       this.updatedAt);
 }
+
+class SessionandOppAcc{
+  String oaid;
+  String otel_no;
+  String oqr_code;
+  String ofirst_name;
+  String olast_name;
+  String oemail;
+  String oimage;
+  String oit_chula;
+  String ssid;
+  String sstart_time;
+  String ssend_time;
+  String ss_status;
+  String siid;
+  String srid;
+
+  SessionandOppAcc({this.oaid,this.otel_no,this.oqr_code,this.ofirst_name,this.olast_name,this.oemail,this.oimage,this.oit_chula
+  ,this.ssid,this.sstart_time,this.ssend_time,this.ss_status,this.siid,this.srid});
+
+  
+factory SessionandOppAcc.fromJson(Map<String, dynamic> json) {
+
+  
+    return 
+    SessionandOppAcc(
+      oaid: json['aid'].toString(),
+      otel_no: json['tel_no'],
+      oqr_code: json['qrcode'],
+      ofirst_name: json['first_name'],
+      olast_name : json['last_name'], 
+      oemail :json['email'],
+      oimage :json['image'],
+      oit_chula: json['it_chula'],
+      ssid: json['sid'].toString(),
+      sstart_time: json['start_time'],
+      ssend_time: json['end_time'],
+      ss_status : json['s_status'], 
+     siid :json['iid'].toString(),
+     srid :json['rid'].toString()
+     
+    
+    );
+}
+
+}

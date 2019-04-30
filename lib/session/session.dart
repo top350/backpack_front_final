@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:front_backpack_app/api_provider.dart';
 
 import 'package:intl/intl.dart';
 
@@ -16,6 +17,11 @@ class SessionPage extends StatefulWidget {
   //Session3
   @override
   State createState() => new SessionPageState(session);
+}
+ApiProvider apiProvider = ApiProvider();
+Future doEndsession() async {
+  final rs = await apiProvider.doEndsession("sid","end");
+  print(rs.body);
 }
 
 class SessionPageState extends State<SessionPage>

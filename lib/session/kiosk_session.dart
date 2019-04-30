@@ -1,22 +1,30 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+
 import 'package:front_backpack_app/api_provider.dart';
+
+import 'package:front_backpack_app/database/db_account.dart';
+import 'package:front_backpack_app/database/db_schema.dart';
 
 import '../profile/profile.dart';
 import 'qr_generator.dart';
 import 'session.dart';
+
 import '../database/db_account.dart';
 import '../database/db_schema.dart';
+
 
 // import  'category.dart';
 
 class KioskSession extends StatefulWidget {
+
+
   AccountObject currentUSer;
   AccountObject borrower;  
   int sessionID;
 KioskSession(this.currentUSer,this.borrower,this.sessionID); 
- 
+
   //Session2
 
 
